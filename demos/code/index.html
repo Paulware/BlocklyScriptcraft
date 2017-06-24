@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google" value="notranslate">
+  <title>Blockly Demo:</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+      var fso = new ActiveXObject("Scripting.FileSystemObject");          
+      function fileExists (filename) { 
+        var myObject;
+        var found = true;
+        if(!fso.FileExists(filename)){
+           alert("File " + filename + " doesn't exist");
+           found = false;
+        }  
+        return found;
+      }  
+  
+     function loadSource(filename) {
+       var ForReading = 1;
+       var path=fso.GetAbsolutePathName(".");        
+       filename = path + '/' + filename;       
+       if (fileExists(filename)) {
+         var f1 = fso.OpenTextFile(filename, ForReading);
+         var text = f1.ReadAll();
+         f1.close();
+         document.all.content_xml.innerText = text;
+       }  
+     }
+    
+     function writeFile (filename, data) { 
+        var a = fso.CreateTextFile(filename, true);
+        a.WriteLine(data);
+        a.Close();
+        alert (filename + ' created: ' );
+     }     
+  
+     function saveSource(filename) {
+        var path=fso.GetAbsolutePathName(".");        
+        filename = path + '\\' + filename;
+        source = document.all.content_xml.innerText;
+        writeFile (filename,source);
+     }
+     function clipboardCopy (text) {
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");  // Security exception may be thrown by some browsers.
+        document.body.removeChild(textarea);
+     }   
+
+  </script>
+  <script src="/storage.js"></script>
+  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blocks_compressed.js"></script>
+  <script src="../../javascript_compressed.js"></script>
+  <script src="../../python_compressed.js"></script>
+  <script src="../../php_compressed.js"></script>
+  <script src="../../lua_compressed.js"></script>
+  <script src="../../dart_compressed.js"></script>
+  <script src="Arduino.js"></script>
+  <script src="Talkie.js"></script>
+  <script src="code.js"></script>
+  <script src="Generator.js"></script>
+</head>
+<body>
+  <table width="100%" height="100%">
+    <tr>
+      <td>
+        <h1>
+          <span id="title">...</span>
+        </h1>
+      </td>
+      <td class="farSide">
+        <select id="languageMenu"></select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan=2>
+        <table width="100%">
+          <tr id="tabRow" height="1em">
+            <td id="tab_blocks" class="tabon">...</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_javascript" class="taboff" style="display:none;">JavaScript</td>
+            <td class="tabmin" style="display:none;">&nbsp;</td>
+            <td id="tab_python" class="taboff">Arduino
+            <input type="button" value="Copy to Clipboard" onclick="clipboardCopy (document.all.content_python.innerText);">
+            </td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_php" class="taboff" style="display:none;">Php</td>
+            <td class="tabmin" style="display:none;">&nbsp;</td>
+            <td id="tab_lua" class="taboff" style="display:none;">Lua</td>
+            <td class="tabmin" style="display:none;">&nbsp;</td>
+            <td id="tab_dart" class="taboff" style="display:none;">Dart</td>
+            <td class="tabmin" style="display:none;">&nbsp;</td>
+            <td id="tab_xml" class="taboff">Diagram Source
+            <input type="button" value="load" onclick="filename=prompt('File?');loadSource(filename);">
+            <input type="button" value="save" onclick="filename=prompt('File?');saveSource(filename);">
+            </td>
+            <td class="tabmax">
+              <button id="trashButton" class="notext" title="...">
+                <img src='../../media/1x1.gif' class="trash icon21">
+              </button>
+              <button id="linkButton" class="notext" title="...">
+                <img src='../../media/1x1.gif' class="link icon21">
+              </button>
+              <button id="runButton" class="notext primary" title="...">
+                <img src='../../media/1x1.gif' class="run icon21">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="99%" colspan=2 id="content_area">
+      </td>
+    </tr>
+  </table>
+  <div id="content_blocks" class="content"></div>
+  <pre id="content_javascript" class="content"></pre>
+  <pre id="content_python" class="content"></pre>
+  <pre id="content_php" class="content"></pre>
+  <pre id="content_lua" class="content"></pre>
+  <pre id="content_dart" class="content"></pre>
+  <textarea id="content_xml" class="content" wrap="off"></textarea>
+
+  <xml id="toolbox" style="display: none">
+    <category name="ArduinoSetup">  
+      <block type="talkie"></block>
+      <block type="commentwidget"></block>
+      <block type="setuploop"></block>
+      <block type="statement"></block>
+      <block type="charpressed"></block>
+      <block type="lineentered"></block>
+    </category>  
+    <category name="{catLogic}" colour="210">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+      <block type="logic_null"></block>
+      <block type="logic_ternary"></block>
+    </category>
+    <category name="{catLoops}" colour="120">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_flow_statements"></block>
+    </category>
+    <category name="{catMath}" colour="230">
+      <block type="math_number"></block>
+      <block type="tostring"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_single">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_trig">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constant"></block>
+      <block type="math_number_property">
+        <value name="NUMBER_TO_CHECK">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_round">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">3.1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_on_list"></block>
+      <block type="math_modulo">
+        <value name="DIVIDEND">
+          <shadow type="math_number">
+            <field name="NUM">64</field>
+          </shadow>
+        </value>
+        <value name="DIVISOR">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constrain">
+        <value name="VALUE">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="LOW">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="HIGH">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_float"></block>
+    </category>
+    <category name="{catText}" colour="160">
+      <block type="text"></block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>      
+      <block type="text_join"></block>
+      <block type="text_append">
+        <value name="TEXT">
+          <shadow type="text"></shadow>
+        </value>
+      </block>
+      <block type="text_length">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{textVariable}</field>
+          </block>
+        </value>
+        <value name="FIND">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_charAt">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{textVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_getSubstring">
+        <value name="STRING">
+          <block type="variables_get">
+            <field name="VAR">{textVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_changeCase">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_trim">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category name="{catLists}" colour="260">
+      <block type="lists_create_with">
+        <mutation items="0"></mutation>
+      </block>
+      <block type="lists_create_with"></block>
+      <block type="lists_repeat">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_length"></block>
+      <block type="lists_isEmpty"></block>
+      <block type="lists_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getIndex">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_setIndex">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getSublist">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_split">
+        <value name="DELIM">
+          <shadow type="text">
+            <field name="TEXT">,</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_sort"></block>
+    </category>
+    <sep></sep>
+    <category name="{catVariables}" colour="330" custom="VARIABLE"></category>
+    <category name="{catFunctions}" colour="290" custom="PROCEDURE"></category>
+  <category name="LED">
+    <block type="settricolor"></block>
+    <block type="flashcolor"></block>
+    <block type="nextcolor"></block>
+    <block type="currentcolor"></block>
+    <block type="cyclecolors"></block>
+    <block type="stopcyclecolors"></block>
+  </category>
+  <category name="H-Bridge">
+    <block type="motormove"></block>
+  </category>
+  <category name="Button">
+    <block type="ispressed"></block>
+    <block type="isreleased"></block>
+  </category>
+  <category name="Infra-Red">
+    <block type="irdetected"></block>
+    <block type="fireshot"></block>
+    <block type="infrared"></block>
+    <block type="createfiresequence"></block>
+ </category>
+  <category name="Piezo">
+    <block type="makesound"></block>
+    <block type="stopsound"></block>
+  </category>  
+  <category name="Timer">
+    <block type="starttimer"></block>
+    <block type="timerexpired"></block>
+    <block type="resettimer"></block>
+    <block type="timerisactive"></block>
+    <block type="wait"></block>
+  </category>
+  <category name="LCDDisplay">
+    <block type="displaywrite"></block>
+    <block type="displayclear"></block>
+  </category>
+  <category name="Pin">
+    <block type="pinselector"></block>  
+    <block type="writepin"></block>
+    <block type="readpin"></block>
+  </category>
+  </xml>
+</body>
+</html>

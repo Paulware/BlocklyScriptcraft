@@ -1,0 +1,30 @@
+  <category name="LED">
+    <block type="tricolorled"></block>
+    <block type="pinselector">
+      <field name="NAME">optD0</field>
+    </block>
+  </category>
+  <category name="Functions" colour="#9A5CA6" custom="PROCEDURE"></category>
+  <category name="Button Press">
+    <block type="ispressed"></block>
+    <block type="isreleased"></block>
+    <block type="buttonpress"></block>
+    <block type="pinselector">
+      <field name="NAME">optD0</field>
+    </block>
+  </category>
+  <category name="Infra-Red">
+    <block type="infrared"></block>
+    <block type="fireshot"></block>
+    <block type="shotdetected"></block>
+    <block type="pinselector">
+      <field name="NAME">optD0</field>
+    </block>
+  </category>
+  <category name="Piezo">
+    <block type="piezo"></block>
+    <block type="pinselector">
+      <field name="NAME">optD0</field>
+    </block>
+    <block type="shotsound"></block>
+  </category>
