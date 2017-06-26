@@ -644,4 +644,18 @@ Blockly.Blocks['tostring'] = {
   }
 };
 
+Blockly.Blocks['speaknumber'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Speak Number");
+    this.appendValueInput("VALUE")
+        .setCheck("Number")
+        .appendField("Number Value");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
