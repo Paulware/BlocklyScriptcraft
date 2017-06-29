@@ -130,14 +130,63 @@
 
   <xml id="toolbox" style="display: none">
     <category name="ArduinoSetup">  
-      <block type="talkie"></block>
-      <block type="speaknumber"></block>
       <block type="commentwidget"></block>
       <block type="setuploop"></block>
       <block type="statement"></block>
       <block type="charpressed"></block>
       <block type="lineentered"></block>
     </category>  
+  <category name="WII Nunchuk">
+      <block type="nunchukreadbutton"></block>
+      <block type="nunchukjoystickx"></block>
+      <block type="nunchukjoysticky"></block>
+      <block type="nunchukjoystickreleased"></block>
+  </category>
+  <category name="Talkie">
+      <block type="talkie"></block>
+      <block type="speaknumber"></block>  
+  </category>
+  <category name="LED">
+    <block type="settricolor"></block>
+    <block type="flashcolor"></block>
+    <block type="nextcolor"></block>
+    <block type="currentcolor"></block>
+    <block type="cyclecolors"></block>
+    <block type="stopcyclecolors"></block>
+  </category>
+  <category name="H-Bridge">
+    <block type="motormove"></block>
+  </category>
+  <category name="Button">
+    <block type="ispressed"></block>
+    <block type="isreleased"></block>
+  </category>
+  <category name="Infra-Red">
+    <block type="irdetected"></block>
+    <block type="fireshot"></block>
+    <block type="infrared"></block>
+    <block type="createfiresequence"></block>
+ </category>
+  <category name="Piezo">
+    <block type="makesound"></block>
+    <block type="stopsound"></block>
+  </category>  
+  <category name="Timer">
+    <block type="starttimer"></block>
+    <block type="timerexpired"></block>
+    <block type="resettimer"></block>
+    <block type="timerisactive"></block>
+    <block type="wait"></block>
+  </category>
+  <category name="Small Display">
+    <block type="displaywrite"></block>
+    <block type="displayclear"></block>
+  </category>
+  <category name="Pin">
+    <block type="pinselector"></block>  
+    <block type="writepin"></block>
+    <block type="readpin"></block>
+  </category>
     <category name="{catLogic}" colour="210">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
@@ -377,47 +426,7 @@
     <sep></sep>
     <category name="{catVariables}" colour="330" custom="VARIABLE"></category>
     <category name="{catFunctions}" colour="290" custom="PROCEDURE"></category>
-  <category name="LED">
-    <block type="settricolor"></block>
-    <block type="flashcolor"></block>
-    <block type="nextcolor"></block>
-    <block type="currentcolor"></block>
-    <block type="cyclecolors"></block>
-    <block type="stopcyclecolors"></block>
-  </category>
-  <category name="H-Bridge">
-    <block type="motormove"></block>
-  </category>
-  <category name="Button">
-    <block type="ispressed"></block>
-    <block type="isreleased"></block>
-  </category>
-  <category name="Infra-Red">
-    <block type="irdetected"></block>
-    <block type="fireshot"></block>
-    <block type="infrared"></block>
-    <block type="createfiresequence"></block>
- </category>
-  <category name="Piezo">
-    <block type="makesound"></block>
-    <block type="stopsound"></block>
-  </category>  
-  <category name="Timer">
-    <block type="starttimer"></block>
-    <block type="timerexpired"></block>
-    <block type="resettimer"></block>
-    <block type="timerisactive"></block>
-    <block type="wait"></block>
-  </category>
-  <category name="LCDDisplay">
-    <block type="displaywrite"></block>
-    <block type="displayclear"></block>
-  </category>
-  <category name="Pin">
-    <block type="pinselector"></block>  
-    <block type="writepin"></block>
-    <block type="readpin"></block>
-  </category>
+  
   </xml>
 </body>
 </html>

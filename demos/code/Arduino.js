@@ -659,3 +659,59 @@ Blockly.Blocks['speaknumber'] = {
   }
 };
 
+Blockly.Blocks['nunchukreadbutton'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField ("Nunchuk");    
+    this.appendDummyInput()
+        .appendField("button")
+        .appendField(new Blockly.FieldDropdown([["c", "C"], ["z", "Z"]]), "BUTTON");
+    this.appendDummyInput()
+        .appendField("Is")
+        .appendField(new Blockly.FieldDropdown([["Pressed", "PRESSED"], ["Released", "RELEASED"]]), "ACTION");
+    this.setOutput(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['nunchukjoystickx'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Joystick X Direction");
+    this.appendDummyInput()
+        .appendField("Direction")
+        .appendField(new Blockly.FieldDropdown([["Left", "LEFT"], ["Right", "RIGHT"]]), "DIRECTION");
+    this.setOutput(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['nunchukjoysticky'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Joystick Y Direction");
+    this.appendDummyInput()
+        .appendField("Direction")
+        .appendField(new Blockly.FieldDropdown([["Up", "UP"], ["Down", "DOWN"]]), "DIRECTION");
+    this.setOutput(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['nunchukjoystickreleased'] = { 
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Joystick Released");
+    this.setOutput(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
