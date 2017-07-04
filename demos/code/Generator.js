@@ -80,7 +80,7 @@ Blockly.Python['setuploop'] = function(block) {
   return code;
 };
 
-function insetupTheCode (code) { 
+function inSetupCode (code) { 
   if (insetupCode.indexOf (code) == -1) {
      insetupCode = insetupCode + code + '\n';
   } 
@@ -212,7 +212,7 @@ Blockly.Python['fireshot'] = function(block) {
   includeClass ( '#include <IR.h>' );    
   includeClass ( '#include <IRPipboy.h>' );
   
-  insetupTheCode (
+  inSetupCode (
     '  ' + name + '.init();\n'
   );
   
@@ -540,7 +540,7 @@ Blockly.Python['irdetected'] = function(block) {
   includeClass ( '#include <IRPipboy.h>' );
   includeClass ( '#include <TimerOne.h>' );
   
-  insetupTheCode (
+  inSetupCode (
     '  ' + name + '.init();\n' +  
     '  Timer1.initialize (25);\n' + 
     '  Timer1.attachInterrupt(callback,25);\n' 
@@ -774,7 +774,7 @@ Blockly.Python['nunchukreadbutton'] = function(block) {
   var code = 'nunchuk.';  
   includeClass ( '#include <ArduinoNunchuk.h>' );
   instantiateVariable ( 'ArduinoNunchuk nunchuk = ArduinoNunchuk();' );
-  insetupTheCode ('  nunchuk.init();'); 
+  inSetupCode ('  nunchuk.init();'); 
   updateVariable ('nunchuk.update();' );
 
   if (button == "C") { 
@@ -797,7 +797,7 @@ Blockly.Python['nunchukjoystickx'] = function(block) {
   var direction = block.getFieldValue('DIRECTION'); 
   includeClass ( '#include <ArduinoNunchuk.h>' );  
   instantiateVariable ( 'ArduinoNunchuk nunchuk = ArduinoNunchuk();' );
-  insetupTheCode ('  nunchuk.init();'); 
+  inSetupCode ('  nunchuk.init();'); 
   updateVariable ('nunchuk.update();' );
   var code = "(nunchuk.newX == \"" + direction + "\")";   
   return [code, Blockly.Python.ORDER_NONE];
@@ -807,7 +807,7 @@ Blockly.Python['nunchukjoysticky'] = function(block) {
   var direction = block.getFieldValue('DIRECTION'); 
   includeClass ( '#include <ArduinoNunchuk.h>' );  
   instantiateVariable ( 'ArduinoNunchuk nunchuk = ArduinoNunchuk();' );
-  insetupTheCode ('  nunchuk.init();');   
+  inSetupCode ('  nunchuk.init();');   
   updateVariable ('nunchuk.update();' );
   var code = "(nunchuk.newY == \"" + direction + "\")";   
   return [code, Blockly.Python.ORDER_NONE];
@@ -817,7 +817,45 @@ Blockly.Python['nunchukjoystickreleased'] = function(block) {
   var direction = block.getFieldValue('DIRECTION'); 
   includeClass ( '#include <ArduinoNunchuk.h>' );  
   instantiateVariable ( 'ArduinoNunchuk nunchuk = ArduinoNunchuk();' );
-  insetupTheCode ('  nunchuk.init();'); 
+  inSetupCode ('  nunchuk.init();'); 
   updateVariable ('nunchuk.update();' );
   return ['nunchuk.joystickReleased()', Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['rf433tx'] = function (block) {
+  
+  var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  var msg = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
+  includeClass ('#include <VirtualWire.h>' );  
+  inSetupCode  ('  vw_set_tx_pin (' + pin + ');');
+  inSetupCode  ('  vw_setup(2000);' ); 
+  
+  var code = "vw_send((uint8_t *)" + msg + ", strlen(" + msg + "));\n";
+  return code + '\n';
+};
+
+Blockly.Python['rf433rx'] = function (block) {
+  
+  var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  
+  inSetupCode  ('  vw_set_rx_pin (' + pin + ');');
+  inSetupCode  ('  vw_setup(2000);' ); 
+  inSetupCode  ('  vw_rx_start(); // Start the receiver PLL running\n' );
+  includeClass ('#include <VirtualWire.h>' );  
+  
+  setupTheCode (  
+    'uint8_t buf[100];\n' + 
+    'uint8_t buflen = 100;\n' + 
+    'char *msgReceived () {\n' +
+    '  buf[0] = 0;\n' +      
+    '  if (vw_get_message(buf, &buflen)) { // Non-blocking \n' + 
+    '     buf[buflen] = 0;\n' + 
+    '  }\n' + 
+    '  return &buf[0];\n' +     
+    '}\n' );
+      
+  return ['msgReceived()', Blockly.Python.ORDER_NONE];
+  
+};
+
+

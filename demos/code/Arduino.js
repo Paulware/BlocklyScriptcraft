@@ -714,4 +714,35 @@ Blockly.Blocks['nunchukjoystickreleased'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+ 
+Blockly.Blocks['rf433tx'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Send Message");
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("Output Pin");        
+    this.appendValueInput("MESSAGE")
+        .setCheck("String")
+        .appendField("Message");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['rf433rx'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Receive Char");
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("Input Pin");        
+    this.setColour(120);
+    this.setOutput(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
