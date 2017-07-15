@@ -610,7 +610,7 @@ Blockly.Blocks['motormove'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Direction")
-        .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Reverse", "reverse"]]), "DIRECTION");
+        .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Left", "left"], ["Reverse", "reverse"], ["Right", "right"]]), "DIRECTION");
     this.appendDummyInput()
         .appendField("Speed")
         .appendField(new Blockly.FieldDropdown([["Stop", "stop"], ["Medium", "medium"], ["Fast", "fast"]]), "SPEED");
@@ -637,7 +637,7 @@ Blockly.Blocks['tostring'] = {
         .appendField("Number Value");        
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
-    this.setOutput(true, "String"); // "String");   
+    this.setOutput(true, "String");  
     this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -651,6 +651,24 @@ Blockly.Blocks['speaknumber'] = {
     this.appendValueInput("VALUE")
         .setCheck("Number")
         .appendField("Number Value");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['speakalphabet'] = {
+   init: function() {
+    this.appendDummyInput()
+        .appendField("Speak Letter");
+    this.appendDummyInput()
+        .appendField("Letter") 
+        .appendField(new Blockly.FieldDropdown([["A", "A"], ["B", "B"], ["C","C"], ["D","D"], ["E","E"], ["F","F"], ["G","G"],
+                                                ["H", "H"], ["I", "I"], ["J","J"], ["K","K"], ["L","L"], ["M","M"], 
+                                                ["N", "N"], ["O", "O"], ["P", "P"], ["Q", "Q"], ["R", "R"], ["S","S"], ["T","T"],
+                                                ["U", "U"], ["V","V"], ["W","W"], ["X","X"], ["Y","Y"], ["Z","Z"]]), "LETTER");       
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
@@ -741,8 +759,57 @@ Blockly.Blocks['rf433rx'] = {
         .setCheck("Number")
         .appendField("Input Pin");        
     this.setColour(120);
-    this.setOutput(true, null);
+    this.setOutput(true, "String")
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['rf433rxready'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Message Ready");
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("Input Pin");        
+    this.setColour(120);
+    this.setOutput(true, "Boolean")
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['textstream'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Text Stream");
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("Receive Pin");        
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setOutput(true, "String");  
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['textstreamready'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Text Stream Ready");
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("Receive Pin");        
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setOutput(true, "Boolean");  
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
