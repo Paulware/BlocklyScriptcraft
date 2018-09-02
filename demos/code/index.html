@@ -61,10 +61,10 @@
   <script src="../../php_compressed.js"></script>
   <script src="../../lua_compressed.js"></script>
   <script src="../../dart_compressed.js"></script>
-  <script src="Arduino.js"></script>
+  <script src="blocks.js"></script>
   <script src="Talkie.js"></script>
   <script src="code.js"></script>
-  <script src="Generator.js"></script>
+  <script src="codeGenerator.js"></script>
 </head>
 <body>
   <table width="100%" height="100%">
@@ -133,14 +133,86 @@
       <block type="commentwidget"></block>
       <block type="setuploop"></block>
       <block type="statement"></block>
-      <block type="charpressed"></block>
       <block type="lineentered"></block>
     </category>  
-  <category name="WII Nunchuk">
-      <block type="nunchukreadbutton"></block>
-      <block type="nunchukjoystickx"></block>
-      <block type="nunchukjoysticky"></block>
-      <block type="nunchukjoystickreleased"></block>
+  <category name="User Interface">
+     <category name="Button">
+       <block type="ispressed"></block>
+       <block type="isreleased"></block>
+     </category>    
+     <category name="PS2 Wireless Controller">
+        <block type="ps2init"></block>
+        <block type="ps2yaction"></block>
+        <block type="ps2fire"></block>
+        <block type="buttonpressed"></block>
+     </category>
+     <category name="Joy Stick">
+        <block type="joysticksetup"></block>
+        <block type="joystickbutton"></block>
+        <block type="joystickx"></block>        
+        <block type="joysticky"></block>
+     </category>
+     <category name="Nrf24l01">
+        <block type="nrf24l01setup"></block>
+        <block type="nrf24l01available"></block>
+        <block type="nrf24l01rx"></block>
+        <block type="nrf24l01tx"></block>
+     </category>
+     <category name="WII Nunchuk">
+         <block type="nunchukreadbutton"></block>
+         <block type="nunchukjoystickx"></block>
+         <block type="nunchukjoysticky"></block>
+         <block type="nunchukjoystickreleased"></block>
+     </category>   
+     <category name="Small Display">
+       <block type="displaywrite"></block>
+       <block type="displayclear"></block>
+     </category>     
+  </category>
+  <category name="Lights">
+    <category name="Pixels">
+      <block type="pixelsetup"></block>
+      <block type="pixelcolor"></block>
+      <block type="pixelblink"></block>
+      <block type="pixelscan"></block>
+      <block type="pixelminus"></block>
+      <block type="pixelplus"></block>
+    </category>
+    <category name="LED">
+      <block type="connectled"></block>
+      <block type="settricolor"></block>
+      <block type="flashcolor"></block>
+      <block type="nextcolor"></block>
+      <block type="currentcolor"></block>
+      <block type="cyclecolors"></block>
+      <block type="stopcyclecolors"></block>
+    </category>    
+  </category>  
+  <category name="GPIO">
+     <category name="Digital Output">
+       <block type="digitalwrite"></block>     
+     </category>
+     <category name="Digital Read">
+       <block type="digitalread"></block>     
+     </category>
+     <category name="Analog Input">
+     </category>
+  </category> 
+  <category name="Features">
+    <block type="pipboy"></block>
+  </category>
+  <category name="Match Strings">
+    <block type="matchstring"></block>     
+    <block type="connectstream"></block>
+  </category>
+  <category name="EEPROM">
+    <category name="Read">
+       <block type="readeeprom"></block> 
+       <block type="readeepromrange"></block> 
+    </category>
+    <category name="Write">
+       <block type="writeeeprom"></block>    
+    </category>
   </category>
   <category name="RF 433">
       <block type="rf433tx"></block>
@@ -152,26 +224,21 @@
       <block type="speaknumber"></block> 
       <block type="speakalphabet"></block>      
   </category>
-  <category name="LED">
-    <block type="settricolor"></block>
-    <block type="flashcolor"></block>
-    <block type="nextcolor"></block>
-    <block type="currentcolor"></block>
-    <block type="cyclecolors"></block>
-    <block type="stopcyclecolors"></block>
-  </category>
   <category name="H-Bridge">
     <block type="motormove"></block>
   </category>
-  <category name="Button">
-    <block type="ispressed"></block>
-    <block type="isreleased"></block>
-  </category>
+
   <category name="Infra-Red">
-    <block type="irdetected"></block>
-    <block type="fireshot"></block>
-    <block type="infrared"></block>
-    <block type="createfiresequence"></block>
+    <category name="Receive">
+      <block type="irdetected"></block>
+      <block type="showlastirvalue"></block>
+    </category>
+    <category name="Transmit">
+      <block type="fireshot"></block>
+      <block type="createfirepulse"></block>
+      <block type="infrared"></block>
+      <block type="simpleinfrared"></block>
+    </category>
  </category>
   <category name="Piezo">
     <block type="makesound"></block>
@@ -184,12 +251,9 @@
     <block type="timerisactive"></block>
     <block type="wait"></block>
   </category>
-  <category name="Small Display">
-    <block type="displaywrite"></block>
-    <block type="displayclear"></block>
-  </category>
     <category name="{catText}" colour="160">
       <block type="text"></block>
+      <block type="charpressed"></block>      
       <block type="text_print">
         <value name="TEXT">
           <shadow type="text">
@@ -197,6 +261,7 @@
           </shadow>
         </value>
       </block>      
+      <block type="textprintln"></block>      
       <block type="textstreamready"></block>
       <block type="textstream"></block>
       <block type="text_join"></block>

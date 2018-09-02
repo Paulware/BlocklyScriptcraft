@@ -67,7 +67,7 @@ Blockly.Variables.allUsedVariables = function(root) {
       }
     }
   }
-  // Flatten the hash into a list.
+  // Flatten the hash into a list. 
   var variableList = [];
   for (var name in variableHash) {
     variableList.push(variableHash[name]);
@@ -249,6 +249,7 @@ Blockly.Variables.createVariable = function(workspace, opt_callback) {
                   promptAndCheckWithAlert(text);  // Recurse
                 });
           } else {
+            // text = "int " + text;
             workspace.createVariable(text);
             if (opt_callback) {
               opt_callback(text);
