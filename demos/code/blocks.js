@@ -10,7 +10,23 @@ Blockly.Blocks['setuploop'] = {
     this.appendDummyInput()
         .appendField("void loop");
     this.appendStatementInput("LOOPCODE")
-        .setCheck(null);        
+        .setCheck(null);              
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+Blockly.Blocks['scriptcraftfunction'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Function");
+    this.appendValueInput("nameOfFunction")
+        .setCheck("String")
+        .appendField("Name");
+    this.appendStatementInput("FUNCTIONCODE")
+        .setCheck(null);
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setColour(120);
@@ -130,6 +146,21 @@ Blockly.Blocks['commentwidget'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['echowidget'] = {
+  init: function() {
+    this.appendValueInput("NAME")
+        .setCheck("String")
+        .appendField("Echo");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 Blockly.Blocks['loop'] = {
   init: function() {
     this.appendDummyInput()
@@ -881,11 +912,11 @@ Blockly.Blocks['textstreamready'] = {
         .appendField("Text Stream Ready");
     this.appendDummyInput("SOURCE")
         .appendField("Receive Source")        
-        .appendField(new Blockly.FieldDropdown([["Serial", "SERIAL"], ["Pin 4", "4"], ["Pin 5", "5"],
+        .appendField(new Blockly.FieldDropdown([["Serial", "SERIAL"], ["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
            ["Pin 6", "6"], ["Pin 7", "7"], ["Pin 8", "8"], ["Pin 9", "9"], ["Pin 10", "10"], 
-           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14", "14"],
-           ["Pin 15", "15"], ["Pin 16", "16"], ["Pin 17", "17"], ["Pin 18", "18"], 
-           ["Pin 19", "19"]]), "DIRECTION");        
+           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14 (A0)", "14"],
+           ["Pin 15 (A1)", "15"], ["Pin 16 (A2)", "16"], ["Pin 17 (A3)", "17"], ["Pin 18 (A4)", "18"], 
+           ["Pin 19 (A5)", "19"]]), "DIRECTION");        
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setOutput(true, "Boolean");  
@@ -1170,16 +1201,16 @@ Blockly.Blocks['connectstream'] = {
         .appendField("Receive Pin")        
         .appendField(new Blockly.FieldDropdown([["Serial", "SERIAL"], ["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
            ["Pin 6", "6"], ["Pin 7", "7"], ["Pin 8", "8"], ["Pin 9", "9"], ["Pin 10", "10"], 
-           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14", "14"],
-           ["Pin 15", "15"], ["Pin 16", "16"], ["Pin 17", "17"], ["Pin 18", "18"], 
-           ["Pin 19", "19"]]), "RECEIVE");
+           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14 (A0)", "14"],
+           ["Pin 15 (A1)", "15"], ["Pin 16 (A2)", "16"], ["Pin 17 (A3)", "17"], ["Pin 18 (A4)", "18"], 
+           ["Pin 19 (A5)", "19"]]), "RECEIVE");
     this.appendDummyInput()
         .appendField("Transmit Pin")        
         .appendField(new Blockly.FieldDropdown([["Serial", "SERIAL"], ["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
            ["Pin 6", "6"], ["Pin 7", "7"], ["Pin 8", "8"], ["Pin 9", "9"], ["Pin 10", "10"], 
-           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14", "14"],
-           ["Pin 15", "15"], ["Pin 16", "16"], ["Pin 17", "17"], ["Pin 18", "18"], 
-           ["Pin 19", "19"]]), "TRANSMIT");
+           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14 (A0)", "14"],
+           ["Pin 15 (A1)", "15"], ["Pin 16 (A2)", "16"], ["Pin 17 (A3)", "17"], ["Pin 18 (A4)", "18"], 
+           ["Pin 19 (A5)", "19"]]), "TRANSMIT");
     this.setColour(120);             
     this.setTooltip('');  
     this.setPreviousStatement(true, null);
@@ -1213,12 +1244,21 @@ Blockly.Blocks['readeeprom'] = {
   }
 };
 
-Blockly.Blocks['writeeeprom'] = {
+Blockly.Blocks['pipboyeeprom'] = {
   init: function() {  
     this.appendDummyInput()
-        .appendField("Write EEPROM");
+        .appendField("Read EEPROM Fire Sequence");
+    this.setOutput(true, "Number");    
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('help/none.html');
+  }
+};
+
+Blockly.Blocks['writeeeprom'] = {
+  init: function() {  
     this.appendValueInput("ADDRESS")
-        .appendField("Address");        
+        .appendField("Write EEPROM Address");
     this.appendValueInput("VALUE")
         .appendField("Value");
     this.setPreviousStatement(true, null);
@@ -1289,23 +1329,23 @@ Blockly.Blocks['connectled'] = {
         .appendField("Connect a Tri-Color LED");      
     this.appendDummyInput()
         .appendField("Green Pin")        
-        .appendField(new Blockly.FieldDropdown([["Serial", "SERIAL"], ["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
+        .appendField(new Blockly.FieldDropdown([["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
            ["Pin 6", "6"], ["Pin 7", "7"], ["Pin 8", "8"], ["Pin 9", "9"], ["Pin 10", "10"], 
-           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14", "14"],
-           ["Pin 15", "15"], ["Pin 16", "16"], ["Pin 17", "17"], ["Pin 18", "18"], 
-           ["Pin 19", "19"]]), "GREEN")
+           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14 (A0)", "14"],
+           ["Pin 15 (A1)", "15"], ["Pin 16 (A2)", "16"], ["Pin 17 (A3)", "17"], ["Pin 18 (A4)", "18"], 
+           ["Pin 19 (A5)", "19"]]), "GREEN")
         .appendField("Blue Pin")        
-        .appendField(new Blockly.FieldDropdown([["Serial", "SERIAL"], ["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
+        .appendField(new Blockly.FieldDropdown([["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
            ["Pin 6", "6"], ["Pin 7", "7"], ["Pin 8", "8"], ["Pin 9", "9"], ["Pin 10", "10"], 
-           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14", "14"],
-           ["Pin 15", "15"], ["Pin 16", "16"], ["Pin 17", "17"], ["Pin 18", "18"], 
-           ["Pin 19", "19"]]), "BLUE")
+           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14 (A0)", "14"],
+           ["Pin 15 (A1)", "15"], ["Pin 16 (A2)", "16"], ["Pin 17 (A3)", "17"], ["Pin 18 (A4)", "18"], 
+           ["Pin 19 (A5)", "19"]]), "BLUE")
         .appendField("Red Pin")        
-        .appendField(new Blockly.FieldDropdown([["Serial", "SERIAL"], ["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
+        .appendField(new Blockly.FieldDropdown([["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
            ["Pin 6", "6"], ["Pin 7", "7"], ["Pin 8", "8"], ["Pin 9", "9"], ["Pin 10", "10"], 
-           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14", "14"],
-           ["Pin 15", "15"], ["Pin 16", "16"], ["Pin 17", "17"], ["Pin 18", "18"], 
-           ["Pin 19", "19"]]), "RED");
+           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14 (A0)", "14"],
+           ["Pin 15 (A1)", "15"], ["Pin 16 (A2)", "16"], ["Pin 17 (A3)", "17"], ["Pin 18 (A4)", "18"], 
+           ["Pin 19 (A5)", "19"]]), "RED");
     this.setColour(120);             
     this.setTooltip('');  
     this.setPreviousStatement(true, null);
@@ -1314,4 +1354,132 @@ Blockly.Blocks['connectled'] = {
   }
 };
 
+Blockly.Blocks['connectring'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Connect a Health Ring LED")             
+        .appendField(new Blockly.FieldDropdown([["Pin 2", "2"], ["Pin 4", "4"], ["Pin 5", "5"],
+           ["Pin 6", "6"], ["Pin 7", "7"], ["Pin 8", "8"], ["Pin 9", "9"], ["Pin 10", "10"], 
+           ["Pin 11", "11"], ["Pin 12", "12"], ["Pin 13", "13"], ["Pin 14 (A0)", "14"],
+           ["Pin 15 (A1)", "15"], ["Pin 16 (A2)", "16"], ["Pin 17 (A3)", "17"], ["Pin 18 (A4)", "18"], 
+           ["Pin 19 (A5)", "19"]]), "PIN");
+    this.setColour(120);             
+    this.setTooltip('');  
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['sethealth'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set XRing"); 
+    this.appendValueInput("HEALTH")
+        .appendField("Health Value");         
+    this.setColour(120);             
+    this.setTooltip('');  
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+// "entities": ["Chicken", "Cow", "Wolf", "Pig", "Sheep", "Rabbit", "Horse", "Ocelot", "Villager", "Zombie", "Skeleton", "Creeper", "Spider"]
+Blockly.Blocks['spawn'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Spawn");    
+    this.appendDummyInput()
+        .appendField("Entity")
+        .appendField(new Blockly.FieldDropdown([["Pig", "PIG"],["Chicken","CHICKEN"]]), "ENTITY");           
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+// https://www.codeproject.com/Articles/878585/Build-Giant-Ravine-in-Minecraft-using-ScriptCraft
+Blockly.Blocks['structures'] = {
+ 
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Spawn");    
+    this.appendDummyInput()
+        .appendField("Structure")
+        .appendField(new Blockly.FieldDropdown([["Castle", "castle"],["Cottage","cottage"]]), "STRUCTURE");           
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['createdrone'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create Drone");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['buildbox'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Build Box");
+    this.appendDummyInput()
+        .appendField("Block Type")
+        .appendField(new Blockly.FieldDropdown([["Slime", "slime"],["Oak","oak"]]), "BLOCKTYPE");  
+    this.appendValueInput("LENGTH")
+        .appendField("Length");                 
+    this.appendValueInput("WIDTH")
+        .appendField("WIDTH");                 
+    this.appendValueInput("HEIGHT")
+        .appendField("Height");                 
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['sign'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create a standing sign");
+    this.appendValueInput("LINE1")
+        .appendField("Line 1");          
+    this.appendValueInput("LINE2")
+        .appendField("Line 2");          
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['wallsign'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create a wall sign");
+    this.appendValueInput("LINE1")
+        .appendField("Line 1");          
+    this.appendValueInput("LINE2")
+        .appendField("Line 2");          
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 

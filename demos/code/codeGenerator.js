@@ -5,7 +5,7 @@ var setupCode = "";
 var insetupCode = "";
 
 Blockly.Python['setuploop'] = function(block) {
-  includes = "//Includes\n";
+  includes = "";
   instantiations = "//Instantiations\n";
   updates = "  //Updates\n";
   setupCode = "";
@@ -18,8 +18,7 @@ Blockly.Python['setuploop'] = function(block) {
   // Get the associated code for blocks in the setup area
   var setCode = Blockly.Python.statementToCode (block, 'SETUPCODE' );
 
-  code = includes + 
-         instantiations + 
+  code = "//Includes\n" +
          setupCode + 
          '\nvoid setup () { // --- This runs once ---\n  Serial.begin (' + baudrate + ');\n  Serial.println (\"Ready\");\n' + insetupCode + setCode + '}\n' +
          '\nvoid loop  () { // --- This runs continually ---\n' + loopCode + updates + '}\n';      
@@ -151,10 +150,9 @@ Blockly.Python['infrared'] = function(block) {
 
 Blockly.Python['fireshot'] = function(block) {
   var val = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
-  var name = 'irTx';
-  instantiateVariable ( 'IRTX ' + name + '(3);\n' );
+  instantiateVariable ( 'IRTX irTx(3);' );  
   includeClass ( '#include <IRTX.h>' );    
-  
+  var name = "irTx";
   var code =  name + '.createDataSequence(' + val + ');\n' + name + '.fireShot();\n';  
   return code;
 };
@@ -173,10 +171,18 @@ Blockly.Python['start'] = function(block) {
   var code = '//Start of blockly generated code!\n';
   return code;
 };
+
 Blockly.Python['commentwidget'] = function(block) {
   var value = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);  
   
   var code = '//' + insideChars ( value, "\"", "\"" ) + '\n';
+  return code;
+};
+
+Blockly.Python['echowidget'] = function(block) {
+  var value = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);  
+  
+  var code = 'echo (\"' + insideChars ( value, "\"", "\"" ) + '\");\n';
   return code;
 };
 
@@ -1016,6 +1022,7 @@ Blockly.Python['buttonpressed'] = function (block) {
   var button = block.getFieldValue ("BUTTON"); 
   var pressedReleased = block.getFieldValue ("PRESSEDRELEASED");
   var code = ""
+  includeClass ('#include <ButtonPress.h>' ); 
   if (button == "left") {
      if (pressedReleased == "pressed") {
         code = "ps2Wireless.newLeft == \"PRESSED\"";
@@ -1118,11 +1125,11 @@ Blockly.Python['writeeeprom'] = function (block) {
 Blockly.Python['simpleinfrared'] = function (block) {
   var onOff = block.getFieldValue ("ONOFF" );
   includeClass ( '#include <IR.h>' );    
-  inSetupCode  ( '  irTx.enableIROut();');        
-  instantiateVariable ( 'IR irTx;' );
-  var code = 'irTx.transmit(true);\n';
+  inSetupCode  ( '  ir.enableIROut();');        
+  instantiateVariable ( 'IR ir(3);' );  
+  var code = 'ir.transmit(true);\n';
   if (onOff == 'OFF') {
-     code = 'irTx.transmit(false);\n';
+     code = 'ir.transmit(false);\n';
   }
   return code;
 };
@@ -1132,6 +1139,8 @@ Blockly.Python['textprintln'] = function(block) {
 };
 
 Blockly.Python['pipboy'] = function(block) {
+  includeClass ( '#include <Pipboy.h>' );      
+  instantiateVariable ( 'IRTX irTx(3);' );  
   instantiateVariable ( 'Pipboy pipboy (&irTx, &matchStream);' );
   updateVariable ('pipboy.update();' );  
  
@@ -1162,6 +1171,120 @@ Blockly.Python['connectled'] = function (block) {
   
 };
 
+Blockly.Python['pipboyeeprom'] = function(block) {
+  includeClass ( '#include <Pipboy.h>' ); 
+  instantiateVariable ( 'IRTX irTx(3);' );   
+  instantiateVariable ( 'Pipboy pipboy (&irTx, &matchStream);' );
+  updateVariable ('pipboy.update();' );  
+  
+  var code =  'pipboy.eepromFireSequence()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['connectring'] = function (block) {
+  var pin = block.getFieldValue ("PIN"); 
+  includeClass ('#include <HealthRing.h>' ); 
+  instantiateVariable ( 'HealthRing ring(' + pin + ');' );    
+  return "";
+};
+
+Blockly.Python['sethealth'] = function (block) {
+  var health = Blockly.Python.valueToCode(block, 'HEALTH', Blockly.Python.ORDER_ATOMIC); 
+  return "ring.setHealth(" + health + ");";
+};
 
 
+Blockly.JavaScript ['setuploop'] = function (block) {
+  // TODO: Assemble Python into code variable.
+  var code = '//Start of blockly generated code!\n';
+  return code;
+};
 
+
+Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
+  // TODO: Assemble Python into code variable.
+  var functionName = Blockly.Python.valueToCode(block, 'nameOfFunction', Blockly.Python.ORDER_ATOMIC);
+  functionName = insideChars ( functionName,"\"","\"");
+  var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
+  var code = '//Scriptcraft function!\n' + 'function ' + functionName + '() {\n' + 
+             functionCode +
+             '}\n' +
+  'exports.' + functionName + ' = ' + functionName + ';';
+  return code;
+};
+
+// self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.PIG);
+
+Blockly.Python['spawn'] = function(block) {
+  var entity = block.getFieldValue ("ENTITY");
+  var code = '// Spawn ' + entity + '\n' + 
+             'var entity = self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';  
+             // 'org.bukkit.entity.getEquipment().setHelmet(new org.bukkit.inventory.ItemStack(gobjBukkit.Material.CHAINMAIL_HELMET));';            
+  return code;
+};
+
+/*
+    /js castle()
+				/js chessboard()
+				/js cottage()
+				/js cottage_road()
+				/js dancefloor()
+				/js fort()
+				/js rainbow()
+				/js temple()
+*/
+Blockly.Python['structures'] = function(block) {
+  var structure = block.getFieldValue ("STRUCTURE");
+
+  var code = '// Spawn ' + structure + '\n' + 
+             structure.toLowerCase() + '();\n' 
+  return code;
+};
+
+Blockly.Python['createdrone'] = function(block) {
+  var code = 'drone = new Drone(self); // create a drone\n'; 
+  //  myDrone.box(blocks.slime, 4, 1 ,4); 
+  return code;
+};
+
+Blockly.Python['buildbox'] = function(block) {
+  var blockType = block.getFieldValue ("BLOCKTYPE");
+  var len = Blockly.Python.valueToCode(block, 'LENGTH', Blockly.Python.ORDER_ATOMIC); 
+  var width = Blockly.Python.valueToCode(block, 'WIDTH', Blockly.Python.ORDER_ATOMIC); 
+  var height = Blockly.Python.valueToCode(block, 'HEIGHT', Blockly.Python.ORDER_ATOMIC); 
+  
+  var code = '//Build a box out of ' + blockType + '\n' +   
+             'drone.box(blocks.' + blockType + ', ' + len + ', ' + height + ', ' +  width + '); // length, height, width\n'; 
+  return code;
+};
+
+Blockly.Python['sign'] = function(block) {
+  var line1 = Blockly.Python.valueToCode(block, 'LINE1', Blockly.Python.ORDER_ATOMIC); 
+  var line2 = Blockly.Python.valueToCode(block, 'LINE2', Blockly.Python.ORDER_ATOMIC); 
+  if (line1 == "" ) { 
+     line1 = "\"\"";
+  } 
+  if (line2 == "" ) { 
+     line2 = "\"\"";
+  }
+  var code = "drone = new Drone(self); // create a drone\n" +
+             "var line1 = " + line1 + "\n" + 
+             "var line2 = " + line2 + "\n" + 
+             "drone.signpost([line1,line2]);\n";  
+  return code;
+};
+Blockly.Python['wallsign'] = function(block) {
+  var line1 = Blockly.Python.valueToCode(block, 'LINE1', Blockly.Python.ORDER_ATOMIC); 
+  var line2 = Blockly.Python.valueToCode(block, 'LINE2', Blockly.Python.ORDER_ATOMIC); 
+  if (line1 == "" ) { 
+     line1 = "\"\"";
+  } 
+  if (line2 == "" ) { 
+     line2 = "\"\"";
+  }
+  var code = "drone = new Drone(self); // create a drone\n" +
+             "var line1 = " + line1 + "\n" + 
+             "var line2 = " + line2 + "\n" + 
+             "drone.sign([line1,line2], blocks.sign);\n";  
+  return code;
+};

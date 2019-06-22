@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="google" value="notranslate">
-  <title>Blockly Demo:</title>
+  <title>Blockly Scriptcraft Demo:</title>
   <link rel="stylesheet" href="style.css">
   <script>
       var fso = new ActiveXObject("Scripting.FileSystemObject");          
@@ -49,11 +49,12 @@
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand("copy");  // Security exception may be thrown by some browsers.
-        document.body.removeChild(textarea);
+        document.body.removeChild(textarea);        
+        alert ( 'Use notepad++ to save to c:/SpigotMC/scriptcraft/plugins/');
      }   
 
   </script>
-  <script src="/storage.js"></script>
+  <script src="../../appengine/storage.js"></script>  
   <script src="../../blockly_compressed.js"></script>
   <script src="../../blocks_compressed.js"></script>
   <script src="../../javascript_compressed.js"></script>
@@ -64,6 +65,7 @@
   <script src="blocks.js"></script>
   <script src="Talkie.js"></script>
   <script src="code.js"></script>
+  <script src="../../generators/javascript.js"></script>  
   <script src="codeGenerator.js"></script>
 </head>
 <body>
@@ -84,9 +86,11 @@
           <tr id="tabRow" height="1em">
             <td id="tab_blocks" class="tabon">...</td>
             <td class="tabmin">&nbsp;</td>
-            <td id="tab_javascript" class="taboff" style="display:none;">JavaScript</td>
+            <td id="tab_javascript" class="taboff" >JavaScript
+               <input type="button" value="Copy to Clipboard" onclick="clipboardCopy (document.all.content_javascript.innerText);">            
+            </td>
             <td class="tabmin" style="display:none;">&nbsp;</td>
-            <td id="tab_python" class="taboff">Arduino
+            <td id="tab_python" class="taboff" style="display:none;">Arduino
             <input type="button" value="Copy to Clipboard" onclick="clipboardCopy (document.all.content_python.innerText);">
             </td>
             <td class="tabmin">&nbsp;</td>
@@ -129,13 +133,25 @@
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
-    <category name="ArduinoSetup">  
+    <category name="ScriptCraft">
+      <block type="scriptcraftfunction"></block>
       <block type="commentwidget"></block>
-      <block type="setuploop"></block>
-      <block type="statement"></block>
-      <block type="lineentered"></block>
-    </category>  
-  <category name="User Interface">
+      <block type="echowidget"></block>
+      <block type="spawn"></block>
+      <category name="Build">
+        <block type="structures"></block>
+        <block type="createdrone"></block>
+        <block type="buildbox"></block>
+        <block type="sign"></block>
+        <block type="wallsign"></block>
+      </category>    
+    </category>
+    <!category name="ArduinoSetup">  
+      <!block type="setuploop"><!/block>
+      <!block type="statement"><!/block>
+      <!block type="lineentered"><!/block>
+    <!/category>  
+  <category name="Interface">
      <category name="Button">
        <block type="ispressed"></block>
        <block type="isreleased"></block>
@@ -168,6 +184,11 @@
        <block type="displaywrite"></block>
        <block type="displayclear"></block>
      </category>     
+     <category name="RF 433">
+         <block type="rf433tx"></block>
+         <block type="rf433rx"></block>
+         <block type="rf433rxready"></block>
+     </category>     
   </category>
   <category name="Lights">
     <category name="Pixels">
@@ -186,6 +207,10 @@
       <block type="currentcolor"></block>
       <block type="cyclecolors"></block>
       <block type="stopcyclecolors"></block>
+    </category>  
+    <category name="Health Ring">
+      <block type="connectring"></block>
+      <block type="sethealth"></block>
     </category>    
   </category>  
   <category name="GPIO">
@@ -199,7 +224,10 @@
      </category>
   </category> 
   <category name="Features">
-    <block type="pipboy"></block>
+    <category name="Pipboy">
+      <block type="pipboy"></block>
+      <block type="pipboyeeprom"></block>
+    </category>
   </category>
   <category name="Match Strings">
     <block type="matchstring"></block>     
@@ -213,11 +241,6 @@
     <category name="Write">
        <block type="writeeeprom"></block>    
     </category>
-  </category>
-  <category name="RF 433">
-      <block type="rf433tx"></block>
-      <block type="rf433rx"></block>
-      <block type="rf433rxready"></block>
   </category>
   <category name="Talkie">
       <block type="talkie"></block>
@@ -440,6 +463,8 @@
       </block>
       <block type="math_random_float"></block>
     </category>
+    <category name="{catVariables}" colour="330" custom="VARIABLE"></category>
+    <category name="{catFunctions}" colour="290" custom="PROCEDURE"></category>    
     <category name="{catLists}" colour="260">
       <block type="lists_create_with">
         <mutation items="0"></mutation>
@@ -492,8 +517,6 @@
       <block type="lists_sort"></block>
     </category>
     <sep></sep>
-    <category name="{catVariables}" colour="330" custom="VARIABLE"></category>
-    <category name="{catFunctions}" colour="290" custom="PROCEDURE"></category>
   
   </xml>
 </body>

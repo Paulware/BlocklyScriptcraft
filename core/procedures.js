@@ -244,6 +244,7 @@ Blockly.Procedures.getCallers = function(name, workspace) {
  * @param {!Blockly.Block} defBlock Procedure definition block.
  */
 Blockly.Procedures.mutateCallers = function(defBlock) {
+  alert ( 'change parameters' );
   var oldRecordUndo = Blockly.Events.recordUndo;
   var name = defBlock.getProcedureDef()[0];
   var xmlElement = defBlock.mutationToDom(true);

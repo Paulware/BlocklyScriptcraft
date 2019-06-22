@@ -357,6 +357,7 @@ Code.renderContent = function() {
  * Initialize Blockly.  Called on page load.
  */
 Code.init = function() {
+
   Code.initLanguage();
 
   var rtl = Code.isRtl();

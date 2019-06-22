@@ -50,6 +50,14 @@ Blockly.JavaScript['controls_if'] = function(block) {
   return code + '\n';
 };
 
+
+Blockly.JavaScript['controls_yo'] = function(block) {
+  // If/elseif/else condition.
+  var n = 0;
+  var code = 'Hello', branchCode, conditionCode;
+  return code + '\n';
+};
+
 Blockly.JavaScript['logic_compare'] = function(block) {
   // Comparison operator.
   var OPERATORS = {

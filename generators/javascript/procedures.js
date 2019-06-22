@@ -75,7 +75,7 @@ Blockly.JavaScript['procedures_callreturn'] = function(block) {
     args[i] = Blockly.JavaScript.valueToCode(block, 'ARG' + i,
         Blockly.JavaScript.ORDER_COMMA) || 'null';
   }
-  var code = funcName + '(' + args.join(', ') + ')';
+  var code = funcName + '(' + args.join(', ') + ');';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 

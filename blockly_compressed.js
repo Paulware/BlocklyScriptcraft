@@ -903,7 +903,19 @@ Blockly.Touch.splitEventByTouches=function(a){var b=[];if(a.changedTouches)for(v
 // Copyright 2012 Google Inc.  Apache License 2.0
 Blockly.Workspace=function(a){this.id=Blockly.genUid();Blockly.Workspace.WorkspaceDB_[this.id]=this;this.options=a||{};this.RTL=!!this.options.RTL;this.horizontalLayout=!!this.options.horizontalLayout;this.toolboxPosition=this.options.toolboxPosition;this.topBlocks_=[];this.listeners_=[];this.undoStack_=[];this.redoStack_=[];this.blockDB_=Object.create(null);this.variableList=[]};Blockly.Workspace.prototype.rendered=!1;Blockly.Workspace.prototype.MAX_UNDO=1024;
 Blockly.Workspace.prototype.dispose=function(){this.listeners_.length=0;this.clear();delete Blockly.Workspace.WorkspaceDB_[this.id]};Blockly.Workspace.SCAN_ANGLE=3;Blockly.Workspace.prototype.addTopBlock=function(a){this.topBlocks_.push(a);if(this.isFlyout){a=Blockly.Variables.allUsedVariables(a);for(var b=0;b<a.length;b++)-1==this.variableList.indexOf(a[b])&&this.variableList.push(a[b])}};
-Blockly.Workspace.prototype.removeTopBlock=function(a){if(!goog.array.remove(this.topBlocks_,a))throw"Block not present in workspace's list of top-most blocks.";};Blockly.Workspace.prototype.getTopBlocks=function(a){var b=[].concat(this.topBlocks_);if(a&&1<b.length){var c=Math.sin(goog.math.toRadians(Blockly.Workspace.SCAN_ANGLE));this.RTL&&(c*=-1);b.sort(function(a,b){var d=a.getRelativeToSurfaceXY(),e=b.getRelativeToSurfaceXY();return d.y+c*d.x-(e.y+c*e.x)})}return b};
+Blockly.Workspace.prototype.removeTopBlock=function(a){if(!goog.array.remove(this.topBlocks_,a))throw"Block not present in workspace's list of top-most blocks.";};
+Blockly.Workspace.prototype.getTopBlocks=function(a){
+  var b=[].concat(this.topBlocks_);
+  if(a&&1<b.length){
+    var c=Math.sin(goog.math.toRadians(Blockly.Workspace.SCAN_ANGLE));
+    this.RTL&&(c*=-1);
+    b.sort(function(a,b){
+      var d=a.getRelativeToSurfaceXY(),e=b.getRelativeToSurfaceXY();
+      return d.y+c*d.x-(e.y+c*e.x)}
+    )
+  }
+  return b
+};
 Blockly.Workspace.prototype.getAllBlocks=function(){for(var a=this.getTopBlocks(!1),b=0;b<a.length;b++)a.push.apply(a,a[b].getChildren());return a};Blockly.Workspace.prototype.clear=function(){var a=Blockly.Events.getGroup();for(a||Blockly.Events.setGroup(!0);this.topBlocks_.length;)this.topBlocks_[0].dispose();a||Blockly.Events.setGroup(!1);this.variableList.length=0};
 Blockly.Workspace.prototype.updateVariableList=function(a){if(!this.isFlyout){a&&(this.variableList.length=0);a=Blockly.Variables.allUsedVariables(this);for(var b=0;b<a.length;b++)this.createVariable(a[b])}};
 Blockly.Workspace.prototype.renameVariable=function(a,b){var c=this.variableIndexOf(a),d=this.variableIndexOf(b);if(-1!=d&&this.variableList[d]!=b)var e=this.variableList[d];Blockly.Events.setGroup(!0);for(var f=this.getAllBlocks(),g=0;g<f.length;g++)f[g].renameVar(a,b),e&&f[g].renameVar(e,b);Blockly.Events.setGroup(!1);c==d||-1!=c&&-1==d?this.variableList[c]=b:-1!=c&&-1!=d?(this.variableList[d]=b,this.variableList.splice(c,1)):(this.variableList.push(b),console.log("Tried to rename an non-existent variable."))};
@@ -1153,7 +1165,11 @@ Blockly.Block.prototype.getInputsInline=function(){if(void 0!=this.inputsInline)
 Blockly.Block.prototype.setDisabled=function(a){this.disabled!=a&&(Blockly.Events.fire(new Blockly.Events.Change(this,"disabled",null,this.disabled,a)),this.disabled=a)};Blockly.Block.prototype.getInheritedDisabled=function(){for(var a=this;;){a=a.getSurroundParent();if(!a)return!1;if(a.disabled)return!0}};Blockly.Block.prototype.isCollapsed=function(){return this.collapsed_};
 Blockly.Block.prototype.setCollapsed=function(a){this.collapsed_!=a&&(Blockly.Events.fire(new Blockly.Events.Change(this,"collapsed",null,this.collapsed_,a)),this.collapsed_=a)};
 Blockly.Block.prototype.toString=function(a,b){var c=[],d=b||"?";if(this.collapsed_)c.push(this.getInput("_TEMP_COLLAPSED_INPUT").fieldRow[0].text_);else for(var e=0,f;f=this.inputList[e];e++){for(var g=0,h;h=f.fieldRow[g];g++)c.push(h.getText());f.connection&&((f=f.connection.targetBlock())?c.push(f.toString(void 0,b)):c.push(d))}c=goog.string.trim(c.join(" "))||"???";a&&(c=goog.string.truncate(c,a));return c};
-Blockly.Block.prototype.appendValueInput=function(a){return this.appendInput_(Blockly.INPUT_VALUE,a)};Blockly.Block.prototype.appendStatementInput=function(a){return this.appendInput_(Blockly.NEXT_STATEMENT,a)};Blockly.Block.prototype.appendDummyInput=function(a){return this.appendInput_(Blockly.DUMMY_INPUT,a||"")};
+Blockly.Block.prototype.appendValueInput=function(a){return this.appendInput_(Blockly.INPUT_VALUE,a)};
+Blockly.Block.prototype.appendStatementInput=function(a){
+  return this.appendInput_(Blockly.NEXT_STATEMENT,a)
+};
+Blockly.Block.prototype.appendDummyInput=function(a){return this.appendInput_(Blockly.DUMMY_INPUT,a||"")};
 Blockly.Block.prototype.jsonInit=function(a){goog.asserts.assert(void 0==a.output||void 0==a.previousStatement,"Must not have both an output and a previousStatement.");void 0!==a.colour&&this.setColour(a.colour);for(var b=0;void 0!==a["message"+b];)this.interpolate_(a["message"+b],a["args"+b]||[],a["lastDummyAlign"+b]),b++;void 0!==a.inputsInline&&this.setInputsInline(a.inputsInline);void 0!==a.output&&this.setOutput(!0,a.output);void 0!==a.previousStatement&&this.setPreviousStatement(!0,a.previousStatement);
 void 0!==a.nextStatement&&this.setNextStatement(!0,a.nextStatement);void 0!==a.tooltip&&this.setTooltip(a.tooltip);void 0!==a.helpUrl&&this.setHelpUrl(a.helpUrl)};
 Blockly.Block.prototype.interpolate_=function(a,b,c){var d=Blockly.utils.tokenizeInterpolation(a),e=[],f=0;a=[];for(var g=0;g<d.length;g++){var h=d[g];"number"==typeof h?(goog.asserts.assert(0<h&&h<=b.length,'Message index "%s" out of range.',h),goog.asserts.assert(!e[h],'Message index "%s" duplicated.',h),e[h]=!0,f++,a.push(b[h-1])):(h=h.trim())&&a.push(h)}goog.asserts.assert(f==b.length,"Message does not reference all %s arg(s).",b.length);a.length&&("string"==typeof a[a.length-1]||goog.string.startsWith(a[a.length-
@@ -1347,10 +1363,67 @@ Blockly.FieldVariable.prototype.setValue=function(a){this.sourceBlock_&&Blockly.
 Blockly.FieldVariable.dropdownCreate=function(){var a=this.sourceBlock_&&this.sourceBlock_.workspace?this.sourceBlock_.workspace.variableList.slice(0):[],b=this.getText();b&&-1==a.indexOf(b)&&a.push(b);a.sort(goog.string.caseInsensitiveCompare);this.renameVarItemIndex_=a.length;a.push(Blockly.Msg.RENAME_VARIABLE);this.deleteVarItemIndex_=a.length;a.push(Blockly.Msg.DELETE_VARIABLE.replace("%1",b));for(var b=[],c=0;c<a.length;c++)b[c]=[a[c],a[c]];return b};
 Blockly.FieldVariable.prototype.onItemSelected=function(a,b){a.getChildCount();var c=b.getValue();if(this.sourceBlock_){var d=this.sourceBlock_.workspace;if(0<=this.renameVarItemIndex_&&a.getChildAt(this.renameVarItemIndex_)===b){var e=this.getText();Blockly.hideChaff();Blockly.Variables.promptName(Blockly.Msg.RENAME_VARIABLE_TITLE.replace("%1",e),e,function(a){a&&d.renameVariable(e,a)});return}if(0<=this.deleteVarItemIndex_&&a.getChildAt(this.deleteVarItemIndex_)===b){d.deleteVariable(this.getText());
 return}c=this.callValidator(c)}null!==c&&this.setValue(c)};Blockly.Generator=function(a){this.name_=a;this.FUNCTION_NAME_PLACEHOLDER_REGEXP_=new RegExp(this.FUNCTION_NAME_PLACEHOLDER_,"g")};Blockly.Generator.NAME_TYPE="generated_function";Blockly.Generator.prototype.INFINITE_LOOP_TRAP=null;Blockly.Generator.prototype.STATEMENT_PREFIX=null;Blockly.Generator.prototype.INDENT="  ";Blockly.Generator.prototype.COMMENT_WRAP=60;Blockly.Generator.prototype.ORDER_OVERRIDES=[];
-Blockly.Generator.prototype.workspaceToCode=function(a){a||(console.warn("No workspace specified in workspaceToCode call.  Guessing."),a=Blockly.getMainWorkspace());var b=[];this.init(a);a=a.getTopBlocks(!0);for(var c=0,d;d=a[c];c++){var e=this.blockToCode(d);goog.isArray(e)&&(e=e[0]);e&&(d.outputConnection&&this.scrubNakedValue&&(e=this.scrubNakedValue(e)),b.push(e))}b=b.join("\n");b=this.finish(b);b=b.replace(/^\s+\n/,"");b=b.replace(/\n\s+$/,"\n");return b=b.replace(/[ \t]+\n/g,"\n")};
+
+Blockly.Generator.prototype.workspaceToCode=function(a){
+   a||(console.warn("No workspace specified in workspaceToCode call.  Guessing."),a=Blockly.getMainWorkspace());
+   var b=[];
+   this.init(a);
+   a=a.getTopBlocks(!0);
+   for(var c=0,d;d=a[c];c++){
+     var e=this.blockToCode(d);
+     goog.isArray(e)&&(e=e[0]);
+     e&&(d.outputConnection&&this.scrubNakedValue&&(e=this.scrubNakedValue(e)),b.push(e))
+   }
+   b=b.join("\n");
+   b=this.finish(b);
+   b=b.replace(/^\s+\n/,"");
+   b=b.replace(/\n\s+$/,"\n");
+   b=b.replace(/[ \t]+\n/g,"\n");
+   // alert ( b ); 
+   var firstPart = '';
+   var secondPart = '';
+   
+   var ind = b.indexOf ( '//Includes' );
+   if (ind > -1) {
+      //alert ( 'ind: ' + ind ); 
+      firstPart = b.substring (0,ind);
+      //alert ( 'firstPart: ' + firstPart );
+      secondPart = b.substring (ind);
+      //alert ( 'secondPart: ' + secondPart );
+      ind = secondPart.indexOf ( 'void setup' );
+      if (ind > -1 ) {
+         b = secondPart.substring (0,ind) + includes + instantiations + firstPart + secondPart.substring (ind);
+      }
+      
+      // Because function calls currently are not followed by a semi-colon....Add it.
+      ind = b.indexOf ( ')\n');
+      while (ind > -1) {
+         //alert ( 'found a lf here: [' + b.substring (ind-2,ind+1) + ']');
+         b = b.replace ( ')\n', ');\n' );
+         ind = b.indexOf ( ')\n');
+      }
+     
+   } 
+   return b;
+ };
+ 
 Blockly.Generator.prototype.prefixLines=function(a,b){return b+a.replace(/(?!\n$)\n/g,"\n"+b)};Blockly.Generator.prototype.allNestedComments=function(a){var b=[];a=a.getDescendants();for(var c=0;c<a.length;c++){var d=a[c].getCommentText();d&&b.push(d)}b.length&&b.push("");return b.join("\n")};
-Blockly.Generator.prototype.blockToCode=function(a){if(!a)return"";if(a.disabled)return this.blockToCode(a.getNextBlock());var b=this[a.type];goog.asserts.assertFunction(b,'Language "%s" does not know how to generate code for block type "%s".',this.name_,a.type);b=b.call(a,a);if(goog.isArray(b))return goog.asserts.assert(a.outputConnection,'Expecting string from statement block "%s".',a.type),[this.scrub_(a,b[0]),b[1]];if(goog.isString(b)){var c=a.id.replace(/\$/g,"$$$$");this.STATEMENT_PREFIX&&(b=
-this.STATEMENT_PREFIX.replace(/%1/g,"'"+c+"'")+b);return this.scrub_(a,b)}if(null===b)return"";goog.asserts.fail("Invalid code generated: %s",b)};
+Blockly.Generator.prototype.blockToCode=function(a){
+   if(!a)return"";
+   if(a.disabled)return this.blockToCode(a.getNextBlock());
+   var b=this[a.type];
+   goog.asserts.assertFunction(b,'Language "%s" does not know how to generate code for block type "%s".',this.name_,a.type);
+   b=b.call(a,a);
+   if(goog.isArray(b))return goog.asserts.assert(a.outputConnection,'Expecting string from statement block "%s".',a.type),[this.scrub_(a,b[0]),b[1]];
+   if(goog.isString(b)){
+     var c=a.id.replace(/\$/g,"$$$$");
+     this.STATEMENT_PREFIX&&(b=this.STATEMENT_PREFIX.replace(/%1/g,"'"+c+"'")+b);
+     return this.scrub_(a,b)
+   }
+   if(null===b)
+     return"";
+   goog.asserts.fail("Invalid code generated: %s",b)
+};
 Blockly.Generator.prototype.valueToCode=function(a,b,c){isNaN(c)&&goog.asserts.fail('Expecting valid order from block "%s".',a.type);var d=a.getInputTargetBlock(b);if(!d)return"";b=this.blockToCode(d);if(""===b)return"";goog.asserts.assertArray(b,'Expecting tuple from value block "%s".',d.type);a=b[0];b=b[1];isNaN(b)&&goog.asserts.fail('Expecting valid order from value block "%s".',d.type);if(!a)return"";var d=!1,e=Math.floor(c),f=Math.floor(b);if(e<=f&&(e!=f||0!=e&&99!=e))for(d=!0,e=0;e<this.ORDER_OVERRIDES.length;e++)if(this.ORDER_OVERRIDES[e][0]==
 c&&this.ORDER_OVERRIDES[e][1]==b){d=!1;break}d&&(a="("+a+")");return a};Blockly.Generator.prototype.statementToCode=function(a,b){var c=a.getInputTargetBlock(b),d=this.blockToCode(c);goog.asserts.assertString(d,'Expecting code from statement block "%s".',c&&c.type);d&&(d=this.prefixLines(d,this.INDENT));return d};
 Blockly.Generator.prototype.addLoopTrap=function(a,b){b=b.replace(/\$/g,"$$$$");this.INFINITE_LOOP_TRAP&&(a=this.INFINITE_LOOP_TRAP.replace(/%1/g,"'"+b+"'")+a);this.STATEMENT_PREFIX&&(a+=this.prefixLines(this.STATEMENT_PREFIX.replace(/%1/g,"'"+b+"'"),this.INDENT));return a};Blockly.Generator.prototype.RESERVED_WORDS_="";Blockly.Generator.prototype.addReservedWords=function(a){this.RESERVED_WORDS_+=a+","};Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_="{leCUI8hutHZI4480Dc}";

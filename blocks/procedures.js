@@ -58,6 +58,8 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     this.setColour(Blockly.Blocks.procedures.HUE);
     this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL);
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);    
     this.arguments_ = [];
     this.setStatements_(true);
     this.statementConnection_ = null;
@@ -474,7 +476,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
    */
   getProcedureCall: function() {
     // The NAME field is guaranteed to exist, null will never be returned.
-    return /** @type {string} */ (this.getFieldValue('NAME'));
+    return /** @type {string} */ (this.getFieldValue('NAME') + ";");
   },
   /**
    * Notification that a procedure is renaming.

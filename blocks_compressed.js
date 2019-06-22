@@ -63,8 +63,24 @@ Blockly.Blocks.colour_rgb={init:function(){this.setHelpUrl(Blockly.Msg.COLOUR_RG
 this.setOutput(!0,"Colour");this.setTooltip(Blockly.Msg.COLOUR_RGB_TOOLTIP)}};
 Blockly.Blocks.colour_blend={init:function(){this.setHelpUrl(Blockly.Msg.COLOUR_BLEND_HELPURL);this.setColour(Blockly.Blocks.colour.HUE);this.appendValueInput("COLOUR1").setCheck("Colour").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.COLOUR_BLEND_TITLE).appendField(Blockly.Msg.COLOUR_BLEND_COLOUR1);this.appendValueInput("COLOUR2").setCheck("Colour").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.COLOUR_BLEND_COLOUR2);this.appendValueInput("RATIO").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.COLOUR_BLEND_RATIO);
 this.setOutput(!0,"Colour");this.setTooltip(Blockly.Msg.COLOUR_BLEND_TOOLTIP)}};Blockly.Blocks.procedures={};Blockly.Blocks.procedures.HUE=290;
-Blockly.Blocks.procedures_defnoreturn={init:function(){var a=new Blockly.FieldTextInput(Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE,Blockly.Procedures.rename);a.setSpellcheck(!1);this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE).appendField(a,"NAME").appendField("","PARAMS");this.setMutator(new Blockly.Mutator(["procedures_mutatorarg"]));(this.workspace.options.comments||this.workspace.options.parentWorkspace&&this.workspace.options.parentWorkspace.options.comments)&&
-Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT&&this.setCommentText(Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT);this.setColour(Blockly.Blocks.procedures.HUE);this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL);this.arguments_=[];this.setStatements_(!0);this.statementConnection_=null},setStatements_:function(a){this.hasStatements_!==a&&(a?(this.appendStatementInput("STACK").appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_DO),this.getInput("RETURN")&&
+Blockly.Blocks.procedures_defnoreturn={
+   init:function(){
+     var a=new Blockly.FieldTextInput(Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE,Blockly.Procedures.rename);
+     a.setSpellcheck(!1);
+     this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE).appendField(a,"NAME").appendField("","PARAMS");
+     this.setMutator(new Blockly.Mutator(["procedures_mutatorarg"]));
+     (this.workspace.options.comments||this.workspace.options.parentWorkspace&&this.workspace.options.parentWorkspace.options.comments)&&
+ Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT&&this.setCommentText(Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT);
+     this.setColour(Blockly.Blocks.procedures.HUE);
+     this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);
+     this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL);
+     this.setPreviousStatement(false, null);
+     this.setNextStatement(false, null);     
+     this.arguments_=[];
+     this.setStatements_(!0);
+     this.statementConnection_=null
+   },
+   setStatements_:function(a){this.hasStatements_!==a&&(a?(this.appendStatementInput("STACK").appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_DO),this.getInput("RETURN")&&
 this.moveInputBefore("STACK","RETURN")):this.removeInput("STACK",!0),this.hasStatements_=a)},updateParams_:function(){for(var a=!1,b={},c=0;c<this.arguments_.length;c++){if(b["arg_"+this.arguments_[c].toLowerCase()]){a=!0;break}b["arg_"+this.arguments_[c].toLowerCase()]=!0}a?this.setWarningText(Blockly.Msg.PROCEDURES_DEF_DUPLICATE_WARNING):this.setWarningText(null);a="";this.arguments_.length&&(a=Blockly.Msg.PROCEDURES_BEFORE_PARAMS+" "+this.arguments_.join(", "));Blockly.Events.disable();try{this.setFieldValue(a,
 "PARAMS")}finally{Blockly.Events.enable()}},mutationToDom:function(a){var b=document.createElement("mutation");a&&b.setAttribute("name",this.getFieldValue("NAME"));for(var c=0;c<this.arguments_.length;c++){var e=document.createElement("arg");e.setAttribute("name",this.arguments_[c]);a&&this.paramIds_&&e.setAttribute("paramId",this.paramIds_[c]);b.appendChild(e)}this.hasStatements_||b.setAttribute("statements","false");return b},domToMutation:function(a){this.arguments_=[];for(var b=0,c;c=a.childNodes[b];b++)"arg"==
 c.nodeName.toLowerCase()&&this.arguments_.push(c.getAttribute("name"));this.updateParams_();Blockly.Procedures.mutateCallers(this);this.setStatements_("false"!==a.getAttribute("statements"))},decompose:function(a){var b=a.newBlock("procedures_mutatorcontainer");b.initSvg();this.getInput("RETURN")?b.setFieldValue(this.hasStatements_?"TRUE":"FALSE","STATEMENTS"):b.getInput("STATEMENT_INPUT").setVisible(!1);for(var c=b.getInput("STACK").connection,e=0;e<this.arguments_.length;e++){var d=a.newBlock("procedures_mutatorarg");
