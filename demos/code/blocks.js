@@ -1535,7 +1535,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["ProjectileHit", "projectileHit"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1587,5 +1587,37 @@ Blockly.Blocks['evententityshooter'] = {
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, "String");
+  }
+};
+
+Blockly.Blocks['eventplayer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("event.player");
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
+
+
+Blockly.Blocks['armorset'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Armor For Player");   
+    this.appendDummyInput()
+        .appendField("Color")
+        .appendField(new Blockly.FieldDropdown([["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
+    this.appendValueInput("PLAYER")
+        .setCheck("String")
+        .appendField("Which Player");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
   }
 };

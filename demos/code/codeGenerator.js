@@ -1330,7 +1330,9 @@ Blockly.Python['evententitylocation'] = function(block) {
 Blockly.Python['evententityshooter'] = function(block) {
   return ['event.entity.shooter', Blockly.Python.ORDER_NONE];
 };
-
+Blockly.Python['eventplayer'] = function(block) {
+  return ['event.player', Blockly.Python.ORDER_NONE];
+};
 Blockly.Python['sendmessage'] = function(block) {
   var value = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);  
@@ -1338,3 +1340,39 @@ Blockly.Python['sendmessage'] = function(block) {
   var code = player + '.sendMessage (\"' + insideChars ( value, "\"", "\"" ) + '\");\n';
   return code;
 };
+
+Blockly.Python['armorset'] = function(block) {
+  var color = block.getFieldValue ('COLOR');
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+  var code = 
+     "var color = org.bukkit.Color." + color + "\n" +
+     "var player = " + player + ";\n" + 
+     "var items = require ('items');\n" + 
+     "var helmet = items.leatherHelmet(1);\n" + 
+     "var helmetMeta = helmet.itemMeta;\n" + 
+     "helmetMeta.color = color;\n" + 
+     "helmet.itemMeta = helmetMeta;\n" + 
+     "player.equipment.helmet = helmet;\n" + 
+     "var boots = items.leatherBoots(1);\n" + 
+     "var bootsMeta = boots.itemMeta;\n" + 
+     "bootsMeta.color = color;\n" + 
+     "boots.itemMeta = bootsMeta;\n" + 
+     "player.equipment.boots = boots;\n" + 
+     "var chest = items.leatherChestplate(1);\n" + 
+     "var chestMeta = chest.itemMeta;\n" + 
+     "chestMeta.color = color;\n" + 
+     "chest.itemMeta = chestMeta;\n" + 
+     "player.equipment.chestplate = chest;\n" +
+     "var legs = items.leatherLeggings(1);\n" + 
+     "var legsMeta = legs.itemMeta;\n" + 
+     "legsMeta.color = color;\n" + 
+     "legs.itemMeta = legsMeta;\n" + 
+     "player.equipment.leggings = legs;\n";  
+  return code;
+};
+
