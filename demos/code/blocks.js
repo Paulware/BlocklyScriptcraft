@@ -18,6 +18,7 @@ Blockly.Blocks['setuploop'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
 Blockly.Blocks['scriptcraftfunction'] = {
   init: function() {
     this.appendDummyInput()
@@ -160,6 +161,23 @@ Blockly.Blocks['echowidget'] = {
   }
 };
 
+Blockly.Blocks['sendmessage'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Send Message to Player");   
+    this.appendValueInput("PLAYER")
+        .setCheck("String")
+        .appendField("Player");
+    this.appendValueInput("MESSAGE")
+        .setCheck("String")
+        .appendField("Message");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
 Blockly.Blocks['loop'] = {
   init: function() {
@@ -1483,3 +1501,91 @@ Blockly.Blocks['wallsign'] = {
   }
 };
 
+Blockly.Blocks['additem'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Add an item to players inventory");
+    this.appendDummyInput()
+        .appendField("Item")
+        .appendField(new Blockly.FieldDropdown([["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"]]), "ITEMTYPE");  
+    this.appendValueInput("COUNT")
+        .appendField("How Many");          
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['consolelog'] = {
+  init: function() {
+    this.appendValueInput("NAME")
+        .setCheck("String")
+        .appendField("server console");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['eventlistener'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Listener Event")
+        .appendField(new Blockly.FieldDropdown([["ProjectileHit", "projectileHit"]]), "LISTENERTYPE");  
+    this.appendStatementInput("LISTENERCODE")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['explosion'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Explosion")
+    this.appendValueInput("SIZE")
+        .setCheck("Number")
+        .appendField("Explosion Size");
+    this.appendValueInput("LOCATION")
+        .setCheck("String")
+        .appendField("Location");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['evententitylocation'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("event.entity.location");
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
+
+Blockly.Blocks['evententityshooter'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("event.entity.shooter");
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};

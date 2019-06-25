@@ -1,7 +1,7 @@
 # Blockly for Scriptcraft
 
 To install on your system, download the .zip file to C:\Blockly.
-To run the program navigate to C:\Blockly\demos\code\index.html 
+To run the program navigate to C:\Blockly\demos\code\index.html <br>
 Here is a screen shot of the user interface: 
 ![](screenShot.jpg)
 You can save and load projects to the desktop or other places on your computer.

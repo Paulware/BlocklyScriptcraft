@@ -134,9 +134,23 @@
 
   <xml id="toolbox" style="display: none">
     <category name="ScriptCraft">
-      <block type="scriptcraftfunction"></block>
+      <category name="My Blocks">
+         <block type="scriptcraftfunction"></block>
+      </category> 
+      <category name="Events">
+         <block type="eventlistener"></block>
+         <block type="evententitylocation"></block>
+         <block type="evententityshooter"></block>
+      </category>
+      <category name="Looks">
+         <block type="explosion">
+      </category>
+      <category name="Output">
+         <block type="consolelog"></block>
+         <block type="echowidget"></block>
+         <block type="sendmessage"></block>
+      </category>
       <block type="commentwidget"></block>
-      <block type="echowidget"></block>
       <block type="spawn"></block>
       <category name="Build">
         <block type="structures"></block>
@@ -145,6 +159,9 @@
         <block type="sign"></block>
         <block type="wallsign"></block>
       </category>    
+      <category name="Inventory">
+         <block type="additem"></block>
+      </category>
     </category> 
     <category name="{catText}" colour="160">
       <block type="text"></block>
@@ -336,7 +353,7 @@
       <block type="math_random_float"></block>
     </category>
     <category name="{catVariables}" colour="330" custom="VARIABLE"></category>
-    <category name="{catFunctions}" colour="290" custom="PROCEDURE"></category>    
+    <!category name="{catFunctions}" colour="290" custom="PROCEDURE"><!/category>    
     <category name="{catLists}" colour="260">
       <block type="lists_create_with">
         <mutation items="0"></mutation>

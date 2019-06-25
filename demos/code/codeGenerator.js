@@ -1202,7 +1202,6 @@ Blockly.JavaScript ['setuploop'] = function (block) {
 
 
 Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
-  // TODO: Assemble Python into code variable.
   var functionName = Blockly.Python.valueToCode(block, 'nameOfFunction', Blockly.Python.ORDER_ATOMIC);
   functionName = insideChars ( functionName,"\"","\"");
   var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
@@ -1286,5 +1285,56 @@ Blockly.Python['wallsign'] = function(block) {
              "var line1 = " + line1 + "\n" + 
              "var line2 = " + line2 + "\n" + 
              "drone.sign([line1,line2], blocks.sign);\n";  
+  return code;
+};
+
+Blockly.Python['additem'] = function(block) {
+  var count =  Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
+  var itemType = block.getFieldValue ("ITEMTYPE");  
+  var code = "var items = require('items');\n" + 
+             "var newItems = items." + itemType + "(" + count + ");\n" +   
+             "var code = self.inventory.addItem(newItems);\n" 
+  return code;
+};
+
+Blockly.Python['consolelog'] = function(block) {
+  var value = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);  
+  
+  var code = "console.log (\"" + insideChars ( value, "\"", "\"" ) + "\");\n";
+  return code;
+};
+
+Blockly.Python['eventlistener'] = function(block) {
+  var listenerType = block.getFieldValue ('LISTENERTYPE');
+  var functionCode = Blockly.Python.statementToCode (block, 'LISTENERCODE' );  
+  var code = 'events.' + listenerType + '( function (event) { \n' + 
+             functionCode + 
+             '});\n';
+  return code;
+};
+
+Blockly.Python['explosion'] = function(block) {
+  var size = Blockly.Python.valueToCode(block, 'SIZE', Blockly.Python.ORDER_ATOMIC);    
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);    
+  location = insideParen (location);
+  var code = "// create explosion of size: " + size + ";\n" + 
+             "event.entity.world.createExplosion (" + location + "," + size + ");\n";
+  
+  return code;
+};
+
+Blockly.Python['evententitylocation'] = function(block) {
+  return ['event.entity.location', Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['evententityshooter'] = function(block) {
+  return ['event.entity.shooter', Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['sendmessage'] = function(block) {
+  var value = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);  
+  player = insideParen(player);
+  var code = player + '.sendMessage (\"' + insideChars ( value, "\"", "\"" ) + '\");\n';
   return code;
 };
