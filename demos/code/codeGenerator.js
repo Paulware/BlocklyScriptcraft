@@ -1330,9 +1330,12 @@ Blockly.Python['evententitylocation'] = function(block) {
 Blockly.Python['evententityshooter'] = function(block) {
   return ['event.entity.shooter', Blockly.Python.ORDER_NONE];
 };
+
 Blockly.Python['eventplayer'] = function(block) {
-  return ['event.player', Blockly.Python.ORDER_NONE];
+  var player = block.getFieldValue ('PLAYER');
+  return [player, Blockly.Python.ORDER_NONE];
 };
+
 Blockly.Python['sendmessage'] = function(block) {
   var value = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);  
@@ -1376,3 +1379,56 @@ Blockly.Python['armorset'] = function(block) {
   return code;
 };
 
+Blockly.Python['repairarmor'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+  var code = 
+     "var player = " + player + ";\n" + 
+     "player.equipment.helmet.durability = 0;\n" + 
+     "player.equipment.chestplate.durability = 0;\n" + 
+     "player.equipment.leggings.durability = 0;\n" + 
+     "player.equipment.boots.durability = 0; \n"; 
+  return code;
+};
+
+Blockly.Python['placebanner'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
+  location = insideParen(location);
+  var banner = block.getFieldValue ('BANNER');
+  var world = "event.entity.world";
+  if (location == "self.location") { 
+     world = "self.world";
+  } 
+  
+  var code = world + ".getBlockAt(" + location + ").type = org.bukkit.Material." + banner + ";\n";
+  return code;
+};
+
+Blockly.Python['playerlocation'] = function(block) {
+  return ['self.location', Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['teleport'] = function(block) {
+  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC); 
+  x = insideParen (x);
+  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC); 
+  y = insideParen (y);
+  var z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC); 
+  z = insideParen (z);
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var code = 	"var player = " + player + ";\n" + 
+              "var location = new org.bukkit.Location(player.world, " + x + ", " + y + ", " + z + ");\n" + 
+              "player.teleport( location, org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";	  
+  return code;
+}
+
+Blockly.Python['sound'] = function(block) {
+  var animal = block.getFieldValue ('ANIMAL');
+  var code = 	"require('sounds').play(org.bukkit.Sound.ENTITY_" + animal + "_AMBIENT,self.location);\n";	  
+  return code;
+}

@@ -167,7 +167,7 @@ Blockly.Blocks['sendmessage'] = {
         .appendField("Send Message to Player");   
     this.appendValueInput("PLAYER")
         .setCheck("String")
-        .appendField("Player");
+        .appendField("Which Player");
     this.appendValueInput("MESSAGE")
         .setCheck("String")
         .appendField("Message");
@@ -1535,7 +1535,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1593,7 +1593,8 @@ Blockly.Blocks['evententityshooter'] = {
 Blockly.Blocks['eventplayer'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("event.player");
+        .appendField("Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["shooter","event.entity.shooter"]]), "PLAYER");           
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setColour(120);
@@ -1614,6 +1615,91 @@ Blockly.Blocks['armorset'] = {
     this.appendValueInput("PLAYER")
         .setCheck("String")
         .appendField("Which Player");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['repairarmor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("RepairArmor");
+    this.appendValueInput("PLAYER")
+        .setCheck("String")
+        .appendField("Which Player");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['placebanner'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Place Banner");
+    this.appendDummyInput()
+        .appendField("Banner Type")
+        .appendField(new Blockly.FieldDropdown([["Standing Banner", "LEGACY_STANDING_BANNER"]]), "BANNER");  
+    this.appendValueInput("LOCATION")
+        .setCheck("String")
+        .appendField("Location");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['playerlocation'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("self.location");
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
+
+Blockly.Blocks['teleport'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Teleport");
+    this.appendValueInput("PLAYER")
+        .setCheck("String")
+        .appendField("Player");   
+    this.appendValueInput("X")
+        .setCheck("Number")
+        .appendField("X");         
+    this.appendValueInput("Y")
+        .setCheck("Number")
+        .appendField("Y");         
+    this.appendValueInput("Z")
+        .setCheck("Number")
+        .appendField("Z");         
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['sound'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Make Animal Sound");
+    this.appendDummyInput()
+        .appendField("Animal")
+        .appendField(new Blockly.FieldDropdown([["Cat", "CAT"],["Chicken","CHICKEN"], ["Cow","COW"],["Horse","HORSE"],["Pig", "PIG"], ["Sheep","SHEEP"],["Wolf","WOLF"]]), "ANIMAL");  
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
