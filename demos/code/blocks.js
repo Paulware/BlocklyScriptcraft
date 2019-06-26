@@ -1405,12 +1405,15 @@ Blockly.Blocks['sethealth'] = {
 
 // "entities": ["Chicken", "Cow", "Wolf", "Pig", "Sheep", "Rabbit", "Horse", "Ocelot", "Villager", "Zombie", "Skeleton", "Creeper", "Spider"]
 Blockly.Blocks['spawn'] = {
-  init: function() {
+  init: function() {   
     this.appendDummyInput()
         .appendField("Spawn");    
     this.appendDummyInput()
         .appendField("Entity")
-        .appendField(new Blockly.FieldDropdown([["Pig", "PIG"],["Chicken","CHICKEN"]]), "ENTITY");           
+        .appendField(new Blockly.FieldDropdown([["Pig", "PIG"],["Chicken","CHICKEN"], ["Skeleton","SKELETON"]]), "ENTITY");           
+    this.appendValueInput("COUNT")
+        .setCheck("Number")    
+        .appendField("How Many");          
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
@@ -1535,7 +1538,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A block was broken","blockBreak"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1703,6 +1706,21 @@ Blockly.Blocks['sound'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['fireworks'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Fireworks")
+    this.appendValueInput("LOCATION")
+        .setCheck("String")
+        .appendField("Location");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

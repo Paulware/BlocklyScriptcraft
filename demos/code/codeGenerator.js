@@ -1216,8 +1216,15 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
 
 Blockly.Python['spawn'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
-  var code = '// Spawn ' + entity + '\n' + 
-             'var entity = self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';  
+  var count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
+  var code = '// Spawn ' + entity + '\n';
+  if ((count == "") || (parseInt(count) <= 1 )) { 
+    code = code + 'self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
+  } else {
+    code = code + 'for (var i=0; i<' + count + '; i++) {\n'; 
+    code = code + '  self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
+    code = code + '}\n';
+  } 
              // 'org.bukkit.entity.getEquipment().setHelmet(new org.bukkit.inventory.ItemStack(gobjBukkit.Material.CHAINMAIL_HELMET));';            
   return code;
 };
@@ -1430,5 +1437,15 @@ Blockly.Python['teleport'] = function(block) {
 Blockly.Python['sound'] = function(block) {
   var animal = block.getFieldValue ('ANIMAL');
   var code = 	"require('sounds').play(org.bukkit.Sound.ENTITY_" + animal + "_AMBIENT,self.location);\n";	  
+  return code;
+}
+
+Blockly.Python['fireworks'] = function(block) {
+  var code = "var fireworks = require ('fireworks');\n";
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  code = code + 'fireworks.firework (' + location + ');\n'; 
+  //var animal = block.getFieldValue ('ANIMAL');
+  //var code = 	"require('sounds').play(org.bukkit.Sound.ENTITY_" + animal + "_AMBIENT,self.location);\n";	  
   return code;
 }
