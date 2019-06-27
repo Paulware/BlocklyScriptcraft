@@ -1725,3 +1725,15 @@ Blockly.Blocks['fireworks'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['eventcancel'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Cancel the Event");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

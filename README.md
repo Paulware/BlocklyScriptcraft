@@ -1,7 +1,14 @@
 # Blockly for Scriptcraft
+# Installation
+* Install Git on your system: https://git-scm.com/download/win
+* Open a cmd window
+* Type commands:
+* cd c:\ 
+* git clone https://www.github.com/Paulware/BlocklyScriptcraft
+  This will create a C:\BlocklyScriptcraft directory with all the necessary files
+  
+To run the program navigate to C:\BlocklyScriptcraft\demos\code\index.html <br>
 
-To install on your system, download the .zip file to C:\Blockly.
-To run the program navigate to C:\Blockly\demos\code\index.html <br>
 Here is a screen shot of the user interface: 
 ![](screenShot.jpg)
 You can save and load projects to the desktop or other places on your computer.

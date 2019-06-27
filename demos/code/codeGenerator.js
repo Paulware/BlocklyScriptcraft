@@ -1449,3 +1449,8 @@ Blockly.Python['fireworks'] = function(block) {
   //var code = 	"require('sounds').play(org.bukkit.Sound.ENTITY_" + animal + "_AMBIENT,self.location);\n";	  
   return code;
 }
+
+Blockly.Python['eventcancel'] = function(block) {
+  var code = "event.cancelled = true;\n";
+  return code;
+}
