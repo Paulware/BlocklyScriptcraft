@@ -4,7 +4,7 @@
 * Open a cmd window
 * Type commands:
 * cd c:\ 
-* git clone https://www.github.com/Paulware/BlocklyScriptcraft
+* git clone https://www.github.com/Paulware/BlocklyScriptcraft<br>
   This will create a C:\BlocklyScriptcraft directory with all the necessary files
   
 To run the program navigate to C:\BlocklyScriptcraft\demos\code\index.html <br>

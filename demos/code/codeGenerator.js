@@ -1213,7 +1213,6 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
 };
 
 // self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.PIG);
-
 Blockly.Python['spawn'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
   var count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
@@ -1221,11 +1220,15 @@ Blockly.Python['spawn'] = function(block) {
   if ((count == "") || (parseInt(count) <= 1 )) { 
     code = code + 'self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
   } else {
+    count = parseInt (count);
+    if (count > 100) {
+       count = 100;
+    } 
     code = code + 'for (var i=0; i<' + count + '; i++) {\n'; 
     code = code + '  self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
     code = code + '}\n';
   } 
-             // 'org.bukkit.entity.getEquipment().setHelmet(new org.bukkit.inventory.ItemStack(gobjBukkit.Material.CHAINMAIL_HELMET));';            
+  // 'org.bukkit.entity.getEquipment().setHelmet(new org.bukkit.inventory.ItemStack(gobjBukkit.Material.CHAINMAIL_HELMET));';            
   return code;
 };
 
@@ -1297,7 +1300,15 @@ Blockly.Python['wallsign'] = function(block) {
 
 Blockly.Python['additem'] = function(block) {
   var count =  Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
-  var itemType = block.getFieldValue ("ITEMTYPE");  
+  var itemType = block.getFieldValue ("ITEMTYPE");
+  if (count == "") {
+     count = 1;
+  } else {
+     count = parseInt (count);
+     if (count > 200) {
+         count = 200;
+     } 
+  }    
   var code = "var items = require('items');\n" + 
              "var newItems = items." + itemType + "(" + count + ");\n" +   
              "var code = self.inventory.addItem(newItems);\n" 
@@ -1454,3 +1465,51 @@ Blockly.Python['eventcancel'] = function(block) {
   var code = "event.cancelled = true;\n";
   return code;
 }
+
+Blockly.Python['teamflag'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
+  location = insideParen(location);
+  var color = block.getFieldValue ('COLOR');
+  var block;
+  if (color == "RED" ) {
+     block = "blocks.stained_clay.red";
+  } else if (color == "BLUE" ) {
+     block = "blocks.stained_clay.blue";
+  } else if (color == "BLACK" ) {
+     block = "blocks.stained_clay.black";
+  } else if (color == "WHITE" ) {
+     block = "blocks.stained_clay.white";
+  } 
+  
+  var code = "// color: " + color + "\n" + 
+             "var block = " + block + ";\n" + 
+             "var y = parseInt ( self.location.y );\n" + 
+             "var upValue = (y<3)?3-y:0;\n" + 
+             "var downValue =(y>3)?y-3:0;\n" + 
+             "var d = new Drone(self.location);\n" +    
+             "d = d.up (upValue)\n" + 
+             "    .down (downValue)\n" +    
+             "    .box(block,5,1,5)\n" +
+             "    .left(5)\n" + 
+             "    .box(block,5,1,5)\n" + 
+             "    .back(5)\n" + 
+             "    .box(block,5,1,5)\n" + 
+             "    .right(5)\n" + 
+             "    .box(block,5,1,5)\n" + 
+             "    .fwd(5)\n" + 
+             "    .up(1)\n" + 
+             "    .box (blocks.banner.standing, 1, 1, 1);\n"   
+  return code;
+};
+
+Blockly.Python['spawnarea'] = function(block) {
+  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC); 
+  x = insideParen (x);
+  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC); 
+  y = insideParen (y);
+  var z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC); 
+  z = insideParen (z);
+  var code = 	"server.worlds[0].setSpawnLocation(new org.bukkit.Location(server.worlds[0]," + x + "," + y + "," + z + "));\n";
+  return code;
+}
+

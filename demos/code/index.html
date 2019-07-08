@@ -1,3 +1,4 @@
+<! Start with cmd line: chrome --allow-file-access-from-files> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +6,10 @@
   <meta name="google" value="notranslate">
   <title>Blockly Scriptcraft Demo:</title>
   <link rel="stylesheet" href="style.css">
+  <!script src="FileSaver.js"><!/script>
   <script>
-      var fso = new ActiveXObject("Scripting.FileSystemObject");          
+      // var fso = new ActiveXObject("Scripting.FileSystemObject");          
+      /*
       function fileExists (filename) { 
         var myObject;
         var found = true;
@@ -42,16 +45,69 @@
         source = document.all.content_xml.innerText;
         writeFile (filename,source);
      }
-     function clipboardCopy (text) {
-        var textarea = document.createElement("textarea");
-        textarea.textContent = text;
-        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");  // Security exception may be thrown by some browsers.
-        document.body.removeChild(textarea);        
-        alert ( 'Use notepad++ to save to c:/SpigotMC/scriptcraft/plugins/');
-     }   
+     */
+  
+     
+ function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}  
+
+
+function savePluginCode ( code ) {
+  var startInd = 0;
+  var endInd = code.indexOf ( '\n' );
+  var line = "";
+  var msg = "";
+  while (endInd > -1) {
+     line = code.substring (startInd,endInd);     
+     line = line.replace(">", "^>");     
+     line = line.replace("<", "^<");     
+     if (msg == "" ) { 
+        msg = msg + "@echo " + line + ">";
+     } else { 
+        msg = msg + "@echo " + line + ">>" 
+     }
+     msg = msg + "c:/SpigotMc/scriptcraft/plugins/blockly.js\n"
+     startInd = endInd +1;
+     endInd = code.indexOf ( '\n', startInd );     
+  } 
+  line = code.substring (startInd);
+  msg = msg + "@echo " + line + ">>c:/SpigotMc/scriptcraft/plugins/blockly.js\n" 
+  msg = msg + "del copyPlug*.*\n"  
+  //alert (msg)
+  download ( 'copyPlugin.bat', msg );
+} 
+
+function clipboardCopy (text) {
+   var textarea = document.createElement("textarea");
+   textarea.textContent = text;
+   textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+   document.body.appendChild(textarea);
+   textarea.select();
+   //document.execCommand("copy");  // Security exception may be thrown by some browsers.
+   //document.body.removeChild(textarea);        
+   
+   
+   //document.execCommand('SaveAs',null,'c:/SpigotMC/scriptcraft/plugins/blockly.js');
+   source = document.all.content_javascript.innerText;
+   //savePluginCode (source);
+   download ('blockly.js', source );
+} 
+
+function bodyLoad() { 
+  //console.log ( 'create it.js' );
+  // download ( 'c:\\SpigotMC\\scriptcraft\\plugins\\blockly.js', 'Hello' );
+  //savePluginCode ( 'function yo(){\nvar i=2;\n}\n//all done' );
+}
 
   </script>
   <script src="../../appengine/storage.js"></script>  
@@ -63,12 +119,11 @@
   <script src="../../lua_compressed.js"></script>
   <script src="../../dart_compressed.js"></script>
   <script src="blocks.js"></script>
-  <script src="Talkie.js"></script>
   <script src="code.js"></script>
   <script src="../../generators/javascript.js"></script>  
   <script src="codeGenerator.js"></script>
 </head>
-<body>
+<body onload="bodyLoad();" >
   <table width="100%" height="100%">
     <tr>
       <td>
@@ -87,7 +142,7 @@
             <td id="tab_blocks" class="tabon">...</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_javascript" class="taboff" >JavaScript
-               <input type="button" value="Copy to Clipboard" onclick="clipboardCopy (document.all.content_javascript.innerText);">            
+               <input type="button" value="Download to Plugins Directory" onclick="clipboardCopy (document.all.content_javascript.innerText);">            
             </td>
             <td class="tabmin" style="display:none;">&nbsp;</td>
             <td id="tab_python" class="taboff" style="display:none;">Arduino
@@ -139,6 +194,7 @@
     </category> 
     <category name="Events">
        <block type="eventlistener"></block>
+       <block type="spawnarea"></block>
        <block type="evententitylocation"></block>
        <block type="evententityshooter"></block>
        <block type="eventcancel"></block>
@@ -166,6 +222,7 @@
       <block type="buildbox"></block>
       <block type="sign"></block>
       <block type="wallsign"></block>
+      <block type="teamflag"></block>
     </category> 
     <category name="Player">
        <block type="playerlocation"></block>
