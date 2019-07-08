@@ -6,6 +6,8 @@
 * cd c:\ 
 * git clone https://www.github.com/Paulware/BlocklyScriptcraft<br>
   This will create a C:\BlocklyScriptcraft directory with all the necessary files
+* To get latest (after git clone command)
+  git pull --all
   
 To run the program navigate to C:\BlocklyScriptcraft\demos\code\index.html <br>
 
