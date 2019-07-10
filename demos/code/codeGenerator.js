@@ -6,7 +6,7 @@ var insetupCode = "";
 
 Blockly.Python['setuploop'] = function(block) {
   includes = "";
-  instantiations = "//Instantiations\n";
+  instantiations = "  //Instantiations\n";
   updates = "  //Updates\n";
   setupCode = "";
   insetupCode = "";
@@ -1200,12 +1200,16 @@ Blockly.JavaScript ['setuploop'] = function (block) {
   return code;
 };
 
-
 Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
+  instantiations = "  //Instantiations\n";
   var functionName = Blockly.Python.valueToCode(block, 'nameOfFunction', Blockly.Python.ORDER_ATOMIC);
   functionName = insideChars ( functionName,"\"","\"");
-  var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
-  var code = '//Scriptcraft function!\n' + 'function ' + functionName + '() {\n' + 
+  var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' ); 
+  if (instantiations == "  //Instantiations\n" ) {
+     instantiations = "";
+  }    
+  var code = '//Blockly Scriptcraft generated function\n' + 'function ' + functionName + '() {\n' + 
+             instantiations + 
              functionCode +
              '}\n' +
   'exports.' + functionName + ' = ' + functionName + ';';
@@ -1301,6 +1305,10 @@ Blockly.Python['wallsign'] = function(block) {
 Blockly.Python['additem'] = function(block) {
   var count =  Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
   var itemType = block.getFieldValue ("ITEMTYPE");
+  var player = block.getFieldValue ('PLAYER'); 
+  instantiateVariable ( '  var player;' );
+  instantiateVariable ( '  var newItems;' );
+  instantiateVariable ( "  var items = require ( 'items' );" );       
   if (count == "") {
      count = 1;
   } else {
@@ -1309,9 +1317,9 @@ Blockly.Python['additem'] = function(block) {
          count = 200;
      } 
   }    
-  var code = "var items = require('items');\n" + 
-             "var newItems = items." + itemType + "(" + count + ");\n" +   
-             "var code = self.inventory.addItem(newItems);\n" 
+  var code = "newItems = items." + itemType + "(" + count + ");\n" +  
+             "player = " + player + ";\n" +              
+             "player.inventory.addItem(newItems);\n" 
   return code;
 };
 
@@ -1355,10 +1363,19 @@ Blockly.Python['eventplayer'] = function(block) {
 };
 
 Blockly.Python['sendmessage'] = function(block) {
-  var value = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
-  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);  
+  var message = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
+  message = insideChars ( message, "\"", "\"" );
+  var player = block.getFieldValue ('PLAYER');  
   player = insideParen(player);
-  var code = player + '.sendMessage (\"' + insideChars ( value, "\"", "\"" ) + '\");\n';
+  var code;
+  if (player == "event.getAffectedEntities") {
+     code = "var entities = event.getAffectedEntities();\n" + 
+            "for (var i=0; i<entities.length; i++) {\n" + 
+            "  entities[i].sendMessage (\"" + message + "\");\n" + 
+            "}\n";
+  } else {
+     code = player + '.sendMessage (\"' + message + '\");\n';
+  }
   return code;
 };
 
@@ -1431,17 +1448,27 @@ Blockly.Python['playerlocation'] = function(block) {
 };
 
 Blockly.Python['teleport'] = function(block) {
+  instantiateVariable ('  var location;' );
+  instantiateVariable ('  var player;' );
+  instantiateVariable ('  var TeleportCause;');
   var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC); 
   x = insideParen (x);
   var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC); 
   y = insideParen (y);
   var z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC); 
   z = insideParen (z);
-  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  var player = block.getFieldValue ('PLAYER');
   player = insideParen(player);
-  var code = 	"var player = " + player + ";\n" + 
-              "var location = new org.bukkit.Location(player.world, " + x + ", " + y + ", " + z + ");\n" + 
-              "player.teleport( location, org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";	  
+  var code = 	"player = " + player + ";\n" + 
+              "location = new org.bukkit.Location(server.worlds[0], " + x + ", " + y + ", " + z + ");\n" + 
+              "TeleportCause  = org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN;\n" + 
+              "// Add a delay for teleport event\n"  + 
+              "function teleportLater()  {\n" +  
+              "  player.teleport( location, TeleportCause);\n" + 
+              "  event.player.sendMessage (\"Teleportation Complete\");\n" + 
+              "}\n" +  
+              "setTimeout (teleportLater,1000);\n" +               
+              "// player.teleport( location, TeleportCause );\n";	  
   return code;
 }
 
@@ -1512,4 +1539,55 @@ Blockly.Python['spawnarea'] = function(block) {
   var code = 	"server.worlds[0].setSpawnLocation(new org.bukkit.Location(server.worlds[0]," + x + "," + y + "," + z + "));\n";
   return code;
 }
+
+Blockly.Python['ability'] = function(block) {
+  var ability = block.getFieldValue ('ABILITY');
+  var player = block.getFieldValue ('PLAYER');
+  var code = "// Give the player an ability\n";
+  var duration = Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC); 
+  
+  instantiateVariable ('  var player;' );
+  code = code + 'player = ' + player + ';\n';
+  if (ability == "FLY" ) { 
+     code = code + "player.allowFlight = true; // Player can fly\n"; 
+  } else if (ability == "SPEED") {
+     code = code + "player.walkSpeed = 1.0; // Super speed\n"; 
+  } else if (ability == "INVULNERABLE") {
+     code = code + "player.invulnerable = true;\n" 
+  }
+   
+  code = code + "function stopAbility() {\n"; 
+  if (ability == "FLY" ) { 
+     code = code + "  player.allowFlight = false;\n"; 
+  } else if (ability == "SPEED") {
+     code = code + "  player.walkSpeed = 0.2; // Normal speed\n"; 
+  } else if (ability == "INVULNERABLE") {
+     code = code + "  player.invulnerable = false;\n"; 
+  } 
+  code = code + "}\n";
+  code = code + "setTimeout (stopAbility, " + duration + "000);\n" 
+   
+  return code;
+};
+
+Blockly.Python['abilityactive'] = function(block) {
+  var ability = block.getFieldValue ('ABILITY');
+  var player = block.getFieldValue ('PLAYER');
+  var code = "// Give the player an ability\n";
+
+
+  if (ability == "FLY" ) { 
+     code = player + ".allowFlight"; 
+  } else if (ability == "SPEED") {
+     code = player + ".walkSpeed == 1.0"; 
+  } else if (ability == "INVULNERABLE") {
+     code = player + ".invulnerable" 
+  }
+    
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+
+
 

@@ -165,9 +165,9 @@ Blockly.Blocks['sendmessage'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Send Message to Player");   
-    this.appendValueInput("PLAYER")
-        .setCheck("String")
-        .appendField("Which Player");
+    this.appendDummyInput()
+        .appendField("For Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"]]), "PLAYER");           
     this.appendValueInput("MESSAGE")
         .setCheck("String")
         .appendField("Message");
@@ -1509,8 +1509,11 @@ Blockly.Blocks['additem'] = {
     this.appendDummyInput()
         .appendField("Add an item to players inventory");
     this.appendDummyInput()
+        .appendField("For Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"]]), "PLAYER");           
+    this.appendDummyInput()
         .appendField("Item")
-        .appendField(new Blockly.FieldDropdown([["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"]]), "ITEMTYPE");  
+        .appendField(new Blockly.FieldDropdown([["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
     this.appendValueInput("COUNT")
         .appendField("How Many");          
     this.setPreviousStatement(true, null);
@@ -1538,7 +1541,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A block was broken","blockBreak"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1596,8 +1599,8 @@ Blockly.Blocks['evententityshooter'] = {
 Blockly.Blocks['eventplayer'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Which Player?")
-        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["shooter","event.entity.shooter"]]), "PLAYER");           
+        .appendField("For Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"]]), "PLAYER");           
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setColour(120);
@@ -1615,9 +1618,9 @@ Blockly.Blocks['armorset'] = {
     this.appendDummyInput()
         .appendField("Color")
         .appendField(new Blockly.FieldDropdown([["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
-    this.appendValueInput("PLAYER")
-        .setCheck("String")
-        .appendField("Which Player");
+    this.appendDummyInput()
+        .appendField("For Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"]]), "PLAYER");           
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
@@ -1700,9 +1703,9 @@ Blockly.Blocks['teleport'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Teleport");
-    this.appendValueInput("PLAYER")
-        .setCheck("String")
-        .appendField("Player");   
+    this.appendDummyInput()
+        .appendField("For Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"]]), "PLAYER");           
     this.appendValueInput("X")
         .setCheck("Number")
         .appendField("X");         
@@ -1782,5 +1785,45 @@ Blockly.Blocks['spawnarea'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['ability'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Give Player")
+    this.appendDummyInput()
+        .appendField("For Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"]]), "PLAYER");           
+    this.appendDummyInput()
+        .appendField("The ability ")
+        .appendField(new Blockly.FieldDropdown([["To Fly", "FLY"],["Invunlerability","INVULNERABLE"], ["Super Speed","SPEED"]]), "ABILITY");          
+    this.appendValueInput("DURATION")
+        .setCheck("Number")
+        .appendField("For how many seconds?");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['abilityactive'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Ability is Active")
+    this.appendDummyInput()
+        .appendField("For Which Player?")
+        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"]]), "PLAYER");           
+    this.appendDummyInput()
+        .appendField("Which ability ")
+        .appendField(new Blockly.FieldDropdown([["To Fly", "FLY"],["Invunlerability","INVULNERABLE"], ["Super Speed","SPEED"]]), "ABILITY");          
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+
 
 
