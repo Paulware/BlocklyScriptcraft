@@ -212,7 +212,7 @@ Blockly.Lua['text_changeCase'] = function(block) {
   var text = Blockly.Lua.valueToCode(block, 'TEXT',
       Blockly.Lua.ORDER_NONE) || '\'\'';
   if (operator == 'UPPERCASE') {
-    var functionName = 'string.upper';
+    var functionName = 'string.upperLua';
   } else if (operator == 'LOWERCASE') {
     var functionName = 'string.lower';
   } else if (operator == 'TITLECASE') {
@@ -232,7 +232,7 @@ Blockly.Lua['text_changeCase'] = function(block) {
          '        inWord = false',
          '      end',
          '    else',
-         '      table.insert(buf, string.upper(c))',
+         '      table.insert(buf, string.upperLua(c))',
          '      inWord = true',
          '    end',
          '  end',

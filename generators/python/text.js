@@ -36,6 +36,7 @@ Blockly.Python['text'] = function(block) {
 };
 
 Blockly.Python['text_join'] = function(block) {
+   alert ( 'python/text.js text_join' );
   // Create a string made up of any number of elements of any type.
   //Should we allow joining by '-' or ',' or any other characters?
   switch (block.itemCount_) {
@@ -193,9 +194,9 @@ Blockly.Python['text_getSubstring'] = function(block) {
 Blockly.Python['text_changeCase'] = function(block) {
   // Change capitalization.
   var OPERATORS = {
-    'UPPERCASE': '.upper()',
-    'LOWERCASE': '.lower()',
-    'TITLECASE': '.title()'
+    'UPPERCASE': '.toUpperCase()',
+    'LOWERCASE': '.toLowerCase()',
+    'TITLECASE': '.toUpperCase()'
   };
   var operator = OPERATORS[block.getFieldValue('CASE')];
   var text = Blockly.Python.valueToCode(block, 'TEXT',

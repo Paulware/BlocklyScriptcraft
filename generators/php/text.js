@@ -200,7 +200,7 @@ Blockly.PHP['text_changeCase'] = function(block) {
   var text = Blockly.PHP.valueToCode(block, 'TEXT',
           Blockly.PHP.ORDER_NONE) || '\'\'';
   if (block.getFieldValue('CASE') == 'UPPERCASE') {
-    var code = 'strtoupper(' + text + ')';
+    var code = 'strtoupperPhp(' + text + ')';
   } else if (block.getFieldValue('CASE') == 'LOWERCASE') {
     var code = 'strtolower(' + text + ')';
   } else if (block.getFieldValue('CASE') == 'TITLECASE') {
