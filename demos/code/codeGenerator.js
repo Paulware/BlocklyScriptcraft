@@ -766,7 +766,7 @@ Blockly.Python['modifyEntity'] = function(block) {
      'var entity = server.worlds[0].spawnEntity(self.location, org.bukkit.entity.EntityType.' + entity + ');\n';
   if ((entity == "HORSE") || (entity == "SKELETON_HORSE")) { 
      code = code + 
-        "var saddle = items.saddle(1);\n" + 
+        "var saddle = require('items').saddle(1);\n" + 
         "entity.getInventory().setSaddle(saddle);\n" + 
         "entity.tamed = true;\n"    
   }   
@@ -780,26 +780,25 @@ Blockly.Python['setName'] = function(block) {
 };
 
 Blockly.Python['entityArmor'] = function(block) {
-  instantiateVariable ( "var items = require ('items');" );
   var color = block.getFieldValue ('COLOR');
   var code = 
      "var color = org.bukkit.Color." + color + "\n" + 
-     "var helmet = items.leatherHelmet(1);\n" + 
+     "var helmet = require('items').leatherHelmet(1);\n" + 
      "var helmetMeta = helmet.itemMeta;\n" + 
      "helmetMeta.color = color;\n" + 
      "helmet.itemMeta = helmetMeta;\n" + 
      "entity.equipment.helmet = helmet;\n" + 
-     "var boots = items.leatherBoots(1);\n" + 
+     "var boots = require('items').leatherBoots(1);\n" + 
      "var bootsMeta = boots.itemMeta;\n" + 
      "bootsMeta.color = color;\n" + 
      "boots.itemMeta = bootsMeta;\n" + 
      "entity.equipment.boots = boots;\n" + 
-     "var chest = items.leatherChestplate(1);\n" + 
+     "var chest = require('items').leatherChestplate(1);\n" + 
      "var chestMeta = chest.itemMeta;\n" + 
      "chestMeta.color = color;\n" + 
      "chest.itemMeta = chestMeta;\n" + 
      "entity.equipment.chestplate = chest;\n" +
-     "var legs = items.leatherLeggings(1);\n" + 
+     "var legs = require('items').leatherLeggings(1);\n" + 
      "var legsMeta = legs.itemMeta;\n" + 
      "legsMeta.color = color;\n" + 
      "legs.itemMeta = legsMeta;\n" + 
