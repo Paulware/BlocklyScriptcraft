@@ -30,7 +30,7 @@ Blockly.Blocks['scriptcraftfunction'] = {
         .setCheck(null);
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -142,7 +142,7 @@ Blockly.Blocks['commentwidget'] = {
         .appendField("Comment");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -155,7 +155,7 @@ Blockly.Blocks['echowidget'] = {
         .appendField("Echo");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -172,7 +172,7 @@ Blockly.Blocks['sendmessage'] = {
         .appendField("To Player/Entity");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -694,7 +694,7 @@ Blockly.Blocks['tostring'] = {
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setOutput(true, "String");  
-    this.setColour(120);
+    this.setColour(230);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1422,8 +1422,7 @@ Blockly.Blocks['spawn'] = {
 };
 
 // https://www.codeproject.com/Articles/878585/Build-Giant-Ravine-in-Minecraft-using-ScriptCraft
-Blockly.Blocks['structures'] = {
- 
+Blockly.Blocks['structures'] = { 
   init: function() {
     this.appendDummyInput()
         .appendField("Spawn");    
@@ -1432,7 +1431,7 @@ Blockly.Blocks['structures'] = {
         .appendField(new Blockly.FieldDropdown([["Castle", "castle"],["Cottage","cottage"]]), "STRUCTURE");           
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1444,7 +1443,7 @@ Blockly.Blocks['createdrone'] = {
         .appendField("Create Drone");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1465,7 +1464,7 @@ Blockly.Blocks['buildbox'] = {
         .appendField("Height");                 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1481,7 +1480,7 @@ Blockly.Blocks['sign'] = {
         .appendField("Line 2");          
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1497,7 +1496,7 @@ Blockly.Blocks['wallsign'] = {
         .appendField("Line 2");          
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1510,13 +1509,13 @@ Blockly.Blocks['additem'] = {
     this.appendDummyInput()
         .appendField("Item")
         .appendField(new Blockly.FieldDropdown([["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
-    this.appendValueInput("ENTITY")
+    this.appendValueInput("PLAYER")
         .appendField("To inventory for Player/Entity ");        
     this.appendValueInput("COUNT")
         .appendField("How Many");          
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(280);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1529,7 +1528,7 @@ Blockly.Blocks['consolelog'] = {
         .appendField("server console");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1544,7 +1543,7 @@ Blockly.Blocks['eventlistener'] = {
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(40);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1573,7 +1572,7 @@ Blockly.Blocks['eventplayer'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("For Which Player?")
-        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "PLAYER");           
+        .appendField(new Blockly.FieldDropdown([["calling function", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "PLAYER");           
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setColour(120);
@@ -1594,7 +1593,7 @@ Blockly.Blocks['armorset'] = {
         .appendField("For Player/Entity");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1609,7 +1608,7 @@ Blockly.Blocks['repairarmor'] = {
         .appendField("Which Player");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1629,13 +1628,11 @@ Blockly.Blocks['placebanner'] = {
         .appendField("Location");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
-
-
 
 Blockly.Blocks['teamflag'] = {
   init: function() {
@@ -1649,7 +1646,7 @@ Blockly.Blocks['teamflag'] = {
         .appendField("Location");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1694,7 +1691,7 @@ Blockly.Blocks['sound'] = {
         .appendField("Entity Type");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1721,7 +1718,7 @@ Blockly.Blocks['eventcancel'] = {
         .appendField("Cancel the Event");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(40);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1735,7 +1732,7 @@ Blockly.Blocks['spawnarea'] = {
         .appendField("Location");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(40);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1767,7 +1764,7 @@ Blockly.Blocks['abilityactive'] = {
         .appendField("Ability is Active")
     this.appendDummyInput()
         .appendField("For Which Player?")
-        .appendField(new Blockly.FieldDropdown([["calling service", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "PLAYER");           
+        .appendField(new Blockly.FieldDropdown([["calling function", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "PLAYER");           
     this.appendDummyInput()
         .appendField("Which ability ")
         .appendField(new Blockly.FieldDropdown([["To Fly", "FLY"],["Invunlerability","INVULNERABLE"], ["Super Speed","SPEED"]]), "ABILITY");          
@@ -1785,14 +1782,13 @@ Blockly.Blocks['addpotion'] = {
     this.appendDummyInput()
         .appendField("Which Potion")
         .appendField(new Blockly.FieldDropdown([["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTIONTYPE");           
-    this.setColour(120);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
   }
 };
-
 
 Blockly.Blocks['modifyEntity'] = {
   init: function() {
@@ -1804,7 +1800,7 @@ Blockly.Blocks['modifyEntity'] = {
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     // this.setOutput(true, null);    
@@ -1820,7 +1816,7 @@ Blockly.Blocks['setName'] = {
         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     // this.setOutput(true, null);    
@@ -1836,7 +1832,7 @@ Blockly.Blocks['entityArmor'] = {
         .appendField(new Blockly.FieldDropdown([["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1848,7 +1844,7 @@ Blockly.Blocks['baby'] = {
         .appendField("Change to Baby");   
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1861,7 +1857,7 @@ Blockly.Blocks['location'] = {
         .appendField("Location");
     this.appendDummyInput()
         .appendField("Location Of")
-        .appendField(new Blockly.FieldDropdown([["xyz", "XYZ"], ["Player calling service", "self.location"], ["Player causing event","event.player.location"],["event entity", "event.entity.location"],["event shooter","event.entity.shooter.location"], ["Attacker", "event.damager.location"]]), "LOCATIONTYPE");           
+        .appendField(new Blockly.FieldDropdown([["xyz", "XYZ"], ["Location of player calling function", "self.location"], ["Player causing event","event.player.location"],["event entity", "event.entity.location"],["event shooter","event.entity.shooter.location"], ["Attacker", "event.damager.location"]]), "LOCATIONTYPE");           
     this.appendValueInput("X")
         .setCheck("Number")
         .appendField("X");         
@@ -1872,7 +1868,7 @@ Blockly.Blocks['location'] = {
         .setCheck("Number")
         .appendField("Z");         
     this.setOutput(true, null);
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1882,9 +1878,9 @@ Blockly.Blocks['entity'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Player, Monster or Object")
-        .appendField(new Blockly.FieldDropdown([["entity","entity"], ["Player calling service", "self"], ["Player causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "ENTITY");           
+        .appendField(new Blockly.FieldDropdown([["entity","entity"], ["Player calling function", "self"], ["Player causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "ENTITY");           
     this.setOutput(true, null);
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1900,6 +1896,9 @@ Blockly.Blocks['entityType'] = {
                                                 ["Chicken","CHICKEN"],
                                                 ["Cow","COW"],
                                                 ["Creeper","CREEPER"],
+                                                ["Ender Dragon", "ENDER_DRAGON"],
+                                                ["Evoker", "EVOKER"],
+                                                ["Evoker Fangs", "EVOKER_FANGS"],
                                                 ["Horse", "HORSE"], 
                                                 ["Minecart", "MINECART"], 
                                                 ["Ocelot", "OCELOT"],
@@ -1914,7 +1913,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Zombie", "ZOMBIE"]
                                                ]), "ENTITY");                   
     this.setOutput(true, null);
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1947,7 +1946,7 @@ Blockly.Blocks['getVariable'] = {
     this.appendStatementInput("FUNCTIONCODE")
         .setCheck(null);
     this.setOutput(true, null);
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1961,7 +1960,7 @@ Blockly.Blocks['rider'] = {
         .appendField("Passenger");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1973,7 +1972,7 @@ Blockly.Blocks['returnVariable'] = {
         .appendField("Return Variable");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1984,7 +1983,7 @@ Blockly.Blocks['functionCall'] = {
     this.appendValueInput("FUNCTIONNAME")
         .appendField("Call Function");
     this.setOutput(true, null);
-    this.setColour(290);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1994,7 +1993,7 @@ Blockly.Blocks['clickedBlock'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Block that was clicked on")
-    this.setColour(120);
+    this.setColour(40);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, "String");
@@ -2006,7 +2005,7 @@ Blockly.Blocks['typeString'] = {
     this.appendValueInput("TYPESTRING")   
         .appendField("Object Type String");
     this.setOutput(true, "String");
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2019,7 +2018,7 @@ Blockly.Blocks['leverUp'] = {
     this.appendValueInput("BLOCK")   
         .appendField("Lever Block");
     this.setOutput(true, "Boolean");
-    this.setColour(120);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2036,7 +2035,7 @@ Blockly.Blocks['sendUdpMessage'] = {
         .appendField("Port");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

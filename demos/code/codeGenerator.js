@@ -344,6 +344,7 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
   //}   
   // alert ( 'Instantiations: [' + instantiations + ']' );
   var code = 'function ' + functionName + '() {\n' + 
+             instantiations +
              functionCode +
              '}\n' +
   'exports.' + functionName + ' = ' + functionName + ';';
@@ -439,10 +440,10 @@ Blockly.Python['wallsign'] = function(block) {
 Blockly.Python['additem'] = function(block) {
   var count =  Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
   var itemType = block.getFieldValue ("ITEMTYPE");
-  var player = block.getFieldValue ('PLAYER'); 
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
   instantiateVariable ( '  var player;' );
   instantiateVariable ( '  var newItems;' );
-  instantiateVariable ( "  var items = require ( 'items' );" );       
   if (count == "") {
      count = 1;
   } else {
@@ -451,7 +452,7 @@ Blockly.Python['additem'] = function(block) {
          count = 200;
      } 
   }    
-  var code = "newItems = items." + itemType + "(" + count + ");\n" +  
+  var code = "newItems = require('items')." + itemType + "(" + count + ");\n" +  
              "player = " + player + ";\n" +              
              "player.inventory.addItem(newItems);\n" 
   return code;
@@ -668,19 +669,18 @@ Blockly.Python['teamflag'] = function(block) {
 };
 
 Blockly.Python['spawnarea'] = function(block) {
-  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC); 
-  x = insideParen (x);
-  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC); 
-  y = insideParen (y);
-  var z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC); 
-  z = insideParen (z);
-  var code = 	"server.worlds[0].setSpawnLocation(new org.bukkit.Location(server.worlds[0]," + x + "," + y + "," + z + "));\n";
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  var code = 	"server.worlds[0].setSpawnLocation(" + location + ");\n";
+  
   return code;
 }
 
 Blockly.Python['ability'] = function(block) {
   var ability = block.getFieldValue ('ABILITY');
-  var player = block.getFieldValue ('PLAYER');
+  var player = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  
   var code = "// Give the player an ability\n";
   var duration = Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC); 
   
@@ -736,7 +736,7 @@ function extractStr (value) {
         returnValue = value; //.substring (1,value.length-1);
         // alert ( 'extract Str, bounding parens: ' + value + ', returnValue: ' + returnValue );
      } else { 
-        alert ( 'extractStr [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
+        //alert ( 'extractStr [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
         if (insideChars (value, "\"", "\"") == "" ) { 
            returnValue = value;
         } else { 
@@ -815,8 +815,7 @@ Blockly.Python['location'] = function(block) {
   y = insideParen (y);
   var z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC); 
   z = insideParen (z);
-  
-  
+    
   if (locationType == "XYZ") {
      code = "new org.bukkit.Location(server.worlds[0], " + x + ", " + y + ", " + z + ")"
   } else {
@@ -831,6 +830,7 @@ Blockly.Python['baby'] = function(block) {
 
 Blockly.Python['entity'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
+  //alert ( 'entity got: ' + entity );
   return [entity, Blockly.Python.ORDER_NONE];
 }
 
