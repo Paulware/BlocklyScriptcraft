@@ -1428,7 +1428,7 @@ Blockly.Blocks['structures'] = {
         .appendField("Spawn");    
     this.appendDummyInput()
         .appendField("Structure")
-        .appendField(new Blockly.FieldDropdown([["Castle", "castle"],["Cottage","cottage"]]), "STRUCTURE");           
+        .appendField(new Blockly.FieldDropdown([["Farm","farm"],["Castle", "castle"],["Cottage","cottage"],["Cottage Road","cottage_road"]]), "STRUCTURE");           
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(240);
@@ -1462,6 +1462,20 @@ Blockly.Blocks['buildbox'] = {
         .appendField("WIDTH");                 
     this.appendValueInput("HEIGHT")
         .appendField("Height");                 
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(240);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['changeBlock'] = {
+  init: function() {
+    this.appendValueInput("BLOCK")
+        .appendField("Change Block");
+    this.appendValueInput("TYPEOFBLOCK")
+        .appendField("Type of Block");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(240);
@@ -1508,7 +1522,7 @@ Blockly.Blocks['additem'] = {
         .appendField("Add");
     this.appendDummyInput()
         .appendField("Item")
-        .appendField(new Blockly.FieldDropdown([["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Wheat Seeds", "wheatSeeds"], ["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
     this.appendValueInput("PLAYER")
         .appendField("To inventory for Player/Entity ");        
     this.appendValueInput("COUNT")
@@ -1538,7 +1552,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever or button","playerInteract"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever or button","playerInteract"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1781,7 +1795,7 @@ Blockly.Blocks['addpotion'] = {
         .appendField("Add potion to inventory")
     this.appendDummyInput()
         .appendField("Which Potion")
-        .appendField(new Blockly.FieldDropdown([["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTIONTYPE");           
+        .appendField(new Blockly.FieldDropdown([["Create a bat cart", "BATCART"],["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTION");           
     this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -1829,7 +1843,22 @@ Blockly.Blocks['entityArmor'] = {
         .appendField("Armor");   
     this.appendDummyInput()
         .appendField("Color")
-        .appendField(new Blockly.FieldDropdown([["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
+        .appendField(new Blockly.FieldDropdown([["Black","BLACK"],["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(80);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['entityProfession'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Villager Profession");   
+    this.appendDummyInput()
+        .appendField("Profession")
+        .appendField(new Blockly.FieldDropdown([["Blacksmith","BLACKSMIT"], ["Butcher", "BUTCHER"],["Farmer","FARMER"],["Husk","HUSK"],["Librarian","LIBRARIAN"],["Nitwit","NITWIT"],["Normal","NORMAL"],["Priest","PRIEST"]]), "PROFESSION");  
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(80);
@@ -1919,6 +1948,23 @@ Blockly.Blocks['entityType'] = {
   }
 };
 
+Blockly.Blocks['blockType'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Block Type")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Composter", "COMPOSTER"],
+                                                ["Farm Land", "FARMLAND"],
+                                                ["Oak", "OAK_WOOD"], 
+                                                ["Water", "WATER"]                                                
+                                               ]), "BLOCK");                   
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['creatureTypeString'] = {
   init: function() {
     this.appendValueInput("ENTITYTYPE")
@@ -1992,8 +2038,21 @@ Blockly.Blocks['functionCall'] = {
 Blockly.Blocks['clickedBlock'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Block that was clicked on")
+        .appendField("Block that was clicked on");
     this.setColour(40);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
+
+Blockly.Blocks['getBlock'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Get Block at Location");
+    this.appendValueInput("LOCATION")
+        .appendField("Location of Block");
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, "String");

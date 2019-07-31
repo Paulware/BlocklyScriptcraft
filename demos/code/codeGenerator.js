@@ -4,6 +4,116 @@ var updates = "";
 var setupCode = "";
 var insetupCode = "";
 
+// Utility javascript functions
+function millis() {
+    var code =
+       'function millis() {\n' + 
+       '   var d = new Date();\n' + 
+       '   return d.getTime();\n' +    
+       '}\n';
+    return code;
+}
+function changeLocation() {
+    var code = 
+       'function changeLocation (location, xOffset, yOffset,zOffset) {\n' + 
+       '   var x = parseInt (location.x) + xOffset;\n' + 
+       '   var y = parseInt (location.y) + yOffset;\n' + 
+       '   var z = parseInt (location.z) + zOffset;\n' + 
+       '   var location = new org.bukkit.Location(server.worlds[0],x,y,z);\n' + 
+       '   return location;\n' + 
+       '}\n';
+    return code;
+}
+
+function changeBlock() {
+   var code = 
+              'function changeBlock (location, xOffset,yOffset,zOffset, material, repeat) {\n' + 
+              '  var x,y,z,block;\n' + 
+              '  for (var i=0; i<repeat; i++) {\n' + 
+              '     x = parseInt (location.x) + xOffset;\n' + 
+              '     y = parseInt (location.y) + yOffset;\n' + 
+              '     z = parseInt (location.z) + zOffset;\n' + 
+              '     location = new org.bukkit.Location(server.worlds[0],x,y,z);\n' + 
+              '     block = server.worlds[0].getBlockAt (location);\n' + 
+              '     block.setType (material);\n' +         
+              '  }\n' + 
+              '  return location;\n' +  
+              '}\n';  
+   return code;
+} 
+
+function circleBlock() {
+   var code = 
+             'function circleBlock (location, radius, material) {\n' + 
+             '  var count = 0;\n' + 
+             '  for (var i=0; i<radius; i++) {\n' + 
+             '     count = count + 1;\n' + 
+             '     location = changeBlock (location, 1,0,0,material,count);\n' + 
+             '     location = changeBlock (location, 0,0,1,material,count);\n' + 
+             '     count = count + 1;\n' + 
+             '     location = changeBlock (location, -1,0,0,material,count);\n' + 
+             '     location = changeBlock (location, 0,0,-1,material,count);\n' + 
+             '  }\n' + 
+             '  location = changeBlock (location, 1,0,0,material,count);\n' + 
+             '  return location;\n' +  
+             '}\n';               
+   return code; 
+} 
+
+function findGround() {
+  var code = 
+     'function findGround (location) {\n' + 
+     '   var x = parseInt (location.x);\n' +
+     '   var y = parseInt (location.y);\n' +
+     '   var z = parseInt (location.z);\n' +
+     '   var block;\n' +
+     '   for (var i=0; i<20; i++) { \n' +       
+     '      location = new org.bukkit.Location(server.worlds[0],x,y+i,z);  \n' + 
+     '      block = server.worlds[0].getBlockAt (location);\n' +
+     '      if (block.type != org.bukkit.Material.AIR) {\n' +
+     '          break;\n' +
+     '      } \n' +
+     '      if (y - i > 0) { \n' +
+     '         location = new org.bukkit.Location(server.worlds[0],x,y-i,z); \n' +  
+     '         block = server.worlds[0].getBlockAt (location);\n' +
+     '         if (block.type != org.bukkit.Material.AIR) {\n' +
+     '             break;\n' +
+     '         } \n' +
+     '      } \n' +                
+     '   }\n' +
+     '   console.log ( \'Ground located at: \' + location );\n' +
+     '   return location;\n' +
+     '}  \n';
+  return code;
+} 
+
+
+// Helper functions 
+function extractStr (value) {
+  var returnValue = value;
+  if (value.length > 1) { 
+     var startChar = value.substring (0,1);
+     var endChar = value.substring (value.length -1) 
+     if ((startChar == "\"") && (endChar == "\"")) {
+        returnValue = insideChars (value, "\"", "\"");
+     } else if ((startChar == "(") && (endChar == ")")) {
+        returnValue = value; //.substring (1,value.length-1);
+        //alert ( 'extract Str, (): ' + value + ', returnValue: ' + returnValue );
+     } else { 
+        if (insideChars (value, "\"", "\"") == "" ) { 
+           //alert ( 'extractStr \"\"== null string, [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
+           returnValue = value;
+        } else { 
+           //alert ( 'extractStr \"\": [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
+           returnValue = insideChars ( value, "\"", "\"" );
+        }
+     }
+  } else {
+     alert ( 'ERR extractStr, value.length ==' + value.length );
+  }
+  return returnValue;
+} 
+
 Blockly.Python['setuploop'] = function(block) {
   includes = "";
   instantiations = "  //Instantiations\n";
@@ -383,9 +493,32 @@ Blockly.Python['spawn'] = function(block) {
 */
 Blockly.Python['structures'] = function(block) {
   var structure = block.getFieldValue ("STRUCTURE");
-
-  var code = '// Spawn ' + structure + '\n' + 
+  var code;
+  if (structure == "farm") {
+     code =        
+        changeBlock() + 
+        'location = changeBlock (self.location,0,-1,0,org.bukkit.Material.COMPOSTER,1);\n' + 
+        'location = changeBlock (location,0,0,1,org.bukkit.Material.FARMLAND,6);\n' + 
+        'location = changeBlock (location,-2,0,1,org.bukkit.Material.FARMLAND,1);\n' + 
+        'location = changeBlock (location,0,0,-1,org.bukkit.Material.FARMLAND,6);\n' + 
+        'location = changeBlock (location,1,0,0,org.bukkit.Material.WHEAT,1);\n' + 
+        'location = changeBlock (location,0,0,1,org.bukkit.Material.WATER,6);\n' + 
+        'location = changeBlock (location,-5,1,0,org.bukkit.Material.OAK_FENCE,1);\n' + 
+        'location = changeBlock (location,0,0,-1,org.bukkit.Material.OAK_FENCE,10);\n' + 
+        'location = changeBlock (location,1,0,0,org.bukkit.Material.OAK_FENCE,8);\n' + 
+        'location = changeBlock (location,0,0,1,org.bukkit.Material.OAK_FENCE,12);\n' + 
+        'location = changeBlock (location,-1,0,0,org.bukkit.Material.OAK_FENCE,4);\n' + 
+        'location = changeBlock (location,-1,0,0,org.bukkit.Material.OAK_FENCE_GATE,1);\n' + 
+        'location = changeBlock (location,-1,0,0,org.bukkit.Material.OAK_FENCE,3);\n' + 
+        'location = changeBlock (location,0,0,-1,org.bukkit.Material.OAK_FENCE,3);\n' + 
+        'var entity = server.worlds[0].spawnEntity(self.location, org.bukkit.entity.EntityType.VILLAGER);\n' + 
+        'newItems = require(\'items\').wheatSeeds(16);\n' + 
+        'entity.inventory.addItem(newItems);\n' + 
+        'entity.setProfession (org.bukkit.entity.Villager.Profession.FARMER);\n';      
+  } else {
+     code = '// Spawn ' + structure + '\n' + 
              structure.toLowerCase() + '();\n' 
+  }
   return code;
 };
 
@@ -403,6 +536,15 @@ Blockly.Python['buildbox'] = function(block) {
   
   var code = '//Build a box out of ' + blockType + '\n' +   
              'drone.box(blocks.' + blockType + ', ' + len + ', ' + height + ', ' +  width + '); // length, height, width\n'; 
+  return code;
+};
+
+Blockly.Python['changeBlock'] = function(block) {
+  var b         = Blockly.Python.valueToCode(block, 'BLOCK',       Blockly.Python.ORDER_ATOMIC); 
+  b = insideParen(b);
+  var blockType = Blockly.Python.valueToCode(block, 'TYPEOFBLOCK', Blockly.Python.ORDER_ATOMIC);
+  blockType = insideParen (blockType);
+  var code = b + ".setType(org.bukkit.Material." + blockType + ");\n";
   return code;
 };
 
@@ -498,8 +640,11 @@ Blockly.Python['eventplayer'] = function(block) {
 };
 
 Blockly.Python['sendmessage'] = function(block) {
+  //alert ( 'hello from sendmessage, get the message yo' );
   var message = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
+  //alert ( 'Got message: ' + message );
   message = extractStr (message);
+  //alert ( 'Extracted message: [' + message + ']' );
   // message = insideChars ( message, "\"", "\"" );
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player);
@@ -565,6 +710,8 @@ Blockly.Python['repairarmor'] = function(block) {
      "player.equipment.boots.durability = 0; \n"; 
   return code;
 };
+
+
 
 Blockly.Python['placebanner'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
@@ -636,35 +783,16 @@ Blockly.Python['teamflag'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
   location = insideParen(location);
   var color = block.getFieldValue ('COLOR');
-  var block;
-  if (color == "RED" ) {
-     block = "blocks.stained_clay.red";
-  } else if (color == "BLUE" ) {
-     block = "blocks.stained_clay.blue";
-  } else if (color == "BLACK" ) {
-     block = "blocks.stained_clay.black";
-  } else if (color == "WHITE" ) {
-     block = "blocks.stained_clay.white";
-  } 
   
-  var code = "// color: " + color + "\n" + 
-             "var block = " + block + ";\n" + 
-             "var y = parseInt ( self.location.y );\n" + 
-             "var upValue = (y<3)?3-y:0;\n" + 
-             "var downValue =(y>3)?y-3:0;\n" + 
-             "var d = new Drone(self.location);\n" +    
-             "d = d.up (upValue)\n" + 
-             "    .down (downValue)\n" +    
-             "    .box(block,5,1,5)\n" +
-             "    .left(5)\n" + 
-             "    .box(block,5,1,5)\n" + 
-             "    .back(5)\n" + 
-             "    .box(block,5,1,5)\n" + 
-             "    .right(5)\n" + 
-             "    .box(block,5,1,5)\n" + 
-             "    .fwd(5)\n" + 
-             "    .up(1)\n" + 
-             "    .box (blocks.banner.standing, 1, 1, 1);\n"   
+  var code = changeBlock() + 
+             circleBlock() + 
+             changeLocation() + 
+             findGround() + 
+             'var material = org.bukkit.Material.' + color + '_TERRACOTTA;\n' + 
+             'var location = findGround (' + location + ');\n' + 
+             'location = changeBlock (location, 0, 1, 0, org.bukkit.Material.' + color + '_BANNER, 1);\n' + 
+             'location = changeLocation (location, 0,-1,0);\n' + 
+             'location = circleBlock (location, 4, material);\n';         
   return code;
 };
 
@@ -725,28 +853,6 @@ Blockly.Python['abilityactive'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-function extractStr (value) {
-  var returnValue = value;
-  if (value.length > 1) { 
-     var startChar = value.substring (0,1);
-     var endChar = value.substring (value.length -1) 
-     if ((startChar == "\"") && (endChar == "\"")) {
-        returnValue = value;
-     } else if ((startChar == "(") && (endChar == ")")) {
-        returnValue = value; //.substring (1,value.length-1);
-        // alert ( 'extract Str, bounding parens: ' + value + ', returnValue: ' + returnValue );
-     } else { 
-        //alert ( 'extractStr [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
-        if (insideChars (value, "\"", "\"") == "" ) { 
-           returnValue = value;
-        } else { 
-           returnValue = insideChars ( value, "\"", "\"" );
-        }
-     }
-  }
-  return returnValue;
-} 
-
 function extractString (block,name) {
   var value = Blockly.Python.valueToCode(block, name, Blockly.Python.ORDER_ATOMIC); 
   value = insideChars ( value,"\"","\"");
@@ -806,6 +912,14 @@ Blockly.Python['entityArmor'] = function(block) {
   return code;
 };
 
+Blockly.Python['getBlock'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  var code = "server.worlds[0].getBlockAt (" + location + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+
 Blockly.Python['location'] = function(block) {
   var locationType = block.getFieldValue ('LOCATIONTYPE');
   var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC); 
@@ -821,7 +935,7 @@ Blockly.Python['location'] = function(block) {
      code = locationType;
   }
   return [code, Blockly.Python.ORDER_NONE];
-}
+};
 
 Blockly.Python['baby'] = function(block) {
   return 'entity.baby = true;\n'; 
@@ -836,6 +950,12 @@ Blockly.Python['entity'] = function(block) {
 Blockly.Python['entityType'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
   return [entity, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['blockType'] = function(block) {
+  var b = block.getFieldValue ("BLOCK");
+  b = insideParen (b);
+  return [b, Blockly.Python.ORDER_NONE];
 }
 
 Blockly.Python['creatureTypeString'] = function(block) {
@@ -923,5 +1043,20 @@ Blockly.Python['sendUdpMessage'] = function(block) {
   return code;
 };
 
+Blockly.Python['entityProfession'] = function(block) {
+  var profession = block.getFieldValue ('PROFESSION');
+  var code = "entity.setProfession (org.bukkit.entity.Villager.Profession." + profession + ");\n";
+  return code;
+};
 
-
+// splashpotion_blindness_meta.setMainEffect(PotionEffectType.BLINDNESS);
+Blockly.Python['addpotion'] = function(block) {
+  var potion = block.getFieldValue ('POTION');
+  var code = '// Add ' + potion + ' to inventory\n' + 
+             'var newItems = require(\'items\').splashPotion(5);\n' + 
+             'var meta = newItems.getItemMeta();\n' + 
+             'meta.setDisplayName(\'' + potion + '\');\n' +
+             'newItems.setItemMeta(meta);\n' +              
+             'self.inventory.addItem(newItems);\n';
+  return code;
+};
