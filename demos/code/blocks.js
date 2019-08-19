@@ -275,6 +275,18 @@ Blockly.Blocks['timerexpired'] = {
   }
 };
 
+// event.getPotion().getItem().getItemMeta().getDisplayName()
+Blockly.Blocks['potionname'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Potion Name");
+    this.setOutput(true, "String");
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['resettimer'] = {
   init: function() {
     this.appendDummyInput()
@@ -1402,25 +1414,6 @@ Blockly.Blocks['sethealth'] = {
   }
 };
 
-// "entities": ["Chicken", "Cow", "Wolf", "Pig", "Sheep", "Rabbit", "Horse", "Ocelot", "Villager", "Zombie", "Skeleton", "Creeper", "Spider"]
-Blockly.Blocks['spawn'] = {
-  init: function() {   
-    this.appendDummyInput()
-        .appendField("Spawn");    
-    this.appendDummyInput()
-        .appendField("Entity")
-        .appendField(new Blockly.FieldDropdown([["Zombie", "ZOMBIE"],["Minecart", "MINECART"], ["Bat", "BAT"], ["Horse", "HORSE"], ["Pig", "PIG"],["Chicken","CHICKEN"], ["Skeleton","SKELETON"], ["Skeleton Horse", "SKELETON_HORSE"]]), "ENTITY");           
-    this.appendValueInput("COUNT")
-        .setCheck("Number")    
-        .appendField("How Many");          
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(290);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
 // https://www.codeproject.com/Articles/878585/Build-Giant-Ravine-in-Minecraft-using-ScriptCraft
 Blockly.Blocks['structures'] = { 
   init: function() {
@@ -1522,7 +1515,7 @@ Blockly.Blocks['additem'] = {
         .appendField("Add");
     this.appendDummyInput()
         .appendField("Item")
-        .appendField(new Blockly.FieldDropdown([["Wheat Seeds", "wheatSeeds"], ["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Bone Meal", "boneMeal"], ["Wheat Seeds", "wheatSeeds"], ["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
     this.appendValueInput("PLAYER")
         .appendField("To inventory for Player/Entity ");        
     this.appendValueInput("COUNT")
@@ -1795,7 +1788,9 @@ Blockly.Blocks['addpotion'] = {
         .appendField("Add potion to inventory")
     this.appendDummyInput()
         .appendField("Which Potion")
-        .appendField(new Blockly.FieldDropdown([["Create a bat cart", "BATCART"],["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTION");           
+        .appendField(new Blockly.FieldDropdown([["Use the optional name",""], ["Create a bat cart", "BATCART"],["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTION");           
+    this.appendValueInput("NAME")
+        .appendField("Optional Potion Name");
     this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -1810,6 +1805,9 @@ Blockly.Blocks['modifyEntity'] = {
         .appendField("Spawn and modify an entity");
     this.appendValueInput("ENTITY")
         .appendField("Type of creature");         
+    this.appendValueInput("LOCATION")
+        .setCheck("String")
+        .appendField("Location");        
     this.appendStatementInput("MODIFICATIONS")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1817,7 +1815,32 @@ Blockly.Blocks['modifyEntity'] = {
     this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
-    // this.setOutput(true, null);    
+  }
+};
+
+Blockly.Blocks['setpassenger'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Add Passenger");
+    this.appendValueInput("ENTITY")
+        .appendField("Type of creature");         
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(80);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['offai'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Turn Off AI");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(80);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
   }
 };
 
@@ -1921,6 +1944,7 @@ Blockly.Blocks['entityType'] = {
         .appendField("Creature Type")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["Bat", "BAT"], 
+                                                ["Bat Cart", "BATCART"],
                                                 ["Cave Spider", "CAVE_SPIDER"],
                                                 ["Chicken","CHICKEN"],
                                                 ["Cow","COW"],

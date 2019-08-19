@@ -91,20 +91,30 @@ function findGround() {
 // Helper functions 
 function extractStr (value) {
   var returnValue = value;
+  var debugIt = false;
   if (value.length > 1) { 
      var startChar = value.substring (0,1);
      var endChar = value.substring (value.length -1) 
      if ((startChar == "\"") && (endChar == "\"")) {
         returnValue = insideChars (value, "\"", "\"");
+        if (debugIt) {
+           alert ( "start:endChar = \"\", returnValue: " + returnValue );
+        }
      } else if ((startChar == "(") && (endChar == ")")) {
-        returnValue = value; //.substring (1,value.length-1);
-        //alert ( 'extract Str, (): ' + value + ', returnValue: ' + returnValue );
+        returnValue = value.substring (1,value.length-1);
+        if (debugIt) { 
+           alert ( 'extract Str, (): ' + value + ', returnValue: ' + returnValue );
+        }
      } else { 
-        if (insideChars (value, "\"", "\"") == "" ) { 
-           //alert ( 'extractStr \"\"== null string, [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
+        if (insideChars (value, "\"", "\"") == "" ) {
+           if (debugIt) {           
+              alert ( 'extractStr \"\"== null string, [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
+           }   
            returnValue = value;
-        } else { 
-           //alert ( 'extractStr \"\": [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
+        } else {
+           if (debugIt) {         
+              alert ( 'extractStr \"\": [value,startChar,endChar]: [' + value + ',' + startChar + ',' + endChar + ']' );
+           }
            returnValue = insideChars ( value, "\"", "\"" );
         }
      }
@@ -640,19 +650,19 @@ Blockly.Python['eventplayer'] = function(block) {
 };
 
 Blockly.Python['sendmessage'] = function(block) {
-  //alert ( 'hello from sendmessage, get the message yo' );
-  var message = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);  
-  //alert ( 'Got message: ' + message );
+  var message = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);
+  // alert ( 'sendmessage Got message: ' + message );
   message = extractStr (message);
-  //alert ( 'Extracted message: [' + message + ']' );
+  // alert ( 'sendmessage extracted message to: [' + message + ']' );
   // message = insideChars ( message, "\"", "\"" );
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player);
   var code;
+  // note: Don't add \" to the message because it might be a variable value.
   if (player == "event.getAffectedEntities") {
      code = "var entities = event.getAffectedEntities();\n" + 
             "for (var i=0; i<entities.length; i++) {\n" + 
-            "  entities[i].sendMessage (\"" + message + "\");\n" + 
+            "  entities[i].sendMessage (" + message + ");\n" + 
             "}\n";
   } else {
      code = player + '.sendMessage (' + message + ');\n';
@@ -859,9 +869,13 @@ function extractString (block,name) {
   return value;
 } 
 
+
+
 Blockly.Python['modifyEntity'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
   entity = insideParen(entity);
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);  
   var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
   if (instantiations.trim() == "") {
      instantiations = "";
@@ -869,7 +883,9 @@ Blockly.Python['modifyEntity'] = function(block) {
   var code = 
      instantiations + 
      '// spawn ' + entity + '\n' + 
-     'var entity = server.worlds[0].spawnEntity(self.location, org.bukkit.entity.EntityType.' + entity + ');\n';
+     'var location = ' + location + ';\n' + 
+     'var entity = server.worlds[0].spawnEntity(location, org.bukkit.entity.EntityType.' + entity + ');\n';
+  
   if ((entity == "HORSE") || (entity == "SKELETON_HORSE")) { 
      code = code + 
         "var saddle = require('items').saddle(1);\n" + 
@@ -878,6 +894,19 @@ Blockly.Python['modifyEntity'] = function(block) {
   }   
   code = code + modifications;  
   return code;
+};
+
+Blockly.Python['setpassenger'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
+  entity = insideParen(entity);
+  
+  var code = 'var passenger = server.worlds[0].spawnEntity(location, org.bukkit.entity.EntityType.' + entity + ');\n' + 
+             'entity.setPassenger(passenger);\n';   
+  return code; 
+};
+
+Blockly.Python['offai'] = function(block) {
+  return 'entity.setAI(false);\n' 
 };
 
 Blockly.Python['setName'] = function(block) {
@@ -1026,6 +1055,11 @@ Blockly.Python['leverUp'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 }
 
+Blockly.Python['potionname'] = function(block) {
+  var code = "event.getPotion().getItem().getItemMeta().getDisplayName()";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
 Blockly.Python['sendUdpMessage'] = function(block) {
   var port = Blockly.Python.valueToCode(block, 'PORT', Blockly.Python.ORDER_ATOMIC);
   var message = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);
@@ -1051,7 +1085,13 @@ Blockly.Python['entityProfession'] = function(block) {
 
 // splashpotion_blindness_meta.setMainEffect(PotionEffectType.BLINDNESS);
 Blockly.Python['addpotion'] = function(block) {
+  var name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
   var potion = block.getFieldValue ('POTION');
+  if (potion == "") {
+     potion = name;
+  } else {
+     // TODO: Add potion attributes
+  } 
   var code = '// Add ' + potion + ' to inventory\n' + 
              'var newItems = require(\'items\').splashPotion(5);\n' + 
              'var meta = newItems.getItemMeta();\n' + 
@@ -1060,3 +1100,5 @@ Blockly.Python['addpotion'] = function(block) {
              'self.inventory.addItem(newItems);\n';
   return code;
 };
+
+
