@@ -1545,7 +1545,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever or button","playerInteract"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Player entered a portal", "playerPortal"],["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever or button","playerInteract"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1595,7 +1595,7 @@ Blockly.Blocks['armorset'] = {
         .appendField("Armor For Player");   
     this.appendDummyInput()
         .appendField("Color")
-        .appendField(new Blockly.FieldDropdown([["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
+        .appendField(new Blockly.FieldDropdown([["Black","BLACK"],["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
     this.appendValueInput("PLAYER")
         .appendField("For Player/Entity");
     this.setPreviousStatement(true, null);
@@ -1633,6 +1633,18 @@ Blockly.Blocks['placebanner'] = {
     this.appendValueInput("LOCATION")
         .setCheck("String")
         .appendField("Location");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['spawnblock'] = {
+  init: function() {
+    this.appendValueInput("TYPE")
+        .appendField("Spawn Block at current location, Type");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(200);
@@ -1818,6 +1830,26 @@ Blockly.Blocks['modifyEntity'] = {
   }
 };
 
+Blockly.Blocks['buildstructure'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Build a structure");
+    this.appendValueInput("NAME")
+        .appendField("Name of Structure");         
+    this.appendValueInput("LOCATION")
+        .setCheck("String")
+        .appendField("Location");        
+    this.appendStatementInput("STEPS")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(80);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 Blockly.Blocks['setpassenger'] = {
   init: function() {
     this.appendDummyInput()
@@ -1878,10 +1910,10 @@ Blockly.Blocks['entityArmor'] = {
 Blockly.Blocks['entityProfession'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Villager Profession");   
+        .appendField("Set Profession");   
     this.appendDummyInput()
         .appendField("Profession")
-        .appendField(new Blockly.FieldDropdown([["Blacksmith","BLACKSMIT"], ["Butcher", "BUTCHER"],["Farmer","FARMER"],["Husk","HUSK"],["Librarian","LIBRARIAN"],["Nitwit","NITWIT"],["Normal","NORMAL"],["Priest","PRIEST"]]), "PROFESSION");  
+        .appendField(new Blockly.FieldDropdown([["Blacksmith","BLACKSMITH"], ["Butcher", "BUTCHER"],["Farmer","FARMER"],["Husk","HUSK"],["Librarian","LIBRARIAN"],["Nitwit","NITWIT"],["Normal","NORMAL"],["Priest","PRIEST"]]), "PROFESSION");  
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(80);
@@ -1906,10 +1938,19 @@ Blockly.Blocks['baby'] = {
 Blockly.Blocks['location'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Location");
-    this.appendDummyInput()
         .appendField("Location Of")
-        .appendField(new Blockly.FieldDropdown([["xyz", "XYZ"], ["Location of player calling function", "self.location"], ["Player causing event","event.player.location"],["event entity", "event.entity.location"],["event shooter","event.entity.shooter.location"], ["Attacker", "event.damager.location"]]), "LOCATIONTYPE");           
+        .appendField(new Blockly.FieldDropdown([ ["Internal Location", "location"],["Player calling function", "self.location"], ["Player causing event","event.player.location"],["event entity", "event.entity.location"],["event shooter","event.entity.shooter.location"], ["Attacker", "event.damager.location"]]), "LOCATIONTYPE");           
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['absolutelocation'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Absolute Location");
     this.appendValueInput("X")
         .setCheck("Number")
         .appendField("X");         
@@ -1925,6 +1966,7 @@ Blockly.Blocks['location'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
 
 Blockly.Blocks['entity'] = {
   init: function() {
@@ -1963,6 +2005,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Skeleton Horse", "SKELETON_HORSE"],
                                                 ["Villager", "VILLAGER"],
                                                 ["Wolf", "WOLF"],
+                                                ["Wither", "WITHER"],
                                                 ["Zombie", "ZOMBIE"]
                                                ]), "ENTITY");                   
     this.setOutput(true, null);
@@ -1979,8 +2022,13 @@ Blockly.Blocks['blockType'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Composter", "COMPOSTER"],
                                                 ["Farm Land", "FARMLAND"],
+                                                ["Fence", "OAK_FENCE"],
+                                                ["Gate", "OAK_FENCE_GATE"],
                                                 ["Oak", "OAK_WOOD"], 
-                                                ["Water", "WATER"]                                                
+                                                ["Portal", "LEGACY_PORTAL"],
+                                                ["Water", "WATER"],
+                                                ["Wheat", "WHEAT"],
+                                                ["White Banner", "WHITE_BANNER"]                                                
                                                ]), "BLOCK");                   
     this.setOutput(true, null);
     this.setColour(0);
@@ -2048,11 +2096,48 @@ Blockly.Blocks['returnVariable'] = {
   }
 };
 
+Blockly.Blocks['incrementlocation'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Increment Location Axis")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["x", "X"],
+                                                ["y", "Y"],
+                                                ["z", "Z"]                                                
+                                               ]), "AXIS");                   
+    this.setColour(0);
+    this.setTooltip('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['decrementlocation'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Decrement Location Axis")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["x", "X"],
+                                                ["y", "Y"],
+                                                ["z", "Z"]                                                
+                                               ]), "AXIS");                   
+    this.setColour(0);
+    this.setTooltip('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
 Blockly.Blocks['functionCall'] = {
   init: function() {   
     this.appendValueInput("FUNCTIONNAME")
         .appendField("Call Function");
-    this.setOutput(true, null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');

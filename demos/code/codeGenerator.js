@@ -88,18 +88,21 @@ function findGround() {
 } 
 
 
-// Helper functions 
+// Helper functions, used by echo and sendMessage
 function extractStr (value) {
   var returnValue = value;
   var debugIt = false;
+  // alert ( 'extractStr starting with : ' + value );
   if (value.length > 1) { 
      var startChar = value.substring (0,1);
      var endChar = value.substring (value.length -1) 
+     // Example: extractStr ("Hello")
      if ((startChar == "\"") && (endChar == "\"")) {
-        returnValue = insideChars (value, "\"", "\"");
+        returnValue = value; // insideChars (value, "\"", "\"");
         if (debugIt) {
            alert ( "start:endChar = \"\", returnValue: " + returnValue );
         }
+     // Example: ? 
      } else if ((startChar == "(") && (endChar == ")")) {
         returnValue = value.substring (1,value.length-1);
         if (debugIt) { 
@@ -732,9 +735,10 @@ Blockly.Python['placebanner'] = function(block) {
      world = "self.world";
   } 
   
-  var code = world + ".getBlockAt(" + location + ").type = org.bukkit.Material." + banner + ";\n";
+  var code = "server.worlds[0].getBlockAt(" + location + ").type = org.bukkit.Material." + banner + ";\n";
   return code;
 };
+
 
 Blockly.Python['playerlocation'] = function(block) {
   return ['self.location', Blockly.Python.ORDER_NONE];
@@ -877,6 +881,7 @@ Blockly.Python['modifyEntity'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);  
   var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
+  //alert ( 'modifications: ' + modifications );
   if (instantiations.trim() == "") {
      instantiations = "";
   }
@@ -895,6 +900,59 @@ Blockly.Python['modifyEntity'] = function(block) {
   code = code + modifications;  
   return code;
 };
+
+Blockly.Python['spawnblock'] = function(block) {
+  var blockType = Blockly.Python.valueToCode(block, 'TYPE', Blockly.Python.ORDER_ATOMIC); 
+  blockType = insideParen(blockType);   
+  var code = "server.worlds[0].getBlockAt (location).setType (org.bukkit.Material." + blockType + ");\n";            
+  return code;
+};
+
+Blockly.Python['decrementlocation'] = function(block) {
+  var axis = block.getFieldValue ('AXIS');
+  var code;
+  if (axis == "X") {
+      code = "location = new org.bukkit.Location (server.worlds[0], parseInt(location.x) -1, parseInt(location.y), parseInt(location.z));\n";
+  } else if (axis == "Y") {
+      code = "location = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y)-1, parseInt(location.z));\n";
+  } else if (axis == "Z") {
+      code = "location = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y), parseInt(location.z)-1);\n";
+  } 
+  return code;
+};
+
+Blockly.Python['incrementlocation'] = function(block) {
+  var axis = block.getFieldValue ('AXIS');
+  var code;
+  if (axis == "X") {
+      code = "location = new org.bukkit.Location (server.worlds[0], parseInt(location.x) +1, parseInt(location.y), parseInt(location.z));\n";
+  } else if (axis == "Y") {
+      code = "location = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y)+1, parseInt(location.z));\n";
+  } else if (axis == "Z") {
+      code = "location = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y), parseInt(location.z)+1);\n";
+  } 
+  return code;
+};
+
+Blockly.Python['buildstructure'] = function(block) {
+  var name = Blockly.Python.valueToCode(block, "NAME", Blockly.Python.ORDER_ATOMIC); 
+  name = insideChars ( name,"\"","\"");
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);  
+  var steps = Blockly.Python.statementToCode (block, 'STEPS' );  
+  if (instantiations.trim() == "") {
+     instantiations = "";
+  }
+  // alert ( 'steps: ' + steps );
+  var code = 
+     instantiations + 
+     '// Build a ' + name + '\n' + 
+     'var location = ' + location + ';\n';
+     
+  code = code + steps;  
+  return code;
+};
+
 
 Blockly.Python['setpassenger'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
@@ -950,7 +1008,12 @@ Blockly.Python['getBlock'] = function(block) {
 
 
 Blockly.Python['location'] = function(block) {
-  var locationType = block.getFieldValue ('LOCATIONTYPE');
+  var locationType = block.getFieldValue ('LOCATIONTYPE');    
+  code = locationType;
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['absolutelocation'] = function(block) {
   var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC); 
   x = insideParen (x);
   var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC); 
@@ -958,11 +1021,7 @@ Blockly.Python['location'] = function(block) {
   var z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC); 
   z = insideParen (z);
     
-  if (locationType == "XYZ") {
-     code = "new org.bukkit.Location(server.worlds[0], " + x + ", " + y + ", " + z + ")"
-  } else {
-     code = locationType;
-  }
+  code = "new org.bukkit.Location(server.worlds[0], " + x + ", " + y + ", " + z + ")"
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -1037,7 +1096,7 @@ Blockly.Python['returnVariable'] = function(block) {
 Blockly.Python['functionCall'] = function(block) {
   var name = Blockly.Python.valueToCode(block, 'FUNCTIONNAME', Blockly.Python.ORDER_ATOMIC);
   name = insideChars ( name,"\"","\"");
-  return [name + "()", Blockly.Python.ORDER_NONE];
+  return name + "();\n";
 };
 
 Blockly.Python['clickedBlock'] = function(block) {

@@ -190,6 +190,8 @@ function bodyLoad() {
   <xml id="toolbox" style="display: none">
     <category name="Basic Blocks" colour="0">
        <block type="scriptcraftfunction"></block>
+       <block type="incrementlocation"></block>
+       <block type="decrementlocation"></block>
        <block type="returnVariable"></block>
        <block type="functionCall"></block>
        <block type="commentwidget"></block>
@@ -198,6 +200,7 @@ function bodyLoad() {
        <block type="blockType"></block>
        <block type="getBlock"></block>
        <block type="location"></block>
+       <block type="absolutelocation"></block>
        <block type="typeString"></block>
        <block type="potionname"></block>
        <!block type="getVariable"><!/block>
@@ -232,10 +235,12 @@ function bodyLoad() {
        <block type="sendUdpMessage"></block>
     </category>
     <category name="Blocks" colour="200">
+       <block type="spawnblock"></block>
        <block type="placebanner"></block>
        <block type="leverUp"></block>       
     </category>
     <category name="Build" colour="240">
+      <block type="buildstructure"></block>
       <block type="changeBlock"></block>
       <block type="structures"></block>
       <block type="createdrone"></block>

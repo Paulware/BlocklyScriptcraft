@@ -46,6 +46,7 @@ Blockly.Python['lists_create_with'] = function(block) {
 };
 
 Blockly.Python['lists_repeat'] = function(block) {
+  alert ( 'python lists_repeat');
   // Create a list with one element repeated.
   var item = Blockly.Python.valueToCode(block, 'ITEM',
       Blockly.Python.ORDER_NONE) || 'None';

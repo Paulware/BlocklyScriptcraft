@@ -30,6 +30,8 @@ goog.require('Blockly.Python');
 
 
 Blockly.Python['controls_repeat_ext'] = function(block) {
+  alert ( 'inside python controls_repeat_ext');
+  /*
   // Repeat n times.
   if (block.getField('TIMES')) {
     // Internal number.
@@ -50,6 +52,8 @@ Blockly.Python['controls_repeat_ext'] = function(block) {
   var loopVar = Blockly.Python.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
   var code = 'for ' + loopVar + ' in range(' + repeats + '):\n' + branch;
+  */
+  code = 'repeat Yo;\n';
   return code;
 };
 
