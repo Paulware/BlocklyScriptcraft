@@ -1413,16 +1413,21 @@ Blockly.Generator.prototype.blockToCode=function(a){
    if(a.disabled)return this.blockToCode(a.getNextBlock());
    var b=this[a.type];
    goog.asserts.assertFunction(b,'Language "%s" does not know how to generate code for block type "%s".',this.name_,a.type);
-   b=b.call(a,a);
-   if(goog.isArray(b))return goog.asserts.assert(a.outputConnection,'Expecting string from statement block "%s".',a.type),[this.scrub_(a,b[0]),b[1]];
-   if(goog.isString(b)){
-     var c=a.id.replace(/\$/g,"$$$$");
-     this.STATEMENT_PREFIX&&(b=this.STATEMENT_PREFIX.replace(/%1/g,"'"+c+"'")+b);
-     return this.scrub_(a,b)
+   if (b == undefined) {
+      alert ( 'There is a block that is not attached in your diagram, use - to find it and then delete it' );
+      return "";
+   } else { 
+      b=b.call(a,a);
+      if(goog.isArray(b))return goog.asserts.assert(a.outputConnection,'Expecting string from statement block "%s".',a.type),[this.scrub_(a,b[0]),b[1]];
+      if(goog.isString(b)){
+        var c=a.id.replace(/\$/g,"$$$$");
+        this.STATEMENT_PREFIX&&(b=this.STATEMENT_PREFIX.replace(/%1/g,"'"+c+"'")+b);
+        return this.scrub_(a,b)
+      }
+      if(null===b)
+        return"";
+      goog.asserts.fail("Invalid code generated: %s",b)
    }
-   if(null===b)
-     return"";
-   goog.asserts.fail("Invalid code generated: %s",b)
 };
 Blockly.Generator.prototype.valueToCode=function(a,b,c){isNaN(c)&&goog.asserts.fail('Expecting valid order from block "%s".',a.type);var d=a.getInputTargetBlock(b);if(!d)return"";b=this.blockToCode(d);if(""===b)return"";goog.asserts.assertArray(b,'Expecting tuple from value block "%s".',d.type);a=b[0];b=b[1];isNaN(b)&&goog.asserts.fail('Expecting valid order from value block "%s".',d.type);if(!a)return"";var d=!1,e=Math.floor(c),f=Math.floor(b);if(e<=f&&(e!=f||0!=e&&99!=e))for(d=!0,e=0;e<this.ORDER_OVERRIDES.length;e++)if(this.ORDER_OVERRIDES[e][0]==
 c&&this.ORDER_OVERRIDES[e][1]==b){d=!1;break}d&&(a="("+a+")");return a};Blockly.Generator.prototype.statementToCode=function(a,b){var c=a.getInputTargetBlock(b),d=this.blockToCode(c);goog.asserts.assertString(d,'Expecting code from statement block "%s".',c&&c.type);d&&(d=this.prefixLines(d,this.INDENT));return d};

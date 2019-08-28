@@ -19,23 +19,6 @@ Blockly.Blocks['setuploop'] = {
   }
 };
 
-Blockly.Blocks['scriptcraftfunction'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Function");
-    this.appendValueInput("nameOfFunction")
-        .setCheck("String")
-        .appendField("Name");
-    this.appendStatementInput("FUNCTIONCODE")
-        .setCheck(null);
-    this.setPreviousStatement(false, null);
-    this.setNextStatement(false, null);
-    this.setColour(0);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
 Blockly.Blocks['infrared'] = {
   init: function() {
     this.appendDummyInput()
@@ -1424,7 +1407,7 @@ Blockly.Blocks['structures'] = {
         .appendField(new Blockly.FieldDropdown([["Farm","farm"],["Castle", "castle"],["Cottage","cottage"],["Cottage Road","cottage_road"]]), "STRUCTURE");           
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(240);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1436,7 +1419,7 @@ Blockly.Blocks['createdrone'] = {
         .appendField("Create Drone");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(240);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1457,7 +1440,7 @@ Blockly.Blocks['buildbox'] = {
         .appendField("Height");                 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(240);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1471,7 +1454,7 @@ Blockly.Blocks['changeBlock'] = {
         .appendField("Type of Block");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(240);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1481,13 +1464,15 @@ Blockly.Blocks['sign'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Create a standing sign");
+    this.appendValueInput("LOCATION")
+        .appendField ("Location");
     this.appendValueInput("LINE1")
         .appendField("Line 1");          
     this.appendValueInput("LINE2")
         .appendField("Line 2");          
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(240);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1503,7 +1488,7 @@ Blockly.Blocks['wallsign'] = {
         .appendField("Line 2");          
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(240);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1545,7 +1530,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["Player entered a portal", "playerPortal"],["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever or button","playerInteract"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["An item was hung", "hangingPlace"],["Player entered a portal", "playerPortal"],["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever or button","playerInteract"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1644,7 +1629,23 @@ Blockly.Blocks['placebanner'] = {
 Blockly.Blocks['spawnblock'] = {
   init: function() {
     this.appendValueInput("TYPE")
-        .appendField("Spawn Block at current location, Type");        
+        .appendField("Spawn Block at current location ");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['signtext'] = {
+  init: function() {
+    this.appendDummyInput ()
+        .appendField ( "Set sign text" );
+    this.appendValueInput("LINE1")
+        .appendField("Line 1");        
+    this.appendValueInput("LINE2")
+        .appendField("Line 2");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(200);
@@ -1665,7 +1666,7 @@ Blockly.Blocks['teamflag'] = {
         .appendField("Location");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(240);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1834,8 +1835,9 @@ Blockly.Blocks['buildstructure'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Build a structure");
-    this.appendValueInput("NAME")
-        .appendField("Name of Structure");         
+    this.appendDummyInput()
+        .appendField("Name of Structure")         
+        .appendField (new Blockly.FieldTextInput ("building"), "NAME");    
     this.appendValueInput("LOCATION")
         .setCheck("String")
         .appendField("Location");        
@@ -1843,7 +1845,7 @@ Blockly.Blocks['buildstructure'] = {
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(80);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2022,16 +2024,19 @@ Blockly.Blocks['blockType'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Composter", "COMPOSTER"],
                                                 ["Farm Land", "FARMLAND"],
-                                                ["Fence", "OAK_FENCE"],
+                                                ["Fence", "OAK_FENCE"],                                                
                                                 ["Gate", "OAK_FENCE_GATE"],
+                                                ["Item Frame", "ITEM_FRAME"],
                                                 ["Oak", "OAK_WOOD"], 
                                                 ["Portal", "LEGACY_PORTAL"],
+                                                ["Sign on Wall", "LEGACY_SIGN"],
+                                                ["Sign Post", "LEGACY_SIGN_POST"],
                                                 ["Water", "WATER"],
                                                 ["Wheat", "WHEAT"],
                                                 ["White Banner", "WHITE_BANNER"]                                                
                                                ]), "BLOCK");                   
     this.setOutput(true, null);
-    this.setColour(0);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2044,27 +2049,6 @@ Blockly.Blocks['creatureTypeString'] = {
         .appendField("Creature Type String");
     this.setOutput(true, null);
     this.setColour(120);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
-Blockly.Blocks['getVariable'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Function");
-    this.appendValueInput("nameOfFunction")
-        .setCheck("String")
-        .appendField("Name");
-    this.appendDummyInput()
-        .appendField("Get Variable")        
-        .appendField(new Blockly.FieldDropdown([
-                                                ["entity1", "entity"]
-                                               ]), "VARIABLENAME");          
-    this.appendStatementInput("FUNCTIONCODE")
-        .setCheck(null);
-    this.setOutput(true, null);
-    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2084,27 +2068,16 @@ Blockly.Blocks['rider'] = {
   }
 };
 
-Blockly.Blocks['returnVariable'] = {
-  init: function() {   
-    this.appendValueInput("RETURNVARIABLE")
-        .appendField("Return Variable");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(0);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
-Blockly.Blocks['incrementlocation'] = {
+Blockly.Blocks['updatelocation'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Increment Location Axis")        
+        .appendField("Update Location Axis")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["x", "X"],
                                                 ["y", "Y"],
                                                 ["z", "Z"]                                                
-                                               ]), "AXIS");                   
+                                               ]), "AXIS")                   
+        .appendField (new Blockly.FieldTextInput ("1"), "OFFSET");
     this.setColour(0);
     this.setTooltip('');
     this.setPreviousStatement(true, null);
@@ -2126,20 +2099,6 @@ Blockly.Blocks['decrementlocation'] = {
     this.setTooltip('');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);    
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
-
-
-Blockly.Blocks['functionCall'] = {
-  init: function() {   
-    this.appendValueInput("FUNCTIONNAME")
-        .appendField("Call Function");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null); 
-    this.setColour(0);
-    this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
@@ -2209,5 +2168,105 @@ Blockly.Blocks['sendUdpMessage'] = {
   }
 };
 
+Blockly.Blocks['varname']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   this.appendDummyInput().appendField("variable:")
+       .appendField (new Blockly.FieldTextInput ("value"), "VARNAME");
+   this.setOutput(true, null);
+   var a=this;
+   this.setTooltip('');
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['setvariable']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   //this.appendValueInput("VARNAME")
+   //   .appendField("Set variable");
+      
+   this.appendDummyInput()
+      .appendField("Set ")
+      .appendField (new Blockly.FieldTextInput ("name"), "VARNAME")      
+      .appendField("=")
+      .appendField (new Blockly.FieldTextInput ("expression"), "EXPRESSION");
+   var a=this;
+   this.setTooltip('');
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['scriptcraftfunction'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Function")
+        .appendField (new Blockly.FieldTextInput ("test"), "nameOfFunction");
+    this.appendStatementInput("FUNCTIONCODE")
+        .setCheck(null);
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['returnVariable'] = {
+  init: function() {   
+    this.appendDummyInput()
+        .appendField("Return ")
+        .appendField (new Blockly.FieldTextInput ("name"), "RETURNVARIABLE");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['snaplocation'] = {
+  init: function() {   
+    this.appendDummyInput()
+        .appendField("Snap Location to block ")
+        .appendField (new Blockly.FieldTextInput ("location"), "NAME");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['createVariable'] = {
+  init: function() {   
+    this.appendDummyInput()
+        .appendField("create ")
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['functionCall'] = {
+  init: function() {   
+    //this.appendValueInput("FUNCTIONNAME")
+    //    .appendField("Call Function");
+    this.appendDummyInput()
+        .appendField("Call Function")
+        .appendField (new Blockly.FieldTextInput ("test"), "FUNCTIONNAME");
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
