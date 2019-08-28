@@ -877,7 +877,7 @@ Blockly.Python['modifyEntity'] = function(block) {
   var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
 
   var code = "";
-  
+  var first = true;
   for (var i=0; i<instantiations.length; i++ ) {
      if (first) {
         code = code + "  //Instantiations;\n"; 
