@@ -875,15 +875,20 @@ Blockly.Python['modifyEntity'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);  
   var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
-  //alert ( 'modifications: ' + modifications );
-  if (instantiations.trim() == "") {
-     instantiations = "";
-  }
-  var code = 
-     instantiations + 
-     '// spawn ' + entity + '\n' + 
-     'var location = ' + location + ';\n' + 
-     'var entity = server.worlds[0].spawnEntity(location, org.bukkit.entity.EntityType.' + entity + ');\n';
+
+  var code = "";
+  
+  for (var i=0; i<instantiations.length; i++ ) {
+     if (first) {
+        code = code + "  //Instantiations;\n"; 
+        first = false;
+     } 
+     code = code + "  var " + instantiations[i] + ";\n"; 
+  }   
+
+  code = code + '// spawn ' + entity + '\n' + 
+                'var location = ' + location + ';\n' + 
+                'var entity = server.worlds[0].spawnEntity(location, org.bukkit.entity.EntityType.' + entity + ');\n';
   
   if ((entity == "HORSE") || (entity == "SKELETON_HORSE")) { 
      code = code + 
