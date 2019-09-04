@@ -2023,6 +2023,7 @@ Blockly.Blocks['blockType'] = {
         .appendField("Block Type")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["Composter", "COMPOSTER"],
+                                                ["Door", "LEGACY_WOODEN_DOOR"],
                                                 ["Farm Land", "FARMLAND"],
                                                 ["Fence", "OAK_FENCE"],                                                
                                                 ["Gate", "OAK_FENCE_GATE"],
@@ -2033,7 +2034,8 @@ Blockly.Blocks['blockType'] = {
                                                 ["Sign Post", "LEGACY_SIGN_POST"],
                                                 ["Water", "WATER"],
                                                 ["Wheat", "WHEAT"],
-                                                ["White Banner", "WHITE_BANNER"]                                                
+                                                ["White Banner", "WHITE_BANNER"], 
+                                                ["Window Pane", "LEGACY_GLASS"]
                                                ]), "BLOCK");                   
     this.setOutput(true, null);
     this.setColour(200);

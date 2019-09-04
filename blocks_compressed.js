@@ -151,7 +151,7 @@ Blockly.Blocks.loops.HUE=120;
 Blockly.Blocks.controls_repeat_ext={
   init:function(){
     this.jsonInit({message0:Blockly.Msg.CONTROLS_REPEAT_TITLE,
-                 args0:[{type:"input_value",name:"TIMES",check:"Number"}],
+                 args0:[{type:"input_value",name:"TIMES"}],
                  previousStatement:null,
                  nextStatement:null,
                  colour:Blockly.Blocks.loops.HUE,

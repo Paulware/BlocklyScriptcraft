@@ -446,6 +446,9 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
   if (functionName.indexOf ( '(') > -1) { 
      ind = functionName.indexOf ( '(' );
      params = functionName.substring (ind);
+     if (params.indexOf ( ')') == -1) { 
+        params = params + ')';
+     } 
      functionName = functionName.substring (0,ind);
   } 
   var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
@@ -902,8 +905,29 @@ Blockly.Python['modifyEntity'] = function(block) {
 
 Blockly.Python['spawnblock'] = function(block) {
   var blockType = Blockly.Python.valueToCode(block, 'TYPE', Blockly.Python.ORDER_ATOMIC); 
-  blockType = insideParen(blockType);   
-  var code = "server.worlds[0].getBlockAt (location).setType (org.bukkit.Material." + blockType + ");\n";            
+  var code = "";
+  instantiateVariable ("location");
+  instantiateVariable ("block");
+  instantiateVariable ("data");
+  blockType = insideParen(blockType); 
+  if (blockType == "LEGACY_WOODEN_DOOR") {
+     code = "var loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y)+1, parseInt(location.z));\n" + 
+             "server.worlds[0].getBlockAt (loc).setType (org.bukkit.Material.OAK_DOOR);\n" + 
+             "block = server.worlds[0].getBlockAt (loc);\n" + 
+             "data = org.bukkit.Material.OAK_DOOR.createBlockData();\n" + 
+             "data.setHalf(org.bukkit.block.data.Bisected.Half.TOP); // TOP or BOTTOM\n" + 
+             "//data.setFacing (org.bukkit.block.BlockFace.NORTH); // Facing\n" + 
+             "block.setBlockData (data);\n" + 
+             "loc = new org.bukkit.Location (server.worlds[0], parseInt(loc.x), parseInt(loc.y)-1, parseInt(loc.z));\n" + 
+             "block = server.worlds[0].getBlockAt (loc);\n" + 
+             "block.setType (org.bukkit.Material.OAK_DOOR);\n" + 
+             "data.setHalf(org.bukkit.block.data.Bisected.Half.BOTTOM); // TOP or BOTTOM\n" + 
+             "//data.setFacing(org.bukkit.block.BlockFace.NORTH); // Facing\n" + 
+             "block.setBlockData (data);\n"; 
+     
+  } else {   
+     code = "server.worlds[0].getBlockAt (location).setType (org.bukkit.Material." + blockType + ");\n";            
+  }
   return code;
 };
 
@@ -1070,6 +1094,8 @@ Blockly.Python['functionCall'] = function(block) {
   // name = insideChars ( name,"\"","\"");
   if (name.indexOf ( '(') == -1) {
      name = name + "()";
+  } else if (name.indexOf ( ')' ) == -1) { // Right parenthesis is missing from name 
+     name = name + ")";
   } 
   return name + ";\n";
 };
