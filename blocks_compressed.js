@@ -2,7 +2,7 @@
 'use strict';
 
 
-// Copyright 2012 Google Inc.  Apache License 2.0
+// Copyright 2012 Google Inc.  Apache License 2.0 
 Blockly.Blocks.lists={};Blockly.Blocks.lists.HUE=260;Blockly.Blocks.lists_create_empty={init:function(){this.jsonInit({message0:Blockly.Msg.LISTS_CREATE_EMPTY_TITLE,output:"Array",colour:Blockly.Blocks.lists.HUE,tooltip:Blockly.Msg.LISTS_CREATE_EMPTY_TOOLTIP,helpUrl:Blockly.Msg.LISTS_CREATE_EMPTY_HELPURL})}};
 Blockly.Blocks.lists_create_with={init:function(){this.setHelpUrl(Blockly.Msg.LISTS_CREATE_WITH_HELPURL);this.setColour(Blockly.Blocks.lists.HUE);this.itemCount_=3;this.updateShape_();this.setOutput(!0,"Array");this.setMutator(new Blockly.Mutator(["lists_create_with_item"]));this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP)},mutationToDom:function(){var a=document.createElement("mutation");a.setAttribute("items",this.itemCount_);return a},domToMutation:function(a){this.itemCount_=parseInt(a.getAttribute("items"),
 10);this.updateShape_()},decompose:function(a){var b=a.newBlock("lists_create_with_container");b.initSvg();for(var c=b.getInput("STACK").connection,e=0;e<this.itemCount_;e++){var d=a.newBlock("lists_create_with_item");d.initSvg();c.connect(d.previousConnection);c=d.nextConnection}return b},compose:function(a){var b=a.getInputTargetBlock("STACK");for(a=[];b;)a.push(b.valueConnection_),b=b.nextConnection&&b.nextConnection.targetBlock();for(b=0;b<this.itemCount_;b++){var c=this.getInput("ADD"+b).connection.targetConnection;
