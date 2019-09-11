@@ -1,104 +1,9 @@
-Blockly.Blocks['setuploop'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("void setup() {");
-    this.appendDummyInput()
-        .appendField("Baud Rate")
-        .appendField(new Blockly.FieldDropdown([["9600", "9600"], ["115200", "115200"]]), "BAUDRATE");
-    this.appendStatementInput("SETUPCODE")
-        .setCheck(null);
-    this.appendDummyInput()
-        .appendField("void loop");
-    this.appendStatementInput("LOOPCODE")
-        .setCheck(null);              
-    this.setPreviousStatement(false, null);
-    this.setNextStatement(false, null);
-    this.setColour(120);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
-Blockly.Blocks['infrared'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Infra-red Object");
-    this.appendValueInput("NAME")
-        .setCheck("String")
-        .appendField("Unique Name");
-    this.appendValueInput("rxPin")
-        .setCheck("Number")
-        .appendField("Receive Pin Selector");
-    this.appendValueInput("txPin")
-        .setCheck("Number")
-        .appendField("Transmit Pin Selector");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(290);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
-Blockly.Blocks['fireshot'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Fire Infra-red Shot");
-    this.appendValueInput("VALUE")
-        .setCheck("Number")
-        .appendField("Value to send");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(120);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
-Blockly.Blocks['irdetected'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("IR Value");
-    this.appendValueInput("RCVPIN")
-        .setCheck("Number")
-        .appendField("Receive Pin");       
-    this.setOutput(true, null);
-    this.setColour(120);
-    this.setTooltip('');
-    this.setHelpUrl('help/infraRed.html');
-  }
-};
-
-Blockly.Blocks['pinselector'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Pin Selector")
-        .appendField(new Blockly.FieldDropdown([["D0(serial receive)", "0"], ["D1(serial transmit)", "1"], ["D2", "2"], ["D3", "3"], ["D4", "4"], ["D5", "5"], ["D6", "6"], ["D7", "7"], ["D8", "8"], ["D9", "9"], ["D10", "10"], ["D11", "11"], ["D12", "12"], ["D13", "13"], ["D14 (A0)", "14"], ["D15(A1)", "15"], ["D16(A2)", "16"], ["D17(A3)", "17"], ["D18(A4)", "18"], ["D19(A5)", "19"], ["D20(A6 Readonly)", "20"], ["D21(A7 Readonly)", "21"]]), "NAME");
-    this.setOutput(true, null);
-    this.setColour(120);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
 
 Blockly.Blocks['instantiate'] = {
   init: function() {
     this.appendValueInput("NAME")
         .setCheck(null)
         .appendField("Instatiate Object");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(290);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
-Blockly.Blocks['import'] = {
-  init: function() {
-    this.appendValueInput("NAME")
-        .setCheck(null)
-        .appendField("Import Library for Object:");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
@@ -2272,3 +2177,59 @@ Blockly.Blocks['functionCall'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['mapRenderer'] = {
+  init: function() {   
+    this.appendDummyInput()
+        .appendField("New Map Renderer")
+        .appendField (new Blockly.FieldTextInput ("render"), "RENDERER");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['fileExists'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("File Exists")
+        .appendField(new Blockly.FieldTextInput ("filename.jpg"), "NAME");       
+    this.setOutput(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com');
+  }
+};
+
+Blockly.Blocks['drawImage'] = {
+  init: function() {   
+
+    this.appendDummyInput()
+        .appendField("Draw Image")
+        .appendField (new Blockly.FieldTextInput ("1.jpg"), "FILENAME");
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['drawText'] = {
+  init: function() {   
+
+    this.appendDummyInput()
+        .appendField("Draw Text")
+        .appendField (new Blockly.FieldTextInput ("Hello World"), "TEXT");
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+

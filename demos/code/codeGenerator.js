@@ -1200,4 +1200,43 @@ Blockly.Python['createVariable'] = function(block) {
   return "var " + name + ';\n';
 };
 
+Blockly.Python['mapRenderer'] = function(block) {
+  var name = block.getFieldValue ('RENDERER');
+  var code = "// Change renderer for all maps\n" + 
+             "var renderers;\n" +
+             "var mapView;\n" + 
+             "var count = 0;\n" + 
+             "while (true) {\n" +  
+             "  mapView = server.getMap (count);\n" + 
+             "  if (mapView == undefined) {\n" +  
+             "    console.log ( 'Aborting at mapId=' + count );\n" + 
+             "    break;\n" + 
+             "  } else {\n" +  
+             "    renderers = mapView.getRenderers ();\n" + 
+             "    for (var j=0; j<renderers.length; j++ ){\n" + 
+             "      mapView.removeRenderer (renderers[j]);\n" + 
+             "    }\n" +  
+             "    mapView.addRenderer (render);\n" + 
+             "  }\n" + 
+             "  count = count + 1;\n" + 
+             "}\n";
+  return code;
+};
 
+Blockly.Python['fileExists'] = function(block) {
+  var varname = block.getFieldValue ('NAME');
+  return ["new java.io.File (" + varname + ").exists()", Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['drawImage'] = function(block) {
+  var filename = block.getFieldValue ("FILENAME");
+  var code = "mapCanvas.drawImage (0,0,org.bukkit.map.MapPalette.resizeImage (" + 
+             "new javax.swing.ImageIcon(filename).getImage()) );\n"
+  return code;
+};
+
+Blockly.Python['drawText'] = function(block) {
+  var text = block.getFieldValue ( "TEXT");
+  var code = "mapCanvas.drawText ( 10,10,org.bukkit.map.MinecraftFont.Font, " + text + ");"; 
+  return code + "\n";
+};

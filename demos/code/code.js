@@ -199,9 +199,10 @@ Code.bindClick = function(el, func) {
 /**
  * Load the Prettify CSS and JavaScript.
  */
+/*
 Code.importPrettify = function() {
-  //<link rel="stylesheet" href="../prettify.css">
-  //<script src="../prettify.js"></script>
+  <link rel="stylesheet" href="../prettify.css">
+  <script src="../prettify.js"></script>
   var link = document.createElement('link');
   link.setAttribute('rel', 'stylesheet');
   link.setAttribute('href', '../prettify.css');
@@ -210,6 +211,7 @@ Code.importPrettify = function() {
   script.setAttribute('src', '../prettify.js');
   document.head.appendChild(script);
 };
+*/
 
 /**
  * Compute the absolute coordinates and dimensions of an HTML element.
@@ -442,7 +444,7 @@ Code.init = function() {
   Blockly.svgResize(Code.workspace);
 
   // Lazy-load the syntax-highlighting.
-  window.setTimeout(Code.importPrettify, 1);
+  //window.setTimeout(Code.importPrettify, 1);
 };
 
 /**
