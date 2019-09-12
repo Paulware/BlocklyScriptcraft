@@ -1405,7 +1405,7 @@ Blockly.Blocks['additem'] = {
         .appendField("Add");
     this.appendDummyInput()
         .appendField("Item")
-        .appendField(new Blockly.FieldDropdown([["Diamond Shovel", "DIAMOND_SHOVEL"],["Diamond Pick", "DIAMOND_PICKAXE"], ["Bone Meal", "boneMeal"], ["Wheat Seeds", "wheatSeeds"], ["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
+  .appendField(new Blockly.FieldDropdown([["Snow Block", "SNOW_BLOCK"],["Diamond Shovel", "DIAMOND_SHOVEL"],["Diamond Pick", "DIAMOND_PICKAXE"], ["Bone Meal", "boneMeal"], ["Wheat Seeds", "wheatSeeds"], ["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
     this.appendValueInput("PLAYER")
         .appendField("To inventory for Player/Entity ");        
     this.appendDummyInput()
