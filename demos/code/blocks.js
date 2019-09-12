@@ -1405,14 +1405,15 @@ Blockly.Blocks['additem'] = {
         .appendField("Add");
     this.appendDummyInput()
         .appendField("Item")
-        .appendField(new Blockly.FieldDropdown([["Bone Meal", "boneMeal"], ["Wheat Seeds", "wheatSeeds"], ["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
+        .appendField(new Blockly.FieldDropdown([["Diamond Pick", "DIAMOND_PICKAXE"], ["Bone Meal", "boneMeal"], ["Wheat Seeds", "wheatSeeds"], ["SnowBall", "snowball"],["Cookie","cookie"],["Baked Potato","bakedPotato"],["Diamond", "diamond"],["Splash Potion", "splashPotion"]]), "ITEMTYPE");  
     this.appendValueInput("PLAYER")
         .appendField("To inventory for Player/Entity ");        
-    this.appendValueInput("COUNT")
-        .appendField("How Many");          
+    this.appendDummyInput()
+        .appendField ("How Many")    
+        .appendField (new Blockly.FieldTextInput ("1"), "COUNT");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(280);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2233,3 +2234,19 @@ Blockly.Blocks['drawText'] = {
   }
 };
 
+Blockly.Blocks['copyFile'] = {
+  init: function() {   
+    //this.appendValueInput("FUNCTIONNAME")
+    //    .appendField("Call Function");
+    this.appendDummyInput()
+        .appendField("Copy File")
+        .appendField (new Blockly.FieldTextInput ("source"), "SOURCE")
+        .appendField (new Blockly.FieldTextInput ("destination"), "DESTINATION");
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

@@ -594,8 +594,6 @@ Blockly.Python['additem'] = function(block) {
   var itemType = block.getFieldValue ("ITEMTYPE");
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen (player);
-  instantiateVariable ( 'player' );
-  instantiateVariable ( 'newItems' );
   if (count == "") {
      count = 1;
   } else {
@@ -604,9 +602,8 @@ Blockly.Python['additem'] = function(block) {
          count = 200;
      } 
   }    
-  var code = "newItems = require('items')." + itemType + "(" + count + ");\n" +  
-             "player = " + player + ";\n" +              
-             "player.inventory.addItem(newItems);\n" 
+  var code = player + '.inventory.addItem (new org.bukkit.inventory.ItemStack (org.bukkit.Material.' + 
+             itemType + ',' + count + '));\n';
   return code;
 };
 
@@ -1240,3 +1237,10 @@ Blockly.Python['drawText'] = function(block) {
   var code = "mapCanvas.drawText ( 10,10,org.bukkit.map.MinecraftFont.Font, " + text + ");"; 
   return code + "\n";
 };
+
+Blockly.Python['copyFile'] = function(block) {
+  var source = block.getFieldValue ('SOURCE');
+  var destination = block.getFieldValue ('DESTINATION');
+  return "java.lang.Runtime.getRuntime.exec (\"cmd.exe /c copy " + source + " " + destination + "\");\n";
+};
+
