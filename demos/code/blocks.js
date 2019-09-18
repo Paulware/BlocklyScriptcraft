@@ -1898,6 +1898,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Bat", "BAT"], 
                                                 ["Bat Cart", "BATCART"],
                                                 ["Cave Spider", "CAVE_SPIDER"],
+                                                ["Cat", "CAT"],
                                                 ["Chicken","CHICKEN"],
                                                 ["Cow","COW"],
                                                 ["Creeper","CREEPER"],
