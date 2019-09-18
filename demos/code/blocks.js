@@ -1436,7 +1436,7 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["An item was hung", "hangingPlace"],["Player entered a portal", "playerPortal"],["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever or button","playerInteract"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([["An item was hung", "hangingPlace"],["Player entered a portal", "playerPortal"],["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever, button or sign","playerInteract"]]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -1484,9 +1484,11 @@ Blockly.Blocks['armorset'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Armor For Player");   
-    this.appendDummyInput()
-        .appendField("Color")
-        .appendField(new Blockly.FieldDropdown([["Black","BLACK"],["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
+    this.appendValueInput("COLOR")
+        .appendField("Color");
+    //this.appendDummyInput()
+    //    .appendField("Color")
+    //    .appendField(new Blockly.FieldDropdown([["White", "WHITE"],["Black","BLACK"],["Red", "RED"],["Blue","BLUE"],["Green","GREEN"]]), "COLOR");  
     this.appendValueInput("PLAYER")
         .appendField("For Player/Entity");
     this.setPreviousStatement(true, null);

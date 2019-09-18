@@ -590,7 +590,7 @@ Blockly.Python['wallsign'] = function(block) {
 };
 
 Blockly.Python['additem'] = function(block) {
-  var count =  Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
+  var count =  block.getFieldValue('COUNT');
   var itemType = block.getFieldValue ("ITEMTYPE");
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen (player);
@@ -668,15 +668,18 @@ Blockly.Python['sendmessage'] = function(block) {
 };
 
 Blockly.Python['armorset'] = function(block) {
-  var color = block.getFieldValue ('COLOR');
+  var color = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_ATOMIC); 
+  color = insideParen (color);
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   if (player == "") {
      player = 'self';
   } else {
      player = insideParen (player );
   } 
+  instantiateVariable ('color' );
+  
   var code = 
-     "var color = org.bukkit.Color." + color + "\n" +
+     "eval (\"color = org.bukkit.Color.\" + " + color + ".toUpperCase());\n" +
      "var player = " + player + ";\n" + 
      "var items = require ('items');\n" + 
      "var helmet = items.leatherHelmet(1);\n" + 
