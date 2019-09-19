@@ -468,6 +468,40 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
          '};\n';
   return code;
 };
+Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
+  //instantiations = [];
+  var expression = block.getFieldValue ('EXPRESSION');
+  // Blockly.Python.valueToCode(block, 'nameOfFunction', Blockly.Python.ORDER_ATOMIC);
+  //var params = "()";
+  //var ind;
+  /*
+  if (functionName.indexOf ( '(') > -1) { 
+     ind = functionName.indexOf ( '(' );
+     params = functionName.substring (ind);
+     if (params.indexOf ( ')') == -1) { 
+        params = params + ')';
+     } 
+     functionName = functionName.substring (0,ind);
+  } 
+  var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
+  var code = 'exports.' + functionName + ' = function ' + params + ' {\n';
+  var first = true;
+  for (var i=0; i<instantiations.length; i++ ) {
+     if (params.indexOf ( instantiations[i] ) == -1) { // not in the parameter list
+        if (first) {
+           code = code + "  //Instantiations;\n"; 
+           first = false;
+        } 
+        code = code + "  var " + instantiations[i] + ";\n"; 
+     } 
+  }   
+  */
+  code = expression + '\n';
+  //code +   
+  //       functionCode +
+  //       '};\n';
+  return code;
+};
 
 // self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.PIG);
 Blockly.Python['spawn'] = function(block) {
@@ -703,6 +737,47 @@ Blockly.Python['armorset'] = function(block) {
      "legs.itemMeta = legsMeta;\n" + 
      "player.equipment.leggings = legs;\n";  
   return code;
+};
+
+Blockly.Python['killplayer'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+  
+  var code = player + ".setHealth (0.0);\n"
+  return code;
+};
+
+Blockly.Python['setplayerdata'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  var value = Blockly.Python.valueToCode (block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
+  value = insideParen (value);
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+  var code = "fd = new org.bukkit.metadata.FixedMetadataValue (__plugin," + value + ");\n" + 
+             player + ".setMetadata (\"" + key + "\", fd );\n";
+  return code;
+};
+
+Blockly.Python['getplayerdata'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+    
+  var code = player + ".getMetadata(\"" + key + "\")[0].value()" 
+  return [code, Blockly.Python.ORDER_NONE];  
 };
 
 Blockly.Python['repairarmor'] = function(block) {
@@ -1034,12 +1109,12 @@ Blockly.Python['location'] = function(block) {
 };
 
 Blockly.Python['absolutelocation'] = function(block) {
-  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC); 
-  x = insideParen (x);
-  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC); 
-  y = insideParen (y);
-  var z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC); 
-  z = insideParen (z);
+  var x = block.getFieldValue ('X'); 
+  //x = insideParen (x);
+  var y = block.getFieldValue ('Y');
+  //y = insideParen (y);
+  var z = block.getFieldValue ('Z');
+  //z = insideParen (z);
     
   code = "new org.bukkit.Location(server.worlds[0], " + x + ", " + y + ", " + z + ")"
   return [code, Blockly.Python.ORDER_NONE];
@@ -1174,6 +1249,16 @@ Blockly.Python['setvariable'] = function(block) {
   return code;
 };
 
+
+Blockly.Python['setvariablevalue'] = function(block) {
+  var varname = block.getFieldValue ('VARNAME'); 
+  var expression = Blockly.Python.valueToCode(block, 'EXPRESSION', Blockly.Python.ORDER_ATOMIC);  
+  // expression = insideChars(expression, "\"", "\"");
+  instantiateVariable (varname);
+  var code = varname + '=' + expression + ';\n';
+  return code;
+};
+
 Blockly.Python['expression'] = function(block) {
   var expression = block.getFieldValue("EXPRESSION"); 
   alert ( 'expression: ' + expression );
@@ -1247,3 +1332,16 @@ Blockly.Python['copyFile'] = function(block) {
   return "java.lang.Runtime.getRuntime.exec (\"cmd.exe /c copy " + source + " " + destination + "\");\n";
 };
 
+Blockly.Python['existsplayerdata'] = function(block) {
+  var key = block.getFieldValue ('KEY'); 
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+    
+  var code = player + ".getMetadata(\"" + key + "\").length > 0" 
+
+  return [code, Blockly.Python.ORDER_NONE];
+};

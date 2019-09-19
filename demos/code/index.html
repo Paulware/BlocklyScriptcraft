@@ -192,7 +192,10 @@ function bodyLoad() {
        <block type="scriptcraftfunction"></block>
        <block type="updatelocation"></block>
        <block type="functionCall"></block>
-       <block type="commentwidget"></block>
+       <!block type="commentwidget"><!/block>
+       <block type="existsplayerdata"></block>
+       <block type="setplayerdata"></block>
+       <block type="getplayerdata"></block>
        <block type="entity"></block>
        <block type="entityType"></block>
        <block type="getBlock"></block>
@@ -217,6 +220,7 @@ function bodyLoad() {
        <block type="offai"></block>
     </category>
     <category name="Effects" colour="120">
+       <block type="killplayer"></block>
        <block type="explosion"></block>
        <block type="teleport"></block>
        <block type="fireworks"></block>
@@ -263,17 +267,6 @@ function bodyLoad() {
     <category name="{catText}" colour="160">
       <block type="text"></block>
       <block type="creatureTypeString"></block>                
-      <block type="charpressed"></block>      
-      <block type="text_print">
-        <value name="TEXT">        
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>      
-      <block type="textprintln"></block>      
-      <block type="textstreamready"></block>
-      <block type="textstream"></block>
       <block type="text_join"></block>
       <block type="text_append">
         <value name="TEXT">
@@ -451,9 +444,11 @@ function bodyLoad() {
       <block type="math_random_float"></block>
     </category>
     <category name="{catVariables}" colour="330"> <!custom="VARIABLE">
+      <block type="scriptcraftexpression"></block>
       <block type="createVariable"></block>
       <block type="varname"></block>
       <block type="setvariable"></block>
+      <block type="setvariablevalue"></block>
       <block type="returnVariable"></block>      
     </category>
     <!category name="{catFunctions}" colour="290" custom="PROCEDURE"><!/category>    
