@@ -432,74 +432,10 @@ Blockly.Python['tostring'] = function (block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.JavaScript ['setuploop'] = function (block) {
-  // TODO: Assemble Python into code variable.
-  var code = '//Start of blockly generated code!\n';
-  return code;
-};
 
-Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
-  instantiations = [];
-  var functionName = block.getFieldValue ('nameOfFunction'); // Blockly.Python.valueToCode(block, 'nameOfFunction', Blockly.Python.ORDER_ATOMIC);
-  var params = "()";
-  var ind;
-  if (functionName.indexOf ( '(') > -1) { 
-     ind = functionName.indexOf ( '(' );
-     params = functionName.substring (ind);
-     if (params.indexOf ( ')') == -1) { 
-        params = params + ')';
-     } 
-     functionName = functionName.substring (0,ind);
-  } 
-  var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
-  var code = 'exports.' + functionName + ' = function ' + params + ' {\n';
-  var first = true;
-  for (var i=0; i<instantiations.length; i++ ) {
-     if (params.indexOf ( instantiations[i] ) == -1) { // not in the parameter list
-        if (first) {
-           code = code + "  //Instantiations;\n"; 
-           first = false;
-        } 
-        code = code + "  var " + instantiations[i] + ";\n"; 
-     } 
-  }   
-  code = code +   
-         functionCode +
-         '};\n';
-  return code;
-};
 Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
-  //instantiations = [];
   var expression = block.getFieldValue ('EXPRESSION');
-  // Blockly.Python.valueToCode(block, 'nameOfFunction', Blockly.Python.ORDER_ATOMIC);
-  //var params = "()";
-  //var ind;
-  /*
-  if (functionName.indexOf ( '(') > -1) { 
-     ind = functionName.indexOf ( '(' );
-     params = functionName.substring (ind);
-     if (params.indexOf ( ')') == -1) { 
-        params = params + ')';
-     } 
-     functionName = functionName.substring (0,ind);
-  } 
-  var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
-  var code = 'exports.' + functionName + ' = function ' + params + ' {\n';
-  var first = true;
-  for (var i=0; i<instantiations.length; i++ ) {
-     if (params.indexOf ( instantiations[i] ) == -1) { // not in the parameter list
-        if (first) {
-           code = code + "  //Instantiations;\n"; 
-           first = false;
-        } 
-        code = code + "  var " + instantiations[i] + ";\n"; 
-     } 
-  }   
-  */
   code = expression + '\n';
-  //code +   
-  //       functionCode +
-  //       '};\n';
   return code;
 };
 
@@ -753,6 +689,7 @@ Blockly.Python['killplayer'] = function(block) {
 
 Blockly.Python['setplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
   var value = Blockly.Python.valueToCode (block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
   value = insideParen (value);
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
@@ -766,8 +703,22 @@ Blockly.Python['setplayerdata'] = function(block) {
   return code;
 };
 
+Blockly.Python['removeplayerdata'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+  var code = player + ".removeMetadata (\"" + key + "\", __plugin );\n";
+  return code;
+};
+
 Blockly.Python['getplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
   
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   if (player == "") {
@@ -835,11 +786,7 @@ Blockly.Python['teleport'] = function(block) {
   code = 	code + 
           "location = " + location + ";\n" + 
           "TeleportCause  = org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN;\n" + 
-          "// Add a delay for teleport event\n"  + 
-          "function teleportLater()  {\n" +  
-          "  entity.teleport( location, TeleportCause);\n" + 
-          "}\n" +  
-          "setTimeout (teleportLater,1000);\n";               
+          "entity.teleport( location, TeleportCause);\n";
   
   return code;
 }
@@ -984,9 +931,12 @@ Blockly.Python['spawnblock'] = function(block) {
   instantiateVariable ("location");
   instantiateVariable ("block");
   instantiateVariable ("data");
+  instantiateVariable ("loc");
+  instantiateVariable ("sign");
+  instantiateVariable ("data");
   blockType = insideParen(blockType); 
   if (blockType == "LEGACY_WOODEN_DOOR") {
-     code = "var loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y)+1, parseInt(location.z));\n" + 
+     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y)+1, parseInt(location.z));\n" + 
              "server.worlds[0].getBlockAt (loc).setType (org.bukkit.Material.OAK_DOOR);\n" + 
              "block = server.worlds[0].getBlockAt (loc);\n" + 
              "data = org.bukkit.Material.OAK_DOOR.createBlockData();\n" + 
@@ -999,7 +949,31 @@ Blockly.Python['spawnblock'] = function(block) {
              "data.setHalf(org.bukkit.block.data.Bisected.Half.BOTTOM); // TOP or BOTTOM\n" + 
              "//data.setFacing(org.bukkit.block.BlockFace.NORTH); // Facing\n" + 
              "block.setBlockData (data);\n"; 
-     
+  } else if (blockType == "LEGACY_BED_BLOCK") {
+     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y), parseInt(location.z));\n" + 
+            "block = server.worlds[0].getBlockAt (loc);\n" + 
+            "block.setType (org.bukkit.Material.LEGACY_BED_BLOCK);\n" +
+            "data = org.bukkit.Material.LEGACY_BED_BLOCK.createBlockData();\n" + 
+            "data.setPart (org.bukkit.block.data.type.Bed.Part.HEAD);\n" + 
+            "block.setBlockData (data);\n" +             
+            "loc = new org.bukkit.Location (server.worlds[0], parseInt(loc.x), parseInt(loc.y), parseInt(loc.z)+1);\n" + 
+            "block = server.worlds[0].getBlockAt (loc);\n" + 
+            "block.setType (org.bukkit.Material.LEGACY_BED_BLOCK);\n" +       
+            "data = org.bukkit.Material.LEGACY_BED_BLOCK.createBlockData();\n" + 
+            "data.setPart (org.bukkit.block.data.type.Bed.Part.FOOT);\n" + 
+            "block.setBlockData (data);\n";                        
+  } else if (blockType == "OAK_SIGN") {
+     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y), parseInt(location.z));\n" + 
+            "block = server.worlds[0].getBlockAt(loc);\n" +   
+            "block.setType (org.bukkit.Material.OAK_SIGN);\n" + 
+            //sign = block.getState();
+            //sign.setLine (0, "Join Team");
+            //sign.setLine (1, "White");
+            //sign.update();
+            "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+            "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
+            "sign.setData (data);\n" + 
+            "sign.update();\n" 
   } else {   
      code = "server.worlds[0].getBlockAt (location).setType (org.bukkit.Material." + blockType + ");\n";            
   }
@@ -1345,3 +1319,117 @@ Blockly.Python['existsplayerdata'] = function(block) {
 
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python ['delayedexecution'] = function (block) {
+  var delayedCode = Blockly.Python.statementToCode (block, 'DELAYEDCODE' );  
+  var timeout = block.getFieldValue("TIMEOUT"); 
+  var code = 'setTimeout (function () {\n' + 
+  delayedCode + "}," + timeout + ");\n";
+  return code;
+};
+
+Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
+  var expression = block.getFieldValue ('EXPRESSION');
+  code = expression + '\n';
+  return code;
+};
+Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
+  instantiations = [];
+  var functionName = block.getFieldValue ('nameOfFunction'); 
+  var params = "()";
+  var ind;
+  if (functionName.indexOf ( '(') > -1) { 
+     ind = functionName.indexOf ( '(' );
+     params = functionName.substring (ind);
+     if (params.indexOf ( ')') == -1) { 
+        params = params + ')';
+     } 
+     functionName = functionName.substring (0,ind);
+  } 
+  var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
+  var code = 'exports.' + functionName + ' = function ' + params + ' {\n';
+  var first = true;
+  for (var i=0; i<instantiations.length; i++ ) {
+     if (params.indexOf ( instantiations[i] ) == -1) { // not in the parameter list
+        if (first) {
+           code = code + "  //Instantiations;\n"; 
+           first = false;
+        } 
+        code = code + "  var " + instantiations[i] + ";\n"; 
+     } 
+  }   
+  code = code +   
+         functionCode +
+         '};\n';
+  return code;
+};
+
+Blockly.JavaScript ['dataexpression'] = function (block) {
+  var name = block.getFieldValue ('VARNAME');
+  var expression = Blockly.Python.statementToCode (block, 'EXPRESSION' );    
+  var ch = expression.charAt (expression.length-1);
+  if (ch == ',' ) { // remove final comma
+     expression = expression.substring (0,expression.length-1);
+  } 
+  var code = "exports." + name + "={" + expression + "};";
+  return code;
+};
+
+Blockly.Python ['datavalue'] = function (block) {
+  var name = block.getFieldValue ('HEADER');
+  var expression = Blockly.Python.statementToCode (block, 'EXPRESSION' );    
+  var ch = expression.charAt (expression.length-1);
+  if (ch == ',' ) { // remove final comma
+     expression = expression.substring (0,expression.length-1);
+  } 
+  return  "\"" + name + "\":{" + expression + "},";
+};
+
+Blockly.Python['namevalue'] = function(block) {
+  var varname = block.getFieldValue ('VARNAME'); 
+  var expression = block.getFieldValue("EXPRESSION"); 
+  var code = varname + ':' + expression + ',';
+  return code;
+};
+
+
+Blockly.Python['settime'] = function(block) {
+  var newTime = block.getFieldValue ('TIME'); 
+  var code = "server.worlds[0].setTime(" + newTime + ");\n";
+  return code;
+};
+
+Blockly.Python['gettime'] = function(block) {
+  var code = "server.worlds[0].getTime()" 
+  return [code, Blockly.Python.ORDER_NONE];  
+};
+
+Blockly.Python['setstorm'] = function(block) {
+  var storm = block.getFieldValue ("STORM");
+  var code = "server.worlds[0].setStorm(" + storm + ");\n";
+  return code;
+};
+
+Blockly.Python['iteminhandis'] = function(block) {
+  // player.getItemInHand().getType().equals(org.bukkit.Material.BOW) 
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  var code = player + '.getItemInHand().getType().toString()';  
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.JavaScript ['repeatexecution'] = function (block) {
+   
+  var repeatCode = Blockly.Python.statementToCode (block, 'CODE' );  
+  var name = block.getFieldValue ("NAME");
+  var timeout = block.getFieldValue("TIMEOUT"); 
+  var code =  'exports.' + name + '= function () {\n' + 
+              repeatCode+ 
+              '  setTimeout (exports.' + name + ',' + timeout + ');\n' +  
+              '};\n' + 
+              'exports.' + name + '();\n'; 
+  return code; 
+};
+
+
+
+
