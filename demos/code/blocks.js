@@ -1386,7 +1386,8 @@ Blockly.Blocks['setgamemode'] = {
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
-};
+}; 
+// That is all yo
 
 
 
