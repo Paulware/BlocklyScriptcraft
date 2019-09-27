@@ -13,6 +13,7 @@ function millis() {
        '}\n';
     return code;
 }
+/*
 function changeLocation() {
     var code = 
        'function changeLocation (location, xOffset, yOffset,zOffset) {\n' + 
@@ -24,6 +25,7 @@ function changeLocation() {
        '}\n';
     return code;
 }
+*/
 
 function changeBlock() {
    var code = 
@@ -784,9 +786,7 @@ Blockly.Python['teleport'] = function(block) {
   } 
   
   code = 	code + 
-          "location = " + location + ";\n" + 
-          "TeleportCause  = org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN;\n" + 
-          "entity.teleport( location, TeleportCause);\n";
+          "entity.teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";
   
   return code;
 }
@@ -812,6 +812,7 @@ Blockly.Python['eventcancel'] = function(block) {
   return code;
 }
 
+/*
 Blockly.Python['teamflag'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
   location = insideParen(location);
@@ -836,6 +837,7 @@ Blockly.Python['spawnarea'] = function(block) {
   
   return code;
 }
+*/
 
 Blockly.Python['ability'] = function(block) {
   var ability = block.getFieldValue ('ABILITY');
@@ -1429,6 +1431,14 @@ Blockly.JavaScript ['repeatexecution'] = function (block) {
               'exports.' + name + '();\n'; 
   return code; 
 };
+
+Blockly.Python['setgamemode'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  var mode = block.getFieldValue("GAMEMODE"); 
+  var code = player + '.setGameMode(org.bukkit.GameMode.' + mode  + ');\n'
+  return code;
+}
 
 
 

@@ -279,7 +279,19 @@ Blockly.Blocks['additem'] = {
         .appendField("Add");
     this.appendDummyInput()
         .appendField("Item")
-       .appendField(new Blockly.FieldDropdown([["White Wool", "WHITE_WOOL"], ["Snow Block", "SNOW_BLOCK"],["Diamond Shovel", "DIAMOND_SHOVEL"],["Diamond Pick", "DIAMOND_PICKAXE"], ["Bone Meal", "BONE_MEAL"], ["Wheat Seeds", "WHEAT_SEEDS"], ["SnowBall", "SNOWBALL"],["Cookie","COOKIE"],["Baked Potato","BAKED_POTATO"],["Diamond", "DIAMOND"],["Splash Potion", "SPLASH_POTION"]]), "ITEMTYPE");  
+       .appendField(new Blockly.FieldDropdown([
+                                               ["White Wool", "WHITE_WOOL"],
+                                               ["Snow Block", "SNOW_BLOCK"],
+                                               ["Diamond Shovel", "DIAMOND_SHOVEL"],
+                                               ["Diamond Pick", "DIAMOND_PICKAXE"],
+                                               ["Bone Meal", "BONE_MEAL"],
+                                               ["Wheat Seeds", "WHEAT_SEEDS"],
+                                               ["SnowBall", "SNOWBALL"],
+                                               ["Cookie","COOKIE"],
+                                               ["Baked Potato","BAKED_POTATO"],
+                                               ["Diamond", "DIAMOND"],
+                                               ["Splash Potion", "SPLASH_POTION"]
+                                              ]), "ITEMTYPE");  
     this.appendValueInput("PLAYER")
         .appendField("To inventory for Player/Entity ");        
     this.appendDummyInput()
@@ -430,7 +442,7 @@ Blockly.Blocks['signtext'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
-
+/*
 Blockly.Blocks['teamflag'] = {
   init: function() {
     this.appendDummyInput()
@@ -448,7 +460,7 @@ Blockly.Blocks['teamflag'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
-
+*/
 
 
 Blockly.Blocks['playerlocation'] = {
@@ -518,7 +530,7 @@ Blockly.Blocks['eventcancel'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
-
+/*
 Blockly.Blocks['spawnarea'] = {
   init: function() {
     this.appendDummyInput()
@@ -532,6 +544,7 @@ Blockly.Blocks['spawnarea'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+*/
 
 Blockly.Blocks['ability'] = {
   init: function() {
@@ -1355,6 +1368,25 @@ Blockly.Blocks['repeatexecution'] = {
   }
 };
 
+Blockly.Blocks['setgamemode'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set Game Mode")
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Adventure - Need correct tools to break blocks", "ADVENTURE"],
+                                                ["Creative - Can fly, build, invulnerable, and create items free", "CREATIVE"],
+                                                ["Spectator - cannot interact with world and is invisible", "SPECTATOR"],
+                                                ["Survival - Normal game mode, no special features", "SURVIVAL"]
+                                               ]), "GAMEMODE"); 
+    this.appendValueInput("PLAYER")
+        .appendField("Player");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
 
 
