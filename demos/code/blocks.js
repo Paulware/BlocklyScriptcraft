@@ -51,10 +51,9 @@ Blockly.Blocks['echowidget'] = {
 
 Blockly.Blocks['sendmessage'] = {
   init: function() {  
-    this.appendValueInput("MESSAGE")
-        .setCheck("String")
-        .appendField("Send Message");
     this.appendValueInput("PLAYER")
+        .appendField ("SendMessage ")
+        .appendField (new Blockly.FieldTextInput ( "Hello"), "MESSAGE")
         .appendField("To Player/Entity");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -322,7 +321,19 @@ Blockly.Blocks['eventlistener'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Listener Event")
-        .appendField(new Blockly.FieldDropdown([["A player moved", "playerMove"], ["An item was hung", "hangingPlace"],["Player entered a portal", "playerPortal"],["Projectile Hit Something", "projectileHit"], ["Player Respawn","playerRespawn"],["Player joined the game","playerJoin"],["A potion was splashed", "potionSplash"],["A plant grew on a block","blockGrow"],["A block was broken","blockBreak"], ["A player, monster or animal was damaged", "entityDamage"],["A player pushed a lever, button or sign","playerInteract"]]), "LISTENERTYPE");  
+        .appendField(new Blockly.FieldDropdown([ 
+            ["A player moved", "playerMove"], 
+            ["An item was hung", "hangingPlace"],
+            ["Player entered a portal", "playerPortal"],
+            ["Projectile Hit Something", "projectileHit"],
+            ["Player Respawn","playerRespawn"],
+            ["Player joined the game","playerJoin"],
+            ["A potion was splashed", "potionSplash"],
+            ["A plant grew on a block","blockGrow"],
+            ["A block was broken","blockBreak"],
+            ["A player, monster or animal was damaged", "entityDamage"],
+            ["A player pushed a lever, button or sign","playerInteract"]
+        ]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -335,14 +346,11 @@ Blockly.Blocks['eventlistener'] = {
 
 Blockly.Blocks['explosion'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Explosion")
-    this.appendValueInput("SIZE")
-        .setCheck("Number")
-        .appendField("Explosion Size");
     this.appendValueInput("LOCATION")
-        .setCheck("String")
-        .appendField("Location");
+        .appendField("Explosion Size")
+        .appendField (new Blockly.FieldTextInput ("1.5"), "SIZE")
+        .appendField ("Location:");      
+
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
@@ -772,29 +780,29 @@ Blockly.Blocks['entityType'] = {
     this.appendDummyInput()
         .appendField("Creature Type")        
         .appendField(new Blockly.FieldDropdown([
-                                                ["Bat", "BAT"], 
+                                                ["Bat", "Bat"], 
                                                 ["Bat Cart", "BATCART"],
-                                                ["Cave Spider", "CAVE_SPIDER"],
-                                                ["Cat", "CAT"],
-                                                ["Chicken","CHICKEN"],
-                                                ["Cow","COW"],
-                                                ["Creeper","CREEPER"],
-                                                ["Ender Dragon", "ENDER_DRAGON"],
-                                                ["Evoker", "EVOKER"],
-                                                ["Evoker Fangs", "EVOKER_FANGS"],
-                                                ["Horse", "HORSE"], 
-                                                ["Minecart", "MINECART"], 
-                                                ["Ocelot", "OCELOT"],
-                                                ["Pig", "PIG"],
-                                                ["Rabbit", "RABBIT"],
-                                                ["Sheep", "SHEEP"],                                                
-                                                ["Shulker", "SHULKER"],
-                                                ["Skeleton","SKELETON"],
-                                                ["Skeleton Horse", "SKELETON_HORSE"],
-                                                ["Villager", "VILLAGER"],
-                                                ["Wolf", "WOLF"],
-                                                ["Wither", "WITHER"],
-                                                ["Zombie", "ZOMBIE"]
+                                                ["Cave Spider", "Cave_Spider"],
+                                                ["Cat", "Cat"],
+                                                ["Chicken","Chicken"],
+                                                ["Cow","Cow"],
+                                                ["Creeper","Creeper"],
+                                                ["Ender Dragon", "Ender_Dragon"],
+                                                ["Evoker", "Evoker"],
+                                                ["Evoker Fangs", "Evoker_Fangs"],
+                                                ["Horse", "Horse"], 
+                                                ["Minecart", "Minecart"], 
+                                                ["Ocelot", "Ocelot"],
+                                                ["Pig", "Pig"],
+                                                ["Rabbit", "Rabbit"],
+                                                ["Sheep", "Sheep"],                                                
+                                                ["Shulker", "Shulker"],
+                                                ["Skeleton","Skeleton"],
+                                                ["Skeleton Horse", "Skeleton_Horse"],
+                                                ["Villager", "Villager"],
+                                                ["Wolf", "Wolf"],
+                                                ["Wither", "Wither"],
+                                                ["Zombie", "Zombie"]
                                                ]), "ENTITY");                   
     this.setOutput(true, null);
     this.setColour(0);
@@ -802,6 +810,31 @@ Blockly.Blocks['entityType'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['materialtype'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Block or Material Type")        
+        .appendField(new Blockly.FieldDropdown([
+                                                  ["White Wool", "WHITE_WOOL"],
+                                                  ["Snow Block", "SNOW_BLOCK"],
+                                                  ["Diamond Shovel", "DIAMOND_SHOVEL"],
+                                                  ["Diamond Pick", "DIAMOND_PICKAXE"],
+                                                  ["Bone Meal", "BONE_MEAL"],
+                                                  ["Wheat Seeds", "WHEAT_SEEDS"],
+                                                  ["SnowBall", "SNOWBALL"],
+                                                  ["Cookie","COOKIE"],
+                                                  ["Baked Potato","BAKED_POTATO"],
+                                                  ["Diamond", "DIAMOND"],
+                                                  ["Splash Potion", "SPLASH_POTION"]
+                                               ]), "MATERIAL");                   
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 
 Blockly.Blocks['blockType'] = {
   init: function() {
@@ -1387,7 +1420,91 @@ Blockly.Blocks['setgamemode'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 }; 
-// That is all yo
+
+Blockly.Blocks['recipe'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Recipe");
+    this.appendValueInput("RESULT")
+        .appendField("Result Stack");
+    this.appendDummyInput()
+        .appendField("Ingredient Stacks");
+    this.appendStatementInput("INGREDIENTS")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("Line1") 
+        .appendField (new Blockly.FieldTextInput ("D"), "CH1")
+        .appendField (new Blockly.FieldTextInput (" "), "CH2")
+        .appendField (new Blockly.FieldTextInput ("D"), "CH3");
+    this.appendDummyInput()
+        .appendField("Line2") 
+        .appendField (new Blockly.FieldTextInput ("X"), "CH4")
+        .appendField (new Blockly.FieldTextInput ("Y"), "CH5")
+        .appendField (new Blockly.FieldTextInput ("Z"), "CH6");
+    this.appendDummyInput()
+        .appendField("Line3") 
+        .appendField (new Blockly.FieldTextInput ("Q"), "CH7")
+        .appendField (new Blockly.FieldTextInput ("H"), "CH8")
+        .appendField (new Blockly.FieldTextInput ("Q"), "CH9");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['addingredient'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Add Ingredient Character:")
+        .appendField (new Blockly.FieldTextInput ("%"), "CHARACTER");
+    this.appendValueInput("INGREDIENT")
+        .appendField("Ingredient Stack");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+}; 
+
+Blockly.Blocks['itemstack'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Stack of Items")
+    this.appendValueInput("ITEM")
+        .appendField("Item");        
+    this.appendDummyInput()
+        .appendField("Number of Items")
+        .appendField (new Blockly.FieldTextInput ("1"), "COUNT");
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+
+  }
+}; 
+
+Blockly.Blocks['instanceof'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Instance of");
+    this.appendValueInput("ENTITY")
+        .appendField("Player/Entity");  
+    this.appendDummyInput()
+        .appendField (" = ");    
+    this.appendValueInput ("TYPE");
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+
+  }
+}; 
+
+
+
 
 
 

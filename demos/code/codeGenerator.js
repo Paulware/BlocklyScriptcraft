@@ -444,6 +444,7 @@ Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
 // self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.PIG);
 Blockly.Python['spawn'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
+  entity = entity.toUpperCase();
   var count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
   var code = '// Spawn ' + entity + '\n';
   if ((count == "") || (parseInt(count) <= 1 )) { 
@@ -596,11 +597,10 @@ Blockly.Python['eventlistener'] = function(block) {
 };
 
 Blockly.Python['explosion'] = function(block) {
-  var size = Blockly.Python.valueToCode(block, 'SIZE', Blockly.Python.ORDER_ATOMIC);    
+  var size = block.getFieldValue ('SIZE'); // Blockly.Python.valueToCode(block, 'SIZE', Blockly.Python.ORDER_ATOMIC);    
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);    
   location = insideParen (location);
-  var code = "// create explosion of size: " + size + ";\n" + 
-             "event.entity.world.createExplosion (" + location + "," + size + ");\n";
+  var code = "event.entity.world.createExplosion (" + location + "," + size + ");\n";
   
   return code;
 };
@@ -619,11 +619,8 @@ Blockly.Python['eventplayer'] = function(block) {
 };
 
 Blockly.Python['sendmessage'] = function(block) {
-  var message = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC);
-  // alert ( 'sendmessage Got message: ' + message );
-  message = extractStr (message);
-  // alert ( 'sendmessage extracted message to: [' + message + ']' );
-  // message = insideChars ( message, "\"", "\"" );
+  var message = block.getFieldValue ('MESSAGE');
+  //alert ( 'sendmessage Got message: ' + message );
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player);
   var code;
@@ -894,11 +891,10 @@ function extractString (block,name) {
   return value;
 } 
 
-
-
 Blockly.Python['modifyEntity'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
   entity = insideParen(entity);
+  entity = entity.toUpperCase();
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);  
   var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
@@ -1116,6 +1112,13 @@ Blockly.Python['blockType'] = function(block) {
   b = insideParen (b);
   return [b, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['materialtype'] = function(block) {
+  var material = block.getFieldValue ("MATERIAL");
+  material = insideParen (material);
+  return [material, Blockly.Python.ORDER_NONE];
+}
+
 
 Blockly.Python['creatureTypeString'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITYTYPE", Blockly.Python.ORDER_ATOMIC);
@@ -1419,8 +1422,7 @@ Blockly.Python['iteminhandis'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.JavaScript ['repeatexecution'] = function (block) {
-   
+Blockly.JavaScript ['repeatexecution'] = function (block) {   
   var repeatCode = Blockly.Python.statementToCode (block, 'CODE' );  
   var name = block.getFieldValue ("NAME");
   var timeout = block.getFieldValue("TIMEOUT"); 
@@ -1440,6 +1442,95 @@ Blockly.Python['setgamemode'] = function(block) {
   return code;
 }
 
+Blockly.Python['recipe'] = function(block) {
+  var result = Blockly.Python.valueToCode(block, 'RESULT', Blockly.Python.ORDER_ATOMIC);
+  result = insideParen (result);
+  var ch1 = block.getFieldValue ("CH1");
+  var ch2 = block.getFieldValue ("CH2");
+  var ch3 = block.getFieldValue ("CH3");
+  var ch4 = block.getFieldValue ("CH4");
+  var ch5 = block.getFieldValue ("CH5");
+  var ch6 = block.getFieldValue ("CH6");
+  var ch7 = block.getFieldValue ("CH7");
+  var ch8 = block.getFieldValue ("CH8");
+  var ch9 = block.getFieldValue ("CH9");
+  
+  if (ch1 == "") {
+     ch1 = " ";
+  } 
+  if (ch2 == "") {
+     ch2 = " ";
+  } 
+  if (ch3 == "") {
+     ch3 = " ";
+  } 
+  if (ch4 == "") {
+     ch4 = " " ;
+  } 
+  if (ch5 =="") {
+     ch5 = " ";
+  }
+  if (ch6 == "") {
+     ch6 = " ";
+  } 
+  if (ch7 == "") {
+     ch7 = " ";
+  } 
+  if (ch8 == "") {
+     ch8 = " ";
+  }
+  if (ch9 == "") {
+     ch9 = " ";
+  }
+  var shape0 = ch1 + ch2 + ch3;
+  var shape1 = ch4 + ch5 + ch6;
+  var shape2 = ch7 + ch8 + ch9; 
+  var ingrediants = Blockly.Python.statementToCode (block, 'INGREDIENTS' );  
+ 
+  var code = 
+    "var recipe = {\n" + 
+    "                result: " + result + ",\n" + 
+    "                ingredients: {\n" + 
+    ingrediants + 
+    "                },\n" +  
+    "                shape: [\n" + 
+    "                        '" + shape0 + "',\n" + 
+    "                        '" + shape1 + "',\n" + 
+    "                        '" + shape2 + "'\n" + 
+    "                       ]\n" + 
+    "             };\n" + 
+    "var result = new org.bukkit.inventory.ShapedRecipe(recipe.result);\n" + 
+    "result.shape(recipe.shape[0], recipe.shape[1], recipe.shape[2]);\n" + 
+    "for (var i in recipe.ingredients) {\n" + 
+    "  result.setIngredient(new java.lang.Character(i),recipe.ingredients[i].getData());\n" + 
+    "}\n" +       
+    "server.addRecipe(result);\n";
+    
+  return code; 
+}
 
+Blockly.Python['addingredient'] = function(block) {
+  var ingredient = Blockly.Python.valueToCode(block, 'INGREDIENT', Blockly.Python.ORDER_ATOMIC);
+  ingredient = insideParen (ingredient);
+  var character = block.getFieldValue ("CHARACTER");
+  var code ="'" + character + "':" + ingredient + "\n";
+  return code;
+}
 
+Blockly.Python['itemstack'] = function(block) {
+  var item = Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_ATOMIC);
+  item = insideParen (item);
+  var count =  block.getFieldValue("COUNT"); 
+  
+  var code = "new org.bukkit.inventory.ItemStack (org.bukkit.Material." + item + "," + count + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+}
 
+Blockly.Python['instanceof'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  entity = insideParen(entity);
+  var entityType = Blockly.Python.valueToCode(block, 'TYPE', Blockly.Python.ORDER_ATOMIC);
+  entityType = insideParen (entityType);
+  var code = entity + " instanceof  org.bukkit.entity." + entityType;
+  return [code, Blockly.Python.ORDER_NONE];
+}
