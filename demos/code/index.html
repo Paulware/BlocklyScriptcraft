@@ -190,25 +190,25 @@ function bodyLoad() {
   <xml id="toolbox" style="display: none">
     <category name="Basic Blocks" colour="0">
        <block type="scriptcraftfunction"></block>
-       <block type="delayedexecution"></block>
+       <block type="functionCall"></block>
        <block type="repeatexecution"></block>
+       <block type="scriptcraftexpression"></block>      
+       <block type="entity"></block>
+       <block type="entityType"></block>
+       <block type="location"></block>
+       <block type="absolutelocation"></block>
+       <block type="delayedexecution"></block>
        <block type="addingredient"></block>
        <block type="itemstack"></block>
        <block type="instanceof"></block>
        <block type="recipe"></block>
        <block type="setgamemode"></block>
        <block type="updatelocation"></block>
-       <block type="functionCall"></block>
-       <!block type="commentwidget"><!/block>
        <block type="existsplayerdata"></block>
        <block type="setplayerdata"></block>
        <block type="getplayerdata"></block>
        <block type="removeplayerdata"></block>
-       <block type="entity"></block>
-       <block type="entityType"></block>
        <block type="getBlock"></block>
-       <block type="location"></block>
-       <block type="absolutelocation"></block>
        <block type="typeString"></block>
        <block type="potionname"></block>
     </category> 
@@ -271,7 +271,9 @@ function bodyLoad() {
        <block type="repairarmor"></block>
        <block type="addpotion"></block>
     </category>
-    <category name="Maps" colour="120">
+    <category name="World" colour="120">
+       <block type="bordercenter"></block>
+       <block type="bordersize"></block>
        <block type="mapRenderer"></block>
        <block type="drawImage"></block>
        <block type="drawText"></block>
@@ -460,7 +462,6 @@ function bodyLoad() {
       <block type="dataexpression"></block>
       <block type="datavalue"></block>
       <block type="namevalue"></block>
-      <block type="scriptcraftexpression"></block>
       <block type="createVariable"></block>
       <block type="varname"></block>
       <block type="setvariable"></block>

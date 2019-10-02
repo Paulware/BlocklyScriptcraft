@@ -1293,7 +1293,7 @@ Blockly.Blocks['dataexpression'] = {
         .setCheck(null);
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
-    this.setColour(0);
+    this.setColour(330);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1309,7 +1309,7 @@ Blockly.Blocks['datavalue'] = {
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(0);
+    this.setColour(330);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1394,6 +1394,9 @@ Blockly.Blocks['repeatexecution'] = {
         .appendField (new Blockly.FieldTextInput ("test"), "NAME")
         .appendField("How Often (ms)")
         .appendField (new Blockly.FieldTextInput ("500"), "TIMEOUT");
+    this.appendDummyInput()
+        .appendField ("Continue execution while" )
+        .appendField (new Blockly.FieldTextInput ("i > 0"), "CONTINUE");
     this.appendStatementInput("CODE");      
     this.setColour(0);
     this.setTooltip('');
@@ -1502,6 +1505,31 @@ Blockly.Blocks['instanceof'] = {
 
   }
 }; 
+
+Blockly.Blocks['bordercenter'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Set World Border Center Location:");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['bordersize'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set World Border Radius:")
+        .appendField (new Blockly.FieldTextInput ("100"), "SIZE");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
 
 

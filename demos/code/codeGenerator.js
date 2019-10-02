@@ -1426,11 +1426,13 @@ Blockly.JavaScript ['repeatexecution'] = function (block) {
   var repeatCode = Blockly.Python.statementToCode (block, 'CODE' );  
   var name = block.getFieldValue ("NAME");
   var timeout = block.getFieldValue("TIMEOUT"); 
+  var continueExecution = block.getFieldValue ("CONTINUE");
   var code =  'exports.' + name + '= function () {\n' + 
               repeatCode+ 
-              '  setTimeout (exports.' + name + ',' + timeout + ');\n' +  
-              '};\n' + 
-              'exports.' + name + '();\n'; 
+              '  if (' + continueExecution + ') {\n' + 
+              '    setTimeout (exports.' + name + ',' + timeout + ');\n' + 
+              '  }\n' +               
+              '};\n';
   return code; 
 };
 
@@ -1534,3 +1536,17 @@ Blockly.Python['instanceof'] = function(block) {
   var code = entity + " instanceof  org.bukkit.entity." + entityType;
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['bordercenter'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location)
+  var code = "server.worlds[0].getWorldBorder().setCenter (" + location + ");\n";
+  return code;
+}
+
+Blockly.Python['bordersize'] = function(block) {
+  var size = block.getFieldValue("SIZE");
+  var code = "server.worlds[0].getWorldBorder().setSize (" + size + ");\n";
+  return code;
+}
+
