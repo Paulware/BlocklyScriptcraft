@@ -195,6 +195,7 @@ function bodyLoad() {
        <block type="scriptcraftexpression"></block>      
        <block type="entity"></block>
        <block type="entityType"></block>
+       <block type="materialtype"></block>       
        <block type="location"></block>
        <block type="absolutelocation"></block>
        <block type="delayedexecution"></block>
@@ -230,6 +231,7 @@ function bodyLoad() {
     <category name="Effects" colour="120">
        <block type="killplayer"></block>
        <block type="explosion"></block>
+       <block type="lightning"></block>
        <block type="teleport"></block>
        <block type="settime"></block>
        <block type="gettime"></block>
@@ -251,14 +253,12 @@ function bodyLoad() {
     <category name="Build" colour="200">
        <block type="spawnblock"></block>
        <block type="blockType"></block> 
-       <block type="materialtype"></block>
        <block type="iteminhandis"></block>       
        <block type="buildstructure"></block>
        <block type="snaplocation"></block>
        <block type="changeBlock"></block>
        <block type="structures"></block>
-       <block type="signtext"></block>
-       
+       <block type="signtext"></block>      
        <!block type="leverUp"><!/block>              
        <!block type="placebanner"><!/block>
        <!block type="createdrone"><!/block>
@@ -266,10 +266,15 @@ function bodyLoad() {
        <!block type="teamflag"><!/block>
     </category> 
     <category name="Equipment" colour="320">
-       <block type="additem"></block>
+       <block type="modifystack"></block>
+       <block type="equipmentname"></block>
+       <block type="getequipmentname"></block>
+       <block type="updateinventory"></block>
+       <block type="playerhas"></block>
+       <!block type="additem"><!/block>
        <block type="armorset"></block>
-       <block type="repairarmor"></block>
-       <block type="addpotion"></block>
+       <!block type="repairarmor"><!/block>
+       <!block type="addpotion"><!/block>
     </category>
     <category name="World" colour="120">
        <block type="bordercenter"></block>

@@ -4,6 +4,15 @@ var updates = "";
 var setupCode = "";
 var insetupCode = "";
 
+function maxValue (max,value) {
+   if (parseInt (value) > max) {
+      value = max;
+   } else {
+      value = parseInt (value);
+   }
+   return value;
+} 
+
 // Utility javascript functions
 function millis() {
     var code =
@@ -441,24 +450,19 @@ Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
   return code;
 };
 
-// self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.PIG);
 Blockly.Python['spawn'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
   entity = entity.toUpperCase();
   var count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
+  count = maxValue (64,count)
   var code = '// Spawn ' + entity + '\n';
-  if ((count == "") || (parseInt(count) <= 1 )) { 
+  if ((count == "") || (count <= 1 )) { 
     code = code + 'self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
   } else {
-    count = parseInt (count);
-    if (count > 100) {
-       count = 100;
-    } 
     code = code + 'for (var i=0; i<' + count + '; i++) {\n'; 
     code = code + '  self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
     code = code + '}\n';
   } 
-  // 'org.bukkit.entity.getEquipment().setHelmet(new org.bukkit.inventory.ItemStack(gobjBukkit.Material.CHAINMAIL_HELMET));';            
   return code;
 };
 
@@ -598,6 +602,7 @@ Blockly.Python['eventlistener'] = function(block) {
 
 Blockly.Python['explosion'] = function(block) {
   var size = block.getFieldValue ('SIZE'); // Blockly.Python.valueToCode(block, 'SIZE', Blockly.Python.ORDER_ATOMIC);    
+  size = maxValue (64,size)
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);    
   location = insideParen (location);
   var code = "event.entity.world.createExplosion (" + location + "," + size + ");\n";
@@ -799,8 +804,6 @@ Blockly.Python['fireworks'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);
   code = code + 'fireworks.firework (' + location + ');\n'; 
-  //var animal = block.getFieldValue ('ANIMAL');
-  //var code = 	"require('sounds').play(org.bukkit.Sound.ENTITY_" + animal + "_AMBIENT,self.location);\n";	  
   return code;
 }
 
@@ -1035,7 +1038,7 @@ Blockly.Python['offai'] = function(block) {
 };
 
 Blockly.Python['setName'] = function(block) {
-  var name =  Blockly.Python.valueToCode(block, "NAME", Blockly.Python.ORDER_ATOMIC);
+  var name =  block.getFieldValue ('NAME');
   return 'entity.setCustomName (' + name + ');\n'; 
 };
 
@@ -1422,17 +1425,18 @@ Blockly.Python['iteminhandis'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.JavaScript ['repeatexecution'] = function (block) {   
+Blockly.Python ['repeatexecution'] = function (block) { 
   var repeatCode = Blockly.Python.statementToCode (block, 'CODE' );  
   var name = block.getFieldValue ("NAME");
   var timeout = block.getFieldValue("TIMEOUT"); 
   var continueExecution = block.getFieldValue ("CONTINUE");
-  var code =  'exports.' + name + '= function () {\n' + 
-              repeatCode+ 
-              '  if (' + continueExecution + ') {\n' + 
-              '    setTimeout (exports.' + name + ',' + timeout + ');\n' + 
+
+  var code =  'var ' + name + '= setInterval (function () {\n' + 
+              repeatCode + 
+              '  if (!(' + continueExecution + ')) {\n' + 
+              '    clearInterval (' + name + ');\n' + 
               '  }\n' +               
-              '};\n';
+              '}, ' + timeout + ');\n';
   return code; 
 };
 
@@ -1549,4 +1553,80 @@ Blockly.Python['bordersize'] = function(block) {
   var code = "server.worlds[0].getWorldBorder().setSize (" + size + ");\n";
   return code;
 }
+
+Blockly.Python['lightning'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  var code = "server.worlds[0].strikeLightning(" + location + ");\n";
+  return code;
+}
+
+Blockly.Python['modifystack'] = function(block) {
+  var item = Blockly.Python.valueToCode(block, "ITEM", Blockly.Python.ORDER_ATOMIC); 
+  item = insideParen(item);
+  var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
+
+  var code = "";
+  var first = true;
+  for (var i=0; i<instantiations.length; i++ ) {
+     if (first) {
+        code = code + "  //Instantiations;\n"; 
+        first = false;
+     } 
+     code = code + "  var " + instantiations[i] + ";\n"; 
+  }   
+
+  code = code + 'var itemStack = ' + item + ';\n';
+  
+  code = code + modifications;  
+  return code;
+};
+
+Blockly.Python['equipmentname'] = function(block) {
+  var name =  block.getFieldValue ('NAME');
+  instantiateVariable ("meta");
+  var code = "meta = itemStack.getItemMeta();\n" + 
+             "meta.setDisplayName(" + name + ");\n" + 
+             "itemStack.setItemMeta (meta);\n" 
+  
+  return code;
+};
+
+Blockly.Python['updateinventory'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  var code = player + '.inventory.addItem (itemStack);\n';
+  return code;
+};
+
+Blockly.Python['getequipmentname'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var code = player + '.getItemInHand().getItemMeta().getDisplayName().toUpperCase()';  
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['playerhas'] = function(block) {
+  instantiateVariable (
+    ' hack;\n  function stackIt ( material, name ) {\n' + 
+    '  var itemStack = new org.bukkit.inventory.ItemStack (material,1);\n' + 
+    '  var meta;\n' + 
+    '  if (name != "") {\n' +  
+    '     meta = itemStack.getItemMeta();\n' + 
+    '     meta.setDisplayName(name);\n' + 
+    '     itemStack.setItemMeta (meta);\n' + 
+    '  }\n' + 
+    '  return itemStack;\n' + 
+    '}\n' 
+  );    
+ 
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var name = block.getFieldValue ('NAME');
+  var material = Blockly.Python.valueToCode(block, 'MATERIAL', Blockly.Python.ORDER_ATOMIC);
+  material = insideParen (material);
+  var code = player + '.getInventory().containsAtLeast (stackIt (org.bukkit.Material.' + material + ',' +  name + '),1)'; 
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
 

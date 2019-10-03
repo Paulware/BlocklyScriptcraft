@@ -279,6 +279,7 @@ Blockly.Blocks['additem'] = {
     this.appendDummyInput()
         .appendField("Item")
        .appendField(new Blockly.FieldDropdown([
+                                               ["Arrow", "ARROW"],
                                                ["White Wool", "WHITE_WOOL"],
                                                ["Snow Block", "SNOW_BLOCK"],
                                                ["Diamond Shovel", "DIAMOND_SHOVEL"],
@@ -527,6 +528,19 @@ Blockly.Blocks['fireworks'] = {
   }
 };
 
+Blockly.Blocks['lightning'] = {
+  init: function() {
+    this.appendValueInput ("LOCATION")
+        .appendField("Lightning strike at")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 Blockly.Blocks['eventcancel'] = {
   init: function() {
     this.appendDummyInput()
@@ -627,6 +641,23 @@ Blockly.Blocks['modifyEntity'] = {
   }
 };
 
+Blockly.Blocks['modifystack'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create a stack of items");
+    this.appendValueInput("ITEM")
+        .appendField("Basic Stack of Items");         
+    this.appendStatementInput("MODIFICATIONS")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 Blockly.Blocks['buildstructure'] = {
   init: function() {
     this.appendDummyInput()
@@ -676,10 +707,9 @@ Blockly.Blocks['offai'] = {
 
 Blockly.Blocks['setName'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Entity Name");
-        
-    this.appendValueInput("NAME");
+    this.appendDummyInput () 
+        .appendField ("Set Entity Name" )    
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME");          
         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -780,6 +810,7 @@ Blockly.Blocks['entityType'] = {
     this.appendDummyInput()
         .appendField("Creature Type")        
         .appendField(new Blockly.FieldDropdown([
+                                                ["Arrow", "Arrow"],
                                                 ["Bat", "Bat"], 
                                                 ["Bat Cart", "BATCART"],
                                                 ["Cave Spider", "Cave_Spider"],
@@ -814,22 +845,24 @@ Blockly.Blocks['entityType'] = {
 Blockly.Blocks['materialtype'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Block or Material Type")        
+        .appendField("Material")        
         .appendField(new Blockly.FieldDropdown([
-                                                  ["White Wool", "WHITE_WOOL"],
-                                                  ["Snow Block", "SNOW_BLOCK"],
-                                                  ["Diamond Shovel", "DIAMOND_SHOVEL"],
-                                                  ["Diamond Pick", "DIAMOND_PICKAXE"],
-                                                  ["Bone Meal", "BONE_MEAL"],
-                                                  ["Wheat Seeds", "WHEAT_SEEDS"],
-                                                  ["SnowBall", "SNOWBALL"],
-                                                  ["Cookie","COOKIE"],
+                                                  ["Arrow", "ARROW"],
+                                                  ["Bow", "BOW"],
                                                   ["Baked Potato","BAKED_POTATO"],
+                                                  ["Bone Meal", "BONE_MEAL"],
+                                                  ["Cookie","COOKIE"],
                                                   ["Diamond", "DIAMOND"],
-                                                  ["Splash Potion", "SPLASH_POTION"]
+                                                  ["Diamond Pick", "DIAMOND_PICKAXE"],
+                                                  ["Diamond Shovel", "DIAMOND_SHOVEL"],
+                                                  ["SnowBall", "SNOWBALL"],
+                                                  ["Snow Block", "SNOW_BLOCK"],
+                                                  ["Splash Potion", "SPLASH_POTION"],
+                                                  ["White Wool", "WHITE_WOOL"],
+                                                  ["Wheat Seeds", "WHEAT_SEEDS"]
                                                ]), "MATERIAL");                   
     this.setOutput(true, null);
-    this.setColour(200);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -960,7 +993,6 @@ Blockly.Blocks['typeString'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
-
 Blockly.Blocks['leverUp'] = {
   init: function() {
     this.appendDummyInput()
@@ -973,6 +1005,7 @@ Blockly.Blocks['leverUp'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
 
 Blockly.Blocks['sendUdpMessage'] = {
   init: function() {
@@ -1400,6 +1433,8 @@ Blockly.Blocks['repeatexecution'] = {
     this.appendStatementInput("CODE");      
     this.setColour(0);
     this.setTooltip('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setHelpUrl('http://www.example.com/');
   }
 };
@@ -1474,12 +1509,8 @@ Blockly.Blocks['addingredient'] = {
 
 Blockly.Blocks['itemstack'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Stack of Items")
     this.appendValueInput("ITEM")
-        .appendField("Item");        
-    this.appendDummyInput()
-        .appendField("Number of Items")
+        .appendField("Stack of")
         .appendField (new Blockly.FieldTextInput ("1"), "COUNT");
     this.setColour(0);
     this.setTooltip('');
@@ -1526,6 +1557,61 @@ Blockly.Blocks['bordersize'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+Blockly.Blocks['equipmentname'] = {
+  init: function() {
+    this.appendDummyInput () 
+        .appendField ("Set Equipment Name" )    
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME");          
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+  }
+};
+
+Blockly.Blocks['updateinventory'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Give Items to Player ");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['getequipmentname'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Item in hand for Player: ")
+
+    this.setOutput(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['playerhas'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Player");
+        
+    this.appendValueInput("MATERIAL")
+        .appendField("Has the item with name" )
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME"); 
+
+    this.setOutput(true, null);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
