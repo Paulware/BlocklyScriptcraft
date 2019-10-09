@@ -333,7 +333,7 @@ Blockly.Blocks['eventlistener'] = {
             ["A plant grew on a block","blockGrow"],
             ["A block was broken","blockBreak"],
             ["A player, monster or animal was damaged", "entityDamage"],
-            ["A player pushed a lever, button or sign","playerInteract"]
+            ["Click on a block, or push a lever, button or sign","playerInteract"]
         ]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
@@ -1414,7 +1414,7 @@ Blockly.Blocks['iteminhandis'] = {
     this.appendValueInput("PLAYER")
         .appendField("Player");
     this.setOutput(true, null);
-    this.setColour(120);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1453,7 +1453,7 @@ Blockly.Blocks['setgamemode'] = {
         .appendField("Player");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(0);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1617,8 +1617,15 @@ Blockly.Blocks['playerhas'] = {
   }
 };
 
-
-
-
-
-
+Blockly.Blocks['servercommand'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Execute server command")
+        .appendField (new Blockly.FieldTextInput ("weather clear"), "COMMAND");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

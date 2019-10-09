@@ -1316,6 +1316,7 @@ Blockly.Python['copyFile'] = function(block) {
 
 Blockly.Python['existsplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY'); 
+  key = key.toLowerCase();
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   if (player == "") {
      player = 'self';
@@ -1627,6 +1628,12 @@ Blockly.Python['playerhas'] = function(block) {
   material = insideParen (material);
   var code = player + '.getInventory().containsAtLeast (stackIt (org.bukkit.Material.' + material + ',' +  name + '),1)'; 
   return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['servercommand'] = function(block) {
+  var command = block.getFieldValue ("COMMAND");
+  var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), \"" + command + "\");\n";
+  return code;
 }
 
 
