@@ -323,7 +323,9 @@ Blockly.Blocks['eventlistener'] = {
     this.appendDummyInput()
         .appendField("Listener Event")
         .appendField(new Blockly.FieldDropdown([ 
-            ["A player moved", "playerMove"], 
+            ["A player moved", "playerMove"],
+            ["A player died", "playerDeath"], 
+            ["World save event", "worldSave"],            
             ["An item was hung", "hangingPlace"],
             ["Player entered a portal", "playerPortal"],
             ["Projectile Hit Something", "projectileHit"],
@@ -797,7 +799,7 @@ Blockly.Blocks['entity'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Player, Monster or Object")
-        .appendField(new Blockly.FieldDropdown([["entity","entity"], ["Player calling function", "self"], ["Player causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "ENTITY");           
+        .appendField(new Blockly.FieldDropdown([["entity","entity"], ["Player calling function", "self"], ["Player causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"], ["All Players", "server.getOnlinePlayers()"]]), "ENTITY");           
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -1353,7 +1355,7 @@ Blockly.Blocks['namevalue']={
    this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
    this.setColour(330);
    this.appendDummyInput()
-      .appendField("Name")
+      .appendField("Data Name")
       .appendField (new Blockly.FieldTextInput ("name"), "VARNAME")      
       .appendField("Value")
       .appendField (new Blockly.FieldTextInput ("expression"), "EXPRESSION");
@@ -1629,3 +1631,5 @@ Blockly.Blocks['servercommand'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+

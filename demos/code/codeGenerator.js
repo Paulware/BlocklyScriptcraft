@@ -1225,7 +1225,8 @@ Blockly.Python['varname'] = function(block) {
 
 Blockly.Python['setvariable'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
-  var expression = block.getFieldValue("EXPRESSION"); 
+  var expression = block.getFieldValue("EXPRESSION");
+  // expression = insideParen (expression);  
   instantiateVariable (varname);
   var code = varname + '=' + expression + ';\n';
   return code;
@@ -1235,6 +1236,7 @@ Blockly.Python['setvariable'] = function(block) {
 Blockly.Python['setvariablevalue'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
   var expression = Blockly.Python.valueToCode(block, 'EXPRESSION', Blockly.Python.ORDER_ATOMIC);  
+  expression = insideParen (expression);
   // expression = insideChars(expression, "\"", "\"");
   instantiateVariable (varname);
   var code = varname + '=' + expression + ';\n';
@@ -1632,8 +1634,17 @@ Blockly.Python['playerhas'] = function(block) {
 
 Blockly.Python['servercommand'] = function(block) {
   var command = block.getFieldValue ("COMMAND");
-  var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), \"" + command + "\");\n";
+  if (command.indexOf ( "\"") == -1) { 
+      command = "\"" + command + "\"";
+  } 
+  
+  //  console.log ( "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.
+  //   getConsoleSender(), \"clear " + player.name + "\");\n" );
+  
+  // \"clear " + player.name + "\"
+  
+  var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
+         command + ");\n";
   return code;
 }
-
 
