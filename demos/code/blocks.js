@@ -334,6 +334,8 @@ Blockly.Blocks['eventlistener'] = {
             ["A potion was splashed", "potionSplash"],
             ["A plant grew on a block","blockGrow"],
             ["A block was broken","blockBreak"],
+            ["A block was exploded", "blockExplode"],
+            ["An entity exploded", "entityExplode"],
             ["A player, monster or animal was damaged", "entityDamage"],
             ["Click on a block, or push a lever, button or sign","playerInteract"]
         ]), "LISTENERTYPE");  
@@ -1632,4 +1634,33 @@ Blockly.Blocks['servercommand'] = {
   }
 };
 
+Blockly.Blocks['blockatlocation'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Block at");
+    this.appendValueInput("LOCATION")
+        .appendField("Location");
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['pushlist']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   this.appendDummyInput()
+      .appendField("Add to list ")
+      .appendField (new Blockly.FieldTextInput ("name"), "VARNAME")      
+      .appendField("Value")
+      .appendField (new Blockly.FieldTextInput ("expression"), "EXPRESSION");
+   var a=this;
+   this.setTooltip('');
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
 

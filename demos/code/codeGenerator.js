@@ -1648,3 +1648,20 @@ Blockly.Python['servercommand'] = function(block) {
   return code;
 }
 
+Blockly.Python['blockatlocation'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location);
+  var code = "server.worlds[0].getBlockAt (" + location + ")"
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['pushlist'] = function(block) {
+  var varname = block.getFieldValue ('VARNAME'); 
+  var expression = block.getFieldValue("EXPRESSION");
+  // expression = insideParen (expression);  
+  instantiateVariable (varname);
+  var code = varname + '.push(' + expression + ');\n';
+  return code;
+};
+
+
