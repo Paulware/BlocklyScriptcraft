@@ -1664,4 +1664,11 @@ Blockly.Python['pushlist'] = function(block) {
   return code;
 };
 
+Blockly.Python['getblocktype'] = function(block) {
+  var b = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
+  b = insideParen (b);
+  var code = b + ".getType().toString()";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
 

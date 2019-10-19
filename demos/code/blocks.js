@@ -335,6 +335,8 @@ Blockly.Blocks['eventlistener'] = {
             ["A plant grew on a block","blockGrow"],
             ["A block was broken","blockBreak"],
             ["A block was exploded", "blockExplode"],
+            ["An entity was damaged", "entityDamage"],
+            ["An entity was damaged by entity", "entityDamageByEntity"],
             ["An entity exploded", "entityExplode"],
             ["A player, monster or animal was damaged", "entityDamage"],
             ["Click on a block, or push a lever, button or sign","playerInteract"]
@@ -1661,6 +1663,17 @@ Blockly.Blocks['pushlist']={
    this.setPreviousStatement(true, null);
    this.setNextStatement(true, null);
    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['getblocktype'] = {
+  init: function() {
+    this.appendValueInput("BLOCK")
+        .appendField("Get Block Type");
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
   }
 };
 
