@@ -558,7 +558,7 @@ Blockly.Blocks['eventcancel'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
-/*
+
 Blockly.Blocks['spawnarea'] = {
   init: function() {
     this.appendDummyInput()
@@ -567,12 +567,12 @@ Blockly.Blocks['spawnarea'] = {
         .appendField("Location");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(40);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
-*/
+
 
 Blockly.Blocks['ability'] = {
   init: function() {
@@ -982,7 +982,7 @@ Blockly.Blocks['getBlock'] = {
         .appendField("Get Block at Location");
     this.appendValueInput("LOCATION")
         .appendField("Location of Block");
-    this.setColour(0);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, "String");
@@ -1111,7 +1111,7 @@ Blockly.Blocks['snaplocation'] = {
         .appendField (new Blockly.FieldTextInput ("location"), "NAME");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(200);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1420,7 +1420,7 @@ Blockly.Blocks['iteminhandis'] = {
     this.appendValueInput("PLAYER")
         .appendField("Player");
     this.setOutput(true, null);
-    this.setColour(200);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1669,7 +1669,39 @@ Blockly.Blocks['pushlist']={
 Blockly.Blocks['getblocktype'] = {
   init: function() {
     this.appendValueInput("BLOCK")
-        .appendField("Get Block Type");
+        .appendField("Get Type of Block:");
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['getsignline'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField ( "Get Sign's Line" );
+    this.appendValueInput("BLOCK")
+        .appendField("For Block");
+    this.appendDummyInput()
+        .appendField("Line: ")
+        .appendField (new Blockly.FieldTextInput ("1"), "LINE");      
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+Blockly.Blocks['whichblock'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Which Block")
+        .appendField(new Blockly.FieldDropdown([
+                                                ["The events block", "event.block"],
+                                                ["Block that was clicked on", "event.getClickedBlock()"]
+                                               ]), "BLOCK");    
     this.setOutput(true, null);
     this.setColour(200);
     this.setTooltip('');

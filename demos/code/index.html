@@ -188,108 +188,150 @@ function bodyLoad() {
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
-    <category name="Basic Blocks" colour="0">
-       <block type="scriptcraftfunction"></block>
-       <block type="functionCall"></block>
-       <block type="repeatexecution"></block>
+    <category name="World" colour="120">
+       <block type="mapRenderer"></block>       
+       <block type="drawImage"></block>
+       <block type="drawText"></block>
+       <block type="copyFile"></block>
+       <category name="Blocks">
+           <category name="Sign">
+               <block type="signtext"></block>      
+               <block type="getsignline"></block>
+           </category>        
+           <category name="Structures">
+               <block type="structures"></block>
+               <block type="buildstructure"></block>
+           </category>       
+           <block type="whichblock"></block>
+           <block type="getBlock"></block>            
+           <block type="blockType"></block> 
+           <block type="getblocktype"></block>
+           <block type="spawnblock"></block>
+           <block type="changeBlock"></block>
+           <!block type="blockatlocation"><!/block>
+       </category>               
+       <category name="Location">
+          <block type="location"></block>
+          <block type="absolutelocation"></block>
+          <block type="updatelocation"></block>
+          <block type="snaplocation"></block>          
+       </category> 
+       <category name="Events" colour="40">
+          <block type="eventlistener"></block>
+          <block type="eventcancel"></block>
+          <block type="clickedBlock"></block>
+       </category>
+       <category name="Effects" colour="120">
+          <block type="sound"></block>           
+          <block type="killplayer"></block>
+          <block type="explosion"></block>
+          <block type="lightning"></block>
+          <block type="teleport"></block>
+          <block type="settime"></block>
+          <block type="gettime"></block>
+          <block type="setstorm"></block>
+          <block type="fireworks"></block>
+          <block type="ability"></block>
+          <block type="abilityactive"></block>
+       </category>       
+       <category name="Server">
+         <block type="bordercenter"></block>
+         <block type="bordersize"></block>
+         <block type="servercommand"></block>
+         <block type="setgamemode"></block>       
+         <block type="spawnarea"></block>       
+       </category>       
+    </category>  
+    <category name="Entities" colour="0">
        <block type="scriptcraftexpression"></block>      
-       <block type="entity"></block>
-       <block type="entityType"></block>
-       <block type="materialtype"></block>       
-       <block type="location"></block>
-       <block type="absolutelocation"></block>
-       <block type="delayedexecution"></block>
-       <block type="addingredient"></block>
-       <block type="itemstack"></block>
-       <block type="instanceof"></block>
-       <block type="recipe"></block>
-       <block type="updatelocation"></block>
-       <block type="existsplayerdata"></block>
-       <block type="setplayerdata"></block>
-       <block type="getplayerdata"></block>
-       <block type="removeplayerdata"></block>
-       <block type="getBlock"></block>
+       <category name="Player">
+         <block type="iteminhandis"></block>                
+         <block type="existsplayerdata"></block>
+         <block type="setplayerdata"></block>
+         <block type="getplayerdata"></block>
+         <block type="removeplayerdata"></block>
+         <block type="playerhas"></block>
+       </category>
+       <category name="Creatures">
+         <block type="entity"></block>
+         <block type="entityType"></block>
+         <block type="creatureTypeString"></block>                
+         <block type="modifyEntity"></block>
+         <block type="setName"></block>
+         <block type="entityProfession"></block>
+         <block type="entityArmor"></block>
+         <block type="baby"></block>
+         <block type="setpassenger"></block>
+         <block type="offai"></block>
+       </category>
        <block type="typeString"></block>
        <block type="potionname"></block>
     </category> 
-    <category name="Events" colour="40">
-       <block type="eventlistener"></block>
-       <block type="eventcancel"></block>
-       <!block type="spawnarea"><!/block>       
-       <block type="clickedBlock"></block>
-    </category>
-    <category name="Entities" colour="80">
-       <block type="modifyEntity"></block>
-       <block type="setName"></block>
-       <block type="entityProfession"></block>
-       <block type="entityArmor"></block>
-       <block type="baby"></block>
-       <block type="setpassenger"></block>
-       <block type="offai"></block>
-    </category>
-    <category name="Effects" colour="120">
-       <block type="killplayer"></block>
-       <block type="explosion"></block>
-       <block type="lightning"></block>
-       <block type="teleport"></block>
-       <block type="settime"></block>
-       <block type="gettime"></block>
-       <block type="setstorm"></block>
-       <block type="fireworks"></block>
-       <block type="ability"></block>
-       <block type="abilityactive"></block>
+    <category name="Items" colour="260">
+          <block type="materialtype"></block>       
+          <block type="addingredient"></block>
+          <block type="itemstack"></block>
+          <block type="instanceof"></block>
+          <block type="recipe"></block>    
+          <block type="modifystack"></block>
+          <block type="equipmentname"></block>
+          <block type="getequipmentname"></block>
+          <block type="updateinventory"></block>
+          <block type="armorset"></block>
     </category>
     <category name="Output" colour="160">
-       <block type="sound"></block>    
        <block type="consolelog"></block>
        <block type="echowidget"></block>
        <block type="sendmessage"></block>
        <block type="sendUdpMessage"></block>
     </category>
-    <category name="File I/O" colour="170">
-       <block type="fileExists"></block>
-    </category>
-    <category name="Build" colour="200">
-       <block type="spawnblock"></block>
-       <block type="iteminhandis"></block>       
-       <block type="getblocktype"></block>
-       <block type="snaplocation"></block>
-       <block type="changeBlock"></block>
-       <block type="blockatlocation"></block>
-       <block type="structures"></block>
-       <block type="signtext"></block>      
-       <block type="blockType"></block> 
-       <block type="buildstructure"></block>
+    <!category name="Blocks and Structures" colour="200">
        <!block type="leverUp"><!/block>              
        <!block type="placebanner"><!/block>
        <!block type="createdrone"><!/block>
        <!block type="buildbox"><!/block>
        <!block type="teamflag"><!/block>
-    </category> 
-    <category name="Equipment" colour="320">
-       <block type="modifystack"></block>
-       <block type="equipmentname"></block>
-       <block type="getequipmentname"></block>
-       <block type="updateinventory"></block>
-       <block type="playerhas"></block>
+    <!/category> 
+    <category name="Scriptcraft Coding"  colour="120">
+       <category name="Functions">
+         <block type="scriptcraftfunction"></block>
+         <block type="functionCall"></block>
+         <block type="repeatexecution"></block>
+         <block type="delayedexecution"></block>
+       </category> 
+       <category name="{catVariables}" > <!custom="VARIABLE">
+         <block type="dataexpression"></block>
+         <block type="datavalue"></block>
+         <block type="namevalue"></block>
+         <block type="createVariable"></block>
+         <block type="varname"></block>
+         <block type="setvariable"></block>      
+         <block type="setvariablevalue"></block>
+         <block type="pushlist"></block>
+         <block type="returnVariable"></block>      
+       </category>      
+       <category name="{catLoops}">
+         <block type="controls_repeat_ext">
+           <value name="TIMES">
+             <shadow type="math_number">
+               <field name="NUM">10</field>
+             </shadow>
+           </value>
+         </block>
+         <block type="controls_whileUntil"></block>
+         <block type="controls_flow_statements"></block>
+       </category>       
+       <category name="File I/O">
+          <block type="fileExists"></block>
+       </category>           
+    </category>
+    <!category name="Equipment" colour="320">
        <!block type="additem"><!/block>
-       <block type="armorset"></block>
        <!block type="repairarmor"><!/block>
        <!block type="addpotion"><!/block>
-    </category>
-    <category name="World" colour="120">
-       <block type="bordercenter"></block>
-       <block type="bordersize"></block>
-       <block type="servercommand"></block>
-       <block type="setgamemode"></block>       
-       <block type="mapRenderer"></block>
-       <block type="drawImage"></block>
-       <block type="drawText"></block>
-       <block type="copyFile"></block>
-    </category>
+    <!/category>
     <category name="{catText}" colour="160">
       <block type="text"></block>
-      <block type="creatureTypeString"></block>                
       <block type="text_join"></block>
       <block type="text_append">
         <value name="TEXT">
@@ -367,17 +409,7 @@ function bodyLoad() {
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="{catLoops}" colour="120">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="controls_whileUntil"></block>
-      <block type="controls_flow_statements"></block>
-    </category>
+
     <category name="{catMath}" colour="230">
       <block type="math_number"></block>
       <block type="tostring"></block>
@@ -466,17 +498,7 @@ function bodyLoad() {
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{catVariables}" colour="330"> <!custom="VARIABLE">
-      <block type="dataexpression"></block>
-      <block type="datavalue"></block>
-      <block type="namevalue"></block>
-      <block type="createVariable"></block>
-      <block type="varname"></block>
-      <block type="setvariable"></block>      
-      <block type="setvariablevalue"></block>
-      <block type="pushlist"></block>
-      <block type="returnVariable"></block>      
-    </category>
+
     <!category name="{catFunctions}" colour="290" custom="PROCEDURE"><!/category>    
     <category name="{catLists}" colour="260">
       <block type="lists_create_with">

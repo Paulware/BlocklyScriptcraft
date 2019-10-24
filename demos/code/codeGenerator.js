@@ -98,8 +98,6 @@ function findGround() {
   return code;
 } 
 
-
-// Helper functions, used by echo and sendMessage
 function extractStr (value) {
   var returnValue = value;
   var debugIt = false;
@@ -525,11 +523,15 @@ Blockly.Python['buildbox'] = function(block) {
 };
 
 Blockly.Python['changeBlock'] = function(block) {
-  var b         = Blockly.Python.valueToCode(block, 'BLOCK',       Blockly.Python.ORDER_ATOMIC); 
+  var b = Blockly.Python.valueToCode(block, 'BLOCK',       Blockly.Python.ORDER_ATOMIC); 
   b = insideParen(b);
   var blockType = Blockly.Python.valueToCode(block, 'TYPEOFBLOCK', Blockly.Python.ORDER_ATOMIC);
   blockType = insideParen (blockType);
-  var code = b + ".setType(org.bukkit.Material." + blockType + ");\n";
+  // alert ( 'blockType: ' + blockType );
+  if (blockType.indexOf ( '[' ) == -1) {
+     blockType = 'org.bukkit.Material.' + blockType;
+  }
+  var code = b + ".setType(" + blockType + ");\n";
   return code;
 };
 
@@ -635,7 +637,16 @@ Blockly.Python['sendmessage'] = function(block) {
             "for (var i=0; i<entities.length; i++) {\n" + 
             "  entities[i].sendMessage (" + message + ");\n" + 
             "}\n";
-  } else {
+  } else if (player == "server.getOnlinePlayers()") { // All players
+      String.prototype.replaceAll = function(search, replacement) {
+          var target = this;
+          return target.split(search).join(replacement);
+      };  
+     // message = message.replaceAll ( "\"", "\\\"");
+     command = "\"tellraw @a [" + message + "]\"";
+     code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
+            command + ");\n";
+  } else { 
      code = player + '.sendMessage (' + message + ');\n';
   }
   return code;
@@ -829,7 +840,7 @@ Blockly.Python['teamflag'] = function(block) {
              'location = circleBlock (location, 4, material);\n';         
   return code;
 };
-
+*/
 Blockly.Python['spawnarea'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);
@@ -837,7 +848,7 @@ Blockly.Python['spawnarea'] = function(block) {
   
   return code;
 }
-*/
+
 
 Blockly.Python['ability'] = function(block) {
   var ability = block.getFieldValue ('ABILITY');
@@ -1069,13 +1080,6 @@ Blockly.Python['entityArmor'] = function(block) {
   return code;
 };
 
-Blockly.Python['getBlock'] = function(block) {
-  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
-  location = insideParen (location);
-  var code = "server.worlds[0].getBlockAt (" + location + ")";
-  return [code, Blockly.Python.ORDER_NONE];
-}
-
 
 Blockly.Python['location'] = function(block) {
   var locationType = block.getFieldValue ('LOCATIONTYPE');    
@@ -1226,8 +1230,10 @@ Blockly.Python['varname'] = function(block) {
 Blockly.Python['setvariable'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
   var expression = block.getFieldValue("EXPRESSION");
-  // expression = insideParen (expression);  
-  instantiateVariable (varname);
+  // expression = insideParen (expression); 
+  if (varname.indexOf ( 'exports') == -1) {    
+     instantiateVariable (varname);
+  }
   var code = varname + '=' + expression + ';\n';
   return code;
 };
@@ -1251,6 +1257,7 @@ Blockly.Python['expression'] = function(block) {
 
 Blockly.Python['returnVariable'] = function(block) {
   var name = block.getFieldValue ('RETURNVARIABLE');
+  // alert ( 'got name [' + name + ']' );
   if (name.indexOf ( '\"' ) > -1) {
      name = insideChars ( name,"\"","\"");
   } else if (name.indexOf ( '(' ) > -1) { 
@@ -1648,13 +1655,6 @@ Blockly.Python['servercommand'] = function(block) {
   return code;
 }
 
-Blockly.Python['blockatlocation'] = function(block) {
-  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
-  location = insideParen(location);
-  var code = "server.worlds[0].getBlockAt (" + location + ")"
-  return [code, Blockly.Python.ORDER_NONE];
-}
-
 Blockly.Python['pushlist'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
   var expression = block.getFieldValue("EXPRESSION");
@@ -1670,5 +1670,39 @@ Blockly.Python['getblocktype'] = function(block) {
   var code = b + ".getType().toString()";
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['getsignline'] = function(block) {
+  var b = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
+  b = insideParen (b);
+  var line = block.getFieldValue("LINE");  
+  var code = b + ".state.getLine(" + line + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['whichblock'] = function(block) {
+  var b = block.getFieldValue("BLOCK"); 
+  //b = insideParen (b);
+  var code = b;
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['getBlock'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  var code = "server.worlds[0].getBlockAt (" + location + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['blockatlocation'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location);
+  var code = "server.worlds[0].getBlockAt (" + location + ")"
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+
+
+
+
 
 
