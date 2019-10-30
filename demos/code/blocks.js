@@ -54,7 +54,7 @@ Blockly.Blocks['sendmessage'] = {
     this.appendValueInput("PLAYER")
         .appendField ("SendMessage ")
         .appendField (new Blockly.FieldTextInput ( "Hello"), "MESSAGE")
-        .appendField("To Player/Entity");        
+        .appendField("To Player");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(160);
@@ -280,17 +280,19 @@ Blockly.Blocks['additem'] = {
         .appendField("Item")
        .appendField(new Blockly.FieldDropdown([
                                                ["Arrow", "ARROW"],
-                                               ["White Wool", "WHITE_WOOL"],
-                                               ["Snow Block", "SNOW_BLOCK"],
-                                               ["Diamond Shovel", "DIAMOND_SHOVEL"],
-                                               ["Diamond Pick", "DIAMOND_PICKAXE"],
-                                               ["Bone Meal", "BONE_MEAL"],
-                                               ["Wheat Seeds", "WHEAT_SEEDS"],
-                                               ["SnowBall", "SNOWBALL"],
-                                               ["Cookie","COOKIE"],
                                                ["Baked Potato","BAKED_POTATO"],
+                                               ["Bone Meal", "BONE_MEAL"],
+                                               ["Cookie","COOKIE"],
+                                               ["Crossbow", "CROSSBOW"],
                                                ["Diamond", "DIAMOND"],
-                                               ["Splash Potion", "SPLASH_POTION"]
+                                               ["Diamond Pick", "DIAMOND_PICKAXE"],
+                                               ["Diamond Shovel", "DIAMOND_SHOVEL"],
+                                               ["Firework", "FIREWORK_ROCKET"],                                                                                             
+                                               ["Snow Block", "SNOW_BLOCK"],
+                                               ["SnowBall", "SNOWBALL"],
+                                               ["Splash Potion", "SPLASH_POTION"],
+                                               ["Wheat Seeds", "WHEAT_SEEDS"],
+                                               ["White Wool", "WHITE_WOOL"],
                                               ]), "ITEMTYPE");  
     this.appendValueInput("PLAYER")
         .appendField("To inventory for Player/Entity ");        
@@ -384,7 +386,7 @@ Blockly.Blocks['eventplayer'] = {
 Blockly.Blocks['armorset'] = {
   init: function() {
     this.appendValueInput("COLOR")
-        .appendField("Player Armor, Color");
+        .appendField("Leather Armor in Color");
     this.appendValueInput("PLAYER")
         .appendField("For Player/Entity");
     this.setPreviousStatement(true, null);
@@ -433,7 +435,9 @@ Blockly.Blocks['placebanner'] = {
 Blockly.Blocks['spawnblock'] = {
   init: function() {
     this.appendValueInput("TYPE")
-        .appendField("Spawn Block at current location ");        
+        .appendField("Spawn Block ");        
+    this.appendValueInput("LOCATION")
+        .appendField("At Location ");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(200);
@@ -444,8 +448,8 @@ Blockly.Blocks['spawnblock'] = {
 
 Blockly.Blocks['signtext'] = {
   init: function() {
-    this.appendDummyInput ()
-        .appendField ( "Set sign text" );
+    this.appendValueInput("LOCATION")
+        .appendField ("Set sign text for sign at location: ");   
     this.appendValueInput("LINE1")
         .appendField("Line 1");        
     this.appendValueInput("LINE2")
@@ -802,8 +806,20 @@ Blockly.Blocks['absolutelocation'] = {
 Blockly.Blocks['entity'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Player, Monster or Object")
-        .appendField(new Blockly.FieldDropdown([["entity","entity"], ["Player calling function", "self"], ["Player causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"], ["All Players", "server.getOnlinePlayers()"]]), "ENTITY");           
+        .appendField("Monster or Object")
+        .appendField(new Blockly.FieldDropdown([["entity","entity"], ["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"]]), "ENTITY");           
+    this.setOutput(true, null);
+    this.setColour(80);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['whichplayer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Player")
+        .appendField(new Blockly.FieldDropdown([["Player calling function", "self"], ["Player causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities"], ["Attacker", "event.damager"], ["All Players", "server.getOnlinePlayers()"]]), "ENTITY");           
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -842,7 +858,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Zombie", "Zombie"]
                                                ]), "ENTITY");                   
     this.setOutput(true, null);
-    this.setColour(0);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -857,10 +873,13 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Bow", "BOW"],
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Bone Meal", "BONE_MEAL"],
+                                                  ["Chest", "CHEST"],
                                                   ["Cookie","COOKIE"],
+                                                  ["Crossbow", "CROSSBOW"],
                                                   ["Diamond", "DIAMOND"],
                                                   ["Diamond Pick", "DIAMOND_PICKAXE"],
                                                   ["Diamond Shovel", "DIAMOND_SHOVEL"],
+                                                  ["Firework", "FIREWORK_ROCKET"],
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
@@ -868,35 +887,40 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Wheat Seeds", "WHEAT_SEEDS"]
                                                ]), "MATERIAL");                   
     this.setOutput(true, null);
-    this.setColour(0);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
 
-
-Blockly.Blocks['blockType'] = {
+Blockly.Blocks['blocktype'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Block or Material Type")        
+        .appendField("Block Type")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["Bed", "LEGACY_BED_BLOCK"],
-                                                ["Bow", "BOW"],
-                                                ["Composter", "COMPOSTER"],
+                                                ["Cobblestone", "COBBLESTONE"],                                                
+                                                ["Composter", "COMPOSTER"],                                                
                                                 ["Door", "LEGACY_WOODEN_DOOR"],
                                                 ["Farm Land", "FARMLAND"],
                                                 ["Fence", "OAK_FENCE"],                                                
                                                 ["Gate", "OAK_FENCE_GATE"],
                                                 ["Item Frame", "ITEM_FRAME"],
+                                                ["Lever", "LEVER"],
+                                                ["Normal Piston", "PISTON"],
                                                 ["Oak", "OAK_WOOD"], 
+                                                ["Observer Block", "OBSERVER"],                                                
                                                 ["Portal", "LEGACY_PORTAL"],
+                                                ["Rail", "RAIL"],
                                                 ["Sign on Wall", "LEGACY_SIGN"],
                                                 ["Sign Post", "OAK_SIGN"],
+                                                ["Sticky Piston", "STICKY_PISTON"],
+                                                ["Slime Block", "SLIME_BLOCK"],
                                                 ["Water", "WATER"],
                                                 ["Wheat", "WHEAT"],
                                                 ["White Banner", "WHITE_BANNER"], 
                                                 ["Window Pane", "LEGACY_GLASS"]
-                                               ]), "BLOCK");                   
+                                               ]), "BLOCKTYPE"); 
     this.setOutput(true, null);
     this.setColour(200);
     this.setTooltip('');
@@ -910,7 +934,7 @@ Blockly.Blocks['creatureTypeString'] = {
         .setCheck("String")    
         .appendField("Creature Type String");
     this.setOutput(true, null);
-    this.setColour(120);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1518,7 +1542,7 @@ Blockly.Blocks['itemstack'] = {
     this.appendValueInput("ITEM")
         .appendField("Stack of")
         .appendField (new Blockly.FieldTextInput ("1"), "COUNT");
-    this.setColour(0);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, null);
@@ -1587,9 +1611,11 @@ Blockly.Blocks['updateinventory'] = {
   init: function() {
     this.appendValueInput("PLAYER")
         .appendField("Give Items to Player ");
+    this.appendValueInput("ITEMSTACK")
+        .appendField("Stack of Items");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(320);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1617,7 +1643,7 @@ Blockly.Blocks['playerhas'] = {
         .appendField (new Blockly.FieldTextInput ("name"), "NAME"); 
 
     this.setOutput(true, null);
-    this.setColour(320);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1709,3 +1735,112 @@ Blockly.Blocks['whichblock'] = {
   }
 };
 
+Blockly.Blocks['allplayers'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField ( "All Players" );
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['blockfacing'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set Block Facing Direction")
+        .appendField(new Blockly.FieldDropdown([
+                                                 ["DOWN","DOWN"],	 
+                                                 ["EAST","EAST"],	 
+                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],	 
+                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],	 
+                                                 ["NORTH","NORTH"],	 
+                                                 ["NORTH_EAST","NORTH_EAST"],	 
+                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],	 
+                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],	 
+                                                 ["NORTH_WEST","NORTH_WEST"],	 
+                                                 ["SOUTH","SOUTH"],	 
+                                                 ["SOUTH_EAST","SOUTH_EAST"],	 
+                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],	 
+                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],	 
+                                                 ["SOUTH_WEST","SOUTH_WEST"],	 
+                                                 ["UP","UP"],	 
+                                                 ["WEST","WEST"],	 
+                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],	 
+                                                 ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
+                                               ]), "FACE"); 
+    this.appendValueInput("LOCATION")
+        .appendField("At Location ");                                                       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['signfacing'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set Sign Facing Direction")
+        .appendField(new Blockly.FieldDropdown([
+                                                 ["DOWN","DOWN"],	 
+                                                 ["EAST","EAST"],	 
+                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],	 
+                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],	 
+                                                 ["NORTH","NORTH"],	 
+                                                 ["NORTH_EAST","NORTH_EAST"],	 
+                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],	 
+                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],	 
+                                                 ["NORTH_WEST","NORTH_WEST"],	 
+                                                 ["SOUTH","SOUTH"],	 
+                                                 ["SOUTH_EAST","SOUTH_EAST"],	 
+                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],	 
+                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],	 
+                                                 ["SOUTH_WEST","SOUTH_WEST"],	 
+                                                 ["UP","UP"],	 
+                                                 ["WEST","WEST"],	 
+                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],	 
+                                                 ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
+                                               ]), "FACE"); 
+    this.appendValueInput("LOCATION")
+        .appendField("At Location ");                                                       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+Blockly.Blocks['getcolor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField ( "Color " )
+        .appendField(new Blockly.FieldDropdown([
+                                        ["AQUA","AQUA"],	
+                                        ["BLACK","BLACK"],
+                                        ["BLUE","BLUE"],
+                                        ["FUCHSIA","FUCHSIA"],
+                                        ["GRAY","GRAY"],
+                                        ["GREEN","GREEN"],
+                                        ["LIME","LIME"],
+                                        ["MAROON","MAROON"],
+                                        ["NAVY","NAVY"],
+                                        ["OLIVE","OLIVE"],
+                                        ["ORANGE","ORANGE"],
+                                        ["PURPLE","PURPLE"],
+                                        ["RED","RED"],
+                                        ["SILVER","SILVER"],
+                                        ["TEAL","TEAL"],
+                                        ["WHITE","WHITE"],
+                                        ["YELLOW","YELLOW"]
+                                     ]), "COLOR"); 
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

@@ -197,6 +197,7 @@ function bodyLoad() {
            <category name="Sign">
                <block type="signtext"></block>      
                <block type="getsignline"></block>
+               <block type="signfacing"></block>               
            </category>        
            <category name="Structures">
                <block type="structures"></block>
@@ -204,11 +205,12 @@ function bodyLoad() {
            </category>       
            <block type="whichblock"></block>
            <block type="getBlock"></block>            
-           <block type="blockType"></block> 
+           <block type="blocktype"></block> 
            <block type="getblocktype"></block>
            <block type="spawnblock"></block>
            <block type="changeBlock"></block>
-           <!block type="blockatlocation"><!/block>
+           <block type="blockfacing"></block>
+           <block type="blockatlocation"></block>
        </category>               
        <category name="Location">
           <block type="location"></block>
@@ -245,12 +247,14 @@ function bodyLoad() {
     <category name="Entities" colour="0">
        <block type="scriptcraftexpression"></block>      
        <category name="Player">
+         <block type="allplayers"></block>
+         <block type="whichplayer"></block>         
          <block type="iteminhandis"></block>                
+         <block type="playerhas"></block>
          <block type="existsplayerdata"></block>
          <block type="setplayerdata"></block>
          <block type="getplayerdata"></block>
          <block type="removeplayerdata"></block>
-         <block type="playerhas"></block>
        </category> 
        <category name="Creatures">
          <block type="entity"></block>
@@ -268,15 +272,18 @@ function bodyLoad() {
        <block type="potionname"></block>
     </category> 
     <category name="Items" colour="260">
+          <block type="updateinventory"></block>
+          <block type="itemstack"></block>
           <block type="materialtype"></block>       
           <block type="addingredient"></block>
-          <block type="itemstack"></block>
           <block type="instanceof"></block>
           <block type="recipe"></block>    
           <block type="modifystack"></block>
+    </category>
+    <category name="Equipment">
           <block type="equipmentname"></block>
+          <block type="getcolor"></block>
           <block type="getequipmentname"></block>
-          <block type="updateinventory"></block>
           <block type="armorset"></block>
     </category>
     <category name="Output" colour="160">
@@ -286,7 +293,7 @@ function bodyLoad() {
        <block type="sendUdpMessage"></block>
     </category>
     <!category name="Blocks and Structures" colour="200">
-       <!block type="leverUp"><!/block>              
+       <!block type="leverUp"><!/block>                     
        <!block type="placebanner"><!/block>
        <!block type="createdrone"><!/block>
        <!block type="buildbox"><!/block>

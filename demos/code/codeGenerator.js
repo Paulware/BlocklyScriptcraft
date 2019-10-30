@@ -1,3 +1,24 @@
+/*
+Direction player is looking
+  public static CardinalDirection get(Player player) {
+    float yaw = player.getLocation().getYaw();
+    if (yaw < 0) {
+        yaw += 360;
+    }
+    if (yaw >= 315 || yaw < 45) {
+        return CardinalDirection.SOUTH;
+    } else if (yaw < 135) {
+        return CardinalDirection.WEST;
+    } else if (yaw < 225) {
+        return CardinalDirection.NORTH;
+    } else if (yaw < 315) {
+        return CardinalDirection.EAST;
+    }
+    return CardinalDirection.NORTH;
+  }
+
+*/
+
 var includes = "";
 var instantiations = [];
 var updates = "";
@@ -642,12 +663,18 @@ Blockly.Python['sendmessage'] = function(block) {
           var target = this;
           return target.split(search).join(replacement);
       };  
-     // message = message.replaceAll ( "\"", "\\\"");
+      
+     if (message.indexOf ( "\"" ) == -1) { 
+        message = "\\\"" + message + "\\\"";
+     } 
      command = "\"tellraw @a [" + message + "]\"";
      code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
             command + ");\n";
   } else { 
-     code = player + '.sendMessage (' + message + ');\n';
+     if (message.indexOf ( "\"" ) == -1) { 
+        message = "\"" + message + "\"";
+     } 
+     code = player + ".sendMessage (" + message + ");\n";
   }
   return code;
 };
@@ -662,9 +689,14 @@ Blockly.Python['armorset'] = function(block) {
      player = insideParen (player );
   } 
   instantiateVariable ('color' );
+  var colorCode = color;
+  if (color.indexOf ( "org.bukkit.Color." ) == -1 ) {
+    colorCode = "eval ( \"color = org.bukkit.Color.\" + " + color + ");\n";
+  } else {
+    colorCode = "color = " + colorCode + ";\n"; 
+  } 
   
-  var code = 
-     "eval (\"color = org.bukkit.Color.\" + " + color + ".toUpperCase());\n" +
+  var code = colorCode + 
      "var player = " + player + ";\n" + 
      "var items = require ('items');\n" + 
      "var helmet = items.leatherHelmet(1);\n" + 
@@ -722,8 +754,11 @@ Blockly.Python['removeplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  player = insideParen (player);
   if (player == "") {
      player = 'self';
+  } else if ( player == 'server.getOnlinePlayers()') { // All Players
+     alert ( 'Use a repeat loop instead of all players' );
   } else {
      player = insideParen (player );
   } 
@@ -939,6 +974,8 @@ Blockly.Python['modifyEntity'] = function(block) {
 
 Blockly.Python['spawnblock'] = function(block) {
   var blockType = Blockly.Python.valueToCode(block, 'TYPE', Blockly.Python.ORDER_ATOMIC); 
+  var location = Blockly.Python.valueToCode (block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  var location = insideParen (location);
   var code = "";
   instantiateVariable ("location");
   instantiateVariable ("block");
@@ -978,16 +1015,13 @@ Blockly.Python['spawnblock'] = function(block) {
      code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y), parseInt(location.z));\n" + 
             "block = server.worlds[0].getBlockAt(loc);\n" +   
             "block.setType (org.bukkit.Material.OAK_SIGN);\n" + 
-            //sign = block.getState();
-            //sign.setLine (0, "Join Team");
-            //sign.setLine (1, "White");
-            //sign.update();
+            "sign = block.getState();\n" + 
             "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
             "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
             "sign.setData (data);\n" + 
             "sign.update();\n" 
   } else {   
-     code = "server.worlds[0].getBlockAt (location).setType (org.bukkit.Material." + blockType + ");\n";            
+     code = "server.worlds[0].getBlockAt (" + location + ").setType (org.bukkit.Material." + blockType + ");\n";            
   }
   return code;
 };
@@ -996,8 +1030,10 @@ Blockly.Python['signtext'] = function(block) {
   var line1 = Blockly.Python.valueToCode(block, 'LINE1', Blockly.Python.ORDER_ATOMIC); 
   line1 = extractStr (line1)  
   var line2 = Blockly.Python.valueToCode(block, 'LINE2', Blockly.Python.ORDER_ATOMIC); 
-  line2 = extractStr (line2)  
-  var code = "var sign = server.worlds[0].getBlockAt (location).getState();\n" +
+  line2 = extractStr (line2)
+  var location =  Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
+  location = insideParen (location);
+  var code = "var sign = server.worlds[0].getBlockAt (" + location + ").getState();\n" +
              "sign.setLine (0," + line1 + ");\n" +   
              "sign.setLine (1," + line2 + ");\n" +   
              "sign.update();\n";
@@ -1105,7 +1141,11 @@ Blockly.Python['baby'] = function(block) {
 
 Blockly.Python['entity'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
-  //alert ( 'entity got: ' + entity );
+  return [entity, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['whichplayer'] = function(block) {
+  var entity = block.getFieldValue ("ENTITY");
   return [entity, Blockly.Python.ORDER_NONE];
 }
 
@@ -1114,8 +1154,8 @@ Blockly.Python['entityType'] = function(block) {
   return [entity, Blockly.Python.ORDER_NONE];
 }
 
-Blockly.Python['blockType'] = function(block) {
-  var b = block.getFieldValue ("BLOCK");
+Blockly.Python['blocktype'] = function(block) {
+  var b = block.getFieldValue ("BLOCKTYPE");
   b = insideParen (b);
   return [b, Blockly.Python.ORDER_NONE];
 }
@@ -1604,8 +1644,9 @@ Blockly.Python['equipmentname'] = function(block) {
 
 Blockly.Python['updateinventory'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  var itemStack = Blockly.Python.valueToCode(block, 'ITEMSTACK', Blockly.Python.ORDER_ATOMIC);
   player = insideParen (player);
-  var code = player + '.inventory.addItem (itemStack);\n';
+  var code = player + '.inventory.addItem (' + itemStack + ');\n';
   return code;
 };
 
@@ -1700,9 +1741,60 @@ Blockly.Python['blockatlocation'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 }
 
+Blockly.Python['allplayers'] = function(block) {
+  var code = "server.getOnlinePlayers()";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['blockfacing'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location); 
+  var direction = block.getFieldValue("FACE");
+  instantiateVariable ("data");
+  instantiateVariable ("block");
+  
+  /*
+            "sign = block.getState();\n" + 
+            "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+            "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
+            "sign.setData (data);\n" + 
+            "sign.update();\n"   
+  */
+  var code = "block = server.worlds[0].getBlockAt (" + location + ")\n" + 
+             "data = block.getBlockData();\n" + 
+             "data.setFacing(org.bukkit.block.BlockFace." + direction + ")\n" + 
+             "block.setBlockData(data)\n"; 
+  return code;
+};
 
 
+Blockly.Python['signfacing'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location); 
+  var direction = block.getFieldValue("FACE");
+  instantiateVariable ("data");
+  instantiateVariable ("block");
+  instantiateVariable ("sign");
+  
+  /*
+            "sign = block.getState();\n" + 
+            "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+            "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
+            "sign.setData (data);\n" + 
+            "sign.update();\n"   
+  */
+  var code = "block = server.worlds[0].getBlockAt (" + location + ")\n" + 
+             "sign = block.getState();\n" + 
+             "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+             "data.setFacingDirection (org.bukkit.block.BlockFace." + direction + ");\n" + 
+             "sign.setData (data);\n" + 
+             "sign.update();\n"   
+  return code;
+};
 
-
-
+Blockly.Python['getcolor'] = function(block) {
+  var color = block.getFieldValue("COLOR");
+  var code = "org.bukkit.Color." + color;
+  return [code, Blockly.Python.ORDER_NONE];
+}
 
