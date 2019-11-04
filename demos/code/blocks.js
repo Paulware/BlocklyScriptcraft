@@ -899,7 +899,9 @@ Blockly.Blocks['blocktype'] = {
         .appendField("Block Type")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["Bed", "LEGACY_BED_BLOCK"],
-                                                ["Cobblestone", "COBBLESTONE"],                                                
+                                                ["Cobblestone", "COBBLESTONE"],
+                                                ["Command Block", "COMMAND_BLOCK"],
+                                                ["Command Block Minecart", "COMMAND_BLOCK_MINECART"],                                                
                                                 ["Composter", "COMPOSTER"],                                                
                                                 ["Door", "LEGACY_WOODEN_DOOR"],
                                                 ["Farm Land", "FARMLAND"],
@@ -1840,6 +1842,21 @@ Blockly.Blocks['getcolor'] = {
                                      ]), "COLOR"); 
     this.setOutput(true, null);
     this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['setblockcommand'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Command Block Command")         
+        .appendField (new Blockly.FieldTextInput ("/say \"Hello\""), "COMMAND");     
+    this.appendValueInput("LOCATION")
+        .appendField("At Location ");                                                       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

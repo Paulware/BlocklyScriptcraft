@@ -1798,3 +1798,16 @@ Blockly.Python['getcolor'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 }
 
+Blockly.Python['setblockcommand'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location);
+  var command = block.getFieldValue("COMMAND");
+  instantiateVariable ("state");
+  instantiateVariable ("block");
+  var code = "block = server.worlds[0].getBlockAt (" + location + ");\n" + 
+             "state = block.getState();\n" + 
+             "state.setCommand(" + command + ");\n" + 
+             "state.update();\n"              
+  return code;
+};
+
