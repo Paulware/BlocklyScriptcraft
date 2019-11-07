@@ -341,6 +341,7 @@ Blockly.Blocks['eventlistener'] = {
             ["An entity was damaged by entity", "entityDamageByEntity"],
             ["An entity exploded", "entityExplode"],
             ["A player, monster or animal was damaged", "entityDamage"],
+            ["A server command was executed", "serverCommand"],
             ["Click on a block, or push a lever, button or sign","playerInteract"]
         ]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
@@ -900,7 +901,9 @@ Blockly.Blocks['blocktype'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Bed", "LEGACY_BED_BLOCK"],
                                                 ["Cobblestone", "COBBLESTONE"],
-                                                ["Command Block", "COMMAND_BLOCK"],
+                                                ["Command Block (Chain)", "CHAIN_COMMAND_BLOCK"],
+                                                ["Command Block (Impulse)", "COMMAND_BLOCK"],
+                                                ["Command Block (Repeating)", "REPEATING_COMMAND_BLOCK"],
                                                 ["Command Block Minecart", "COMMAND_BLOCK_MINECART"],                                                
                                                 ["Composter", "COMPOSTER"],                                                
                                                 ["Door", "LEGACY_WOODEN_DOOR"],
@@ -914,6 +917,9 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Observer Block", "OBSERVER"],                                                
                                                 ["Portal", "LEGACY_PORTAL"],
                                                 ["Rail", "RAIL"],
+                                                ["Rail Powered", "POWERED_RAIL"],
+                                                ["Redstone Block", "REDSTONE_BLOCK"],
+                                                ["Redstone Torch", "REDSTONE_TORCH"],
                                                 ["Sign on Wall", "LEGACY_SIGN"],
                                                 ["Sign Post", "OAK_SIGN"],
                                                 ["Sticky Piston", "STICKY_PISTON"],
@@ -1748,6 +1754,17 @@ Blockly.Blocks['allplayers'] = {
   }
 };
 
+Blockly.Blocks['allentities'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField ( "All Entities" );
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['blockfacing'] = {
   init: function() {
     this.appendDummyInput()
@@ -1856,7 +1873,38 @@ Blockly.Blocks['setblockcommand'] = {
         .appendField("At Location ");                                                       
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['runexpression'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Expression")
+        .appendField (new Blockly.FieldTextInput ("expression"), "EXPRESSION");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['setconditional'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set Command Block Conditional")  
+        .appendField(new Blockly.FieldDropdown([
+                                                ["True", "true"],
+                                                ["False", "false"]
+                                               ]), "CONDITIONAL"); 
+    this.appendValueInput("LOCATION")
+        .appendField("Block Location ");                                                
+    this.setNextStatement(true, null);
+    this.setPreviousStatement(true, null);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

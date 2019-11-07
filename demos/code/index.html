@@ -196,6 +196,7 @@ function bodyLoad() {
        <category name="Blocks">
            <category name="Command Block">
                <block type="setblockcommand"></block>
+               <block type="setconditional"></block>
            </category>
            <category name="Sign">
                <block type="signtext"></block>      
@@ -248,9 +249,9 @@ function bodyLoad() {
        </category>       
     </category>  
     <category name="Entities" colour="0">
-       <block type="scriptcraftexpression"></block>      
+       <block type="allentities"></block>
        <category name="Player">
-         <block type="allplayers"></block>
+         <block type="allplayers"></block>         
          <block type="whichplayer"></block>         
          <block type="iteminhandis"></block>                
          <block type="playerhas"></block>
@@ -310,6 +311,7 @@ function bodyLoad() {
          <block type="delayedexecution"></block>
        </category> 
        <category name="{catVariables}" > <!custom="VARIABLE">
+         <block type="runexpression"></block>                  
          <block type="dataexpression"></block>
          <block type="datavalue"></block>
          <block type="namevalue"></block>

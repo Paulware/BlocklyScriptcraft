@@ -1016,7 +1016,7 @@ Blockly.Python['spawnblock'] = function(block) {
             "block = server.worlds[0].getBlockAt(loc);\n" +   
             "block.setType (org.bukkit.Material.OAK_SIGN);\n" + 
             "sign = block.getState();\n" + 
-            "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+            "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
             "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
             "sign.setData (data);\n" + 
             "sign.update();\n" 
@@ -1685,12 +1685,7 @@ Blockly.Python['servercommand'] = function(block) {
   if (command.indexOf ( "\"") == -1) { 
       command = "\"" + command + "\"";
   } 
-  
-  //  console.log ( "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.
-  //   getConsoleSender(), \"clear " + player.name + "\");\n" );
-  
-  // \"clear " + player.name + "\"
-  
+
   var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
          command + ");\n";
   return code;
@@ -1746,6 +1741,11 @@ Blockly.Python['allplayers'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 }
 
+Blockly.Python['allentities'] = function(block) {
+  var code = "server.worlds[0].getEntities()";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
 Blockly.Python['blockfacing'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen(location); 
@@ -1755,7 +1755,7 @@ Blockly.Python['blockfacing'] = function(block) {
   
   /*
             "sign = block.getState();\n" + 
-            "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+            "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
             "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
             "sign.setData (data);\n" + 
             "sign.update();\n"   
@@ -1778,14 +1778,14 @@ Blockly.Python['signfacing'] = function(block) {
   
   /*
             "sign = block.getState();\n" + 
-            "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+            "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
             "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
             "sign.setData (data);\n" + 
             "sign.update();\n"   
   */
   var code = "block = server.worlds[0].getBlockAt (" + location + ")\n" + 
              "sign = block.getState();\n" + 
-             "data = new org.bukkit.material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
+             "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
              "data.setFacingDirection (org.bukkit.block.BlockFace." + direction + ");\n" + 
              "sign.setData (data);\n" + 
              "sign.update();\n"   
@@ -1808,6 +1808,25 @@ Blockly.Python['setblockcommand'] = function(block) {
              "state = block.getState();\n" + 
              "state.setCommand(" + command + ");\n" + 
              "state.update();\n"              
+  return code;
+};
+
+Blockly.Python['setconditional'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location);
+  var conditional = block.getFieldValue("CONDITIONAL");
+  instantiateVariable ("data");
+  instantiateVariable ("block");
+  var code = "block = server.worlds[0].getBlockAt (" + location + ");\n" + 
+             "data = block.getBlockData();\n" + 
+             "data.setConditional(" + conditional + ");\n" + 
+             "block.setBlockData(data);\n"              
+  return code;
+};
+
+Blockly.Python ['runexpression'] = function (block) {
+  var expression = block.getFieldValue ('EXPRESSION');
+  code = expression + '\n';
   return code;
 };
 
