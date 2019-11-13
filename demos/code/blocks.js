@@ -778,7 +778,7 @@ Blockly.Blocks['location'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Location Of")
-        .appendField(new Blockly.FieldDropdown([ ["Internal Location", "location"],["Player calling function", "self.location"], ["Player causing event","event.player.location"],["event entity", "event.entity.location"],["event shooter","event.entity.shooter.location"], ["Attacker", "event.damager.location"]]), "LOCATIONTYPE");           
+        .appendField(new Blockly.FieldDropdown([ ["Location Player is looking at", "self.getTargetBlock(null,0).getLocation()"],["Internal Location", "location"],["Player calling function", "self.location"], ["Player causing event","event.player.location"],["event entity", "event.entity.location"],["event shooter","event.entity.shooter.location"], ["Attacker", "event.damager.location"]]), "LOCATIONTYPE");           
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -899,6 +899,7 @@ Blockly.Blocks['blocktype'] = {
     this.appendDummyInput()
         .appendField("Block Type")        
         .appendField(new Blockly.FieldDropdown([
+                                                ["Air", "AIR"],
                                                 ["Bed", "LEGACY_BED_BLOCK"],
                                                 ["Cobblestone", "COBBLESTONE"],
                                                 ["Command Block (Chain)", "CHAIN_COMMAND_BLOCK"],
@@ -1130,7 +1131,7 @@ Blockly.Blocks['returnVariable'] = {
         .appendField (new Blockly.FieldTextInput ("name"), "RETURNVARIABLE");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(330);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1909,3 +1910,52 @@ Blockly.Blocks['setconditional'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['setblockdata'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set Block Data")  
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
+    this.appendValueInput("VALUE")
+        .appendField("Value");
+    this.appendValueInput("LOCATION")
+        .appendField("Block Location");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['getblockdata'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Get Block Data")
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY");        
+    this.appendValueInput("LOCATION")
+        .appendField("Block Location");
+    this.setColour(200);
+    this.setOutput(true, null);    
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['existsblockdata'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Block Data Exists?")  
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
+    this.appendValueInput("LOCATION")
+        .appendField("Block Location");
+    this.setColour(200);
+    this.setTooltip('');
+    this.setOutput(true, "Boolean");
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
+

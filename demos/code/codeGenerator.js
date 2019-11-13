@@ -1271,7 +1271,7 @@ Blockly.Python['setvariable'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
   var expression = block.getFieldValue("EXPRESSION");
   // expression = insideParen (expression); 
-  if (varname.indexOf ( 'exports') == -1) {    
+  if (varname.indexOf ( '.') == -1) {    
      instantiateVariable (varname);
   }
   var code = varname + '=' + expression + ';\n';
@@ -1829,4 +1829,40 @@ Blockly.Python ['runexpression'] = function (block) {
   code = expression + '\n';
   return code;
 };
+
+Blockly.Python['setblockdata'] = function(block) {
+  instantiateVariable ("fd");
+  var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
+  var value = Blockly.Python.valueToCode (block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
+  value = insideParen (value);
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
+  location = insideParen (location);
+  var code = "fd = new org.bukkit.metadata.FixedMetadataValue (__plugin," + value + ");\n" + 
+             "server.worlds[0].getBlockAt(" + location + ").setMetadata (\"" + key + "\", fd );\n";
+  return code;
+};
+
+Blockly.Python['getblockdata'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
+  location = insideParen (location);
+      
+  var code = "server.worlds[0].getBlockAt(" + location + ").getMetadata(\"" + key + "\")[0].value()" 
+  return [code, Blockly.Python.ORDER_NONE];  
+};
+
+Blockly.Python['existsblockdata'] = function(block) {
+  var key = block.getFieldValue ('KEY'); 
+  key = key.toLowerCase();
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
+  location = insideParen (location);
+    
+  var code = "server.worlds[0].getBlockAt(" + location + ").getMetadata(\"" + key + "\").length > 0" 
+
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
 

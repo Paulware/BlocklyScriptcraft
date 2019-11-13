@@ -194,6 +194,11 @@ function bodyLoad() {
        <block type="drawText"></block>
        <block type="copyFile"></block>
        <category name="Blocks">
+           <category name="Location">
+               <block type="getBlock"></block>            
+               <block type="spawnblock"></block>           
+               <block type="blockatlocation"></block>
+           </category>
            <category name="Command Block">
                <block type="setblockcommand"></block>
                <block type="setconditional"></block>
@@ -207,14 +212,16 @@ function bodyLoad() {
                <block type="structures"></block>
                <block type="buildstructure"></block>
            </category>       
+           <category name="Block Data">
+               <block type="setblockdata"></block>
+               <block type="getblockdata"></block>
+               <block type="existsblockdata"></block>
+           </category>       
            <block type="whichblock"></block>
-           <block type="getBlock"></block>            
            <block type="blocktype"></block> 
            <block type="getblocktype"></block>
-           <block type="spawnblock"></block>
            <block type="changeBlock"></block>
            <block type="blockfacing"></block>
-           <block type="blockatlocation"></block>
        </category>               
        <category name="Location">
           <block type="location"></block>
@@ -304,11 +311,13 @@ function bodyLoad() {
        <!block type="teamflag"><!/block>
     <!/category> 
     <category name="Scriptcraft Coding"  colour="120">
+       <block type="scriptcraftexpression"></block>
        <category name="Functions">
          <block type="scriptcraftfunction"></block>
          <block type="functionCall"></block>
          <block type="repeatexecution"></block>
          <block type="delayedexecution"></block>
+         <block type="returnVariable"></block>      
        </category> 
        <category name="{catVariables}" > <!custom="VARIABLE">
          <block type="runexpression"></block>                  
@@ -320,7 +329,6 @@ function bodyLoad() {
          <block type="setvariable"></block>      
          <block type="setvariablevalue"></block>
          <block type="pushlist"></block>
-         <block type="returnVariable"></block>      
        </category>      
        <category name="{catLoops}">
          <block type="controls_repeat_ext">
