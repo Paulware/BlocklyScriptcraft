@@ -232,7 +232,7 @@ function bodyLoad() {
        <category name="Events" colour="40">
           <block type="eventlistener"></block>
           <block type="eventcancel"></block>
-          <block type="clickedBlock"></block>
+          <block type="clickedBlock"></block>        
        </category>
        <category name="Effects" colour="120">
           <block type="sound"></block>           
@@ -280,9 +280,8 @@ function bodyLoad() {
          <block type="offai"></block>
        </category>
        <block type="typeString"></block>
-       <block type="potionname"></block>
     </category> 
-    <category name="Items" colour="260">
+    <category name="Items" colour="320">
           <block type="updateinventory"></block>
           <block type="itemstack"></block>
           <block type="materialtype"></block>       
@@ -290,12 +289,17 @@ function bodyLoad() {
           <block type="instanceof"></block>
           <block type="recipe"></block>    
           <block type="modifystack"></block>
-    </category>
-    <category name="Equipment">
-          <block type="equipmentname"></block>
-          <block type="getcolor"></block>
-          <block type="getequipmentname"></block>
-          <block type="armorset"></block>
+          <category name="Potions"></block>
+             <block type="addpotion"></block> 
+             <block type="potionSplashed"></block>
+             <block type="potionname"></block>               
+          </category>
+          <category name="Gear">
+             <block type="equipmentname"></block>
+             <block type="getcolor"></block>
+             <block type="getequipmentname"></block>
+             <block type="armorset"></block>              
+          </category>
     </category>
     <category name="Output" colour="160">
        <block type="consolelog"></block>
@@ -320,15 +324,15 @@ function bodyLoad() {
          <block type="returnVariable"></block>      
        </category> 
        <category name="{catVariables}" > <!custom="VARIABLE">
-         <block type="runexpression"></block>                  
-         <block type="dataexpression"></block>
-         <block type="datavalue"></block>
-         <block type="namevalue"></block>
-         <block type="createVariable"></block>
+         <!block type="createVariable"><!/block>
          <block type="varname"></block>
          <block type="setvariable"></block>      
          <block type="setvariablevalue"></block>
+         <block type="runexpression"></block>                  
          <block type="pushlist"></block>
+         <block type="dataexpression"></block>
+         <block type="datavalue"></block>
+         <block type="namevalue"></block>
        </category>      
        <category name="{catLoops}">
          <block type="controls_repeat_ext">
@@ -348,7 +352,6 @@ function bodyLoad() {
     <!category name="Equipment" colour="320">
        <!block type="additem"><!/block>
        <!block type="repairarmor"><!/block>
-       <!block type="addpotion"><!/block>
     <!/category>
     <category name="{catText}" colour="160">
       <block type="text"></block>

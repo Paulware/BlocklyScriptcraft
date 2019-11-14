@@ -653,7 +653,7 @@ Blockly.Python['sendmessage'] = function(block) {
   player = insideParen(player);
   var code;
   // note: Don't add \" to the message because it might be a variable value.
-  if (player == "event.getAffectedEntities") {
+  if (player == "event.getAffectedEntities()") {
      code = "var entities = event.getAffectedEntities();\n" + 
             "for (var i=0; i<entities.length; i++) {\n" + 
             "  entities[i].sendMessage (" + message + ");\n" + 
@@ -1247,14 +1247,18 @@ Blockly.Python['entityProfession'] = function(block) {
 // splashpotion_blindness_meta.setMainEffect(PotionEffectType.BLINDNESS);
 Blockly.Python['addpotion'] = function(block) {
   var name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
+  name = insideChars(name, "\"", "\"");
   var potion = block.getFieldValue ('POTION');
-  if (potion == "") {
+  var count = block.getFieldValue ('COUNT');
+  if (potion == "SPLASH_POTION") {
      potion = name;
   } else {
+     potion = insideChars(potion, "\"", "\"");
+
      // TODO: Add potion attributes
   } 
   var code = '// Add ' + potion + ' to inventory\n' + 
-             'var newItems = require(\'items\').splashPotion(5);\n' + 
+             'var newItems = require(\'items\').splashPotion(' + count + ');\n' + 
              'var meta = newItems.getItemMeta();\n' + 
              'meta.setDisplayName(\'' + potion + '\');\n' +
              'newItems.setItemMeta(meta);\n' +              
@@ -1682,10 +1686,6 @@ Blockly.Python['playerhas'] = function(block) {
 
 Blockly.Python['servercommand'] = function(block) {
   var command = block.getFieldValue ("COMMAND");
-  if (command.indexOf ( "\"") == -1) { 
-      command = "\"" + command + "\"";
-  } 
-
   var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
          command + ");\n";
   return code;
@@ -1863,6 +1863,11 @@ Blockly.Python['existsblockdata'] = function(block) {
 
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['potionSplashed'] = function(block) {
+  return ["event.getPotion()", Blockly.Python.ORDER_NONE];
+}
+
 
 
 
