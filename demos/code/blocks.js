@@ -342,6 +342,9 @@ Blockly.Blocks['eventlistener'] = {
             ["An entity exploded", "entityExplode"],
             ["A player, monster or animal was damaged", "entityDamage"],
             ["A server command was executed", "serverCommand"],
+            ["A vehicle moved", "vehicleMove"],
+            ["A vehicle was entered", "vehicleEnter"],
+            ["A vehicle was exited", "vehicleExit"],
             ["Click on a block, or push a lever, button or sign","playerInteract"]
         ]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
@@ -776,19 +779,6 @@ Blockly.Blocks['baby'] = {
   }
 };
 
-
-Blockly.Blocks['location'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Location Of")
-        .appendField(new Blockly.FieldDropdown([ ["Location Player is looking at", "self.getTargetBlock(null,0).getLocation()"],["Internal Location", "location"],["Player calling function", "self.location"], ["Player causing event","event.player.location"],["event entity", "event.entity.location"],["event shooter","event.entity.shooter.location"], ["Attacker", "event.damager.location"]]), "LOCATIONTYPE");           
-    this.setOutput(true, null);
-    this.setColour(0);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
-
 Blockly.Blocks['absolutelocation'] = {
   init: function() {
     this.appendDummyInput()
@@ -823,7 +813,14 @@ Blockly.Blocks['whichplayer'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Player")
-        .appendField(new Blockly.FieldDropdown([["Player calling function", "self"], ["Player causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"], ["Attacker", "event.damager"], ["All Players", "server.getOnlinePlayers()"]]), "ENTITY");           
+        .appendField(new Blockly.FieldDropdown([["Player calling function", "self"], 
+                                                ["Player causing event","event.player"],
+                                                ["event entity", "event.entity"],
+                                                ["event vehicle", "event.vehicle"],
+                                                ["shooter","event.entity.shooter"], 
+                                                ["All affected entities", "event.getAffectedEntities()"],
+                                                ["Attacker", "event.damager"], 
+                                                ["All Players", "server.getOnlinePlayers()"]]), "ENTITY");           
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -1572,7 +1569,7 @@ Blockly.Blocks['instanceof'] = {
     this.appendDummyInput()
         .appendField (" = ");    
     this.appendValueInput ("TYPE");
-    this.setColour(320);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, null);
@@ -1623,7 +1620,7 @@ Blockly.Blocks['equipmentname'] = {
 Blockly.Blocks['updateinventory'] = {
   init: function() {
     this.appendValueInput("PLAYER")
-        .appendField("Give Items to Player ");
+        .appendField("Give Items to Entity/Player ");
     this.appendValueInput("ITEMSTACK")
         .appendField("Stack of Items");
     this.setPreviousStatement(true, null);
@@ -1769,6 +1766,8 @@ Blockly.Blocks['allentities'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+
 
 Blockly.Blocks['blockfacing'] = {
   init: function() {
@@ -1971,7 +1970,234 @@ Blockly.Blocks['potionSplashed'] = {
   }
 };
 
+Blockly.Blocks['dropitem'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Drop Items At Location:");
+    this.appendValueInput("ITEMSTACK")
+        .appendField("Stack of Items");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['findentitybyname'] = {
+  init: function() {
+    this.appendDummyInput () 
+        .appendField ("var entity = findEntityByName " )    
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME");          
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    // this.setOutput(true, null);    
+  }
+};
+
+Blockly.Blocks['findentitybycustomname'] = {
+  init: function() {
+    this.appendDummyInput () 
+        .appendField ("var entity = findEntityByCustomName " )    
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME");                  
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');    
+  }
+};
+
+Blockly.Blocks['whicheffect'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Effect")
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Add health to health bar", "absorption"],
+                                                ["Get attacked by mobs in a village", "bad_omen"],
+                                                ["Create a thick black fog", "blindness"],
+                                                ["Improve visibility and water mining speed", "conduit_power"], 
+                                                ["Increase swimming speed ", "dolphins_grace"],
+                                                ["Immunity to fire","fire_resistance"],
+                                                ["Display halo around player", "glowing"],
+                                                ["Speed up block breaking","haste"],
+                                                ["Increase max health", "health_boost"],
+                                                ["Allow discount trading", "hero_of_the_village"],
+                                                ["Cause food bar to deplete","hunger"],
+                                                ["Damage player or living mob","instant_damage"],
+                                                ["Give health to player or living mob","instant_health"],
+                                                ["Invisibility","invisibility"],
+                                                ["Higher Jumping","jump_boost"],
+                                                ["Involuntary floating","levitation"],
+                                                ["Increase chance of finding loot","luck"],
+                                                ["Slow you down when breaking blocks","mining_fatigue"],
+                                                ["Twist and warp the screen","nausea"],
+                                                ["Night Vision","night_vision"],
+                                                ["Continually damager health","poison"],
+                                                ["Continually restore health","regeneration"],
+                                                ["Reduce damage received","resistance"],
+                                                ["Replenish food supply","saturation"],
+                                                ["Slow falling","slow_falling"],
+                                                ["Make player slower","slowness"],
+                                                ["Make player faster","speed"],
+                                                ["Increase damage dealt to others","strength"],
+                                                ["Decrease probability of finding loot","unluck"],
+                                                ["Breathe under water","water_breathing"],
+                                                ["Decrease damage dealt to others","weakness"],
+                                                ["Damage health every 2 seconds","wither"]
+                                               ]), "EFFECT");           
+    this.setOutput(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['createvector'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Vector")
+        .appendField("X")
+        .appendField (new Blockly.FieldTextInput (".5"), "X")          
+        .appendField("Y")
+        .appendField (new Blockly.FieldTextInput (".5"), "Y")          
+        .appendField("Z")
+        .appendField (new Blockly.FieldTextInput (".5"), "Z");          
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['multiplyvector'] = {
+  init: function() {
+    this.appendValueInput("VECTOR")
+        .appendField ("Multiply vector ");   
+    this.appendDummyInput () 
+        .appendField ("By " )    
+        .appendField (new Blockly.FieldTextInput ("1.5"), "SCALAR");                  
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');    
+  }
+};
+
+Blockly.Blocks['getvectorvelocity'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField ("Get vector velocity from entity:" );   
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['setvectorvelocity'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField ("Set vector velocity for entity:" );   
+    this.appendValueInput("VECTOR")
+        .appendField ("Vector:" );   
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');    
+  }
+};
+
+Blockly.Blocks['findentitybylocation'] = {
+  init: function() {           
+    this.appendValueInput("LOCATION")
+        .appendField ("var entity = findEntityByLocation" )
+        .appendField ("Location:" );        
+    this.appendValueInput("RADIUS")
+        .appendField ("Radius:" );        
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    // this.setOutput(true, null);    
+  }
+};
+
+Blockly.Blocks['distancebetweenlocations'] = {
+  init: function() {
+    this.appendValueInput("LOCATION1")
+        .appendField ("Distance between locations location1:" );   
+    this.appendValueInput("LOCATION2")
+        .appendField ("location2:" );
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['direction'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Item Direction")
+        .appendField(new Blockly.FieldDropdown([
+                                                 ["DOWN","DOWN"],	 
+                                                 ["EAST","EAST"],	 
+                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],	 
+                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],	 
+                                                 ["NORTH","NORTH"],	 
+                                                 ["NORTH_EAST","NORTH_EAST"],	 
+                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],	 
+                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],	 
+                                                 ["NORTH_WEST","NORTH_WEST"],	 
+                                                 ["SOUTH","SOUTH"],	 
+                                                 ["SOUTH_EAST","SOUTH_EAST"],	 
+                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],	 
+                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],	 
+                                                 ["SOUTH_WEST","SOUTH_WEST"],	 
+                                                 ["UP","UP"],	 
+                                                 ["WEST","WEST"],	 
+                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],	 
+                                                 ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
+                                               ]), "DIRECTION"); 
+                                                      
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['lookingdirection'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField ("Get direction looking for Player" ); 
+                                                      
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['millis'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Current Milliseconds")
+                                                      
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
 
 

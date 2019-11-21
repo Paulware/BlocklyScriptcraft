@@ -1578,11 +1578,11 @@ Blockly.Python['addingredient'] = function(block) {
 }
 
 Blockly.Python['itemstack'] = function(block) {
-  var item = Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_ATOMIC);
-  item = insideParen (item);
+  var blockType = Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_ATOMIC);
+  blockType = insideParen (blockType);
   var count =  block.getFieldValue("COUNT"); 
   
-  var code = "new org.bukkit.inventory.ItemStack (org.bukkit.Material." + item + "," + count + ")";
+  var code = "new org.bukkit.inventory.ItemStack (" + blockType + "," + count + ")";
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -1686,6 +1686,11 @@ Blockly.Python['playerhas'] = function(block) {
 
 Blockly.Python['servercommand'] = function(block) {
   var command = block.getFieldValue ("COMMAND");
+  if ((command.indexOf ( "\"" ) == -1) && (command.indexOf ( "'") == -1 )) {
+     if (command.indexOf ( " " ) > -1) { 
+        command = "\"" + command + "\""; // Add double quotes.
+     } 
+  }
   var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
          command + ");\n";
   return code;
@@ -1703,7 +1708,7 @@ Blockly.Python['pushlist'] = function(block) {
 Blockly.Python['getblocktype'] = function(block) {
   var b = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
   b = insideParen (b);
-  var code = b + ".getType().toString()";
+  var code = b + ".getType()";
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -1868,6 +1873,145 @@ Blockly.Python['potionSplashed'] = function(block) {
   return ["event.getPotion()", Blockly.Python.ORDER_NONE];
 }
 
+Blockly.Python['dropitem'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  var itemStack = Blockly.Python.valueToCode(block, 'ITEMSTACK', Blockly.Python.ORDER_ATOMIC);
+  itemStack = insideParen (itemStack);
+  location = insideParen (location);
+  var code = 'server.worlds[0].dropItem (' + location + ',' + itemStack + ');\n';
+  return code;
+};
 
+Blockly.Python['findentitybyname'] = function(block) {
+  var name =  block.getFieldValue ('NAME');
+  instantiateVariable ('entity');
+  instantiateVariable ('entities');
+  var code = 
+    'entity = null;\n' + 
+    'entities = server.worlds[0].getEntities();\n' + 
+    'for (var i = 0; i<entities.length; i++) { \n' + 
+    "  if (entities[i].name == " + name + ") {\n" + 
+    "     entity = entities[i];\n" +  
+    "     break;\n" + 
+    "  }\n" +
+    "}\n";    
+  return code; 
+};
+
+Blockly.Python['findentitybycustomname'] = function(block) {
+  var name =  block.getFieldValue ('NAME');
+  instantiateVariable ('entity');
+  instantiateVariable ('entities');
+  var code = 
+    "entity = null;\n" + 
+    "entities = server.worlds[0].getEntities();\n" + 
+    "for (var i = 0; i<entities.length; i++) { \n" + 
+    "   if (entities[i].getCustomName != null) { \n" + 
+    "      if (entities[i].getCustomName() == " + name + ") {\n" + 
+    "         entity = entities[i];\n" +  
+    "         break;\n" + 
+    "      }\n" + 
+    "   }\n" +
+    "}\n";    
+  return code; 
+};
+
+Blockly.Python['whicheffect'] = function(block) {
+  var effect = block.getFieldValue ("EFFECT");
+  return [effect, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['createvector'] = function(block) {
+  var x = block.getFieldValue ('X'); 
+  var y = block.getFieldValue ('Y');
+  var z = block.getFieldValue ('Z');
+  
+  if (x.indexOf ( '.' ) == -1) {
+     x = x + ".0";
+  }
+  if (y.indexOf ( '.' ) == -1) {
+     y = y + ".0";
+  }
+  if (z.indexOf ( '.' ) == -1) {
+     z = z + ".0";
+  }
+    
+  code = "new org.bukkit.util.Vector(" + x + "," + y + "," + z + ")"
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['multiplyvector'] = function(block) {
+  var vector =  Blockly.Python.valueToCode(block, 'VECTOR', Blockly.Python.ORDER_ATOMIC);
+  vector = insideParen (vector);
+  var scalar = block.getFieldValue ('SCALAR');
+  var code = vector + ".multiply (" + scalar + ")";   
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['getvectorvelocity'] = function(block) {
+  var entity =  Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);   
+  entity = insideParen (entity)
+  code = entity + ".getVelocity()"
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['setvectorvelocity'] = function(block) {
+  var entity =  Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);  
+  entity = insideParen(entity)  
+  var vector =  Blockly.Python.valueToCode(block, 'VECTOR', Blockly.Python.ORDER_ATOMIC);  
+  vector = insideParen (vector)  
+  code = entity + ".setVelocity("+ vector + ");\n"
+  return code; 
+};
+
+Blockly.Python['findentitybylocation'] = function(block) {
+  var location =  Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);  
+  location = insideParen (location)
+  var radius = Blockly.Python.valueToCode(block, 'RADIUS', Blockly.Python.ORDER_ATOMIC); 
+  radius = insideParen(radius)
+  instantiateVariable ('entity');
+  instantiateVariable ('entities');
+  var code = 
+    '//findentitybylocation\n' + 
+    'entity = null;\n' + 
+    'entities = server.worlds[0].getEntities();\n' + 
+    'for (var i = 0; i<entities.length; i++) { \n' + 
+    "  if (entities[i].location.distance (" + location + ") < " + radius + ") {\n" + 
+    "     entity = entities[i];\n" +  
+    "     break;\n" + 
+    "  }\n" +
+    "}\n";    
+  return code; 
+};
+
+Blockly.Python['distancebetweenlocations'] = function(block) {
+  var location1 =  Blockly.Python.valueToCode(block, 'LOCATION1', Blockly.Python.ORDER_ATOMIC);   
+  var location2 =  Blockly.Python.valueToCode(block, 'LOCATION2', Blockly.Python.ORDER_ATOMIC);   
+  location1 = insideParen (location1)
+  location2 = insideParen (location2)
+  code = location1 + ".distance(" + location2 + ")"
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['direction'] = function(block) {
+  var direction =  block.getFieldValue ('DIRECTION');   
+  code = "org.bukkit.block.BlockFace." + direction;
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['lookingdirection'] = function(block) {
+  var player =  Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);   
+  instantiateVariable ("directions = [org.bukkit.block.BlockFace.SOUTH,org.bukkit.block.BlockFace.SOUTH_SOUTH_WEST,org.bukkit.block.BlockFace.SOUTH_WEST,org.bukkit.block.BlockFace.WEST_SOUTH_WEST," + 
+                                     "org.bukkit.block.BlockFace.WEST,org.bukkit.block.BlockFace.WEST_NORTH_WEST,org.bukkit.block.BlockFace.NORTH_WEST,org.bukkit.block.BlockFace.NORTH_NORTH_WEST,org.bukkit.block.BlockFace.NORTH,org.bukkit.block.BlockFace.NORTH_NORTH_EAST,org.bukkit.block.BlockFace.NORTH_EAST,org.bukkit.block.BlockFace.EAST_NORTH_EAST,org.bukkit.block.BlockFace.EAST,org.bukkit.block.BlockFace.EAST_SOUTH_EAST,org.bukkit.block.BlockFace.SOUTH_EAST,org.bukkit.block.BlockFace.SOUTH_SOUTH_EAST]");
+                                     
+  code = "directions[parseInt((" + player + ".getLocation().getYaw() + 368.0 ) / 22.5) % 16]"
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['millis'] = function(block) {
+  code = "new Date().getTime()"
+  return [code, Blockly.Python.ORDER_NONE];
+};
 
 

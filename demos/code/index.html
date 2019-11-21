@@ -189,9 +189,8 @@ function bodyLoad() {
 
   <xml id="toolbox" style="display: none">
     <category name="World" colour="120">
-       <block type="mapRenderer"></block>       
-       <block type="drawImage"></block>
-       <block type="drawText"></block>
+       <block type="direction"></block>
+       <block type="millis"></block>
        <block type="copyFile"></block>
        <category name="Blocks">
            <category name="Location">
@@ -224,10 +223,11 @@ function bodyLoad() {
            <block type="blockfacing"></block>
        </category>               
        <category name="Location">
-          <block type="location"></block>
+          <!block type="location"><!/block>
           <block type="absolutelocation"></block>
           <block type="updatelocation"></block>
-          <block type="snaplocation"></block>          
+          <block type="snaplocation"></block>    
+          <block type="distancebetweenlocations"></block>          
        </category> 
        <category name="Events" colour="40">
           <block type="eventlistener"></block>
@@ -235,6 +235,7 @@ function bodyLoad() {
           <block type="clickedBlock"></block>        
        </category>
        <category name="Effects" colour="120">
+          <block type="whicheffect"></block>
           <block type="sound"></block>           
           <block type="killplayer"></block>
           <block type="explosion"></block>
@@ -245,7 +246,13 @@ function bodyLoad() {
           <block type="setstorm"></block>
           <block type="fireworks"></block>
           <block type="ability"></block>
-          <block type="abilityactive"></block>
+          <!block type="abilityactive"><!/block>
+       </category> 
+       <category name="Vector" colour="40">
+         <block type="createvector"></block>
+         <block type="multiplyvector"></block>
+         <block type="getvectorvelocity"></block>
+         <block type="setvectorvelocity"></block>
        </category>       
        <category name="Server">
          <block type="bordercenter"></block>
@@ -254,14 +261,24 @@ function bodyLoad() {
          <block type="setgamemode"></block>       
          <block type="spawnarea"></block>       
        </category>       
+       <category name="Map">
+          <block type="mapRenderer"></block>       
+          <block type="drawImage"></block>
+          <block type="drawText"></block>
+       </category>       
     </category>  
     <category name="Entities" colour="0">
        <block type="allentities"></block>
+       <block type="findentitybyname"></block>
+       <block type="findentitybycustomname"></block>
+       <block type="findentitybylocation"></block>
        <category name="Player">
          <block type="allplayers"></block>         
          <block type="whichplayer"></block>         
          <block type="iteminhandis"></block>                
          <block type="playerhas"></block>
+         <block type="instanceof"></block> 
+         <block type="lookingdirection"></block>         
          <block type="existsplayerdata"></block>
          <block type="setplayerdata"></block>
          <block type="getplayerdata"></block>
@@ -285,9 +302,7 @@ function bodyLoad() {
           <block type="updateinventory"></block>
           <block type="itemstack"></block>
           <block type="materialtype"></block>       
-          <block type="addingredient"></block>
-          <block type="instanceof"></block>
-          <block type="recipe"></block>    
+          <block type="dropitem"></block>
           <block type="modifystack"></block>
           <category name="Potions"></block>
              <block type="addpotion"></block> 
@@ -299,6 +314,10 @@ function bodyLoad() {
              <block type="getcolor"></block>
              <block type="getequipmentname"></block>
              <block type="armorset"></block>              
+          </category>
+          <category name="Recipes">
+             <block type="addingredient"></block>
+             <block type="recipe"></block>    
           </category>
     </category>
     <category name="Output" colour="160">
