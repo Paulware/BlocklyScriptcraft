@@ -450,15 +450,10 @@ Blockly.Python['definename'] = function(block) {
 
 
 Blockly.Python['tostring'] = function (block) {
-  var value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);  
-  var code  = "toString (" + value + ")"; 
-  setupTheCode ( 
-    'String toString(float value) // Convert a number to a string\n' + 
-    '{\n' + 
-    '  String val = String (value);\n' + 
-    '  return val;\n' + 
-    '}' 
-  );  
+  var val = Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC);
+  val = insideParen (val)  
+  var code  = val + ".toString()"; 
+  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -471,19 +466,20 @@ Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
 
 Blockly.Python['spawn'] = function(block) {
   var entity = block.getFieldValue ("ENTITY");
-  entity = entity.toUpperCase();
+  //entity = entity.toUpperCase();
   var count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_ATOMIC);
   count = maxValue (64,count)
   var code = '// Spawn ' + entity + '\n';
   if ((count == "") || (count <= 1 )) { 
-    code = code + 'self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
+    code = code + 'self.world.spawnEntity(self.location,' + entity + ');\n';     
   } else {
     code = code + 'for (var i=0; i<' + count + '; i++) {\n'; 
-    code = code + '  self.world.spawnEntity(self.location,org.bukkit.entity.EntityType.' + entity + ');\n';     
+    code = code + '  self.world.spawnEntity(self.location,' + entity + ');\n';     
     code = code + '}\n';
   } 
   return code;
 };
+
 
 /*
     /js castle()
@@ -943,7 +939,7 @@ function extractString (block,name) {
 Blockly.Python['modifyEntity'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
   entity = insideParen(entity);
-  entity = entity.toUpperCase();
+  //entity = entity.toUpperCase();
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);  
   var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
@@ -960,7 +956,7 @@ Blockly.Python['modifyEntity'] = function(block) {
 
   code = code + '// spawn ' + entity + '\n' + 
                 'var location = ' + location + ';\n' + 
-                'var entity = server.worlds[0].spawnEntity(location, org.bukkit.entity.EntityType.' + entity + ');\n';
+                'var entity = server.worlds[0].spawnEntity(location,' + entity + ');\n';
   
   if ((entity == "HORSE") || (entity == "SKELETON_HORSE")) { 
      code = code + 
@@ -1075,7 +1071,7 @@ Blockly.Python['setpassenger'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
   entity = insideParen(entity);
   
-  var code = 'var passenger = server.worlds[0].spawnEntity(location, org.bukkit.entity.EntityType.' + entity + ');\n' + 
+  var code = 'var passenger = server.worlds[0].spawnEntity(location,' + entity + ');\n' + 
              'entity.setPassenger(passenger);\n';   
   return code; 
 };
@@ -1150,7 +1146,7 @@ Blockly.Python['whichplayer'] = function(block) {
 }
 
 Blockly.Python['entityType'] = function(block) {
-  var entity = block.getFieldValue ("ENTITY");
+  var entity = 'org.bukkit.entity.EntityType.' + block.getFieldValue ("ENTITY");
   return [entity, Blockly.Python.ORDER_NONE];
 }
 
@@ -1162,10 +1158,15 @@ Blockly.Python['blocktype'] = function(block) {
 
 Blockly.Python['materialtype'] = function(block) {
   var material = block.getFieldValue ("MATERIAL");
-  material = insideParen (material);
+  material = 'org.bukkit.Material.' + insideParen (material);
   return [material, Blockly.Python.ORDER_NONE];
 }
 
+Blockly.Python['eggtype'] = function(block) {
+  var material = block.getFieldValue ("MATERIAL");
+  material = 'org.bukkit.Material.' + insideParen (material);
+  return [material, Blockly.Python.ORDER_NONE];
+}
 
 Blockly.Python['creatureTypeString'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITYTYPE", Blockly.Python.ORDER_ATOMIC);
@@ -1174,7 +1175,6 @@ Blockly.Python['creatureTypeString'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 }
 
-// self.location.world.spawnEntity(self.location,org.bukkit.entity.EntityType.PIG);
 Blockly.Python['rider'] = function(block) {
   //alert ( 'get ride' );
   var ride  = Blockly.Python.valueToCode(block, 'RIDE', Blockly.Python.ORDER_ATOMIC);
@@ -1250,19 +1250,20 @@ Blockly.Python['addpotion'] = function(block) {
   name = insideChars(name, "\"", "\"");
   var potion = block.getFieldValue ('POTION');
   var count = block.getFieldValue ('COUNT');
+  /*
   if (potion == "SPLASH_POTION") {
      potion = name;
   } else {
      potion = insideChars(potion, "\"", "\"");
-
      // TODO: Add potion attributes
   } 
+  */
   var code = '// Add ' + potion + ' to inventory\n' + 
-             'var newItems = require(\'items\').splashPotion(' + count + ');\n' + 
+             'var newItems = new org.bukkit.inventory.ItemStack (org.bukkit.Material.' + potion + ',' + count + ');\n' + 
              'var meta = newItems.getItemMeta();\n' + 
-             'meta.setDisplayName(\'' + potion + '\');\n' +
+             'meta.setDisplayName(\'' + name + '\');\n' +
              'newItems.setItemMeta(meta);\n' +              
-             'self.inventory.addItem(newItems);\n';
+             'inventory.addItem(newItems);\n';
   return code;
 };
 
@@ -1870,7 +1871,10 @@ Blockly.Python['existsblockdata'] = function(block) {
 };
 
 Blockly.Python['potionSplashed'] = function(block) {
-  return ["event.getPotion()", Blockly.Python.ORDER_NONE];
+  var potion = Blockly.Python.valueToCode(block, 'POTION', Blockly.Python.ORDER_ATOMIC);  
+  potion = insideParen(potion);
+  var code = potion + ".getItem().getItemMeta().getDisplayName()" 
+  return [code, Blockly.Python.ORDER_NONE];
 }
 
 Blockly.Python['dropitem'] = function(block) {
@@ -2014,4 +2018,30 @@ Blockly.Python['millis'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['getentitytype'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  entity = insideParen (entity);
+  var code = entity + ".getType()";
+  return [code, Blockly.Python.ORDER_NONE];
+}
 
+Blockly.Python['randomnumber'] = function(block) {
+  var low = parseInt(Blockly.Python.valueToCode(block, 'LOW', Blockly.Python.ORDER_ATOMIC));
+  var high = parseInt(Blockly.Python.valueToCode(block, 'HIGH', Blockly.Python.ORDER_ATOMIC));
+  var code  = "parseInt (Math.random () * (" + high + "-" + low + ")) + " + low 
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['isplayer'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var code = player + " instanceof org.bukkit.entity.Player";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['islivingentity'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  entity = insideParen(entity);
+  var code = entity + " instanceof org.bukkit.entity.LivingEntity";
+  return [code, Blockly.Python.ORDER_NONE];
+}

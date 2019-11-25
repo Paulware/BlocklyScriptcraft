@@ -268,15 +268,18 @@ function bodyLoad() {
        </category>       
     </category>  
     <category name="Entities" colour="0">
+       <block type="whichplayer"></block>         
+       <block type="getentitytype"></block>
+       <block type="islivingentity"></block>
        <block type="allentities"></block>
        <block type="findentitybyname"></block>
        <block type="findentitybycustomname"></block>
        <block type="findentitybylocation"></block>
        <category name="Player">
          <block type="allplayers"></block>         
-         <block type="whichplayer"></block>         
          <block type="iteminhandis"></block>                
          <block type="playerhas"></block>
+         <block type="isplayer"></block>
          <block type="instanceof"></block> 
          <block type="lookingdirection"></block>         
          <block type="existsplayerdata"></block>
@@ -287,7 +290,7 @@ function bodyLoad() {
        <category name="Creatures">
          <block type="entity"></block>
          <block type="entityType"></block>
-         <block type="creatureTypeString"></block>                
+         <!block type="creatureTypeString"><!/block>                
          <block type="modifyEntity"></block>
          <block type="setName"></block>
          <block type="entityProfession"></block>
@@ -296,12 +299,13 @@ function bodyLoad() {
          <block type="setpassenger"></block>
          <block type="offai"></block>
        </category>
-       <block type="typeString"></block>
+       <!block type="typeString"><!/block>
     </category> 
     <category name="Items" colour="320">
           <block type="updateinventory"></block>
           <block type="itemstack"></block>
           <block type="materialtype"></block>       
+          <block type="eggtype"></block>       
           <block type="dropitem"></block>
           <block type="modifystack"></block>
           <category name="Potions"></block>
@@ -372,8 +376,9 @@ function bodyLoad() {
        <!block type="additem"><!/block>
        <!block type="repairarmor"><!/block>
     <!/category>
-    <category name="{catText}" colour="160">
+    <category name="{catText}" colour="160">    
       <block type="text"></block>
+      <block type="tostring"></block>      
       <block type="text_join"></block>
       <block type="text_append">
         <value name="TEXT">
@@ -454,7 +459,7 @@ function bodyLoad() {
 
     <category name="{catMath}" colour="230">
       <block type="math_number"></block>
-      <block type="tostring"></block>
+      <block type="randomnumber"></block>
       <block type="math_arithmetic">
         <value name="A">
           <shadow type="math_number">
@@ -526,19 +531,19 @@ function bodyLoad() {
           </shadow>
         </value>
       </block>
-      <block type="math_random_int">
-        <value name="FROM">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="TO">
-          <shadow type="math_number">
-            <field name="NUM">100</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="math_random_float"></block>
+      <!block type="math_random_int">
+        <!value name="FROM">
+          <!shadow type="math_number">
+            <!field name="NUM">1<!/field>
+          <!/shadow>
+        <!/value>
+        <!value name="TO">
+          <!shadow type="math_number">
+            <!field name="NUM">100<!/field>
+          <!/shadow>
+        <!/value>
+      <!/block>
+      <!block type="math_random_float"><!/block>
     </category>
 
     <!category name="{catFunctions}" colour="290" custom="PROCEDURE"><!/category>    

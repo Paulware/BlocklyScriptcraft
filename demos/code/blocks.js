@@ -161,15 +161,12 @@ Blockly.Blocks['potionname'] = {
 // https://www.codeproject.com/Articles/878585/Build-Giant-Ravine-in-Minecraft-using-ScriptCraft
 Blockly.Blocks['tostring'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Convert to string");
-    this.appendValueInput("VALUE")
-        .setCheck("Number")
-        .appendField("Number Value");        
+    this.appendValueInput("VARIABLE")
+        .appendField("Var to string, Variable:");   
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setOutput(true, "String");  
-    this.setColour(230);
+    this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -334,15 +331,21 @@ Blockly.Blocks['eventlistener'] = {
             ["Player Respawn","playerRespawn"],
             ["Player joined the game","playerJoin"],
             ["A potion was splashed", "potionSplash"],
+            ["A player consumed an item", "playerItemConsume"],
             ["A plant grew on a block","blockGrow"],
             ["A block was broken","blockBreak"],
             ["A block was exploded", "blockExplode"],
+            ["A player threw an egg", "playerEggThrow"],
             ["An entity was damaged", "entityDamage"],
+            ["An entity was spawned", "entitySpawn"],
+            ["A creature was spawned", "creatureSpawn"],
+            ["An entity targets another entity", "entityTarget"],
             ["An entity was damaged by entity", "entityDamageByEntity"],
             ["An entity exploded", "entityExplode"],
             ["A player, monster or animal was damaged", "entityDamage"],
             ["A server command was executed", "serverCommand"],
             ["A vehicle moved", "vehicleMove"],
+            ["A vehicle collided with a block", "vehicleBlockCollision"],
             ["A vehicle was entered", "vehicleEnter"],
             ["A vehicle was exited", "vehicleExit"],
             ["Click on a block, or push a lever, button or sign","playerInteract"]
@@ -625,7 +628,7 @@ Blockly.Blocks['addpotion'] = {
         .appendField("Add potion to inventory")
     this.appendDummyInput()
         .appendField("Which Potion")
-        .appendField(new Blockly.FieldDropdown([["Splash Potion","SPLASH_POTION"], ["Create a bat cart", "BATCART"],["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTION");           
+        .appendField(new Blockly.FieldDropdown([["Drinkable Potion","POTION"],["Splash Potion","SPLASH_POTION"], ["Create a bat cart", "BATCART"],["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTION");           
     this.appendValueInput("NAME")
         .appendField("Optional Potion Name");
     this.appendDummyInput()
@@ -812,13 +815,14 @@ Blockly.Blocks['entity'] = {
 Blockly.Blocks['whichplayer'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Player")
+        .appendField("Event Entity")
         .appendField(new Blockly.FieldDropdown([["Player calling function", "self"], 
                                                 ["Player causing event","event.player"],
                                                 ["event entity", "event.entity"],
                                                 ["event vehicle", "event.vehicle"],
                                                 ["shooter","event.entity.shooter"], 
                                                 ["All affected entities", "event.getAffectedEntities()"],
+                                                ["Potion that was splashed", "event.getPotion()"],
                                                 ["Attacker", "event.damager"], 
                                                 ["All Players", "server.getOnlinePlayers()"]]), "ENTITY");           
     this.setOutput(true, null);
@@ -845,6 +849,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Evoker", "Evoker"],
                                                 ["Evoker Fangs", "Evoker_Fangs"],
                                                 ["Horse", "Horse"], 
+                                                ["Iron Golem", "Iron_Golem"],
                                                 ["Minecart", "Minecart"], 
                                                 ["Ocelot", "Ocelot"],
                                                 ["Pig", "Pig"],
@@ -881,11 +886,15 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Diamond", "DIAMOND"],
                                                   ["Diamond Pick", "DIAMOND_PICKAXE"],
                                                   ["Diamond Shovel", "DIAMOND_SHOVEL"],
+                                                  ["Drinkable Potion", "POTION"],
                                                   ["Firework", "FIREWORK_ROCKET"],
+                                                  ["Golden Apple","GOLDEN_APPLE"],
+                                                  ["Enchanted Golden Apple", "ENCHANTED_GOLDEN_APPLE"],
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
                                                   ["White Wool", "WHITE_WOOL"],
+                                                  ["Wolf Egg", "WOLF_SPAWN_EGG"],
                                                   ["Wheat Seeds", "WHEAT_SEEDS"]
                                                ]), "MATERIAL");                   
     this.setOutput(true, null);
@@ -895,6 +904,41 @@ Blockly.Blocks['materialtype'] = {
   }
 };
 
+Blockly.Blocks['eggtype'] = {
+  init: function() {
+    this.appendDummyInput()       
+        .appendField(new Blockly.FieldDropdown([
+                                                  ["Blaze Spawn Egg", "BLAZE_SPAWN_EGG"],
+                                                  ["Cave Spider Spawn Egg", "CAVE_SPIDER_SPAWN_EGG"],
+                                                  ["Creeper Spawn Egg", "CREEPER_SPAWN_EGG"],
+                                                  ["Endermite Spawn Egg", "ENDERMITE_SPAWN_EGG"],
+                                                  ["Enderman Egg", "ENDERMAN_SPAWN_EGG"],
+                                                  ["Guardian Egg", "GUARDIAN_SPAWN_EGG"],
+                                                  ["Ghast Egg", "GHAST_SPAWN_EGG"],
+                                                  ["Husk Egg", "HUSK_SPAWN_EGG"],
+                                                  ["Llama Spawn Egg", "LLAMA_SPAWN_EGG"],
+                                                  ["Magma Cube Spawn Egg","MAGMA_CUBE_SPAWN_EGG"],
+                                                  ["Pillager Spawn Egg","PILLAGER_SPAWN_EGG"],
+                                                  ["Polar Bear Spawn Egg","POLAR_BEAR_SPAWN_EGG"],
+                                                  ["Shulker Spawn Egg", "SHULKER_SPAWN_EGG"],
+                                                  ["Ravager Spawn Egg", "RAVAGER_SPAWN_EGG"],
+                                                  ["Skeleton Spawn Egg", "SKELETON_SPAWN_EGG"],
+                                                  ["Skeleton Horse Spawn Egg", "SKELETON_HORSE_SPAWN_EGG"],
+                                                  ["Wolf Egg", "WOLF_SPAWN_EGG"],
+                                                  ["Vex Spawn Egg", "VEX_SPAWN_EGG"],                                                
+                                                  ["Vindicator Spawn Egg", "VINDICATOR_SPAWN_EGG"],
+                                                  ["Zombie Pigman Spawn Egg", "ZOMBIE_PIGMAN_SPAWN_EGG"],
+                                                  ["Zombie Villager Spawn Egg", "ZOMBIE_VILLAGER_SPAWN_EGG"],
+                                                  ["Zombie Spawn Egg", "ZOMBIE_SPAWN_EGG"]
+                                               ]), "MATERIAL");                   
+    this.setOutput(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 Blockly.Blocks['blocktype'] = {
   init: function() {
     this.appendDummyInput()
@@ -902,6 +946,7 @@ Blockly.Blocks['blocktype'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Air", "AIR"],
                                                 ["Bed", "LEGACY_BED_BLOCK"],
+                                                ["Chest", "CHEST"],
                                                 ["Cobblestone", "COBBLESTONE"],
                                                 ["Command Block (Chain)", "CHAIN_COMMAND_BLOCK"],
                                                 ["Command Block (Impulse)", "COMMAND_BLOCK"],
@@ -1961,8 +2006,8 @@ Blockly.Blocks['existsblockdata'] = {
 
 Blockly.Blocks['potionSplashed'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Potion that was splashed");
+    this.appendValueInput("POTION")
+        .appendField("Custom Name of Potion:");   
     this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2181,7 +2226,7 @@ Blockly.Blocks['lookingdirection'] = {
         .appendField ("Get direction looking for Player" ); 
                                                       
     this.setOutput(true, null);
-    this.setColour(200);
+    this.setColour(00);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2199,6 +2244,49 @@ Blockly.Blocks['millis'] = {
   }
 };
 
+Blockly.Blocks['getentitytype'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField("Get Type of entity:");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['randomnumber'] = {
+  init: function() {
+    this.appendValueInput("LOW")
+        .appendField("Random Number between");
+    this.appendValueInput("HIGH")
+        .appendField("And High");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['isplayer'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Is a player");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['islivingentity'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField("Is a living entity");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
