@@ -585,24 +585,6 @@ Blockly.Python['wallsign'] = function(block) {
   return code;
 };
 
-Blockly.Python['additem'] = function(block) {
-  var count =  block.getFieldValue('COUNT');
-  var itemType = block.getFieldValue ("ITEMTYPE");
-  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
-  player = insideParen (player);
-  if (count == "") {
-     count = 1;
-  } else {
-     count = parseInt (count);
-     if (count > 200) {
-         count = 200;
-     } 
-  }    
-  var code = player + '.inventory.addItem (new org.bukkit.inventory.ItemStack (org.bukkit.Material.' + 
-             itemType + ',' + count + '));\n';
-  return code;
-};
-
 Blockly.Python['consolelog'] = function(block) {
   var value = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ADDITIVE);  
   value = extractStr (value);
@@ -620,11 +602,13 @@ Blockly.Python['eventlistener'] = function(block) {
 };
 
 Blockly.Python['explosion'] = function(block) {
-  var size = block.getFieldValue ('SIZE'); // Blockly.Python.valueToCode(block, 'SIZE', Blockly.Python.ORDER_ATOMIC);    
-  size = maxValue (64,size)
+  var size = parseFloat(block.getFieldValue ('SIZE'));    
+  if (size > 10.0) {
+     size = 10.0;
+  } 
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);    
   location = insideParen (location);
-  var code = "event.entity.world.createExplosion (" + location + "," + size + ");\n";
+  var code = "server.worlds[0].createExplosion (" + location + "," + size + ");\n";
   
   return code;
 };
@@ -1922,7 +1906,8 @@ Blockly.Python['findentitybycustomname'] = function(block) {
 
 Blockly.Python['whicheffect'] = function(block) {
   var effect = block.getFieldValue ("EFFECT");
-  return [effect, Blockly.Python.ORDER_NONE];
+  var code = 'org.bukkit.potion.PotionEffectType.' + effect.toUpperCase()
+  return [code, Blockly.Python.ORDER_NONE];
 }
 
 Blockly.Python['createvector'] = function(block) {
@@ -2045,3 +2030,15 @@ Blockly.Python['islivingentity'] = function(block) {
   var code = entity + " instanceof org.bukkit.entity.LivingEntity";
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['addpotioneffect'] = function(block) {
+  var effect =  Blockly.Python.valueToCode(block, 'EFFECT', Blockly.Python.ORDER_ATOMIC);  
+  effect = insideParen(effect)  
+  var player =  Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);  
+  player = insideParen (player)  
+  var duration =  Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);  
+  duration = parseInt(insideParen (duration)) * 20 // 20 ticks per second
+    
+  code = player + ".addPotionEffect(new org.bukkit.potion.PotionEffect (" + effect + "," + duration + ", 1));\n"
+  return code; 
+};

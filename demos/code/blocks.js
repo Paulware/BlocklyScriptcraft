@@ -269,40 +269,6 @@ Blockly.Blocks['wallsign'] = {
   }
 };
 
-Blockly.Blocks['additem'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Add");
-    this.appendDummyInput()
-        .appendField("Item")
-       .appendField(new Blockly.FieldDropdown([
-                                               ["Arrow", "ARROW"],
-                                               ["Baked Potato","BAKED_POTATO"],
-                                               ["Bone Meal", "BONE_MEAL"],
-                                               ["Cookie","COOKIE"],
-                                               ["Crossbow", "CROSSBOW"],
-                                               ["Diamond", "DIAMOND"],
-                                               ["Diamond Pick", "DIAMOND_PICKAXE"],
-                                               ["Diamond Shovel", "DIAMOND_SHOVEL"],
-                                               ["Firework", "FIREWORK_ROCKET"],                                                                                             
-                                               ["Snow Block", "SNOW_BLOCK"],
-                                               ["SnowBall", "SNOWBALL"],
-                                               ["Splash Potion", "SPLASH_POTION"],
-                                               ["Wheat Seeds", "WHEAT_SEEDS"],
-                                               ["White Wool", "WHITE_WOOL"],
-                                              ]), "ITEMTYPE");  
-    this.appendValueInput("PLAYER")
-        .appendField("To inventory for Player/Entity ");        
-    this.appendDummyInput()
-        .appendField ("How Many")    
-        .appendField (new Blockly.FieldTextInput ("1"), "COUNT");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(320);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
 
 Blockly.Blocks['consolelog'] = {
   init: function() {
@@ -887,9 +853,10 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Diamond Pick", "DIAMOND_PICKAXE"],
                                                   ["Diamond Shovel", "DIAMOND_SHOVEL"],
                                                   ["Drinkable Potion", "POTION"],
+                                                  ["Elytra (Glider)", "ELYTRA"],                                                  
                                                   ["Firework", "FIREWORK_ROCKET"],
                                                   ["Golden Apple","GOLDEN_APPLE"],
-                                                  ["Enchanted Golden Apple", "ENCHANTED_GOLDEN_APPLE"],
+                                                  ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
@@ -2096,7 +2063,7 @@ Blockly.Blocks['whicheffect'] = {
                                                 ["Damage health every 2 seconds","wither"]
                                                ]), "EFFECT");           
     this.setOutput(true, null);
-    this.setColour(120);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2287,6 +2254,23 @@ Blockly.Blocks['islivingentity'] = {
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['addpotioneffect'] = {
+  init: function() {           
+    this.appendValueInput("EFFECT")
+        .appendField ("Give potion effect:" );        
+    this.appendValueInput("PLAYER")
+        .appendField ("To Player" );        
+    this.appendValueInput("DURATION")
+        .appendField ("Duration (seconds)" );        
+                
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
   }
 };
 
