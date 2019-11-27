@@ -761,6 +761,25 @@ Blockly.Python['getplayerdata'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];  
 };
 
+Blockly.Python['getplayerdata2'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
+  
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (player == "") {
+     player = 'self';
+  } else {
+     player = insideParen (player );
+  } 
+  var code = "(!(" + player + " instanceof org.bukkit.entity.LivingEntity))?null:(" + player + 
+             ".getMetadata == null)?null:(" + player + ".getMetadata(\"" + key + 
+             "\").length == 0)?null:" + player + ".getMetadata(\"" + key + "\")[0].value()";
+    
+  return [code, Blockly.Python.ORDER_NONE];  
+};
+
+
+
 Blockly.Python['repairarmor'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   if (player == "") {
@@ -796,6 +815,26 @@ Blockly.Python['placebanner'] = function(block) {
 Blockly.Python['playerlocation'] = function(block) {
   return ['self.location', Blockly.Python.ORDER_NONE];
 };
+
+
+Blockly.Python['moveto'] = function(block) {  
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  entity = insideParen (entity);
+  var code;
+  
+  instantiateVariable ('handle');  
+  instantiateVariable ('path');
+  instantiateVariable ('entity' );
+  
+  code = 'handle = entity.getHandle();\n' + 
+         'path = handle.getNavigation().a(' + location + '.getX(),' + location + '.getY(),' + location + '.getZ());\n' + 
+         entity + '.getNavigation().a(path,1.0);\n' 
+  
+  return code;
+}
+
 
 Blockly.Python['teleport'] = function(block) {
    
@@ -1632,10 +1671,9 @@ Blockly.Python['equipmentname'] = function(block) {
 };
 
 Blockly.Python['updateinventory'] = function(block) {
-  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   var itemStack = Blockly.Python.valueToCode(block, 'ITEMSTACK', Blockly.Python.ORDER_ATOMIC);
-  player = insideParen (player);
-  var code = player + '.inventory.addItem (' + itemStack + ');\n';
+  itemStack = insideParen (itemStack);
+  var code = 'inventory.addItem (' + itemStack + ');\n';
   return code;
 };
 
@@ -1929,6 +1967,15 @@ Blockly.Python['createvector'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['vector2points'] = function(block) {
+  var location1 = Blockly.Python.valueToCode(block, 'LOCATION1', Blockly.Python.ORDER_ATOMIC);
+  location1 = insideParen (location1);
+  var location2 = Blockly.Python.valueToCode(block, 'LOCATION2', Blockly.Python.ORDER_ATOMIC);
+  location2 = insideParen (location2);
+  code = location2 + ".toVector().subtract(" + location1 + ".toVector())"  
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
 Blockly.Python['multiplyvector'] = function(block) {
   var vector =  Blockly.Python.valueToCode(block, 'VECTOR', Blockly.Python.ORDER_ATOMIC);
   vector = insideParen (vector);
@@ -2041,4 +2088,26 @@ Blockly.Python['addpotioneffect'] = function(block) {
     
   code = player + ".addPotionEffect(new org.bukkit.potion.PotionEffect (" + effect + "," + duration + ", 1));\n"
   return code; 
+};
+
+Blockly.Python['spawnentity'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
+  entity = insideParen(entity);
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);  
+  var code = "server.worlds[0].spawnEntity(" + location + "," + entity + ")"
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['nameastack'] = function(block) {
+  var stack  = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);
+  stack = insideParen (stack);
+  var name = block.getFieldValue ('NAME');   
+  instantiateVariable ( 'meta' )
+  instantiateVariable ( 'stack' )
+  var code = 'stack = ' + stack + ';\n' + 
+             'meta = stack.getItemMeta()\n' + 
+             'meta.setDisplayName (\"' + name + '\");\n' +
+             'stack.setItemMeta(meta);\n';             
+  return code;
 };

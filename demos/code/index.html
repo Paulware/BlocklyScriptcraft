@@ -240,6 +240,7 @@ function bodyLoad() {
           <block type="explosion"></block>
           <block type="lightning"></block>
           <block type="teleport"></block>
+          <block type="moveto"></block>
           <block type="settime"></block>
           <block type="gettime"></block>
           <block type="setstorm"></block>
@@ -249,6 +250,7 @@ function bodyLoad() {
        </category> 
        <category name="Vector" colour="40">
          <block type="createvector"></block>
+         <block type="vector2points"></block>
          <block type="multiplyvector"></block>
          <block type="getvectorvelocity"></block>
          <block type="setvectorvelocity"></block>
@@ -271,6 +273,7 @@ function bodyLoad() {
        <block type="getentitytype"></block>
        <block type="islivingentity"></block>
        <block type="allentities"></block>
+       <block type="spawnentity"></block>
        <block type="findentitybyname"></block>
        <block type="findentitybycustomname"></block>
        <block type="findentitybylocation"></block>
@@ -283,7 +286,8 @@ function bodyLoad() {
          <block type="lookingdirection"></block>         
          <block type="existsplayerdata"></block>
          <block type="setplayerdata"></block>
-         <block type="getplayerdata"></block>
+         <!block type="getplayerdata"><!/block>
+         <block type="getplayerdata2"></block>
          <block type="removeplayerdata"></block>
        </category> 
        <category name="Creatures">
@@ -303,6 +307,7 @@ function bodyLoad() {
     <category name="Items" colour="320">
           <block type="updateinventory"></block>
           <block type="itemstack"></block>
+          <block type="nameastack"></block>
           <block type="materialtype"></block>       
           <block type="eggtype"></block>       
           <block type="dropitem"></block>
