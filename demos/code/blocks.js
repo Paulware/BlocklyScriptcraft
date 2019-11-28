@@ -952,6 +952,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Sign Post", "OAK_SIGN"],
                                                 ["Sticky Piston", "STICKY_PISTON"],
                                                 ["Slime Block", "SLIME_BLOCK"],
+                                                ["TNT", "TNT"],
                                                 ["Water", "WATER"],
                                                 ["Wheat", "WHEAT"],
                                                 ["White Banner", "WHITE_BANNER"], 
