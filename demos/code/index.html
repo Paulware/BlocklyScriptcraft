@@ -192,7 +192,16 @@ function bodyLoad() {
        <block type="direction"></block>
        <block type="millis"></block>
        <block type="copyFile"></block>
+       <!block type="boundingbox"><!/block>
+       <block type="nearbyentities"></block>
        <category name="Blocks">
+           <block type="lookingat"></block>
+           <block type="clickedBlock"></block>            
+           <!block type="whichblock"><!/block>
+           <block type="blocktype"></block> 
+           <block type="getblocktype"></block>
+           <block type="changeBlock"></block>
+           <block type="blockfacing"></block>
            <category name="Location">
                <block type="getBlock"></block>            
                <block type="spawnblock"></block>           
@@ -216,11 +225,6 @@ function bodyLoad() {
                <block type="getblockdata"></block>
                <block type="existsblockdata"></block>
            </category>       
-           <block type="whichblock"></block>
-           <block type="blocktype"></block> 
-           <block type="getblocktype"></block>
-           <block type="changeBlock"></block>
-           <block type="blockfacing"></block>
        </category>               
        <category name="Location">
           <!block type="location"><!/block>
@@ -230,9 +234,9 @@ function bodyLoad() {
           <block type="distancebetweenlocations"></block>          
        </category> 
        <category name="Events" colour="40">
+          <block type="actiontype"></block>
           <block type="eventlistener"></block>
-          <block type="eventcancel"></block>
-          <block type="clickedBlock"></block>        
+          <block type="eventcancel"></block>       
        </category>
        <category name="Effects" colour="120">
           <block type="sound"></block>           
@@ -254,6 +258,7 @@ function bodyLoad() {
          <block type="multiplyvector"></block>
          <block type="getvectorvelocity"></block>
          <block type="setvectorvelocity"></block>
+         <block type="vectortoyaw"></block>
        </category>       
        <category name="Server">
          <block type="bordercenter"></block>
@@ -262,16 +267,13 @@ function bodyLoad() {
          <block type="setgamemode"></block>       
          <block type="spawnarea"></block>       
        </category>       
-       <category name="Map">
-          <block type="mapRenderer"></block>       
-          <block type="drawImage"></block>
-          <block type="drawText"></block>
-       </category>       
     </category>  
     <category name="Entities" colour="0">
        <block type="whichplayer"></block>         
        <block type="getentitytype"></block>
        <block type="islivingentity"></block>
+       <block type="isarrow"></block>
+       <block type="issnowball"></block>
        <block type="allentities"></block>
        <block type="spawnentity"></block>
        <block type="findentitybyname"></block>
@@ -282,7 +284,7 @@ function bodyLoad() {
          <block type="iteminhandis"></block>                
          <block type="playerhas"></block>
          <block type="isplayer"></block>
-         <block type="instanceof"></block> 
+         <!block type="instanceof"><!/block> 
          <block type="lookingdirection"></block>         
          <block type="existsplayerdata"></block>
          <block type="setplayerdata"></block>
@@ -293,6 +295,7 @@ function bodyLoad() {
        <category name="Creatures">
          <block type="entity"></block>
          <block type="entityType"></block>
+         <block type="tocreature"></block>
          <!block type="creatureTypeString"><!/block>                
          <block type="modifyEntity"></block>
          <block type="setName"></block>
@@ -306,8 +309,12 @@ function bodyLoad() {
     </category> 
     <category name="Items" colour="320">
           <block type="updateinventory"></block>
+          <block type="playerinventory"></block>
+          <block type="clearinventory"></block>
           <block type="itemstack"></block>
+          <block type="potionSplashed"></block>
           <block type="nameastack"></block>
+          <block type="nameofitem"></block>
           <block type="materialtype"></block>       
           <block type="eggtype"></block>       
           <block type="dropitem"></block>
@@ -316,7 +323,6 @@ function bodyLoad() {
              <block type="addpotion"></block> 
              <block type="addpotioneffect"></block>
              <block type="whicheffect"></block>
-             <block type="potionSplashed"></block>
              <block type="potionname"></block>               
           </category>
           <category name="Gear">
@@ -329,6 +335,11 @@ function bodyLoad() {
              <block type="addingredient"></block>
              <block type="recipe"></block>    
           </category>
+          <category name="Map">
+             <block type="mapRenderer"></block>       
+             <block type="drawImage"></block>
+             <block type="drawText"></block>
+          </category>       
     </category>
     <category name="Output" colour="160">
        <block type="consolelog"></block>
@@ -350,6 +361,7 @@ function bodyLoad() {
          <block type="functionCall"></block>
          <block type="repeatexecution"></block>
          <block type="delayedexecution"></block>
+         <block type="hasfunction"></block>
          <block type="returnVariable"></block>      
        </category> 
        <category name="{catVariables}" > <!custom="VARIABLE">

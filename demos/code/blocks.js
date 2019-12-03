@@ -315,7 +315,7 @@ Blockly.Blocks['eventlistener'] = {
             ["A vehicle collided with a block", "vehicleBlockCollision"],
             ["A vehicle was entered", "vehicleEnter"],
             ["A vehicle was exited", "vehicleExit"],
-            ["Click on a block, or push a lever, button or sign","playerInteract"]
+            ["Player Mouse Click","playerInteract"]
         ]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
@@ -610,7 +610,7 @@ Blockly.Blocks['addpotion'] = {
         .appendField (new Blockly.FieldTextInput ("1"), "COUNT")
         .appendField (" ")        
         .appendField (new Blockly.FieldDropdown([["Drinkable Potion","POTION"],["Splash Potion","SPLASH_POTION"], ["Create a bat cart", "BATCART"],["Increase health of entity", "ABSORPTION"],["Oof Bad Omen", "BAD_OMEN"],["Blindness", "BLINDNESS"],["Confusion", "CONFUSION"],["Decrease Damage Received","DAMAGE_RESISTANCE"],["Glow", "GLOWING"], ["Hurt an entity", "HARM"],["Heal an entity", "HEAL"],["Increase damage dealt","INCREASE_DAMAGE"],["Invisibility","INVISIBILITY"],["Increase jump height","JUMP"],["Cause entity to float","LEVITATION"],["Loot table luck","LUCK"],["Night Vision","NIGHT_VISION"],["Poison an entity","POISION"],["Regenerate Health","REGENERATION"], ["Decrease Movement Speed","SLOW"],["Increase Movement Speed", "SPEED"],["Allow breathing underwater", "WATER_BREATHING"],["Decrease damage dealt by entity","WEAKNESS"],["Suck health from entity","WITHER"]]), "POTION")           
-        .appendField (" to inventory.  Optional Potion Name:" );
+        .appendField (" to inventory. Potion Name:" );
     this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -826,6 +826,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Endermite", "ENDERMITE"],
                                                 ["Evoker", "EVOKER"],
                                                 ["Evoker Fangs", "EVOKER_FANGS"],
+                                                ["Fireball", "FIREBALL"],
                                                 ["Horse", "HORSE"], 
                                                 ["Iron Golem", "IRON_GOLEM"],
                                                 ["Minecart", "MINECART"], 
@@ -835,8 +836,10 @@ Blockly.Blocks['entityType'] = {
                                                 ["Sheep", "SHEEP"],  
                                                 ["Splash Potion", "SPLASH_POTION"],                                                
                                                 ["Shulker", "SHULKER"],
+                                                ["Shulker Bullet", "SHULKER_BULLET"],
                                                 ["Skeleton","SKELETON"],
                                                 ["Skeleton Horse", "SKELETON_HORSE"],
+                                                ["Trident", "TRIDENT"],
                                                 ["Villager", "VILLAGER"],
                                                 ["Wolf", "WOLF"],
                                                 ["Wither", "WITHER"],
@@ -870,6 +873,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Firework", "FIREWORK_ROCKET"],
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
+                                                  ["Oak Sign Post", "OAK_SIGN"],                                                  
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Stick", "STICK"],
                                                   ["Snow Block", "SNOW_BLOCK"],
@@ -919,7 +923,6 @@ Blockly.Blocks['eggtype'] = {
   }
 };
 
-
 Blockly.Blocks['blocktype'] = {
   init: function() {
     this.appendDummyInput()
@@ -936,12 +939,14 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Composter", "COMPOSTER"],                                                
                                                 ["Door", "LEGACY_WOODEN_DOOR"],
                                                 ["Farm Land", "FARMLAND"],
-                                                ["Fence", "OAK_FENCE"],                                                
+                                                ["Fence", "OAK_FENCE"],
+                                                ["Fire", "FIRE"],                                                
                                                 ["Gate", "OAK_FENCE_GATE"],
                                                 ["Item Frame", "ITEM_FRAME"],
                                                 ["Lever", "LEVER"],
                                                 ["Normal Piston", "PISTON"],
                                                 ["Oak", "OAK_WOOD"], 
+                                                ["Oak Sign Post", "OAK_SIGN"],
                                                 ["Observer Block", "OBSERVER"],                                                
                                                 ["Portal", "LEGACY_PORTAL"],
                                                 ["Rail", "RAIL"],
@@ -949,7 +954,6 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Redstone Block", "REDSTONE_BLOCK"],
                                                 ["Redstone Torch", "REDSTONE_TORCH"],
                                                 ["Sign on Wall", "LEGACY_SIGN"],
-                                                ["Sign Post", "OAK_SIGN"],
                                                 ["Sticky Piston", "STICKY_PISTON"],
                                                 ["Slime Block", "SLIME_BLOCK"],
                                                 ["TNT", "TNT"],
@@ -1030,7 +1034,7 @@ Blockly.Blocks['clickedBlock'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Block that was clicked on");
-    this.setColour(40);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, "String");
@@ -1490,10 +1494,8 @@ Blockly.Blocks['setstorm'] = {
 
 Blockly.Blocks['iteminhandis'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Item in hand");
-    this.appendValueInput("PLAYER")
-        .appendField("Player");
+    this.appendValueInput("PLAYER")        
+        .appendField("Item in hand of Player");
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -1761,7 +1763,7 @@ Blockly.Blocks['getsignline'] = {
         .appendField("For Block");
     this.appendDummyInput()
         .appendField("Line: ")
-        .appendField (new Blockly.FieldTextInput ("1"), "LINE");      
+        .appendField (new Blockly.FieldTextInput ("0"), "LINE");      
     this.setOutput(true, null);
     this.setColour(200);
     this.setTooltip('');
@@ -1912,7 +1914,7 @@ Blockly.Blocks['setblockcommand'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Command Block Command")         
-        .appendField (new Blockly.FieldTextInput ("/say \"Hello\""), "COMMAND");     
+        .appendField (new Blockly.FieldTextInput ("\"say \\\"Hello\\\"\""), "COMMAND");     
     this.appendValueInput("LOCATION")
         .appendField("At Location ");                                                       
     this.setPreviousStatement(true, null);
@@ -2002,7 +2004,7 @@ Blockly.Blocks['existsblockdata'] = {
 Blockly.Blocks['potionSplashed'] = {
   init: function() {
     this.appendValueInput("POTION")
-        .appendField("Custom Name of Potion:");   
+        .appendField("Custom Name of Stack:");   
     this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2117,7 +2119,7 @@ Blockly.Blocks['createvector'] = {
 Blockly.Blocks['vector2points'] = {
   init: function() {
     this.appendValueInput("LOCATION1")
-        .appendField("Vector between 2 points From ")
+        .appendField("Vector between 2 locations From ")
     this.appendValueInput("LOCATION2")
         .appendField("To")
     this.setOutput(true, null);
@@ -2202,27 +2204,27 @@ Blockly.Blocks['direction'] = {
         .appendField("Item Direction")
         .appendField(new Blockly.FieldDropdown([
                                                  ["DOWN","DOWN"],	 
-                                                 ["EAST","EAST"],	 
+                                                 ["EAST (Positive X)","EAST"],	 
                                                  ["EAST_NORTH_EAST","EAST_NORTH_EAST"],	 
                                                  ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],	 
-                                                 ["NORTH","NORTH"],	 
+                                                 ["NORTH (Negative Z)","NORTH"],	 
                                                  ["NORTH_EAST","NORTH_EAST"],	 
                                                  ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],	 
                                                  ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],	 
                                                  ["NORTH_WEST","NORTH_WEST"],	 
-                                                 ["SOUTH","SOUTH"],	 
+                                                 ["SOUTH (Positive Z)","SOUTH"],	 
                                                  ["SOUTH_EAST","SOUTH_EAST"],	 
                                                  ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],	 
                                                  ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],	 
                                                  ["SOUTH_WEST","SOUTH_WEST"],	 
                                                  ["UP","UP"],	 
-                                                 ["WEST","WEST"],	 
+                                                 ["WEST (Negative X)","WEST"],	 
                                                  ["WEST_NORTH_WEST","WEST_NORTH_WEST"],	 
                                                  ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
                                                ]), "DIRECTION"); 
                                                       
     this.setOutput(true, null);
-    this.setColour(200);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2246,7 +2248,7 @@ Blockly.Blocks['millis'] = {
         .appendField("Current Milliseconds")
                                                       
     this.setOutput(true, null);
-    this.setColour(200);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2298,12 +2300,34 @@ Blockly.Blocks['islivingentity'] = {
   }
 };
 
+Blockly.Blocks['isarrow'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField("Is an arrow");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['issnowball'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField("Is a snowball");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['addpotioneffect'] = {
   init: function() {           
     this.appendValueInput("EFFECT")
         .appendField ("Give potion effect:" );        
     this.appendValueInput("PLAYER")
-        .appendField ("To Player" );        
+        .appendField ("To Entity" );        
     this.appendValueInput("DURATION")
         .appendField ("Duration (seconds)" );        
                 
@@ -2337,8 +2361,149 @@ Blockly.Blocks['nameastack'] = {
         .appendField(" named stack of ");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(0);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['additem'] = {
+  init: function() {           
+    this.appendValueInput("ITEMTYPE")
+        .appendField ("Give potion effect:" );        
+    this.appendValueInput("PLAYER")
+        .appendField ("To Player" );        
+    this.appendValueInput("COUNT")
+        .appendField ("Duration (seconds)" );        
+                
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+  }
+};
+
+Blockly.Blocks['nameofitem'] = {
+  init: function() {
+    this.appendValueInput("ITEM")
+        .appendField("Custom Name of Item:");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
+
+Blockly.Blocks['lookingat'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Block looked at by player");   
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+Blockly.Blocks['playerinventory'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Inventory for player:");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+Blockly.Blocks['clearinventory'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Clear inventory for player:");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['vectortoyaw'] = {
+  init: function() {
+    this.appendValueInput("VECTOR")
+        .appendField("Get yaw for vector:");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+Blockly.Blocks['boundingbox'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Get Bounding Box, with center location:");   
+    this.appendValueInput("RADIUS")
+        .appendField("Radius:");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+Blockly.Blocks['nearbyentities'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Entities in a box, with center");   
+    this.appendValueInput("RADIUS")
+        .appendField("and radius");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+Blockly.Blocks['tocreature'] = {
+  init: function() {
+    this.appendValueInput("CREATURE")
+        .appendField("Convert to creature type");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+Blockly.Blocks['hasfunction'] = {
+  init: function() {
+    this.appendValueInput("OBJECT")
+        .appendField ("Function ")
+        .appendField (new Blockly.FieldTextInput ( "functionName"), "NAME")
+        .appendField(" is callable from object");        
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);
+  }
+};
+
+Blockly.Blocks['actiontype'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Mouse Click Type")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Left click in air", "LEFT_CLICK_AIR"],
+                                                ["Left click on a block", "LEFT_CLICK_BLOCK"],
+                                                ["Right click in the air", "RIGHT_CLICK_AIR"], 
+                                                ["Right click on a block", "RIGHT_CLICK_BLOCK"]
+                                               ]), "ACTION"); 
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
