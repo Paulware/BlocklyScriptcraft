@@ -1187,18 +1187,12 @@ Blockly.Python['creatureTypeString'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 }
 
-Blockly.Python['rider'] = function(block) {
-  //alert ( 'get ride' );
-  var ride  = Blockly.Python.valueToCode(block, 'RIDE', Blockly.Python.ORDER_ATOMIC);
-  ride = insideParen (ride);
-  //alert ( 'got: ' + ride );
-  var rider = Blockly.Python.valueToCode(block, 'PASSENGER', Blockly.Python.ORDER_ATOMIC);
-  rider = insideParen (rider);
-  var code = 
-     "// Spawn " + rider + " riding: [" + ride + "]\n" + 
-     "var ride = " + ride + ";\n" + 
-     "var rider = " + rider + ";\n" + 
-     "ride.setPassenger(rider);\n"; 
+Blockly.Python['setride'] = function(block) {
+  var vehicle  = Blockly.Python.valueToCode(block, 'VEHICLE', Blockly.Python.ORDER_ATOMIC);
+  vehicle = insideParen (vehicle);
+  var passenger = Blockly.Python.valueToCode(block, 'PASSENGER', Blockly.Python.ORDER_ATOMIC);
+  passenger = insideParen (passenger);
+  var code = vehicle + ".setPassenger(" + passenger + ");\n"; 
   return code;
 };
 
