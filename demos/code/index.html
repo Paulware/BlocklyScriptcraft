@@ -244,6 +244,7 @@ function bodyLoad() {
           <block type="explosion"></block>
           <block type="lightning"></block>
           <block type="teleport"></block>
+          <block type="launchprojectile"></block>
           <block type="moveto"></block>
           <block type="settime"></block>
           <block type="gettime"></block>
@@ -272,13 +273,16 @@ function bodyLoad() {
        <block type="whichplayer"></block>         
        <block type="getentitytype"></block>
        <block type="islivingentity"></block>
-       <block type="isarrow"></block>
-       <block type="issnowball"></block>
        <block type="allentities"></block>
        <block type="spawnentity"></block>
        <block type="findentitybyname"></block>
        <block type="findentitybycustomname"></block>
        <block type="findentitybylocation"></block>
+       <category name="Projectiles">
+          <block type="projectileentity"></block>       
+          <block type="isarrow"></block>
+          <block type="issnowball"></block>
+       </category>
        <category name="Player">
          <block type="allplayers"></block>  
          <block type="setride"></block>         
@@ -288,10 +292,11 @@ function bodyLoad() {
          <!block type="instanceof"><!/block> 
          <block type="lookingdirection"></block>         
          <block type="existsplayerdata"></block>
-         <block type="setplayerdata"></block>
-         <!block type="getplayerdata"><!/block>
-         <block type="getplayerdata2"></block>
-         <block type="removeplayerdata"></block>
+         <category name="Data">
+            <block type="setplayerdata"></block>
+            <block type="getplayerdata2"></block>
+            <block type="removeplayerdata"></block>
+         </category>
        </category> 
        <category name="Creatures">
          <block type="entity"></block>
@@ -312,14 +317,16 @@ function bodyLoad() {
           <block type="updateinventory"></block>
           <block type="playerinventory"></block>
           <block type="clearinventory"></block>
-          <block type="itemstack"></block>
-          <block type="potionSplashed"></block>
-          <block type="nameastack"></block>
           <block type="nameofitem"></block>
           <block type="materialtype"></block>       
           <block type="eggtype"></block>       
           <block type="dropitem"></block>
           <block type="modifystack"></block>
+          <category name="Stack"></block>
+             <block type="itemstack"></block>
+             <block type="nameastack"></block>
+             <block type="nameofstack"></block>
+          </category>
           <category name="Potions"></block>
              <block type="addpotion"></block> 
              <block type="addpotioneffect"></block>

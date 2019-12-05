@@ -289,6 +289,7 @@ Blockly.Blocks['eventlistener'] = {
         .appendField("Listener Event")
         .appendField(new Blockly.FieldDropdown([ 
             ["A player moved", "playerMove"],
+            ["Player Mouse Click","playerInteract"],           
             ["A player died", "playerDeath"], 
             ["World save event", "worldSave"],            
             ["An item was hung", "hangingPlace"],
@@ -314,8 +315,7 @@ Blockly.Blocks['eventlistener'] = {
             ["A vehicle moved", "vehicleMove"],
             ["A vehicle collided with a block", "vehicleBlockCollision"],
             ["A vehicle was entered", "vehicleEnter"],
-            ["A vehicle was exited", "vehicleExit"],
-            ["Player Mouse Click","playerInteract"]
+            ["A vehicle was exited", "vehicleExit"]
         ]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
@@ -505,7 +505,7 @@ Blockly.Blocks['sound'] = {
         .appendField("Entity Type");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(160);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -832,7 +832,8 @@ Blockly.Blocks['entityType'] = {
                                                 ["Minecart", "MINECART"], 
                                                 ["Ocelot", "OCELOT"],
                                                 ["Pig", "PIG"],
-                                                ["Rabbit", "RABIIT"],
+                                                ["Rabbit", "RABBIT"],
+                                                ["Ravager", "RAVAGER"],
                                                 ["Sheep", "SHEEP"],  
                                                 ["Splash Potion", "SPLASH_POTION"],                                                
                                                 ["Shulker", "SHULKER"],
@@ -888,6 +889,28 @@ Blockly.Blocks['materialtype'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['projectileentity'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Projectile")        
+        .appendField(new Blockly.FieldDropdown([
+                                                  ["Arrow", "ARROW"],
+                                                  ["Dragon Fireball", "DRAGON_FIREBALL"],
+                                                  ["Fireball", "FIREBALL"],
+                                                  ["Firework", "FIREWORK_ROCKET"],
+                                                  ["Shulker Bullet", "SHULKER_BULLET"],
+                                                  ["SnowBall", "SNOWBALL"],
+                                                  ["Trident", "TRIDENT"],
+                                                  ["Wither Skull", "WITHER_SKULL"]                                                                                                        
+                                               ]), "PROJECTILE");                   
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 
 Blockly.Blocks['eggtype'] = {
   init: function() {
@@ -1495,7 +1518,7 @@ Blockly.Blocks['setstorm'] = {
 Blockly.Blocks['iteminhandis'] = {
   init: function() {
     this.appendValueInput("PLAYER")        
-        .appendField("Item in hand of Player");
+        .appendField("Stack in hand of Player");
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -2433,7 +2456,7 @@ Blockly.Blocks['vectortoyaw'] = {
   init: function() {
     this.appendValueInput("VECTOR")
         .appendField("Get yaw for vector:");   
-    this.setColour(320);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, null);
@@ -2459,7 +2482,7 @@ Blockly.Blocks['nearbyentities'] = {
         .appendField("Entities in a box, with center");   
     this.appendValueInput("RADIUS")
         .appendField("and radius");   
-    this.setColour(320);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, null);
@@ -2470,7 +2493,7 @@ Blockly.Blocks['tocreature'] = {
   init: function() {
     this.appendValueInput("CREATURE")
         .appendField("Convert to creature type");   
-    this.setColour(320);
+    this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, null);
@@ -2483,7 +2506,7 @@ Blockly.Blocks['hasfunction'] = {
         .appendField ("Function ")
         .appendField (new Blockly.FieldTextInput ( "functionName"), "NAME")
         .appendField(" is callable from object");        
-    this.setColour(320);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, null);
@@ -2506,4 +2529,31 @@ Blockly.Blocks['actiontype'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['launchprojectile'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField("Launch projectile from entity:");   
+    this.appendValueInput("PROJECTILE")
+        .appendField("projectile:");   
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['nameofstack'] = {
+  init: function() {
+    this.appendValueInput("STACK")
+        .appendField("Custom Name of Stack:");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
+
+
 

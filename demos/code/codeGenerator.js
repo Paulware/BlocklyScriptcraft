@@ -647,9 +647,6 @@ Blockly.Python['sendmessage'] = function(block) {
      code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
             command + ");\n";
   } else { 
-     if (message.indexOf ( "\"" ) == -1) { 
-        message = "\"" + message + "\"";
-     } 
      code = player + ".sendMessage (" + message + ");\n";
   }
   return code;
@@ -1881,7 +1878,7 @@ Blockly.Python['existsblockdata'] = function(block) {
 Blockly.Python['potionSplashed'] = function(block) {
   var potion = Blockly.Python.valueToCode(block, 'POTION', Blockly.Python.ORDER_ATOMIC);  
   potion = insideParen(potion);
-  var code = potion + ".getItem().getItemMeta().getDisplayName()" 
+  var code = potion + ".getItemMeta().getDisplayName()" 
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -2198,6 +2195,32 @@ Blockly.Python['actiontype'] = function(block) {
   var action = block.getFieldValue ("ACTION");
   action = insideParen(action)
   var code = 'org.bukkit.event.block.Action.' + action;
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['projectileentity'] = function(block) {
+  var projectile = block.getFieldValue ("PROJECTILE");
+  projectile = 'org.bukkit.entity.EntityType.' + insideParen (projectile);
+  return [projectile, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['launchprojectile'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  var projectile = Blockly.Python.valueToCode(block, 'PROJECTILE', Blockly.Python.ORDER_ATOMIC);
+  var code;
+  entity = insideParen (entity);
+  projectile = insideParen (projectile);
+  
+  instantiateVariable ("projectile");
+  code = "projectile=server.worlds[0].spawnEntity(" + entity + ".location," + projectile + ");\n" + 
+         entity + ".launchProjectile(projectile.getClass());\n"                 
+  return code;
+};
+
+Blockly.Python['nameofstack'] = function(block) {
+  var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);  
+  stack = insideParen(stack);
+  var code = stack + ".getItemMeta().getDisplayName()" 
   return [code, Blockly.Python.ORDER_NONE];
 }
 
