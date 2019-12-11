@@ -197,25 +197,25 @@ function includeClass (className) {
 
 function getTypeName (value) {
   var bracket1 = findIndex ( value, '|', 1) + 1;
-  var bracket2 = findIndex ( value, '|', 2);	
+  var bracket2 = findIndex ( value, '|', 2);    
   var typeName = value.substring(bracket1,bracket2);
   return typeName;
 }
 
 function getUniqueName (value) {
   var bracket1 = findIndex ( value, '|', 2) + 1;
-  var bracket2 = findIndex ( value, '|', 3);	
+  var bracket2 = findIndex ( value, '|', 3);    
   var uniqueName = value.substring(bracket1,bracket2);
   var index = uniqueName.indexOf ( "\"");
   if (index != -1) {
-	 uniqueName = uniqueName.substring (1,uniqueName.length-1);
+     uniqueName = uniqueName.substring (1,uniqueName.length-1);
   }
   return uniqueName;
 }
 
 function getPins (value) {
   var bracket1 = findIndex ( value, '|', 3) + 1;
-  var bracket2 = findIndex ( value, '|', 4);	
+  var bracket2 = findIndex ( value, '|', 4);    
   var val = value.substring(bracket1,bracket2);
   return val;
 }
@@ -365,7 +365,7 @@ Blockly.Python['loadobjects'] = function(block) {
   var endIndex = objects.indexOf ('\n');
   var imports = "";
   while (endIndex != -1) {
-	   value = objects.substring (startIndex,endIndex-1);
+       value = objects.substring (startIndex,endIndex-1);
     typeName = getTypeName (value);
     if (imports.indexOf (typeName) == -1) {
       if (typeName== "IRPipboy") {
@@ -375,9 +375,9 @@ Blockly.Python['loadobjects'] = function(block) {
     }
     uniqueName = getUniqueName (value);    
     pins = getPins (value);
-   	code = code + typeName + ' ' + uniqueName + ' = ' + typeName + '(' + pins + ');\n';
-	   startIndex = endIndex + 1;
-	   endIndex = objects.indexOf ( '\n', startIndex);
+    code = code + typeName + ' ' + uniqueName + ' = ' + typeName + '(' + pins + ');\n';
+       startIndex = endIndex + 1;
+       endIndex = objects.indexOf ( '\n', startIndex);
   }    
   return imports + code +'\n';
 };
@@ -483,13 +483,13 @@ Blockly.Python['spawn'] = function(block) {
 
 /*
     /js castle()
-				/js chessboard()
-				/js cottage()
-				/js cottage_road()
-				/js dancefloor()
-				/js fort()
-				/js rainbow()
-				/js temple()
+                /js chessboard()
+                /js cottage()
+                /js cottage_road()
+                /js dancefloor()
+                /js fort()
+                /js rainbow()
+                /js temple()
 */
 Blockly.Python['structures'] = function(block) {
   var structure = block.getFieldValue ("STRUCTURE");
@@ -839,14 +839,14 @@ Blockly.Python['teleport'] = function(block) {
   location = insideParen (location);
   var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
   entity = insideParen (entity);  
-  code = 	entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";
+  code =    entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";
   
   return code;
 }
 
 Blockly.Python['sound'] = function(block) {
   var animal = block.getFieldValue ('ANIMAL');
-  var code = 	"require('sounds').play(org.bukkit.Sound.ENTITY_" + animal + "_AMBIENT,self.location);\n";	  
+  var code =    "require('sounds').play(org.bukkit.Sound.ENTITY_" + animal + "_AMBIENT,self.location);\n";    
   return code;
 }
 
@@ -884,7 +884,7 @@ Blockly.Python['teamflag'] = function(block) {
 Blockly.Python['spawnarea'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);
-  var code = 	"server.worlds[0].setSpawnLocation(" + location + ");\n";
+  var code =    "server.worlds[0].setSpawnLocation(" + location + ");\n";
   
   return code;
 }
@@ -945,6 +945,32 @@ function extractString (block,name) {
   return value;
 } 
 
+function showInstantiations(code,params) {
+  var first = true;
+  var found;
+  for (var i=0; i<instantiations.length; i++ ) {
+     found = false;
+     if (params.length > 0) {
+         if (params.indexOf ( instantiations[i]) > -1 ) {
+             found = true;
+         } 
+     } 
+      
+     if (!found) { 
+        if (first) {
+            code = code + "  //Instantiations;\n"; 
+            first = false;
+         } 
+         if (instantiations[i].indexOf ( "function") > -1) { 
+           code = code + "  " + instantiations[i] + ";\n";
+         } else { 
+           code = code + "  var " + instantiations[i] + ";\n"; 
+         } 
+     }
+  }   
+  return code;  
+} 
+
 Blockly.Python['modifyEntity'] = function(block) {
   var entity = Blockly.Python.valueToCode(block, "ENTITY", Blockly.Python.ORDER_ATOMIC); 
   entity = insideParen(entity);
@@ -954,14 +980,7 @@ Blockly.Python['modifyEntity'] = function(block) {
   var modifications = Blockly.Python.statementToCode (block, 'MODIFICATIONS' );  
 
   var code = "";
-  var first = true;
-  for (var i=0; i<instantiations.length; i++ ) {
-     if (first) {
-        code = code + "  //Instantiations;\n"; 
-        first = false;
-     } 
-     code = code + "  var " + instantiations[i] + ";\n"; 
-  }   
+  code = showInstantiations (code, []);
 
   code = code + '// spawn ' + entity + '\n' + 
                 'var location = ' + location + ';\n' + 
@@ -1414,15 +1433,7 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
   var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
   var code = 'exports.' + functionName + ' = function ' + params + ' {\n';
   var first = true;
-  for (var i=0; i<instantiations.length; i++ ) {
-     if (params.indexOf ( instantiations[i] ) == -1) { // not in the parameter list
-        if (first) {
-           code = code + "  //Instantiations;\n"; 
-           first = false;
-        } 
-        code = code + "  var " + instantiations[i] + ";\n"; 
-     } 
-  }   
+  code = showInstantiations (code, params );
   code = code +   
          functionCode +
          '};\n';
@@ -1626,14 +1637,7 @@ Blockly.Python['modifystack'] = function(block) {
 
   var code = "";
   var first = true;
-  for (var i=0; i<instantiations.length; i++ ) {
-     if (first) {
-        code = code + "  //Instantiations;\n"; 
-        first = false;
-     } 
-     code = code + "  var " + instantiations[i] + ";\n"; 
-  }   
-
+  code = showInstantiations (code , [] );
   code = code + 'var itemStack = ' + item + ';\n';
   
   code = code + modifications;  
@@ -2131,7 +2135,12 @@ Blockly.Python['lookingat'] = function(block) {
 Blockly.Python['vectortoyaw'] = function(block) {
   var vector = Blockly.Python.valueToCode(block, 'VECTOR', Blockly.Python.ORDER_ATOMIC);
   vector = insideParen (vector)
-  var code = "vectorToYaw (" + vector + ")"
+  instantiateVariable ("function finalVecAdjust (v){return (v<-180) ? v+360 : (v>180 ) ? v-360 : v; }" );
+  
+  var code = "finalVecAdjust((" + vector + ".getX==null) ? 0 : (" + vector + 
+                              ".getZ==null) ? 0 : ((" + vector + ".getX()!= 0) ? ((" + 
+							  vector + ".getX()<0) ? 1.5*Math.PI : 0.5*Math.PI) - Math.atan(" + 
+							  vector + ".getZ()/" + vector + ".getX()) : (" + vector + ".getZ()<0) ? Math.PI : 0) * (-1*180/Math.PI))"
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -2222,5 +2231,26 @@ Blockly.Python['nameofstack'] = function(block) {
   stack = insideParen(stack);
   var code = stack + ".getItemMeta().getDisplayName()" 
   return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['playerinventory'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);  
+  player = insideParen(player);
+  var code = player + ".getInventory()" 
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['chestplate'] = function(block) {
+  var inventory = Blockly.Python.valueToCode(block, 'INVENTORY', Blockly.Python.ORDER_ATOMIC);  
+  inventory = insideParen(inventory);
+  var code = inventory + ".getChestplate()" 
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['materialdata'] = function(block) {
+  var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);  
+  stack = insideParen(stack);
+  var code = "(" + stack + " == null ) ? null : (" + stack + ".getData == null) ? null : " +  stack + ".getData()" 
+  return [code + ".getItemType()", Blockly.Python.ORDER_NONE];
 }
 

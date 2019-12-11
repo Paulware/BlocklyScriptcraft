@@ -870,7 +870,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Diamond Pick", "DIAMOND_PICKAXE"],
                                                   ["Diamond Shovel", "DIAMOND_SHOVEL"],
                                                   ["Drinkable Potion", "POTION"],
-                                                  ["Elytra (Glider)", "ELYTRA"],                                                  
+                                                  ["Elytra (Glider)", "LEGACY_ELYTRA"],                                                  
                                                   ["Firework", "FIREWORK_ROCKET"],
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
@@ -2536,7 +2536,7 @@ Blockly.Blocks['launchprojectile'] = {
         .appendField("Launch projectile from entity:");   
     this.appendValueInput("PROJECTILE")
         .appendField("projectile:");   
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setPreviousStatement(true, null);
@@ -2555,5 +2555,35 @@ Blockly.Blocks['nameofstack'] = {
   }
 };
 
+Blockly.Blocks['playerinventory'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Inventory for player: ");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
 
+Blockly.Blocks['chestplate'] = {
+  init: function() {
+    this.appendValueInput("INVENTORY")
+        .appendField("Chestplate in inventory: ");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
 
+Blockly.Blocks['materialdata'] = {
+  init: function() {
+    this.appendValueInput("STACK")
+        .appendField("Material type in stack: ");   
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, "String");
+  }
+};
