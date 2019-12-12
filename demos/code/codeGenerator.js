@@ -2254,3 +2254,18 @@ Blockly.Python['materialdata'] = function(block) {
   return [code + ".getItemType()", Blockly.Python.ORDER_NONE];
 }
 
+Blockly.Python['sethotbar'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  var slot = block.getFieldValue ("SLOT");
+  var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);
+  stack = insideParen (stack)
+  player = insideParen (player)
+  slot = parseInt(slot)
+  if ((slot <0) || (slot > 8)) {
+	  alert ( 'Range of slot for player gear is 0..8' );
+	  slot = 0;
+  }
+  var code = player + ".getInventory().setItem (" + slot + "," + stack + " );\n"              
+  return code;
+};
+

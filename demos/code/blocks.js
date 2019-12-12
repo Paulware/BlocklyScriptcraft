@@ -2587,3 +2587,19 @@ Blockly.Blocks['materialdata'] = {
     this.setOutput(true, "String");
   }
 };
+
+Blockly.Blocks['sethotbar'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+	    .appendField ( "Set hotbar slot (0..8)" )
+        .appendField (new Blockly.FieldTextInput ( "0"), "SLOT")
+        .appendField("for player: ");   
+    this.appendValueInput("STACK")
+        .appendField("To a stack of:"); 		
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
