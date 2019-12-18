@@ -1991,12 +1991,10 @@ Blockly.Python['setvectorvelocity'] = function(block) {
 Blockly.Python['findentitybylocation'] = function(block) {
   var location =  Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);  
   location = insideParen (location)
-  var radius = Blockly.Python.valueToCode(block, 'RADIUS', Blockly.Python.ORDER_ATOMIC); 
-  radius = insideParen(radius)
+  var radius = block.getFieldValue ("RADIUS");  
   instantiateVariable ('entity');
   instantiateVariable ('entities');
   var code = 
-    '//findentitybylocation\n' + 
     'entity = null;\n' + 
     'entities = server.worlds[0].getEntities();\n' + 
     'for (var i = 0; i<entities.length; i++) { \n' + 
@@ -2160,12 +2158,9 @@ Blockly.Python['boundingbox'] = function(block) {
 }
 
 Blockly.Python['nearbyentities'] = function(block) {
-  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
-  location = insideParen (location)
-  var radius = Blockly.Python.valueToCode(block, 'RADIUS', Blockly.Python.ORDER_ATOMIC);
-  radius = insideParen (radius)
-  var code = "server.worlds[0].getNearbyEntities (" + location + "," + radius + "," + radius + "," + 
-             radius + ")"
+  var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));
+  var radius = block.getFieldValue ( 'RADIUS');
+  var code = "server.worlds[0].getNearbyEntities (" + location + "," + radius + "," + radius + "," + radius + ")"
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -2261,11 +2256,31 @@ Blockly.Python['sethotbar'] = function(block) {
   stack = insideParen (stack)
   player = insideParen (player)
   slot = parseInt(slot)
-  if ((slot <0) || (slot > 8)) {
-	  alert ( 'Range of slot for player gear is 0..8' );
-	  slot = 0;
+  if ((slot <1) || (slot > 9)) {
+	  alert ( 'Range of slot for player gear is 1..9' );
+	  slot = 1;
   }
-  var code = player + ".getInventory().setItem (" + slot + "," + stack + " );\n"              
+  var code = player + ".getInventory().setItem (" + (slot-1) + "," + stack + " );\n"              
+  return code;
+};
+
+Blockly.Python['tameentity'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  entity = insideParen (entity);
+  var code;
+  code = 'if (' + entity + '.setTamed != null) {\n' + 
+         '  ' + entity + '.setTamed (true);\n' + 
+         '}\n';            
+  return code;
+};
+
+Blockly.Python['attackentity'] = function(block) {
+  var attacker = Blockly.Python.valueToCode(block, 'ATTACKER', Blockly.Python.ORDER_ATOMIC);
+  attacker = insideParen (attacker);
+  var target = Blockly.Python.valueToCode(block, 'TARGET', Blockly.Python.ORDER_ATOMIC);
+  target = insideParen (target);
+  var code;
+  code = attacker + '.setTarget (' + target + ')\n';
   return code;
 };
 

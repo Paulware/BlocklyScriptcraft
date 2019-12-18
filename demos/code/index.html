@@ -193,7 +193,6 @@ function bodyLoad() {
        <block type="millis"></block>
        <block type="copyFile"></block>
        <!block type="boundingbox"><!/block>
-       <block type="nearbyentities"></block>
        <category name="Blocks">
            <block type="lookingat"></block>
            <block type="clickedBlock"></block>            
@@ -274,6 +273,9 @@ function bodyLoad() {
        <block type="islivingentity"></block>
        <block type="allentities"></block>
        <block type="spawnentity"></block>
+	   <block type="tameentity"></block>
+	   <block type="attackentity"></block>
+       <block type="nearbyentities"></block>	   
        <block type="findentitybyname"></block>
        <block type="findentitybycustomname"></block>
        <block type="findentitybylocation"></block>
@@ -291,8 +293,8 @@ function bodyLoad() {
          <block type="isplayer"></block>
          <!block type="instanceof"><!/block> 
          <block type="lookingdirection"></block>         
-         <block type="existsplayerdata"></block>
          <category name="Data">
+            <block type="existsplayerdata"></block>		 
             <block type="setplayerdata"></block>
             <block type="getplayerdata2"></block>
             <block type="removeplayerdata"></block>

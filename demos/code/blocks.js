@@ -2192,12 +2192,11 @@ Blockly.Blocks['setvectorvelocity'] = {
 };
 
 Blockly.Blocks['findentitybylocation'] = {
-  init: function() {           
+  init: function() {  
     this.appendValueInput("LOCATION")
-        .appendField ("var entity = findEntityByLocation" )
-        .appendField ("Location:" );        
-    this.appendValueInput("RADIUS")
-        .appendField ("Radius:" );        
+        .appendField ("var entity = entity within " )
+        .appendField (new Blockly.FieldTextInput ( "5"), "RADIUS")
+        .appendField ("blocks of location:" );        
         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -2479,9 +2478,9 @@ Blockly.Blocks['boundingbox'] = {
 Blockly.Blocks['nearbyentities'] = {
   init: function() {
     this.appendValueInput("LOCATION")
-        .appendField("Entities in a box, with center");   
-    this.appendValueInput("RADIUS")
-        .appendField("and radius");   
+        .appendField("Entities within " )
+        .appendField (new Blockly.FieldTextInput ("5"), "RADIUS")		
+		.appendField("blocks of location:" );
     this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2591,11 +2590,37 @@ Blockly.Blocks['materialdata'] = {
 Blockly.Blocks['sethotbar'] = {
   init: function() {
     this.appendValueInput("PLAYER")
-	    .appendField ( "Set hotbar slot (0..8)" )
-        .appendField (new Blockly.FieldTextInput ( "0"), "SLOT")
+	    .appendField ( "Set hotbar slot (1..9)" )
+        .appendField (new Blockly.FieldTextInput ( "1"), "SLOT")
         .appendField("for player: ");   
     this.appendValueInput("STACK")
         .appendField("To a stack of:"); 		
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['tameentity'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+	    .appendField ( "Tame (if possible) entity:" )
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['attackentity'] = {
+  init: function() {
+    this.appendValueInput("ATTACKER")
+	    .appendField ( "Attack! Attacker: " )
+    this.appendValueInput("TARGET")
+	    .appendField ( "Target: " )
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
