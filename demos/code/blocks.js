@@ -776,7 +776,6 @@ Blockly.Blocks['absolutelocation'] = {
   }
 };
 
-
 Blockly.Blocks['entity'] = {
   init: function() {
     this.appendDummyInput()
@@ -864,6 +863,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Bone Meal", "BONE_MEAL"],
                                                   ["Chest", "CHEST"],
+												  ["Compass", "COMPASS"],
                                                   ["Cookie","COOKIE"],
                                                   ["Crossbow", "CROSSBOW"],
                                                   ["Diamond", "DIAMOND"],
@@ -2628,3 +2628,36 @@ Blockly.Blocks['attackentity'] = {
     this.setNextStatement(true, null);
   }
 };
+
+Blockly.Blocks['namethestack'] = {
+  init: function() {
+    this.appendValueInput("STACK")
+        .appendField ("Set stacks name to ")
+        .appendField (new Blockly.FieldTextInput ( "Custom Name"), "NAME")
+        .appendField(" with a stack of ");        
+    this.setOutput(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['locationadd'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Modify location")
+        .appendField("X")
+        .appendField (new Blockly.FieldTextInput ("0"), "X")          
+        .appendField("Y")
+        .appendField (new Blockly.FieldTextInput ("100"), "Y")          
+        .appendField("Z")
+        .appendField (new Blockly.FieldTextInput ("0"), "Z") 
+        .appendField ("Location:");		
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+

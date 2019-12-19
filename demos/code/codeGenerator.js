@@ -2103,7 +2103,7 @@ Blockly.Python['nameofitem'] = function(block) {
   var ind = item.indexOf ( "()" ) 
   var functionName = (ind > -1) ? item.substring(0,ind) : item; 
   var code = "(" + functionName + "== null) ? \"\" : " + 
-           "(" + item + ".getItemMeta() == null ) ? \"\" : "  + 
+           "(" + item + ".getItemMeta == null ) ? \"\" : "  + 
            item + ".getItemMeta().getDisplayName()";
   return [code, Blockly.Python.ORDER_NONE];
 }
@@ -2283,4 +2283,36 @@ Blockly.Python['attackentity'] = function(block) {
   code = attacker + '.setTarget (' + target + ')\n';
   return code;
 };
+
+Blockly.Python['namethestack'] = function(block) {
+  var stack  = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);
+  stack = insideParen (stack);
+  var name = block.getFieldValue ('NAME');   
+  instantiateVariable ( 'meta' )
+  instantiateVariable ( 'stack' )
+  var code = '(function() { ' + 
+             '  var s = ' + stack + ';' + 
+             '  var m = s.getItemMeta();' + 
+             '  m.setDisplayName (' + name + ');' +
+             '  s.setItemMeta(m);' + 
+             '  return s;' + 
+             ' })()'              
+			 
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['locationadd'] = function(block) {
+  var x = block.getFieldValue ('X'); 
+  //x = insideParen (x);
+  var y = block.getFieldValue ('Y');
+  //y = insideParen (y);
+  var z = block.getFieldValue ('Z');
+  //z = insideParen (z);
+  var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));
+    
+  code = location + ".add (" + x + ", " + y + ", " + z + ")"
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
 
