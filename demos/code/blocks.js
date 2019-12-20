@@ -826,6 +826,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Evoker", "EVOKER"],
                                                 ["Evoker Fangs", "EVOKER_FANGS"],
                                                 ["Fireball", "FIREBALL"],
+												["Heart of the Sea", "HEART_OF_THE_SEA"],
                                                 ["Horse", "HORSE"], 
                                                 ["Iron Golem", "IRON_GOLEM"],
                                                 ["Minecart", "MINECART"], 
