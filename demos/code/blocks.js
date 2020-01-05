@@ -2677,5 +2677,15 @@ Blockly.Blocks['entitydead'] = {
   }
 };
 
+Blockly.Blocks['isspectator'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField ("Is spectator, player:");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
 

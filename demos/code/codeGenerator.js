@@ -2325,6 +2325,13 @@ Blockly.Python['entitydead'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE]; 
 };
 
+Blockly.Python['isspectator'] = function(block) {
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC));
+    
+  code = "(" + player + " == null ) ? false : (" + player + ".getGameMode().toString() == \"SPECTATOR\")";
+  return [code, Blockly.Python.ORDER_NONE]; 
+};
+
 
 
 
