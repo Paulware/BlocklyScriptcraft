@@ -172,12 +172,16 @@ function setupTheCode (code) {
 
 function instantiateVariable (variableName) {
   var found = false;
-  for (var i=0; i<instantiations.length; i++) {
-     if (instantiations[i] == variableName) { 
-        found = true;
-        break;
-     } 
-  } 
+  if (variableName.indexOf ( 'exports.') > -1) { 
+      found = true;
+  } else { 
+	  for (var i=0; i<instantiations.length; i++) {
+		 if (instantiations[i] == variableName) { 
+			found = true;
+			break;
+		 } 
+	  }
+  }	  
   if (!found) {
      instantiations.push (variableName);
   }
@@ -628,6 +632,7 @@ Blockly.Python['sendmessage'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player);
   var code;
+  
   // note: Don't add \" to the message because it might be a variable value.
   if (player == "event.getAffectedEntities()") {
      code = "var entities = event.getAffectedEntities();\n" + 
@@ -640,9 +645,6 @@ Blockly.Python['sendmessage'] = function(block) {
           return target.split(search).join(replacement);
       };  
       
-     if (message.indexOf ( "\"" ) == -1) { 
-        message = "\\\"" + message + "\\\"";
-     } 
      command = "\"tellraw @a [" + message + "]\"";
      code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
             command + ");\n";
@@ -758,15 +760,14 @@ Blockly.Python['getplayerdata2'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
   
-  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
-  if (player == "") {
-     player = 'self';
+  var entity = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  if (entity == "") {
+     entity = 'self';
   } else {
-     player = insideParen (player );
+     entity = insideParen (entity );
   } 
-  var code = "(!(" + player + " instanceof org.bukkit.entity.LivingEntity))?null:(" + player + 
-             ".getMetadata == null)?null:(" + player + ".getMetadata(\"" + key + 
-             "\").length == 0)?null:" + player + ".getMetadata(\"" + key + "\")[0].value()";
+  var code = "(" + entity + ".getMetadata == null)?null:(" + entity + ".getMetadata(\"" + key + 
+             "\").length == 0)?null:" + entity + ".getMetadata(\"" + key + "\")[0].value()";
     
   return [code, Blockly.Python.ORDER_NONE];  
 };
@@ -2224,7 +2225,7 @@ Blockly.Python['launchprojectile'] = function(block) {
 Blockly.Python['nameofstack'] = function(block) {
   var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);  
   stack = insideParen(stack);
-  var code = stack + ".getItemMeta().getDisplayName()" 
+  var code = "(" + stack + ".getItemMeta() == null) ? null : " + stack + ".getItemMeta().getDisplayName()" 
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -2245,8 +2246,8 @@ Blockly.Python['chestplate'] = function(block) {
 Blockly.Python['materialdata'] = function(block) {
   var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);  
   stack = insideParen(stack);
-  var code = "(" + stack + " == null ) ? null : (" + stack + ".getData == null) ? null : " +  stack + ".getData()" 
-  return [code + ".getItemType()", Blockly.Python.ORDER_NONE];
+  var code = "(" + stack + " == null ) ? null : (" + stack + ".getType == null) ? null : " +  stack + ".getType()" 
+  return [code, Blockly.Python.ORDER_NONE];
 }
 
 Blockly.Python['sethotbar'] = function(block) {
@@ -2288,6 +2289,9 @@ Blockly.Python['namethestack'] = function(block) {
   var stack  = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);
   stack = insideParen (stack);
   var name = block.getFieldValue ('NAME');   
+  if ((name.indexOf ( " " ) > -1) && (name.indexOf ( "\"") == -1) && (name.indexOf ( "'" ) == -1) ) {
+     name = "\"" + name + "\"";
+  }	 
   instantiateVariable ( 'meta' )
   instantiateVariable ( 'stack' )
   var code = '(function() { ' + 
@@ -2313,6 +2317,14 @@ Blockly.Python['locationadd'] = function(block) {
   code = location + ".add (" + x + ", " + y + ", " + z + ")"
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['entitydead'] = function(block) {
+  var entity = insideParen(Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC));
+    
+  code = "(" + entity + " == null ) ? false : " + entity + ".isDead()";
+  return [code, Blockly.Python.ORDER_NONE]; 
+};
+
 
 
 

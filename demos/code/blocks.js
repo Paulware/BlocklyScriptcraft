@@ -289,11 +289,15 @@ Blockly.Blocks['eventlistener'] = {
         .appendField("Listener Event")
         .appendField(new Blockly.FieldDropdown([ 
             ["A player moved", "playerMove"],
-            ["Player Mouse Click","playerInteract"],           
+            ["Player Mouse Click","playerInteract"],  
+            ["An inventory item was selected", "inventoryClick"],		
+            ["Player entered a command", "playerCommandPreprocess" ], 			
             ["A player died", "playerDeath"], 
+			["A player joined the server", "playerJoin"],
             ["World save event", "worldSave"],            
             ["An item was hung", "hangingPlace"],
             ["Player entered a portal", "playerPortal"],
+			["Bow was fired", "entityShootBow"],
             ["Projectile Hit Something", "projectileHit"],
             ["Player Respawn","playerRespawn"],
             ["Item Despawn", "itemDespawn"],
@@ -826,7 +830,6 @@ Blockly.Blocks['entityType'] = {
                                                 ["Evoker", "EVOKER"],
                                                 ["Evoker Fangs", "EVOKER_FANGS"],
                                                 ["Fireball", "FIREBALL"],
-												["Heart of the Sea", "HEART_OF_THE_SEA"],
                                                 ["Horse", "HORSE"], 
                                                 ["Iron Golem", "IRON_GOLEM"],
                                                 ["Minecart", "MINECART"], 
@@ -873,6 +876,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Drinkable Potion", "POTION"],
                                                   ["Elytra (Glider)", "LEGACY_ELYTRA"],                                                  
                                                   ["Firework", "FIREWORK_ROCKET"],
+  												  ["Heart of the Sea", "HEART_OF_THE_SEA"],												  
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
                                                   ["Oak Sign Post", "OAK_SIGN"],                                                  
@@ -880,6 +884,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Stick", "STICK"],
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
+												  ["Totem of Undying", "TOTEM_OF_UNDYING"],
                                                   ["White Wool", "WHITE_WOOL"],
                                                   ["Wolf Egg", "WOLF_SPAWN_EGG"],
                                                   ["Wheat Seeds", "WHEAT_SEEDS"]
@@ -1383,7 +1388,7 @@ Blockly.Blocks['getplayerdata2'] = {
 Blockly.Blocks['existsplayerdata'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Player Data Exists?")  
+        .appendField("Entity Data Exists?")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
     this.appendValueInput("PLAYER")
         .appendField("For Player/Entity");
@@ -1937,7 +1942,7 @@ Blockly.Blocks['getcolor'] = {
 Blockly.Blocks['setblockcommand'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Command Block Command")         
+        .appendField("Set command block command")         
         .appendField (new Blockly.FieldTextInput ("\"say \\\"Hello\\\"\""), "COMMAND");     
     this.appendValueInput("LOCATION")
         .appendField("At Location ");                                                       
@@ -2315,7 +2320,7 @@ Blockly.Blocks['isplayer'] = {
 Blockly.Blocks['islivingentity'] = {
   init: function() {
     this.appendValueInput("ENTITY")
-        .appendField("Is a living entity");
+        .appendField("Is a living type, entity:");
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -2596,7 +2601,7 @@ Blockly.Blocks['sethotbar'] = {
         .appendField("for player: ");   
     this.appendValueInput("STACK")
         .appendField("To a stack of:"); 		
-    this.setColour(0);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setPreviousStatement(true, null);
@@ -2633,9 +2638,9 @@ Blockly.Blocks['attackentity'] = {
 Blockly.Blocks['namethestack'] = {
   init: function() {
     this.appendValueInput("STACK")
-        .appendField ("Set stacks name to ")
+        .appendField ("Set name to: ")
         .appendField (new Blockly.FieldTextInput ( "Custom Name"), "NAME")
-        .appendField(" with a stack of ");        
+        .appendField(" for the stack:");        
     this.setOutput(true, null);
     this.setColour(320);
     this.setTooltip('');
@@ -2660,5 +2665,17 @@ Blockly.Blocks['locationadd'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['entitydead'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
+        .appendField ("Is dead, entity:");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 
 
