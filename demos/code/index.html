@@ -195,7 +195,7 @@ function bodyLoad() {
        <!block type="boundingbox"><!/block>
        <category name="Blocks">
            <block type="lookingat"></block>
-           <block type="clickedBlock"></block>            
+           <!block type="clickedBlock"><!/block>            
            <!block type="whichblock"><!/block>
            <block type="blocktype"></block> 
            <block type="getblocktype"></block>
@@ -236,6 +236,7 @@ function bodyLoad() {
        <category name="Events" colour="40">
           <block type="actiontype"></block>
           <block type="eventlistener"></block>
+		  <block type="eventinfo"></block>
           <block type="eventcancel"></block>       
        </category>
        <category name="Effects" colour="120">
@@ -281,14 +282,12 @@ function bodyLoad() {
        <block type="findentitybyname"></block>
        <block type="findentitybycustomname"></block>
        <block type="findentitybylocation"></block>
-       <category name="Projectiles">
-          <block type="projectileentity"></block>       
-          <block type="isarrow"></block>
-          <block type="issnowball"></block>
-          <block type="launchprojectile"></block>          
-       </category>
+	   <category name="AllPlayers">
+	      <block type="removeplayersdata"></block>
+		  <block type="removeplayersgear"></block>
+	   </category>
        <category name="Player">
-         <block type="allplayers"></block>  
+         <!block type="allplayers"><!/block>  
          <block type="setride"></block>         
          <block type="iteminhandis"></block>                
          <block type="playerhas"></block>
@@ -303,6 +302,12 @@ function bodyLoad() {
             <block type="removeplayerdata"></block>
          </category>
        </category> 
+       <category name="Projectiles">
+          <block type="projectileentity"></block>       
+          <block type="isarrow"></block>
+          <block type="issnowball"></block>
+          <block type="launchprojectile"></block>          
+       </category>
        <category name="Creatures">
          <block type="entity"></block>
          <block type="entityType"></block>
@@ -347,6 +352,7 @@ function bodyLoad() {
 			 <block type="sethotbar"></block>
              <block type="chestplate"></block>
              <block type="getequipmentname"></block>
+			 <block type="diamondarmor"></block>
              <block type="armorset"></block>              
           </category>
           <category name="Recipes">

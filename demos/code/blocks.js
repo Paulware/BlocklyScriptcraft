@@ -2529,7 +2529,7 @@ Blockly.Blocks['actiontype'] = {
                                                 ["Right click on a block", "RIGHT_CLICK_BLOCK"]
                                                ]), "ACTION"); 
     this.setOutput(true, null);
-    this.setColour(200);
+    this.setColour(40);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -2687,5 +2687,66 @@ Blockly.Blocks['isspectator'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['eventinfo'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Event information") 	  
+        .appendField(new Blockly.FieldDropdown([
+		                                        ["Get block that was clicked on", "getClickedBlock()"],
+												["Get bow that was fired", "getBow()"],
+                                                ["Get entity", "getEntity()"],
+												["Get message that player sent", "getMessage()" ],
+                                                ["Get player", "getPlayer()"],
+												["Get projectile", "getProjectile()"]
+                                               ]), "INFORMATION"); 
+
+    this.setOutput(true, null);
+    this.setColour(40);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['removeplayersdata'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Delete All Players Data with Key: ")  
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['diamondarmor'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Give diamond armor to player/entity:");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['removeplayersgear'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Remove Gear from All Players");  
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
+
 
 

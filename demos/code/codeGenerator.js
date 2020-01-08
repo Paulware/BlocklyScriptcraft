@@ -699,13 +699,12 @@ Blockly.Python['armorset'] = function(block) {
 
 Blockly.Python['killplayer'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
-  if (player == "") {
-     player = 'self';
-  } else {
-     player = insideParen (player );
-  } 
-  
-  var code = player + ".setHealth (0.0);\n"
+  player = insideParen (player );
+   
+  var code = "setTimeout (function () {\n" + 
+             "  " + player + ".setHealth(0);\n" +
+             "},500);\n";    
+
   return code;
 };
 
@@ -832,16 +831,13 @@ Blockly.Python['moveto'] = function(block) {
 
 Blockly.Python['teleport'] = function(block) {
    
-  instantiateVariable ('location' );
-  instantiateVariable ('entity' );
-  instantiateVariable ('TeleportCause');
-  
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);
   var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
   entity = insideParen (entity);  
-  code =    entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";
-  
+  var code = "setTimeout (function () {\n" + 
+             "  " + entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n" +
+             "},2000);\n";    
   return code;
 }
 
@@ -1714,9 +1710,8 @@ Blockly.Python['pushlist'] = function(block) {
 };
 
 Blockly.Python['getblocktype'] = function(block) {
-  var b = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
-  b = insideParen (b);
-  var code = b + ".getType()";
+  var b = insideParen(Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC));
+  var code = "(" + b + "==null)?null:" + b + ".getType()"; 
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -2331,6 +2326,46 @@ Blockly.Python['isspectator'] = function(block) {
   code = "(" + player + " == null ) ? false : (" + player + ".getGameMode().toString() == \"SPECTATOR\")";
   return [code, Blockly.Python.ORDER_NONE]; 
 };
+
+Blockly.Python['eventinfo'] = function(block) {
+  var information = block.getFieldValue ('INFORMATION');
+  code = "event." + information; 
+  return [code, Blockly.Python.ORDER_NONE]; 
+};
+
+Blockly.Python['removeplayersdata'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
+  instantiateVariable ( "players");
+  var code = "players = server.getOnlinePlayers();\n" + 
+             "for (var playersIndex=0; playersIndex<players.length; playersIndex++) {\n" + 
+			 "  players[playersIndex].removeMetadata (\"" + key + "\", __plugin );\n" + 
+			 "}\n" 
+  return code;
+};
+
+Blockly.Python['diamondarmor'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  player = insideParen (player );
+  var code = "var player = " + player + ";\n" + 
+			 "var items = require ('items');\n" + 
+			 "player.equipment.helmet = items.diamondHelmet(1);\n" + 
+			 "player.equipment.boots = items.diamondBoots(1);\n" + 
+			 "player.equipment.chestplate = items.diamondChestplate(1);\n" + 
+			 "player.equipment.leggings = items.diamondLeggings(1);\n";  
+  return code;
+};
+
+Blockly.Python['removeplayersgear'] = function(block) {
+  instantiateVariable ( "players");
+  var code = "players = server.getOnlinePlayers();\n" + 
+             "for (var playersIndex=0; playersIndex<players.length; playersIndex++) {\n" + 
+			 "  players[playersIndex].getInventory().clear();\n" + 
+			 "}\n" 
+  return code;
+};
+
+
 
 
 
