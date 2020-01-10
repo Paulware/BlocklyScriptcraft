@@ -301,7 +301,7 @@ Blockly.Blocks['eventlistener'] = {
             ["Projectile Hit Something", "projectileHit"],
             ["Player Respawn","playerRespawn"],
             ["Item Despawn", "itemDespawn"],
-            ["Player joined the game","playerJoin"],
+            ["Player disconnected","playerQuit"],
             ["A potion was splashed", "potionSplash"],
             ["A player consumed an item", "playerItemConsume"],
             ["A plant grew on a block","blockGrow"],
