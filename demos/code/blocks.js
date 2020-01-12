@@ -335,7 +335,11 @@ Blockly.Blocks['explosion'] = {
   init: function() {
     this.appendValueInput("LOCATION")
         .appendField("Explosion Size")
-        .appendField (new Blockly.FieldTextInput ("1.5"), "SIZE")
+        .appendField(new Blockly.FieldDropdown([
+		             [ "0", "0"], 
+		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
+  		             ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"], ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
+                                               ]), "SIZE")
         .appendField ("Location:");      
 
     this.setPreviousStatement(true, null);
@@ -2596,8 +2600,11 @@ Blockly.Blocks['materialdata'] = {
 Blockly.Blocks['sethotbar'] = {
   init: function() {
     this.appendValueInput("PLAYER")
-	    .appendField ( "Set hotbar slot (1..9)" )
-        .appendField (new Blockly.FieldTextInput ( "1"), "SLOT")
+	    .appendField ( "Set hotbar slot" )
+        .appendField(new Blockly.FieldDropdown([
+		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], 
+					 [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"]
+                                               ]), "SLOT")		
         .appendField("for player: ");   
     this.appendValueInput("STACK")
         .appendField("To a stack of:"); 		
@@ -2737,6 +2744,26 @@ Blockly.Blocks['removeplayersgear'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Remove Gear from All Players");  
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['setplayerhealth'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Set Health to: ")
+        .appendField(new Blockly.FieldDropdown([
+		             [ "0", "0"], 
+		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"],
+		             [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
+  		             ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"],
+					 ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
+                                               ]), "HEALTH")
+        .appendField ("for player:");	 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);

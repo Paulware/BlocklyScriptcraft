@@ -2357,7 +2357,7 @@ Blockly.Python['diamondarmor'] = function(block) {
 };
 
 Blockly.Python['removeplayersgear'] = function(block) {
-  instantiateVariable ( "players");
+    
   var code = "players = server.getOnlinePlayers();\n" + 
              "for (var playersIndex=0; playersIndex<players.length; playersIndex++) {\n" + 
 			 "  players[playersIndex].getInventory().clear();\n" + 
@@ -2365,8 +2365,9 @@ Blockly.Python['removeplayersgear'] = function(block) {
   return code;
 };
 
-
-
-
-
-
+Blockly.Python['setplayerhealth'] = function(block) {
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC)); 
+  var health = block.getFieldValue ('HEALTH');  
+  var code = player + ".setHealth(" + health + ");\n" 
+  return code;
+};
