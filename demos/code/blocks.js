@@ -2772,8 +2772,43 @@ Blockly.Blocks['setplayerhealth'] = {
   }
 };
 
+Blockly.Blocks['createexplosion'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Explosion Size")
+        .appendField(new Blockly.FieldDropdown([
+		             [ "0", "0"], 
+		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
+  		             ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"], ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
+                                               ]), "SIZE")
+        .appendField("Set Fire")
+        .appendField(new Blockly.FieldDropdown([
+		                                            [ "true", "true"],  [ "false", "false"]
+                                               ]), "FIRE")
+        .appendField("Destroy Blocks")
+        .appendField(new Blockly.FieldDropdown([
+		                                            [ "true", "true"],  [ "false", "false"]
+                                               ]), "DESTROY")
+        .appendField ("Location:");      
 
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['countcondition'] = {
+  init: function() {
+    this.appendValueInput("LIST")
+        .appendField ("Count condition ")
+        .appendField (new Blockly.FieldTextInput ("x == y"), "CONDITION")
+        .appendField (" in list ");
 
-
-
+    this.setOutput(true, null);
+    this.setColour(40);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

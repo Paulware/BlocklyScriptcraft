@@ -2371,3 +2371,30 @@ Blockly.Python['setplayerhealth'] = function(block) {
   var code = player + ".setHealth(" + health + ");\n" 
   return code;
 };
+
+Blockly.Python['createexplosion'] = function(block) {
+  var size = parseFloat(block.getFieldValue ('SIZE'));    
+  var fire = block.getFieldValue ( 'FIRE' );
+  var destroy = block.getFieldValue ( 'DESTROY' );
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);    
+  location = insideParen (location);
+  var code = "server.worlds[0].createExplosion (" + location + "," + size + "," + 
+             fire + ',' + destroy + ");\n";
+  
+  return code;
+};
+
+Blockly.Python['countcondition'] = function(block) {
+  var list = insideParen(Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_ATOMIC));
+  var condition = block.getFieldValue ( 'CONDITION' );  
+  var code = '(function() { \n' +
+             '  var count = 0;\n' +   
+             '  for (var i=0; i<' + list + '.length; i++) {\n' + 
+             '     if (' + list + '[i] == ' +  condition + ') {\n' + 
+             '        count = count + 1;\n' + 
+             '     }\n' +
+             '  }\n' + 
+             '  return count;' + 
+             ' })()'              
+  return [code, Blockly.Python.ORDER_NONE]; 
+};
