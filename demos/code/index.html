@@ -76,12 +76,12 @@ function savePluginCode ( code ) {
      } else { 
         msg = msg + "@echo " + line + ">>" 
      }
-     msg = msg + "c:/SpigotMc/scriptcraft/plugins/blockly.js\n"
+     msg = msg + "c:/SpigotMc/scriptcraft/plugins/test.js\n"
      startInd = endInd +1;
      endInd = code.indexOf ( '\n', startInd );     
   } 
   line = code.substring (startInd);
-  msg = msg + "@echo " + line + ">>c:/SpigotMc/scriptcraft/plugins/blockly.js\n" 
+  msg = msg + "@echo " + line + ">>c:/SpigotMc/scriptcraft/plugins/test.js\n" 
   msg = msg + "del copyPlug*.*\n"  
   //alert (msg)
   download ( 'copyPlugin.bat', msg );
@@ -93,20 +93,13 @@ function clipboardCopy (text) {
    textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
    document.body.appendChild(textarea);
    textarea.select();
-   //document.execCommand("copy");  // Security exception may be thrown by some browsers.
-   //document.body.removeChild(textarea);        
-   
-   
-   //document.execCommand('SaveAs',null,'c:/SpigotMC/scriptcraft/plugins/blockly.js');
+
    source = document.all.content_javascript.innerText;
-   //savePluginCode (source);
-   download ('blockly.js', source );
+   download ('test.js', source );
 } 
 
 function bodyLoad() { 
-  //console.log ( 'create it.js' );
-  // download ( 'c:\\SpigotMC\\scriptcraft\\plugins\\blockly.js', 'Hello' );
-  //savePluginCode ( 'function yo(){\nvar i=2;\n}\n//all done' );
+
 }
 
   </script>
@@ -309,6 +302,7 @@ function bodyLoad() {
           <block type="isarrow"></block>
           <block type="issnowball"></block>
           <block type="launchprojectile"></block>          
+		  <block type="setprojectilespeed"></block>
        </category>
        <category name="Creatures">
          <block type="entity"></block>

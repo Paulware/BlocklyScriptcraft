@@ -299,6 +299,7 @@ Blockly.Blocks['eventlistener'] = {
             ["Player entered a portal", "playerPortal"],
 			["Bow was fired", "entityShootBow"],
             ["Projectile Hit Something", "projectileHit"],
+			["Projectile Launched", "projectileLaunch"],
             ["Player Respawn","playerRespawn"],
             ["Item Despawn", "itemDespawn"],
             ["Player disconnected","playerQuit"],
@@ -1337,7 +1338,8 @@ Blockly.Blocks['setplayerdata'] = {
         .appendField("Value");
 		
     this.appendValueInput("PLAYER")
-        .appendField("For Player/Entity");
+        .appendField("For ");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
@@ -2823,6 +2825,22 @@ Blockly.Blocks['healthofplayer'] = {
     this.appendValueInput("PLAYER")        
         .appendField("Health of Player");
     this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['setprojectilespeed'] = {
+  init: function() {
+    this.appendValueInput("SPEED")
+        .appendField("Set Speed");
+    this.appendValueInput ("PROJECTILE")
+	    .appendField("For Projectile:");
+   
+	this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');

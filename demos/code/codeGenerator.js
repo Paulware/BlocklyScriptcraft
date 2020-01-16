@@ -2413,3 +2413,22 @@ Blockly.Python['healthofplayer'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['setprojectilespeed'] = function(block) {
+  var speed = parseInt(insideParen(Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_ATOMIC))); 
+  if (speed > 7) {
+	 speed = '7';
+  } else if (speed < 1) {
+	 speed = 0.5
+  }
+  var projectile = insideParen(Blockly.Python.valueToCode(block, 'PROJECTILE', Blockly.Python.ORDER_ATOMIC));     
+	
+  var code = '(function() { \n' +
+             '  var vector = ' + projectile + '.getVelocity().normalize().multiply(' + speed + ');\n' +   
+             '  if (!isNaN(vector.x)) {\n' + 
+			 '     ' + projectile + '.setVelocity (vector);\n' + 
+             '  }\n' + 
+             ' })();\n'   
+  
+  return code;
+};
+
