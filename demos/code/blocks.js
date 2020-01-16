@@ -965,6 +965,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Bed", "LEGACY_BED_BLOCK"],
                                                 ["Chest", "CHEST"],
                                                 ["Cobblestone", "COBBLESTONE"],
+												["Cobweb", "COBWEB"],
                                                 ["Command Block (Chain)", "CHAIN_COMMAND_BLOCK"],
                                                 ["Command Block (Impulse)", "COMMAND_BLOCK"],
                                                 ["Command Block (Repeating)", "REPEATING_COMMAND_BLOCK"],
@@ -1330,11 +1331,11 @@ Blockly.Blocks['killplayer'] = {
 
 Blockly.Blocks['setplayerdata'] = {
   init: function() {
-    this.appendDummyInput()
+    this.appendValueInput("VALUE")
         .appendField("Set Entity Data")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
-    this.appendValueInput("VALUE")
         .appendField("Value");
+		
     this.appendValueInput("PLAYER")
         .appendField("For Player/Entity");
     this.setPreviousStatement(true, null);
@@ -1377,11 +1378,10 @@ Blockly.Blocks['getplayerdata'] = {
 
 Blockly.Blocks['getplayerdata2'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Get Player Data")
-        .appendField (new Blockly.FieldTextInput ("Key"), "KEY");        
     this.appendValueInput("PLAYER")
-        .appendField("For Player/Entity");
+        .appendField("Get Player Data")
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY")      
+        .appendField("For: ");
     this.setColour(0);
     this.setOutput(true, null);    
     this.setTooltip('');
@@ -1391,11 +1391,12 @@ Blockly.Blocks['getplayerdata2'] = {
 
 Blockly.Blocks['existsplayerdata'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Entity Data Exists?")  
-        .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
     this.appendValueInput("PLAYER")
-        .appendField("For Player/Entity");
+        .appendField("Data Exists?")  
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
+		.appendField("For:");
+    //this.appendValueInput("PLAYER")
+    //    .appendField("For Player/Entity");
     this.setColour(0);
     this.setTooltip('');
     this.setOutput(true, "Boolean");
@@ -1749,10 +1750,8 @@ Blockly.Blocks['servercommand'] = {
 
 Blockly.Blocks['blockatlocation'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Block at");
     this.appendValueInput("LOCATION")
-        .appendField("Location");
+        .appendField("Block at Location");
     this.setOutput(true, null);
     this.setColour(200);
     this.setTooltip('');
@@ -2703,8 +2702,10 @@ Blockly.Blocks['eventinfo'] = {
 		                                        ["Get block that was clicked on", "getClickedBlock()"],
 												["Get bow that was fired", "getBow()"],
                                                 ["Get entity", "getEntity()"],
+												["Get location player moved from", "getFrom()"],
 												["Get message that player sent", "getMessage()" ],
                                                 ["Get player", "getPlayer()"],
+												["Get location player moved to", "getTo()"],
 												["Get projectile", "getProjectile()"]
                                                ]), "INFORMATION"); 
 
@@ -2752,10 +2753,7 @@ Blockly.Blocks['removeplayersgear'] = {
   }
 };
 
-Blockly.Blocks['setplayerhealth'] = {
-  init: function() {
-    this.appendValueInput("PLAYER")
-        .appendField("Set Health to: ")
+/*
         .appendField(new Blockly.FieldDropdown([
 		             [ "0", "0"], 
 		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"],
@@ -2763,6 +2761,13 @@ Blockly.Blocks['setplayerhealth'] = {
   		             ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"],
 					 ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
                                                ]), "HEALTH")
+
+*/
+Blockly.Blocks['setplayerhealth'] = {
+  init: function() {
+    this.appendValueInput("HEALTH")
+        .appendField("Set Health to: ");
+    this.appendValueInput("PLAYER")
         .appendField ("for player:");	 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -2812,3 +2817,15 @@ Blockly.Blocks['countcondition'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['healthofplayer'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")        
+        .appendField("Health of Player");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+

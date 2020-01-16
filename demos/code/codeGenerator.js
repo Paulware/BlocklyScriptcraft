@@ -2367,8 +2367,15 @@ Blockly.Python['removeplayersgear'] = function(block) {
 
 Blockly.Python['setplayerhealth'] = function(block) {
   var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC)); 
-  var health = block.getFieldValue ('HEALTH');  
-  var code = player + ".setHealth(" + health + ");\n" 
+  var health = insideParen(Blockly.Python.valueToCode(block, 'HEALTH', Blockly.Python.ORDER_ATOMIC)); 
+  
+  var code = '(function() { ' + 
+			 '  var h=' + health + ';' + 
+			 '  if (h<0) { ' + 
+			 '     h = 0; ' + 
+			 '  } ' + 
+			 '  ' + player + '.setHealth(h);' + 
+             ' })();\n'              
   return code;
 };
 
@@ -2398,3 +2405,11 @@ Blockly.Python['countcondition'] = function(block) {
              ' })()'              
   return [code, Blockly.Python.ORDER_NONE]; 
 };
+
+Blockly.Python['healthofplayer'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player)
+  var code = player + '.getHealth()';  
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
