@@ -2847,3 +2847,14 @@ Blockly.Blocks['setprojectilespeed'] = {
   }
 };
 
+Blockly.Blocks['getshooter'] = {
+  init: function() {
+    this.appendValueInput("PROJECTILE")        
+        .appendField("Shooter of Projectile:");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+

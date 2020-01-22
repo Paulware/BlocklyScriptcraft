@@ -1487,7 +1487,7 @@ Blockly.Python['iteminhandis'] = function(block) {
   // player.getItemInHand().getType().equals(org.bukkit.Material.BOW) 
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player)
-  var code = player + '.getItemInHand()';  
+  var code = '(' + player + '== null) ? null : ( ' + player + '.getItemInHand == null) ? null : ' + player + '.getItemInHand()';  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -2220,7 +2220,7 @@ Blockly.Python['launchprojectile'] = function(block) {
 Blockly.Python['nameofstack'] = function(block) {
   var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);  
   stack = insideParen(stack);
-  var code = "(" + stack + ".getItemMeta() == null) ? null : " + stack + ".getItemMeta().getDisplayName()" 
+  var code = '(' + stack + '== null) ? null : (' + stack + '.getItemMeta == null) ? null : (' + stack + '.getItemMeta() == null)?null:' + stack + '.getItemMeta().getDisplayName()'; 
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -2370,11 +2370,13 @@ Blockly.Python['setplayerhealth'] = function(block) {
   var health = insideParen(Blockly.Python.valueToCode(block, 'HEALTH', Blockly.Python.ORDER_ATOMIC)); 
   
   var code = '(function() { ' + 
-			 '  var h=' + health + ';' + 
-			 '  if (h<0) { ' + 
-			 '     h = 0; ' + 
-			 '  } ' + 
-			 '  ' + player + '.setHealth(h);' + 
+			 '  var h=' + health + ';\n' + 
+			 '  if (' + player + '.setHealth != null) {\n' + 
+			 '    if (h<0) {\n' + 
+			 '       h = 0;\n' + 
+			 '    }\n' + 
+			 '    ' + player + '.setHealth(h);' + 
+			 '  }\n' + 
              ' })();\n'              
   return code;
 };
@@ -2430,5 +2432,12 @@ Blockly.Python['setprojectilespeed'] = function(block) {
              ' })();\n'   
   
   return code;
+};
+
+Blockly.Python['getshooter'] = function(block) {
+  var projectile = insideParen(Blockly.Python.valueToCode(block, 'PROJECTILE', Blockly.Python.ORDER_ATOMIC)); 
+  
+  var code = '(' + projectile + ' == null) ? null : (' + projectile + '.getShooter == null) ? null : ' + projectile + '.getShooter()';             
+  return  [code, Blockly.Python.ORDER_NONE];
 };
 
