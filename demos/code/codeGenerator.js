@@ -1719,7 +1719,7 @@ Blockly.Python['getsignline'] = function(block) {
   var b = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
   b = insideParen (b);
   var line = block.getFieldValue("LINE");  
-  var code = b + ".state.getLine(" + line + ")";
+  var code = "(" + b + "==null)?null: (" + b + ".state.getLine == null)?null:" + b + ".state.getLine(" + line + ")";
   return [code, Blockly.Python.ORDER_NONE];
 }
 
@@ -2441,3 +2441,83 @@ Blockly.Python['getshooter'] = function(block) {
   return  [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['getnewboard'] = function(block) {
+  var code = 'var manager = org.bukkit.Bukkit.getScoreboardManager();\n' + 
+             'exports.board = manager.getNewScoreboard();\n' +   
+             'var objective = exports.board.registerNewObjective(\"objective1\", \"HEALTH\", \"Scoreboard\");\n' + 
+             'objective.setDisplaySlot(org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n'              
+  return code;
+};
+
+Blockly.Python['registernewteam'] = function(block) {
+  var name = insideParen(Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC)); 
+  
+  var code = 'exports.board.registerNewTeam(' + name + ')'          
+  return  [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['addteamplayer'] = function(block) {
+  var team = insideParen(Blockly.Python.valueToCode(block, 'TEAM', Blockly.Python.ORDER_ATOMIC)); 
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC)); 
+  var code = team + '.addPlayer (' + player + ');\n';
+     
+  return code;
+};
+
+Blockly.Python['friendlyfire'] = function(block) { 
+  var team = insideParen(Blockly.Python.valueToCode(block, 'TEAM', Blockly.Python.ORDER_ATOMIC)); 
+  var allowed = block.getFieldValue ( 'ALLOWED' ); 
+  var code = team + '.setAllowFriendlyFire (' + allowed + ');\n';     
+  return code;
+};
+
+Blockly.Python['setscore'] = function(block) {
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC)); 
+  var value = insideParen(Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));  
+  instantiateVariable ("objective");
+  var code = 'objective = exports.board.getObjective (org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n' + 
+             'objective.getScore(' + player + ').setScore(' + value + ');\n' + 
+             player + '.setScoreboard (exports.board);\n'; 
+  return code;
+};
+
+Blockly.Python['scoreboardtitle'] = function(block) { 
+  var title = insideParen(Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_ATOMIC)); 
+  
+  instantiateVariable ("objective");
+  var code = 'objective = exports.board.getObjective (org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n' + 
+             'objective.setDisplayName(' + title + ');\n'; 
+  return code;
+};
+
+
+Blockly.Python['increment'] = function(block) {
+  var variable = insideParen(Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC)); 
+  
+  instantiateVariable ( 'value' );
+  var code = '(function () {\n'  + 
+             '  var value = ( ' + variable + '==null)?0:' + variable + ';\n' + 
+             '  ' + variable + '= value+1;\n' +
+             '})();\n'
+  return code;
+};
+
+Blockly.Python['allplayerssetscore'] = function(block) {
+  var score = insideParen(Blockly.Python.valueToCode(block, 'SCORE', Blockly.Python.ORDER_ATOMIC));   
+  instantiateVariable ("objective");
+  instantiateVariable ("players");
+  var code = 'objective = exports.board.getObjective (org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n' + 
+             'players = server.getOnlinePlayers();\n' + 
+             'for (var playersIndex=0; playersIndex<players.length; playersIndex++) {\n' + 
+             '  objective.getScore(players[playersIndex]).setScore(' + score + ');\n' + 
+             '  players[playersIndex].setScoreboard (exports.board);\n' + 
+		         	 '}\n'; 
+  return code;
+};
+
+Blockly.Python['allplayersmessage'] = function(block) {
+  var message = insideParen(Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC));   
+  var code = 'org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), ' + 
+             '\"say @a \" + ' + message + ');\n';
+  return code;
+};

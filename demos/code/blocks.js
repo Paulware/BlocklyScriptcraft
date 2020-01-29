@@ -53,7 +53,7 @@ Blockly.Blocks['sendmessage'] = {
   init: function() {  
     this.appendValueInput("PLAYER")
         .appendField ("SendMessage ")
-        .appendField (new Blockly.FieldTextInput ( "Hello"), "MESSAGE")
+        .appendField (new Blockly.FieldTextInput ( "\"Hello\""), "MESSAGE")
         .appendField("To Player");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -290,16 +290,19 @@ Blockly.Blocks['eventlistener'] = {
         .appendField(new Blockly.FieldDropdown([ 
             ["A player moved", "playerMove"],
             ["Player Mouse Click","playerInteract"],  
-            ["An inventory item was selected", "inventoryClick"],		
-            ["Player entered a command", "playerCommandPreprocess" ], 			
+            ["Player dropped an item", "playerDropItem"],
+            ["An inventory item was selected", "inventoryClick"],  
+            ["An inventory got an item", "inventoryPickupItem"],
+            ["An entity moved an inventory item", "inventoryMoveItem"],
+            ["Player entered a command", "playerCommandPreprocess" ],    
             ["A player died", "playerDeath"], 
-			["A player joined the server", "playerJoin"],
+            ["A player joined the server", "playerJoin"],
             ["World save event", "worldSave"],            
             ["An item was hung", "hangingPlace"],
             ["Player entered a portal", "playerPortal"],
-			["Bow was fired", "entityShootBow"],
+            ["Bow was fired", "entityShootBow"],
             ["Projectile Hit Something", "projectileHit"],
-			["Projectile Launched", "projectileLaunch"],
+            ["Projectile Launched", "projectileLaunch"],
             ["Player Respawn","playerRespawn"],
             ["Item Despawn", "itemDespawn"],
             ["Player disconnected","playerQuit"],
@@ -337,9 +340,9 @@ Blockly.Blocks['explosion'] = {
     this.appendValueInput("LOCATION")
         .appendField("Explosion Size")
         .appendField(new Blockly.FieldDropdown([
-		             [ "0", "0"], 
-		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
-  		             ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"], ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
+               [ "0", "0"], 
+               [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
+                 ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"], ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
                                                ]), "SIZE")
         .appendField ("Location:");      
 
@@ -483,7 +486,8 @@ Blockly.Blocks['teleport'] = {
     this.appendValueInput("ENTITY")
         .appendField("Teleport Entity");
     this.appendValueInput("LOCATION")
-        .appendField("Location");         
+        .appendField("Location");      
+    this.setInputsInline(true);             
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
@@ -872,16 +876,18 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Bone Meal", "BONE_MEAL"],
                                                   ["Chest", "CHEST"],
-												  ["Compass", "COMPASS"],
+                                                  ["Compass", "COMPASS"],
                                                   ["Cookie","COOKIE"],
                                                   ["Crossbow", "CROSSBOW"],
                                                   ["Diamond", "DIAMOND"],
                                                   ["Diamond Pick", "DIAMOND_PICKAXE"],
                                                   ["Diamond Shovel", "DIAMOND_SHOVEL"],
+                                                  ["Diamond Sword", "DIAMOND_SWORD"],
                                                   ["Drinkable Potion", "POTION"],
-                                                  ["Elytra (Glider)", "LEGACY_ELYTRA"],                                                  
+                                                  ["Elytra (Glider)", "LEGACY_ELYTRA"],   
+                                                  ["Emerald", "EMERALD"],                                                  
                                                   ["Firework", "FIREWORK_ROCKET"],
-  												  ["Heart of the Sea", "HEART_OF_THE_SEA"],												  
+                                                  ["Heart of the Sea", "HEART_OF_THE_SEA"],              
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
                                                   ["Oak Sign Post", "OAK_SIGN"],                                                  
@@ -889,7 +895,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Stick", "STICK"],
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
-												  ["Totem of Undying", "TOTEM_OF_UNDYING"],
+                                                  ["Totem of Undying", "TOTEM_OF_UNDYING"],
                                                   ["White Wool", "WHITE_WOOL"],
                                                   ["Wolf Egg", "WOLF_SPAWN_EGG"],
                                                   ["Wheat Seeds", "WHEAT_SEEDS"]
@@ -966,7 +972,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Bed", "LEGACY_BED_BLOCK"],
                                                 ["Chest", "CHEST"],
                                                 ["Cobblestone", "COBBLESTONE"],
-												["Cobweb", "COBWEB"],
+                                                ["Cobweb", "COBWEB"],
                                                 ["Command Block (Chain)", "CHAIN_COMMAND_BLOCK"],
                                                 ["Command Block (Impulse)", "COMMAND_BLOCK"],
                                                 ["Command Block (Repeating)", "REPEATING_COMMAND_BLOCK"],
@@ -975,6 +981,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Door", "LEGACY_WOODEN_DOOR"],
                                                 ["Farm Land", "FARMLAND"],
                                                 ["Fence", "OAK_FENCE"],
+                                                ["Hopper", "HOPPER"],
                                                 ["Fire", "FIRE"],                                                
                                                 ["Gate", "OAK_FENCE_GATE"],
                                                 ["Item Frame", "ITEM_FRAME"],
@@ -1078,10 +1085,9 @@ Blockly.Blocks['clickedBlock'] = {
 
 Blockly.Blocks['getBlock'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Get Block at Location");
     this.appendValueInput("LOCATION")
-        .appendField("Location of Block");
+        .appendField("Get Block at Location");
+    this.setInputsInline(true);        
     this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -1336,7 +1342,7 @@ Blockly.Blocks['setplayerdata'] = {
         .appendField("Set Entity Data")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
         .appendField("Value");
-		
+  
     this.appendValueInput("PLAYER")
         .appendField("For ");
     this.setInputsInline(true);
@@ -1355,6 +1361,7 @@ Blockly.Blocks['removeplayerdata'] = {
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
     this.appendValueInput("PLAYER")
         .appendField("For Player/Entity");
+    this.setInputsInline(true);             
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
@@ -1396,7 +1403,7 @@ Blockly.Blocks['existsplayerdata'] = {
     this.appendValueInput("PLAYER")
         .appendField("Data Exists?")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
-		.appendField("For:");
+  .appendField("For:");
     //this.appendValueInput("PLAYER")
     //    .appendField("For Player/Entity");
     this.setColour(0);
@@ -1570,6 +1577,7 @@ Blockly.Blocks['setgamemode'] = {
                                                ]), "GAMEMODE"); 
     this.appendValueInput("PLAYER")
         .appendField("Player");
+    this.setInputsInline(true);        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
@@ -1741,7 +1749,7 @@ Blockly.Blocks['servercommand'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Execute server command")
-        .appendField (new Blockly.FieldTextInput ("weather clear"), "COMMAND");        
+        .appendField (new Blockly.FieldTextInput ("\"weather clear\""), "COMMAND");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
@@ -1850,23 +1858,23 @@ Blockly.Blocks['blockfacing'] = {
     this.appendDummyInput()
         .appendField("Set Block Facing Direction")
         .appendField(new Blockly.FieldDropdown([
-                                                 ["DOWN","DOWN"],	 
-                                                 ["EAST","EAST"],	 
-                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],	 
-                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],	 
-                                                 ["NORTH","NORTH"],	 
-                                                 ["NORTH_EAST","NORTH_EAST"],	 
-                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],	 
-                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],	 
-                                                 ["NORTH_WEST","NORTH_WEST"],	 
-                                                 ["SOUTH","SOUTH"],	 
-                                                 ["SOUTH_EAST","SOUTH_EAST"],	 
-                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],	 
-                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],	 
-                                                 ["SOUTH_WEST","SOUTH_WEST"],	 
-                                                 ["UP","UP"],	 
-                                                 ["WEST","WEST"],	 
-                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],	 
+                                                 ["DOWN","DOWN"],  
+                                                 ["EAST","EAST"],  
+                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],  
+                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],  
+                                                 ["NORTH","NORTH"],  
+                                                 ["NORTH_EAST","NORTH_EAST"],  
+                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],  
+                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],  
+                                                 ["NORTH_WEST","NORTH_WEST"],  
+                                                 ["SOUTH","SOUTH"],  
+                                                 ["SOUTH_EAST","SOUTH_EAST"],  
+                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],  
+                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],  
+                                                 ["SOUTH_WEST","SOUTH_WEST"],  
+                                                 ["UP","UP"],  
+                                                 ["WEST","WEST"],  
+                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],  
                                                  ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
                                                ]), "FACE"); 
     this.appendValueInput("LOCATION")
@@ -1884,23 +1892,23 @@ Blockly.Blocks['signfacing'] = {
     this.appendDummyInput()
         .appendField("Set Sign Facing Direction")
         .appendField(new Blockly.FieldDropdown([
-                                                 ["DOWN","DOWN"],	 
-                                                 ["EAST","EAST"],	 
-                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],	 
-                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],	 
-                                                 ["NORTH","NORTH"],	 
-                                                 ["NORTH_EAST","NORTH_EAST"],	 
-                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],	 
-                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],	 
-                                                 ["NORTH_WEST","NORTH_WEST"],	 
-                                                 ["SOUTH","SOUTH"],	 
-                                                 ["SOUTH_EAST","SOUTH_EAST"],	 
-                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],	 
-                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],	 
-                                                 ["SOUTH_WEST","SOUTH_WEST"],	 
-                                                 ["UP","UP"],	 
-                                                 ["WEST","WEST"],	 
-                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],	 
+                                                 ["DOWN","DOWN"],  
+                                                 ["EAST","EAST"],  
+                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],  
+                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],  
+                                                 ["NORTH","NORTH"],  
+                                                 ["NORTH_EAST","NORTH_EAST"],  
+                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],  
+                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],  
+                                                 ["NORTH_WEST","NORTH_WEST"],  
+                                                 ["SOUTH","SOUTH"],  
+                                                 ["SOUTH_EAST","SOUTH_EAST"],  
+                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],  
+                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],  
+                                                 ["SOUTH_WEST","SOUTH_WEST"],  
+                                                 ["UP","UP"],  
+                                                 ["WEST","WEST"],  
+                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],  
                                                  ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
                                                ]), "FACE"); 
     this.appendValueInput("LOCATION")
@@ -1919,7 +1927,7 @@ Blockly.Blocks['getcolor'] = {
     this.appendDummyInput()
         .appendField ( "Color " )
         .appendField(new Blockly.FieldDropdown([
-                                        ["AQUA","AQUA"],	
+                                        ["AQUA","AQUA"], 
                                         ["BLACK","BLACK"],
                                         ["BLUE","BLUE"],
                                         ["FUCHSIA","FUCHSIA"],
@@ -2236,23 +2244,23 @@ Blockly.Blocks['direction'] = {
     this.appendDummyInput()
         .appendField("Item Direction")
         .appendField(new Blockly.FieldDropdown([
-                                                 ["DOWN","DOWN"],	 
-                                                 ["EAST (Positive X)","EAST"],	 
-                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],	 
-                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],	 
-                                                 ["NORTH (Negative Z)","NORTH"],	 
-                                                 ["NORTH_EAST","NORTH_EAST"],	 
-                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],	 
-                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],	 
-                                                 ["NORTH_WEST","NORTH_WEST"],	 
-                                                 ["SOUTH (Positive Z)","SOUTH"],	 
-                                                 ["SOUTH_EAST","SOUTH_EAST"],	 
-                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],	 
-                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],	 
-                                                 ["SOUTH_WEST","SOUTH_WEST"],	 
-                                                 ["UP","UP"],	 
-                                                 ["WEST (Negative X)","WEST"],	 
-                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],	 
+                                                 ["DOWN","DOWN"],  
+                                                 ["EAST (Positive X)","EAST"],  
+                                                 ["EAST_NORTH_EAST","EAST_NORTH_EAST"],  
+                                                 ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],  
+                                                 ["NORTH (Negative Z)","NORTH"],  
+                                                 ["NORTH_EAST","NORTH_EAST"],  
+                                                 ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],  
+                                                 ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],  
+                                                 ["NORTH_WEST","NORTH_WEST"],  
+                                                 ["SOUTH (Positive Z)","SOUTH"],  
+                                                 ["SOUTH_EAST","SOUTH_EAST"],  
+                                                 ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],  
+                                                 ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],  
+                                                 ["SOUTH_WEST","SOUTH_WEST"],  
+                                                 ["UP","UP"],  
+                                                 ["WEST (Negative X)","WEST"],  
+                                                 ["WEST_NORTH_WEST","WEST_NORTH_WEST"],  
                                                  ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
                                                ]), "DIRECTION"); 
                                                       
@@ -2490,8 +2498,8 @@ Blockly.Blocks['nearbyentities'] = {
   init: function() {
     this.appendValueInput("LOCATION")
         .appendField("Entities within " )
-        .appendField (new Blockly.FieldTextInput ("5"), "RADIUS")		
-		.appendField("blocks of location:" );
+        .appendField (new Blockly.FieldTextInput ("5"), "RADIUS")  
+  .appendField("blocks of location:" );
     this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2601,14 +2609,14 @@ Blockly.Blocks['materialdata'] = {
 Blockly.Blocks['sethotbar'] = {
   init: function() {
     this.appendValueInput("PLAYER")
-	    .appendField ( "Set hotbar slot" )
+     .appendField ( "Set hotbar slot" )
         .appendField(new Blockly.FieldDropdown([
-		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], 
-					 [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"]
-                                               ]), "SLOT")		
+               [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], 
+      [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"]
+                                               ]), "SLOT")  
         .appendField("for player: ");   
     this.appendValueInput("STACK")
-        .appendField("To a stack of:"); 		
+        .appendField("To a stack of:");   
     this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2620,7 +2628,7 @@ Blockly.Blocks['sethotbar'] = {
 Blockly.Blocks['tameentity'] = {
   init: function() {
     this.appendValueInput("ENTITY")
-	    .appendField ( "Tame (if possible) entity:" )
+     .appendField ( "Tame (if possible) entity:" )
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2632,9 +2640,9 @@ Blockly.Blocks['tameentity'] = {
 Blockly.Blocks['attackentity'] = {
   init: function() {
     this.appendValueInput("ATTACKER")
-	    .appendField ( "Attack! Attacker: " )
+     .appendField ( "Attack! Attacker: " )
     this.appendValueInput("TARGET")
-	    .appendField ( "Target: " )
+     .appendField ( "Target: " )
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2666,7 +2674,7 @@ Blockly.Blocks['locationadd'] = {
         .appendField (new Blockly.FieldTextInput ("100"), "Y")          
         .appendField("Z")
         .appendField (new Blockly.FieldTextInput ("0"), "Z") 
-        .appendField ("Location:");		
+        .appendField ("Location:");  
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -2699,16 +2707,19 @@ Blockly.Blocks['isspectator'] = {
 Blockly.Blocks['eventinfo'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Event information") 	  
+        .appendField("Event information")    
         .appendField(new Blockly.FieldDropdown([
-		                                        ["Get block that was clicked on", "getClickedBlock()"],
-												["Get bow that was fired", "getBow()"],
+                                                ["Get block that was clicked on", "getClickedBlock()"],
+                                                ["Get bow that was fired", "getBow()"],
                                                 ["Get entity", "getEntity()"],
-												["Get location player moved from", "getFrom()"],
-												["Get message that player sent", "getMessage()" ],
+                                                ["Get item", "getItem()"],
+                                                ["Get item dropped", "getItemDrop()"],
+                                                ["Get inventory", "getInventory()"],
+                                                ["Get location player moved from", "getFrom()"],
+                                                ["Get message that player sent", "getMessage()" ],
                                                 ["Get player", "getPlayer()"],
-												["Get location player moved to", "getTo()"],
-												["Get projectile", "getProjectile()"]
+                                                ["Get location player moved to", "getTo()"],
+                                                ["Get projectile", "getProjectile()"]
                                                ]), "INFORMATION"); 
 
     this.setOutput(true, null);
@@ -2757,11 +2768,11 @@ Blockly.Blocks['removeplayersgear'] = {
 
 /*
         .appendField(new Blockly.FieldDropdown([
-		             [ "0", "0"], 
-		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"],
-		             [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
-  		             ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"],
-					 ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
+               [ "0", "0"], 
+               [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"],
+               [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
+                 ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"],
+      ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
                                                ]), "HEALTH")
 
 */
@@ -2770,7 +2781,8 @@ Blockly.Blocks['setplayerhealth'] = {
     this.appendValueInput("HEALTH")
         .appendField("Set Health to: ");
     this.appendValueInput("PLAYER")
-        .appendField ("for player:");	 
+        .appendField ("for player:");  
+    this.setInputsInline(true);              
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
@@ -2784,17 +2796,17 @@ Blockly.Blocks['createexplosion'] = {
     this.appendValueInput("LOCATION")
         .appendField("Explosion Size")
         .appendField(new Blockly.FieldDropdown([
-		             [ "0", "0"], 
-		             [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
-  		             ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"], ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
+               [ "0", "0"], 
+               [ "1", "1"],  ["2", "2"],  ["3", "3"],  ["4", "4"], [ "5", "5"], [ "6", "6"],  ["7", "7"],  ["8", "8"],  ["9", "9"], ["10","10"],
+                 ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"], ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"]
                                                ]), "SIZE")
         .appendField("Set Fire")
         .appendField(new Blockly.FieldDropdown([
-		                                            [ "true", "true"],  [ "false", "false"]
+                                              [ "true", "true"],  [ "false", "false"]
                                                ]), "FIRE")
         .appendField("Destroy Blocks")
         .appendField(new Blockly.FieldDropdown([
-		                                            [ "true", "true"],  [ "false", "false"]
+                                              [ "true", "true"],  [ "false", "false"]
                                                ]), "DESTROY")
         .appendField ("Location:");      
 
@@ -2836,9 +2848,8 @@ Blockly.Blocks['setprojectilespeed'] = {
     this.appendValueInput("SPEED")
         .appendField("Set Speed");
     this.appendValueInput ("PROJECTILE")
-	    .appendField("For Projectile:");
-   
-	this.setInputsInline(true);
+        .appendField("For Projectile:");   
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
@@ -2858,3 +2869,135 @@ Blockly.Blocks['getshooter'] = {
   }
 };
 
+Blockly.Blocks['getnewboard'] = { 
+  init: function() {
+    this.appendDummyInput()        
+        .appendField("Get new scoreboard");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['registernewteam'] = {
+  init: function() {
+    this.appendValueInput("NAME")        
+        .appendField("Create team with name:");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['addteamplayer'] = { 
+  init: function() {
+    this.appendValueInput("TEAM")       
+        .appendField("Modify team:");
+    this.appendValueInput ("PLAYER")
+        .appendField("Add player: ");
+    this.setInputsInline(true);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['friendlyfire'] = { 
+  init: function() {
+    this.appendValueInput("TEAM")       
+        .appendField("Set Friendly Fire:")
+        .appendField(new Blockly.FieldDropdown([
+                                              [ "true", "true"],  [ "false", "false"]
+                                               ]), "ALLOWED")
+        .appendField ( "For Team:" );                                               
+    this.setInputsInline(true);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['createscoreboard'] = { 
+  init: function() {
+    this.appendValueInput("NAME")       
+        .appendField("Scoreboard name");
+    this.setInputsInline(true);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['scoreboardtitle'] = { 
+  init: function() {
+    this.appendValueInput("TITLE")       
+        .appendField("Set Scoreboard Title");
+    this.setInputsInline(true);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['setscore'] = { 
+  init: function() {
+    this.appendValueInput("PLAYER")       
+        .appendField("Set score for player: ");
+    this.appendValueInput("VALUE")       
+        .appendField("value: ");
+    this.setInputsInline(true);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['increment'] = { 
+  init: function() {
+    this.appendValueInput("VARIABLE")       
+        .appendField("Increment variable:");
+    this.setInputsInline(true);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['allplayerssetscore'] = {
+  init: function() {
+    this.appendValueInput("SCORE")
+        .appendField ( "For all players set score =" );       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['allplayersmessage'] = {
+  init: function() {
+    this.appendValueInput("MESSAGE")
+        .appendField ( "To all players, send message:" );       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
