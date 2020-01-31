@@ -2754,6 +2754,32 @@ Blockly.Blocks['diamondarmor'] = {
   }
 };
 
+Blockly.Blocks['diamondhelmet'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Give diamond helmet to player/entity:");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['goldboots'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Give gold boots to player/entity:");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
 Blockly.Blocks['removeplayersgear'] = {
   init: function() {
     this.appendDummyInput()

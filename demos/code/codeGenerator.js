@@ -2521,3 +2521,26 @@ Blockly.Python['allplayersmessage'] = function(block) {
              '\"say @a \" + ' + message + ');\n';
   return code;
 };
+
+Blockly.Python['diamondhelmet'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  player = insideParen (player );
+  instantiateVariable ( "player" );
+  instantiateVariable ( "items" );
+  var code = "player = " + player + ";\n" + 
+	         		 "items = require ('items');\n" + 
+	         		 "player.equipment.helmet = items.diamondHelmet(1);\n"; 
+  return code;
+};
+
+Blockly.Python['goldboots'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  player = insideParen (player );
+  instantiateVariable ( "player" );
+  instantiateVariable ( "items" );
+  var code = "player = " + player + ";\n" + 
+	         		 "items = require ('items');\n" + 
+	         		 "player.equipment.boots = items.goldenBoots(1);\n";
+
+  return code;
+};
