@@ -932,29 +932,30 @@ Blockly.Blocks['projectileentity'] = {
 Blockly.Blocks['eggtype'] = {
   init: function() {
     this.appendDummyInput()       
+        .appendField ("EGG") 
         .appendField(new Blockly.FieldDropdown([
-                                                  ["Blaze Spawn Egg", "BLAZE_SPAWN_EGG"],
-                                                  ["Cave Spider Spawn Egg", "CAVE_SPIDER_SPAWN_EGG"],
-                                                  ["Creeper Spawn Egg", "CREEPER_SPAWN_EGG"],
-                                                  ["Endermite Spawn Egg", "ENDERMITE_SPAWN_EGG"],
-                                                  ["Enderman Egg", "ENDERMAN_SPAWN_EGG"],
-                                                  ["Guardian Egg", "GUARDIAN_SPAWN_EGG"],
-                                                  ["Ghast Egg", "GHAST_SPAWN_EGG"],
-                                                  ["Husk Egg", "HUSK_SPAWN_EGG"],
-                                                  ["Llama Spawn Egg", "LLAMA_SPAWN_EGG"],
-                                                  ["Magma Cube Spawn Egg","MAGMA_CUBE_SPAWN_EGG"],
-                                                  ["Pillager Spawn Egg","PILLAGER_SPAWN_EGG"],
-                                                  ["Polar Bear Spawn Egg","POLAR_BEAR_SPAWN_EGG"],
-                                                  ["Shulker Spawn Egg", "SHULKER_SPAWN_EGG"],
-                                                  ["Ravager Spawn Egg", "RAVAGER_SPAWN_EGG"],
-                                                  ["Skeleton Spawn Egg", "SKELETON_SPAWN_EGG"],
-                                                  ["Skeleton Horse Spawn Egg", "SKELETON_HORSE_SPAWN_EGG"],
-                                                  ["Wolf Egg", "WOLF_SPAWN_EGG"],
-                                                  ["Vex Spawn Egg", "VEX_SPAWN_EGG"],                                                
-                                                  ["Vindicator Spawn Egg", "VINDICATOR_SPAWN_EGG"],
-                                                  ["Zombie Pigman Spawn Egg", "ZOMBIE_PIGMAN_SPAWN_EGG"],
-                                                  ["Zombie Villager Spawn Egg", "ZOMBIE_VILLAGER_SPAWN_EGG"],
-                                                  ["Zombie Spawn Egg", "ZOMBIE_SPAWN_EGG"]
+                                                  ["Blaze", "BLAZE_SPAWN_EGG"],
+                                                  ["Cave Spider", "CAVE_SPIDER_SPAWN_EGG"],
+                                                  ["Creeper", "CREEPER_SPAWN_EGG"],
+                                                  ["Endermite", "ENDERMITE_SPAWN_EGG"],
+                                                  ["Enderman", "ENDERMAN_SPAWN_EGG"],
+                                                  ["Guardian", "GUARDIAN_SPAWN_EGG"],
+                                                  ["Ghast", "GHAST_SPAWN_EGG"],
+                                                  ["Husk", "HUSK_SPAWN_EGG"],
+                                                  ["Llama", "LLAMA_SPAWN_EGG"],
+                                                  ["Magma Cube","MAGMA_CUBE_SPAWN_EGG"],
+                                                  ["Pillager","PILLAGER_SPAWN_EGG"],
+                                                  ["Polar Bear","POLAR_BEAR_SPAWN_EGG"],
+                                                  ["Shulker", "SHULKER_SPAWN_EGG"],
+                                                  ["Ravager", "RAVAGER_SPAWN_EGG"],
+                                                  ["Skeleton", "SKELETON_SPAWN_EGG"],
+                                                  ["Skeleton Horse", "SKELETON_HORSE_SPAWN_EGG"],
+                                                  ["Wolf", "WOLF_SPAWN_EGG"],
+                                                  ["Vex", "VEX_SPAWN_EGG"],                                                
+                                                  ["Vindicator", "VINDICATOR_SPAWN_EGG"],
+                                                  ["Zombie Pigman", "ZOMBIE_PIGMAN_SPAWN_EGG"],
+                                                  ["Zombie Villager", "ZOMBIE_VILLAGER_SPAWN_EGG"],
+                                                  ["Zombie", "ZOMBIE_SPAWN_EGG"]
                                                ]), "MATERIAL");                   
     this.setOutput(true, null);
     this.setColour(320);
