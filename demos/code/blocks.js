@@ -987,10 +987,10 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Gate", "OAK_FENCE_GATE"],
                                                 ["Item Frame", "ITEM_FRAME"],
                                                 ["Lever", "LEVER"],
-                                                ["Normal Piston", "PISTON"],
                                                 ["Oak", "OAK_WOOD"], 
                                                 ["Oak Sign Post", "OAK_SIGN"],
-                                                ["Observer Block", "OBSERVER"],                                                
+                                                ["Observer Block", "OBSERVER"], 
+                                                ["Piston", "PISTON"],                                                
                                                 ["Portal", "LEGACY_PORTAL"],
                                                 ["Rail", "RAIL"],
                                                 ["Rail Powered", "POWERED_RAIL"],
@@ -1856,8 +1856,22 @@ Blockly.Blocks['allentities'] = {
 
 Blockly.Blocks['blockfacing'] = {
   init: function() {
+    this.appendValueInput("FACE")
+        .appendField("Set Block Facing Direction");
+    this.appendValueInput("LOCATION")
+        .appendField("At Location ");                                                       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['blockfacingdirection'] = {
+  init: function() {
     this.appendDummyInput()
-        .appendField("Set Block Facing Direction")
+        .appendField("Block Facing Direction")
         .appendField(new Blockly.FieldDropdown([
                                                  ["DOWN","DOWN"],  
                                                  ["EAST","EAST"],  
@@ -1877,11 +1891,19 @@ Blockly.Blocks['blockfacing'] = {
                                                  ["WEST","WEST"],  
                                                  ["WEST_NORTH_WEST","WEST_NORTH_WEST"],  
                                                  ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
-                                               ]), "FACE"); 
-    this.appendValueInput("LOCATION")
-        .appendField("At Location ");                                                       
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+                                               ]), "DIRECTION"); 
+    this.setOutput(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['reverseface'] = {
+  init: function() {
+    this.appendValueInput("DIRECTION")
+        .appendField("Reverse Block Direction")
+    this.setOutput(true, null);
     this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -2683,6 +2705,20 @@ Blockly.Blocks['locationadd'] = {
   }
 };
 
+Blockly.Blocks['changelocation'] = {
+  init: function() {
+    this.appendValueInput ( "LOCATION" )
+        .appendField ("Change Location" ) 
+    this.appendValueInput("DIRECTION")
+        .appendField ("By Direction:");  
+    this.setInputsInline(true);                      
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['entitydead'] = {
   init: function() {
     this.appendValueInput("ENTITY")
@@ -2710,17 +2746,19 @@ Blockly.Blocks['eventinfo'] = {
     this.appendDummyInput()
         .appendField("Event information")    
         .appendField(new Blockly.FieldDropdown([
-                                                ["Get block that was clicked on", "getClickedBlock()"],
-                                                ["Get bow that was fired", "getBow()"],
-                                                ["Get entity", "getEntity()"],
-                                                ["Get item", "getItem()"],
-                                                ["Get item dropped", "getItemDrop()"],
-                                                ["Get inventory", "getInventory()"],
-                                                ["Get location player moved from", "getFrom()"],
-                                                ["Get message that player sent", "getMessage()" ],
-                                                ["Get player", "getPlayer()"],
-                                                ["Get location player moved to", "getTo()"],
-                                                ["Get projectile", "getProjectile()"]
+                                                ["Get block that was clicked on", "getClickedBlock"],
+                                                ["Get face of block that was clicked on", "getBlockFace"],
+                                                ["Get bow that was fired", "getBow"],
+                                                ["Get the entity doing the damage", "getDamager"],
+                                                ["Get entity", "getEntity"],
+                                                ["Get item", "getItem"],
+                                                ["Get item dropped", "getItemDrop"],
+                                                ["Get inventory", "getInventory"],
+                                                ["Get location player moved from", "getFrom"],
+                                                ["Get message that player sent", "getMessage" ],
+                                                ["Get player", "getPlayer"],
+                                                ["Get location player moved to", "getTo"],
+                                                ["Get projectile", "getProjectile"]
                                                ]), "INFORMATION"); 
 
     this.setOutput(true, null);

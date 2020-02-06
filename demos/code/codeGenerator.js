@@ -649,7 +649,11 @@ Blockly.Python['sendmessage'] = function(block) {
      code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
             command + ");\n";
   } else { 
-     code = player + ".sendMessage (" + message + ");\n";
+     var code = '(function() { \n' + 
+                '  if (' + player + ' != null ) { \n' + 
+                '     ' + player + '.sendMessage (' + message + ');\n' + 
+                '  }\n' +                 
+                ' })();\n'    
   }
   return code;
 };
@@ -765,7 +769,7 @@ Blockly.Python['getplayerdata2'] = function(block) {
   } else {
      entity = insideParen (entity );
   } 
-  var code = "(" + entity + ".getMetadata == null)?null:(" + entity + ".getMetadata(\"" + key + 
+  var code = "(" + entity + "== null)? null : (" + entity + ".getMetadata == null)?null:(" + entity + ".getMetadata(\"" + key + 
              "\").length == 0)?null:" + entity + ".getMetadata(\"" + key + "\")[0].value()";
     
   return [code, Blockly.Python.ORDER_NONE];  
@@ -1180,6 +1184,26 @@ Blockly.Python['blocktype'] = function(block) {
   b = 'org.bukkit.Material.' + insideParen (b);
   return [b, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['blockfacingdirection'] = function(block) {
+  var b = block.getFieldValue ("DIRECTION");
+  b = 'org.bukkit.block.BlockFace.' + insideParen (b);
+  return [b, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['reverseface'] = function(block) {
+  var direction = Blockly.Python.valueToCode(block, "DIRECTION", Blockly.Python.ORDER_ATOMIC);
+  direction = insideParen (direction)
+  var newDirection = ""
+  var code = "(" + direction + "== org.bukkit.block.BlockFace.NORTH)? org.bukkit.block.BlockFace.SOUTH : \n" + 
+             "(" + direction + "== org.bukkit.block.BlockFace.SOUTH)? org.bukkit.block.BlockFace.NORTH : \n" + 
+             "(" + direction + "== org.bukkit.block.BlockFace.EAST)? org.bukkit.block.BlockFace.WEST : \n" + 
+             "(" + direction + "== org.bukkit.block.BlockFace.WEST)? org.bukkit.block.BlockFace.EAST : \n" + 
+             "(" + direction + "== org.bukkit.block.BlockFace.UP)? org.bukkit.block.BlockFace.DOWN : \n" + 
+             "(" + direction + "== org.bukkit.block.BlockFace.DOWN)? org.bukkit.block.BlockFace.UP : null"; 
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
 
 Blockly.Python['materialtype'] = function(block) {
   var material = block.getFieldValue ("MATERIAL");
@@ -1757,21 +1781,15 @@ Blockly.Python['allentities'] = function(block) {
 Blockly.Python['blockfacing'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen(location); 
-  var direction = block.getFieldValue("FACE");
-  instantiateVariable ("data");
-  instantiateVariable ("block");
-  
-  /*
-            "sign = block.getState();\n" + 
-            "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
-            "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
-            "sign.setData (data);\n" + 
-            "sign.update();\n"   
-  */
-  var code = "block = server.worlds[0].getBlockAt (" + location + ")\n" + 
-             "data = block.getBlockData();\n" + 
-             "data.setFacing(org.bukkit.block.BlockFace." + direction + ")\n" + 
-             "block.setBlockData(data)\n"; 
+  var direction = Blockly.Python.valueToCode(block, 'FACE', Blockly.Python.ORDER_ATOMIC);  
+  direction = insideParen (direction);
+  instantiateVariable ("_data");
+  instantiateVariable ("_block");
+
+  var code = "_block = server.worlds[0].getBlockAt (" + location + ")\n" + 
+             "_data = _block.getBlockData();\n" + 
+             "_data.setFacing(" + direction + ")\n" + 
+             "_block.setBlockData(_data)\n"; 
   return code;
 };
 
@@ -1784,17 +1802,10 @@ Blockly.Python['signfacing'] = function(block) {
   instantiateVariable ("block");
   instantiateVariable ("sign");
   
-  /*
-            "sign = block.getState();\n" + 
-            "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
-            "data.setFacingDirection (org.bukkit.block.BlockFace.SOUTH);\n" + 
-            "sign.setData (data);\n" + 
-            "sign.update();\n"   
-  */
   var code = "block = server.worlds[0].getBlockAt (" + location + ")\n" + 
              "sign = block.getState();\n" + 
              "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
-             "data.setFacingDirection (org.bukkit.block.BlockFace." + direction + ");\n" + 
+             "data.setFacingDirection (" + direction + ");\n" + 
              "sign.setData (data);\n" + 
              "sign.update();\n"   
   return code;
@@ -2329,7 +2340,7 @@ Blockly.Python['isspectator'] = function(block) {
 
 Blockly.Python['eventinfo'] = function(block) {
   var information = block.getFieldValue ('INFORMATION');
-  code = "event." + information; 
+  code = "(event." + information + "== null) ? null : event." + information + "()"; 
   return [code, Blockly.Python.ORDER_NONE]; 
 };
 
@@ -2544,3 +2555,25 @@ Blockly.Python['goldboots'] = function(block) {
 
   return code;
 };
+
+Blockly.Python['changelocation'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  var direction = Blockly.Python.valueToCode(block, 'DIRECTION', Blockly.Python.ORDER_ATOMIC);
+  
+  var code = '(function() { \n' +
+                '  var _location = new org.bukkit.Location(server.worlds[0], ' + location + '.x, ' + location + '.y, ' + location + '.z);\n' +   
+                '  if (' + direction  + ' == org.bukkit.block.BlockFace.NORTH ) {\n' + 
+                '     _location.add (0,0,-1);\n' + 
+                '  }else if (' + direction  + ' == org.bukkit.block.BlockFace.SOUTH ) {\n' +  
+                '     _location.add (0,0,1);\n' + 
+                '  }else if (' + direction  + ' == org.bukkit.block.BlockFace.EAST ) {\n' +  
+                '     _location.add (1,0,0);\n' + 
+                '  }else if (' + direction  + ' == org.bukkit.block.BlockFace.WEST ) {\n' +  
+                '     _location.add (-1,0,0);\n' + 
+                '  }\n' + 
+                '  return _location;\n' +                 
+                ' })()';    
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
