@@ -335,6 +335,20 @@ Blockly.Blocks['eventlistener'] = {
   }
 };
 
+Blockly.Blocks['forlistdo'] = {
+  init: function() {
+    this.appendValueInput("LIST")
+        .appendField("For loop for list: ");
+    this.appendStatementInput("FORCODE")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(40);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['explosion'] = {
   init: function() {
     this.appendValueInput("LOCATION")
@@ -2711,7 +2725,6 @@ Blockly.Blocks['changelocation'] = {
         .appendField ("Change Location" ) 
     this.appendValueInput("DIRECTION")
         .appendField ("By Direction:");  
-    this.setInputsInline(true);                      
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
@@ -3062,6 +3075,20 @@ Blockly.Blocks['allplayersmessage'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['valueinlist'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .appendField("Value");
+    this.appendValueInput("LIST")
+        .appendField("In List"); 
+    this.setInputsInline(true);         
+    this.setOutput(true, null);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

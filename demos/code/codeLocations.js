@@ -155,7 +155,9 @@
       "Random Number => Math", 
       "Count condition in list => Lists",
       "Reverse face => World, Blocks",   
-      "Change Location => World, Location",      
+      "Change Location => World, Location", 
+      "create list with => Lists",  
+      "Value in List => Lists",       
    ];
    
    function autocomplete(inp, arr) {

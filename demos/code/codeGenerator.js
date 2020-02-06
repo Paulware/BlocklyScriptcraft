@@ -601,6 +601,20 @@ Blockly.Python['eventlistener'] = function(block) {
   return code;
 };
 
+Blockly.Python['forlistdo'] = function(block) {
+  
+  var name = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_ADDITIVE); 
+  name = insideParen (name);
+  
+  var forCode = Blockly.Python.statementToCode (block, 'FORCODE' ); 
+   
+  var code = 'for (var i=0; i<' + name + '.length;i++) {\n'  + 
+             forCode + 
+             '};\n';
+  
+  return code;
+};
+
 Blockly.Python['explosion'] = function(block) {
   var size = parseFloat(block.getFieldValue ('SIZE'));    
   if (size > 10.0) {
@@ -2576,4 +2590,13 @@ Blockly.Python['changelocation'] = function(block) {
                 ' })()';    
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['valueinlist'] = function(block) {
+  var value = Blockly.Python.valueToCode(block, "VALUE", Blockly.Python.ORDER_ATOMIC);
+  value = insideParen (value)
+  var list = Blockly.Python.valueToCode(block, "LIST", Blockly.Python.ORDER_ATOMIC);
+  list = insideParen (list)
+  var code = "(" + list + ".indexOf ( " + value + ") >= 0)"
+  return [code, Blockly.Python.ORDER_NONE];
+}
 
