@@ -92,7 +92,8 @@ Blockly.Python['text_length'] = function(block) {
   // Is the string null or array empty?
   var text = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_NONE) || '\'\'';
-  return ['len(' + text + ')', Blockly.Python.ORDER_FUNCTION_CALL];
+  alert ( 'in text_length yo' );
+  return ['lenyo(' + text + ')', Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Python['text_isEmpty'] = function(block) {

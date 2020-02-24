@@ -352,13 +352,13 @@ function bodyLoad() {
        <block type="findentitybycustomname"></block>
        <block type="findentitybylocation"></block>
 	   <category name="AllPlayers">
+       <block type="allplayers"></block>  
 	      <block type="removeplayersdata"></block>
 		     <block type="removeplayersgear"></block>
        <block type="allplayerssetscore"></block>
        <block type="allplayersmessage"></block>
 	   </category>
        <category name="Player">
-         <!block type="allplayers"><!/block>  
          <block type="setride"></block>
          <block type="setplayerhealth"></block>   
          <block type="healthofplayer"></block>		 
@@ -486,6 +486,7 @@ function bodyLoad() {
          </block>
          <block type="controls_whileUntil"></block>
          <block type="forlistdo"></block>
+         <block type="forchinstring"></block>
          <block type="controls_flow_statements"></block>
        </category>       
        <category name="File I/O">
@@ -504,13 +505,13 @@ function bodyLoad() {
           <shadow type="text"></shadow>
         </value>
       </block>
-      <block type="text_length">
-        <value name="VALUE">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
+      <!block type="text_length">
+        <!value name="VALUE">
+          <!shadow type="text">
+            <!field name="TEXT"><!abc><!/field>
+          <!/shadow>
+        <!/value>
+      <!/block>
       <block type="text_isEmpty">
         <value name="VALUE">
           <shadow type="text">
@@ -579,6 +580,7 @@ function bodyLoad() {
     <category name="{catMath}" colour="230">
       <block type="math_number"></block>
       <block type="randomnumber"></block>
+      <block type="increment"></block>
       <block type="math_arithmetic">
         <value name="A">
           <shadow type="math_number">
@@ -650,7 +652,6 @@ function bodyLoad() {
           </shadow>
         </value>
       </block>
-      <block type="increment"></block>
       <!block type="math_random_int">
         <!value name="FROM">
           <!shadow type="math_number">
@@ -683,6 +684,7 @@ function bodyLoad() {
       </block>
       <block type="lists_length"></block>
       <block type="lists_isEmpty"></block>
+      <block type="deletefromlist"></block>
       <block type="lists_indexOf">
         <value name="VALUE">
           <block type="variables_get">

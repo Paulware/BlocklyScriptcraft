@@ -605,10 +605,14 @@ Blockly.Python['forlistdo'] = function(block) {
   
   var name = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_ADDITIVE); 
   name = insideParen (name);
+  var index = block.getFieldValue ('INDEX');
+  if (index.indexOf ( "\"" ) > -1) { 
+     index = insideChars ( index,"\"","\"");
+  }
   
   var forCode = Blockly.Python.statementToCode (block, 'FORCODE' ); 
    
-  var code = 'for (var i=0; i<' + name + '.length;i++) {\n'  + 
+  var code = 'for (var ' + index + '=0; ' + index + '<' + name + '.length;' + index + '++) {\n'  + 
              forCode + 
              '};\n';
   
@@ -729,6 +733,7 @@ Blockly.Python['killplayer'] = function(block) {
 Blockly.Python['setplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
+  key = '_' + key + '_';
   var value = Blockly.Python.valueToCode (block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
   value = insideParen (value);
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
@@ -738,13 +743,18 @@ Blockly.Python['setplayerdata'] = function(block) {
      player = insideParen (player );
   } 
   var code = "fd = new org.bukkit.metadata.FixedMetadataValue (__plugin," + value + ");\n" + 
-             player + ".setMetadata (\"" + key + "\", fd );\n";
+             "if (" + player + " != null) { \n" + 
+             "  if (" + player + ".setMetadata != null ) { \n" +              
+             "    " + player + ".setMetadata (\"" + key + "\", fd );\n" + 
+             "  }\n" + 
+             "}\n";
   return code;
 };
 
 Blockly.Python['removeplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
+  key = '_' + key + '_';
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   player = insideParen (player);
   if (player == "") {
@@ -761,6 +771,7 @@ Blockly.Python['removeplayerdata'] = function(block) {
 Blockly.Python['getplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
+  key = '_' + key + '_';
   
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   if (player == "") {
@@ -776,6 +787,7 @@ Blockly.Python['getplayerdata'] = function(block) {
 Blockly.Python['getplayerdata2'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
+  key = '_' + key + '_';
   
   var entity = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   if (entity == "") {
@@ -1209,11 +1221,11 @@ Blockly.Python['reverseface'] = function(block) {
   var direction = Blockly.Python.valueToCode(block, "DIRECTION", Blockly.Python.ORDER_ATOMIC);
   direction = insideParen (direction)
   var newDirection = ""
-  var code = "(" + direction + "== org.bukkit.block.BlockFace.NORTH)? org.bukkit.block.BlockFace.SOUTH : \n" + 
-             "(" + direction + "== org.bukkit.block.BlockFace.SOUTH)? org.bukkit.block.BlockFace.NORTH : \n" + 
-             "(" + direction + "== org.bukkit.block.BlockFace.EAST)? org.bukkit.block.BlockFace.WEST : \n" + 
-             "(" + direction + "== org.bukkit.block.BlockFace.WEST)? org.bukkit.block.BlockFace.EAST : \n" + 
-             "(" + direction + "== org.bukkit.block.BlockFace.UP)? org.bukkit.block.BlockFace.DOWN : \n" + 
+  var code = "(" + direction + "== org.bukkit.block.BlockFace.NORTH)? org.bukkit.block.BlockFace.SOUTH : " + 
+             "(" + direction + "== org.bukkit.block.BlockFace.SOUTH)? org.bukkit.block.BlockFace.NORTH : " + 
+             "(" + direction + "== org.bukkit.block.BlockFace.EAST)? org.bukkit.block.BlockFace.WEST : " + 
+             "(" + direction + "== org.bukkit.block.BlockFace.WEST)? org.bukkit.block.BlockFace.EAST : " + 
+             "(" + direction + "== org.bukkit.block.BlockFace.UP)? org.bukkit.block.BlockFace.DOWN : " + 
              "(" + direction + "== org.bukkit.block.BlockFace.DOWN)? org.bukkit.block.BlockFace.UP : null"; 
   return [code, Blockly.Python.ORDER_NONE];
 }
@@ -1427,6 +1439,7 @@ Blockly.Python['copyFile'] = function(block) {
 Blockly.Python['existsplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY'); 
   key = key.toLowerCase();
+  key = '_' + key + '_';
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   if (player == "") {
      player = 'self';
@@ -1479,6 +1492,7 @@ Blockly.JavaScript ['dataexpression'] = function (block) {
   var name = block.getFieldValue ('VARNAME');
   var expression = Blockly.Python.statementToCode (block, 'EXPRESSION' );    
   var ch = expression.charAt (expression.length-1);
+  var ind;
   if (ch == ',' ) { // remove final comma
      expression = expression.substring (0,expression.length-1);
   } 
@@ -1488,11 +1502,30 @@ Blockly.JavaScript ['dataexpression'] = function (block) {
 
 Blockly.Python ['datavalue'] = function (block) {
   var name = block.getFieldValue ('HEADER');
-  var expression = Blockly.Python.statementToCode (block, 'EXPRESSION' );    
+  var expression = Blockly.Python.statementToCode (block, 'EXPRESSION' );  
   var ch = expression.charAt (expression.length-1);
   if (ch == ',' ) { // remove final comma
      expression = expression.substring (0,expression.length-1);
   } 
+  ind = expression.indexOf ( ';' );
+  if (ind > -1) { 
+     expression = expression.substring (0,ind) + ',' + expression.substring (ind+1) 
+  } 
+  ind = expression.indexOf ( '\n' );
+  if (ind > -1) { 
+     expression = expression.substring (0,ind) + expression.substring (ind+1) 
+  } 
+  
+  ind = expression.indexOf ( '\r' );
+  if (ind > -1) { 
+     expression = expression.substring (0,ind)  + expression.substring (ind+1) 
+  } 
+
+  ind = expression.indexOf ( '=' );
+  if (ind > -1) {
+      expression = expression.substring (0,ind) + ':' + expression.substring (ind+1)
+  } 
+  
   return  "\"" + name + "\":{" + expression + "},";
 };
 
@@ -1502,7 +1535,6 @@ Blockly.Python['namevalue'] = function(block) {
   var code = varname + ':' + expression + ',';
   return code;
 };
-
 
 Blockly.Python['settime'] = function(block) {
   var newTime = block.getFieldValue ('TIME'); 
@@ -1522,7 +1554,6 @@ Blockly.Python['setstorm'] = function(block) {
 };
 
 Blockly.Python['iteminhandis'] = function(block) {
-  // player.getItemInHand().getType().equals(org.bukkit.Material.BOW) 
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player)
   var code = '(' + player + '== null) ? null : ( ' + player + '.getItemInHand == null) ? null : ' + player + '.getItemInHand()';  
@@ -1870,6 +1901,7 @@ Blockly.Python['setblockdata'] = function(block) {
   instantiateVariable ("fd");
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
+  key = '_' + key + '_';
   var value = Blockly.Python.valueToCode (block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
   value = insideParen (value);
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
@@ -1882,6 +1914,7 @@ Blockly.Python['setblockdata'] = function(block) {
 Blockly.Python['getblockdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
+  key = '_' + key + '_';
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
   location = insideParen (location);
       
@@ -1892,6 +1925,7 @@ Blockly.Python['getblockdata'] = function(block) {
 Blockly.Python['existsblockdata'] = function(block) {
   var key = block.getFieldValue ('KEY'); 
   key = key.toLowerCase();
+  key = '_' + key + '_';
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
   location = insideParen (location);
     
@@ -2125,6 +2159,8 @@ Blockly.Python['nameofitem'] = function(block) {
   var functionName = (ind > -1) ? item.substring(0,ind) : item; 
   var code = "(" + functionName + "== null) ? \"\" : " + 
            "(" + item + ".getItemMeta == null ) ? \"\" : "  + 
+           "(" + item + ".getItemMeta() == null ) ? \"\" : " + 
+           "(" + item + ".getItemMeta().getDisplayName == null ) ? \"\" : " + 
            item + ".getItemMeta().getDisplayName()";
   return [code, Blockly.Python.ORDER_NONE];
 }
@@ -2333,8 +2369,16 @@ Blockly.Python['locationadd'] = function(block) {
   var z = block.getFieldValue ('Z');
   //z = insideParen (z);
   var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));
-    
-  code = location + ".add (" + x + ", " + y + ", " + z + ")"
+  
+  var code = '(function() { ' + 
+                'var x = ' + location + '.x' + x + ';' + 
+                'var y = ' + location + '.y' + y + ';' +
+                'var z = ' + location + '.z' + z + ';' +                 
+                'var loc = new org.bukkit.Location(server.worlds[0],x,y,z);'
+                'return loc;' + 
+             ' })()' 
+  
+  // code = location + ".add (" + x + ", " + y + ", " + z + ")"
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -2361,6 +2405,7 @@ Blockly.Python['eventinfo'] = function(block) {
 Blockly.Python['removeplayersdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
+  key = '_' + key + '_';
   instantiateVariable ( "players");
   var code = "players = server.getOnlinePlayers();\n" + 
              "for (var playersIndex=0; playersIndex<players.length; playersIndex++) {\n" + 
@@ -2574,18 +2619,17 @@ Blockly.Python['changelocation'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);
   var direction = Blockly.Python.valueToCode(block, 'DIRECTION', Blockly.Python.ORDER_ATOMIC);
+  direction = insideParen (direction);
   
-  var code = '(function() { \n' +
+  var code = '(function() { \n' +                
                 '  var _location = new org.bukkit.Location(server.worlds[0], ' + location + '.x, ' + location + '.y, ' + location + '.z);\n' +   
-                '  if (' + direction  + ' == org.bukkit.block.BlockFace.NORTH ) {\n' + 
-                '     _location.add (0,0,-1);\n' + 
-                '  }else if (' + direction  + ' == org.bukkit.block.BlockFace.SOUTH ) {\n' +  
-                '     _location.add (0,0,1);\n' + 
-                '  }else if (' + direction  + ' == org.bukkit.block.BlockFace.EAST ) {\n' +  
-                '     _location.add (1,0,0);\n' + 
-                '  }else if (' + direction  + ' == org.bukkit.block.BlockFace.WEST ) {\n' +  
-                '     _location.add (-1,0,0);\n' + 
-                '  }\n' + 
+                ' _location = ' +                 
+                '(' + direction + ' == org.bukkit.block.BlockFace.NORTH ) ? _location.add (0,0,-1) : ' + 
+                '(' + direction + ' == org.bukkit.block.BlockFace.SOUTH ) ? _location.add (0,0,1) : ' +   
+                '(' + direction + ' == org.bukkit.block.BlockFace.EAST )   ? _location.add (1,0,0) : ' + 
+                '(' + direction + ' == org.bukkit.block.BlockFace.WEST )   ? _location.add (-1,0,0) : ' + 
+                '(' + direction + ' == org.bukkit.block.BlockFace.UP )     ? _location.add (0,1,0) : ' + 
+                '(' + direction + ' == org.bukkit.block.BlockFace.DOWN )   ? _location.add (0,-1,0):null;\n' +                 
                 '  return _location;\n' +                 
                 ' })()';    
   return [code, Blockly.Python.ORDER_NONE];
@@ -2599,4 +2643,29 @@ Blockly.Python['valueinlist'] = function(block) {
   var code = "(" + list + ".indexOf ( " + value + ") >= 0)"
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['deletefromlist'] = function(block) {
+  var index = block.getFieldValue ( 'INDEX' ); 
+  var list = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_ATOMIC); 
+  list = insideParen (list);
+  var code = list + '.splice (' + index + ',1);\n';
+  return code;
+};
+
+Blockly.Python['forchinstring'] = function(block) {
+  
+  var name = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_ADDITIVE); 
+  name = insideParen (name);
+  
+  var forCode = Blockly.Python.statementToCode (block, 'FORCODE' ); 
+  instantiateVariable ("_ch");
+   
+  var code = 'for (var _ch_i=0; _ch_i<' + name + '.length;_ch_i++) {\n'  + 
+             '  _ch = ' + name + '.charAt(_ch_i);\n' + 
+             forCode + 
+             '};\n';
+  
+  return code;
+};
+
 

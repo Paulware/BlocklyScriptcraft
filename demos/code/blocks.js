@@ -323,7 +323,8 @@ Blockly.Blocks['eventlistener'] = {
             ["A vehicle moved", "vehicleMove"],
             ["A vehicle collided with a block", "vehicleBlockCollision"],
             ["A vehicle was entered", "vehicleEnter"],
-            ["A vehicle was exited", "vehicleExit"]
+            ["A vehicle was exited", "vehicleExit"],
+            ["World unload event", "worldUnload"]
         ]), "LISTENERTYPE");  
     this.appendStatementInput("LISTENERCODE")
         .setCheck(null);
@@ -338,12 +339,14 @@ Blockly.Blocks['eventlistener'] = {
 Blockly.Blocks['forlistdo'] = {
   init: function() {
     this.appendValueInput("LIST")
+        .appendField ( "Using loop variable: " )
+        .appendField (new Blockly.FieldTextInput ( "_i"), "INDEX")    
         .appendField("For loop for list: ");
     this.appendStatementInput("FORCODE")
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(40);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -984,7 +987,9 @@ Blockly.Blocks['blocktype'] = {
         .appendField("Block Type")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["Air", "AIR"],
-                                                ["Bed", "LEGACY_BED_BLOCK"],
+                                                ["Beacon", "BEACON"],
+                                                ["Bed", "LEGACY_BED_BLOCK"],              
+                                                ["Blue Stained Glass", "BLUE_STAINED_GLASS"],                                                 
                                                 ["Chest", "CHEST"],
                                                 ["Cobblestone", "COBBLESTONE"],
                                                 ["Cobweb", "COBWEB"],
@@ -992,11 +997,13 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Command Block (Impulse)", "COMMAND_BLOCK"],
                                                 ["Command Block (Repeating)", "REPEATING_COMMAND_BLOCK"],
                                                 ["Command Block Minecart", "COMMAND_BLOCK_MINECART"],                                                
-                                                ["Composter", "COMPOSTER"],                                                
+                                                ["Composter", "COMPOSTER"],    
+                                                ["Diamond Block", "DIAMOND_BLOCK"],                                                
                                                 ["Door", "LEGACY_WOODEN_DOOR"],
                                                 ["Farm Land", "FARMLAND"],
                                                 ["Fence", "OAK_FENCE"],
                                                 ["Hopper", "HOPPER"],
+                                                ["Iron Block", "IRON_BLOCK"],
                                                 ["Fire", "FIRE"],                                                
                                                 ["Gate", "OAK_FENCE_GATE"],
                                                 ["Item Frame", "ITEM_FRAME"],
@@ -1008,9 +1015,11 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Portal", "LEGACY_PORTAL"],
                                                 ["Rail", "RAIL"],
                                                 ["Rail Powered", "POWERED_RAIL"],
+                                                ["Red Stained Glass", "RED_STAINED_GLASS"],                                                                                                 
                                                 ["Redstone Block", "REDSTONE_BLOCK"],
                                                 ["Redstone Torch", "REDSTONE_TORCH"],
                                                 ["Sign on Wall", "LEGACY_SIGN"],
+                                                ["Snow Block", "SNOW_BLOCK"],
                                                 ["Sticky Piston", "STICKY_PISTON"],
                                                 ["Slime Block", "SLIME_BLOCK"],
                                                 ["TNT", "TNT"],
@@ -1500,7 +1509,7 @@ Blockly.Blocks['namevalue']={
       .appendField (new Blockly.FieldTextInput ("name"), "VARNAME")      
       .appendField("Value")
       .appendField (new Blockly.FieldTextInput ("expression"), "EXPRESSION");
-   var a=this;
+   // var a=this;
    this.setTooltip('');
    this.setPreviousStatement(true, null);
    this.setNextStatement(true, null);
@@ -3093,3 +3102,34 @@ Blockly.Blocks['valueinlist'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+
+Blockly.Blocks['deletefromlist'] = {
+  init: function() {
+    this.appendValueInput("LIST")
+        .appendField ("Delete element ")
+        .appendField (new Blockly.FieldTextInput ("0"), "INDEX")
+        .appendField ("from list");        
+     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['forchinstring'] = {
+  init: function() {
+    this.appendValueInput("LIST")
+        .appendField("For _ch in string: ");
+    this.appendStatementInput("FORCODE")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+

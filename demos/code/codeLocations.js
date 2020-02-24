@@ -1,4 +1,5 @@
    var codeLocations = [
+      "Set => Scriptcraft Coding => Variables", 
       "Block at Location (location) => World, Blocks, Location",
       "Block looked at by player => World, Blocks",
       "Block Type => World, Blocks", 
@@ -10,7 +11,7 @@
       "Get new scoreboard => World, Scoreboard", 
       "Get Type of Block: => World, Blocks",       
       "Item Direction => World",       
-      "Set Block Facing Direction => World, Blocks", 
+      "Block Facing Direction => World, Blocks", 
       "Set Command Block Conditional => World, Blocks, Command Block ", 
       "Set command block command => World, Blocks, Command Block ", 
       "Set score for (player,value) => World, Scoreboard", 
@@ -157,7 +158,12 @@
       "Reverse face => World, Blocks",   
       "Change Location => World, Location", 
       "create list with => Lists",  
-      "Value in List => Lists",       
+      "Value in List => Lists",     
+      "Delete element from list => Lists",  
+      "Set Variable => Scriptcraft Coding, Variables",  
+      "Increment Variable => Math", 
+      "All Players => Entities => All Players",
+      "Using loop variable => Scriptcraft Coding, Loop ",       
    ];
    
    function autocomplete(inp, arr) {
