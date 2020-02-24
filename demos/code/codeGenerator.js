@@ -2371,10 +2371,10 @@ Blockly.Python['locationadd'] = function(block) {
   var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));
   
   var code = '(function() { ' + 
-                'var x = ' + location + '.x' + x + ';' + 
-                'var y = ' + location + '.y' + y + ';' +
-                'var z = ' + location + '.z' + z + ';' +                 
-                'var loc = new org.bukkit.Location(server.worlds[0],x,y,z);'
+                'var x = ' + location + '.x + ' + x + ';' + 
+                'var y = ' + location + '.y + ' + y + ';' +
+                'var z = ' + location + '.z + ' + z + ';' +                 
+                'var loc = new org.bukkit.Location(server.worlds[0],x,y,z);' + 
                 'return loc;' + 
              ' })()' 
   
