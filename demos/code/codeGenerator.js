@@ -692,30 +692,31 @@ Blockly.Python['armorset'] = function(block) {
   } else {
     colorCode = "color = " + colorCode + ";\n"; 
   } 
+  instantiateVariable ( '_player');
   
   var code = colorCode + 
-     "var player = " + player + ";\n" + 
+     "_player = " + player + ";\n" + 
      "var items = require ('items');\n" + 
      "var helmet = items.leatherHelmet(1);\n" + 
      "var helmetMeta = helmet.itemMeta;\n" + 
      "helmetMeta.color = color;\n" + 
      "helmet.itemMeta = helmetMeta;\n" + 
-     "player.equipment.helmet = helmet;\n" + 
+     "_player.equipment.helmet = helmet;\n" + 
      "var boots = items.leatherBoots(1);\n" + 
      "var bootsMeta = boots.itemMeta;\n" + 
      "bootsMeta.color = color;\n" + 
      "boots.itemMeta = bootsMeta;\n" + 
-     "player.equipment.boots = boots;\n" + 
+     "_player.equipment.boots = boots;\n" + 
      "var chest = items.leatherChestplate(1);\n" + 
      "var chestMeta = chest.itemMeta;\n" + 
      "chestMeta.color = color;\n" + 
      "chest.itemMeta = chestMeta;\n" + 
-     "player.equipment.chestplate = chest;\n" +
+     "_player.equipment.chestplate = chest;\n" +
      "var legs = items.leatherLeggings(1);\n" + 
      "var legsMeta = legs.itemMeta;\n" + 
      "legsMeta.color = color;\n" + 
      "legs.itemMeta = legsMeta;\n" + 
-     "player.equipment.leggings = legs;\n";  
+     "_player.equipment.leggings = legs;\n";  
   return code;
 };
 
@@ -2545,9 +2546,11 @@ Blockly.Python['setscore'] = function(block) {
   var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC)); 
   var value = insideParen(Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));  
   instantiateVariable ("objective");
-  var code = 'objective = exports.board.getObjective (org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n' + 
-             'objective.getScore(' + player + ').setScore(' + value + ');\n' + 
-             player + '.setScoreboard (exports.board);\n'; 
+  var code = 'if (player != null) {\n' + 
+             '  objective = exports.board.getObjective (org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n' + 
+             '  objective.getScore(' + player + ').setScore(' + value + ');\n' + 
+             '  ' + player + '.setScoreboard (exports.board);\n' + 
+             '}\n';             
   return code;
 };
 
@@ -2555,8 +2558,17 @@ Blockly.Python['scoreboardtitle'] = function(block) {
   var title = insideParen(Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_ATOMIC)); 
   
   instantiateVariable ("objective");
+  instantiateVariable ("players");
   var code = 'objective = exports.board.getObjective (org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n' + 
-             'objective.setDisplayName(' + title + ');\n'; 
+             'objective.setDisplayName(' + title + ');\n' +  
+             '// Update scoreboard for all players\n' +      
+             'players=server.getOnlinePlayers();\n' +
+             'for (var playerIndex=0; playerIndex<players.length;playerIndex++) {\n' +
+             '  score=(players[playerIndex]== null)? null : (players[playerIndex].getMetadata == null)?null:(players[playerIndex].getMetadata("_score_").length == 0)?null:players[playerIndex].getMetadata("_score_")[0].value();\n' +
+             '  objective = exports.board.getObjective (org.bukkit.scoreboard.DisplaySlot.SIDEBAR);\n' +
+             '  objective.getScore(players[playerIndex]).setScore(score);\n' +
+             '  players[playerIndex].setScoreboard (exports.board);\n' +
+             '}; \n'           
   return code;
 };
 
@@ -2595,11 +2607,11 @@ Blockly.Python['allplayersmessage'] = function(block) {
 Blockly.Python['diamondhelmet'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
   player = insideParen (player );
-  instantiateVariable ( "player" );
+  instantiateVariable ( "_player" );
   instantiateVariable ( "items" );
-  var code = "player = " + player + ";\n" + 
+  var code = "_player = " + player + ";\n" + 
 	         		 "items = require ('items');\n" + 
-	         		 "player.equipment.helmet = items.diamondHelmet(1);\n"; 
+	         		 "_player.equipment.helmet = items.diamondHelmet(1);\n"; 
   return code;
 };
 
@@ -2666,6 +2678,10 @@ Blockly.Python['forchinstring'] = function(block) {
              '};\n';
   
   return code;
+};
+
+Blockly.Python['breakoutofloop'] = function(block) {
+  return "break;";
 };
 
 

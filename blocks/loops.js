@@ -270,7 +270,8 @@ Blockly.Blocks['controls_flow_statements'] = {
       }
       block = block.getSurroundParent();
     } while (block);
-    if (legal) {
+     
+    if (true) { // (legal) { 
       this.setWarningText(null);
       if (!this.isInFlyout) {
         this.setDisabled(false);
@@ -281,6 +282,7 @@ Blockly.Blocks['controls_flow_statements'] = {
         this.setDisabled(true);
       }
     }
+    
   },
   /**
    * List of block types that are loops and thus do not need warnings.

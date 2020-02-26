@@ -1006,11 +1006,10 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Hopper", "HOPPER"],
                                                 ["Iron Block", "IRON_BLOCK"],
                                                 ["Fire", "FIRE"],                                                
-                                                ["Gate", "OAK_FENCE_GATE"],
+                                                ["Gate (Oak)", "OAK_FENCE_GATE"],
                                                 ["Item Frame", "ITEM_FRAME"],
                                                 ["Lever", "LEVER"],
                                                 ["Oak", "OAK_WOOD"], 
-                                                ["Oak Sign Post", "OAK_SIGN"],
                                                 ["Observer Block", "OBSERVER"], 
                                                 ["Piston", "PISTON"],                                                
                                                 ["Portal", "LEGACY_PORTAL"],
@@ -1021,6 +1020,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Redstone Block", "REDSTONE_BLOCK"],
                                                 ["Redstone Torch", "REDSTONE_TORCH"],
                                                 ["Sign on Wall", "LEGACY_SIGN"],
+                                                ["Sign Post (Oak)", "OAK_SIGN"],                                                
                                                 ["Snow Block", "SNOW_BLOCK"],
                                                 ["Sticky Piston", "STICKY_PISTON"],
                                                 ["Slime Block", "SLIME_BLOCK"],
@@ -1367,7 +1367,7 @@ Blockly.Blocks['setplayerdata'] = {
     this.appendValueInput("VALUE")
         .appendField("Set Entity Data")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
-        .appendField("Value");
+        .appendField(" = ");
   
     this.appendValueInput("PLAYER")
         .appendField("For ");
@@ -3044,7 +3044,7 @@ Blockly.Blocks['setscore'] = {
     this.appendValueInput("PLAYER")       
         .appendField("Set score for player: ");
     this.appendValueInput("VALUE")       
-        .appendField("value: ");
+        .appendField(" = ");
     this.setInputsInline(true);        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -3127,6 +3127,18 @@ Blockly.Blocks['forchinstring'] = {
         .appendField("For _ch in string: ");
     this.appendStatementInput("FORCODE")
         .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['breakoutofloop'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Break out of loop");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
