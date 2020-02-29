@@ -30,10 +30,27 @@ Blockly.Python.init=function(a){
 Blockly.Python.finish=function(a){var b=[],c=[],d;for(d in Blockly.Python.definitions_){var e=Blockly.Python.definitions_[d];e.match(/^(from\s+\S+\s+)?import\s+\S+/)?b.push(e):c.push(e)}delete Blockly.Python.definitions_;delete Blockly.Python.functionNames_;Blockly.Python.variableDB_.reset();return(b.join("\n")+"\n\n"+c.join("\n\n")).replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n\n")+a};Blockly.Python.scrubNakedValue=function(a){return a+"\n"};
 Blockly.Python.quote_=function(a){a=a.replace(/\\/g,"\\\\").replace(/\n/g,"\\\n").replace(/\%/g,"\\%").replace(/'/g,"\\'");return"\""+a+"\""};
 Blockly.Python.scrub_=function(a,b){var c="";if(!a.outputConnection||!a.outputConnection.targetConnection){var d=a.getCommentText();(d=Blockly.utils.wrap(d,Blockly.Python.COMMENT_WRAP-3))&&(c=a.getProcedureDef?c+('//!'+d+'\n//\n'):c+Blockly.Python.prefixLines(d+"\n","// "));for(var e=0;e<a.inputList.length;e++)a.inputList[e].type==Blockly.INPUT_VALUE&&(d=a.inputList[e].connection.targetBlock())&&(d=Blockly.Python.allNestedComments(d))&&(c+=Blockly.Python.prefixLines(d,"// "))}e=a.nextConnection&&a.nextConnection.targetBlock();
-e=Blockly.Python.blockToCode(e);return c+b+e};Blockly.Python.getAdjustedInt=function(a,b,c,d){c=c||0;a.workspace.options.oneBasedIndex&&c--;var e=a.workspace.options.oneBasedIndex?"1":"0";a=Blockly.Python.valueToCode(a,b,c?Blockly.Python.ORDER_ADDITIVE:Blockly.Python.ORDER_NONE)||e;Blockly.isNumber(a)?(a=parseInt(a,10)+c,d&&(a=-a)):(a=0<c?"int("+a+" + "+c+")":0>c?"int("+a+" - "+-c+")":"int("+a+")",d&&(a="-"+a));return a};Blockly.Python.lists={};Blockly.Python.lists_create_empty=function(a){return["[]",Blockly.Python.ORDER_ATOMIC]};Blockly.Python.lists_create_with=function(a){for(var b=Array(a.itemCount_),c=0;c<a.itemCount_;c++)b[c]=Blockly.Python.valueToCode(a,"ADD"+c,Blockly.Python.ORDER_NONE)||"None";return["["+b.join(", ")+"]",Blockly.Python.ORDER_ATOMIC]};
+e=Blockly.Python.blockToCode(e);return c+b+e};Blockly.Python.getAdjustedInt=function(a,b,c,d){c=c||0;a.workspace.options.oneBasedIndex&&c--;var e=a.workspace.options.oneBasedIndex?"1":"0";a=Blockly.Python.valueToCode(a,b,c?Blockly.Python.ORDER_ADDITIVE:Blockly.Python.ORDER_NONE)||e;Blockly.isNumber(a)?(a=parseInt(a,10)+c,d&&(a=-a)):(a=0<c?"int("+a+" + "+c+")":0>c?"int("+a+" - "+-c+")":"int("+a+")",d&&(a="-"+a));return a};Blockly.Python.lists={};Blockly.Python.lists_create_empty=function(a){return["[]",Blockly.Python.ORDER_ATOMIC]};
+Blockly.Python.lists_create_with=function(a){
+   var element;
+   //alert ( 'python_compressed list create with' );
+   
+   for(var b=Array(a.itemCount_),c=0;c<a.itemCount_;c++) {
+      element = Blockly.Python.valueToCode(a,"ADD"+c,Blockly.Python.ORDER_NONE)  
+      // element = "\"" + element + "\"";      
+      //alert ( "Got an element: " + element );      
+      b[c]=element||"None";
+   }
+   var bJoin = b.join (",\n  ")
+   var code = "[\n  " + bJoin + "\n]";
+   //alert ( 'code: ' + code );
+   return[code,Blockly.Python.ORDER_NONE]};  //ORDER_ATOMIC
 Blockly.Python.lists_repeat=function(a){
-   alert ( 'python lists_repeat');
-   var b=Blockly.Python.valueToCode(a,"ITEM",Blockly.Python.ORDER_NONE)||"None";a=Blockly.Python.valueToCode(a,"NUM",Blockly.Python.ORDER_MULTIPLICATIVE)||"0";return["["+b+"] * "+a,Blockly.Python.ORDER_MULTIPLICATIVE]};Blockly.Python.lists_length=function(a){return["len("+(Blockly.Python.valueToCode(a,"VALUE",Blockly.Python.ORDER_NONE)||"[]")+")",Blockly.Python.ORDER_FUNCTION_CALL]};
+   var b=Blockly.Python.valueToCode(a,"ITEM",Blockly.Python.ORDER_NONE)||"None";
+   a=Blockly.Python.valueToCode(a,"NUM",Blockly.Python.ORDER_MULTIPLICATIVE)||"0";
+   return["["+b+"] * "+a,Blockly.Python.ORDER_MULTIPLICATIVE]
+};
+Blockly.Python.lists_length=function(a){return["len("+(Blockly.Python.valueToCode(a,"VALUE",Blockly.Python.ORDER_NONE)||"[]")+")",Blockly.Python.ORDER_FUNCTION_CALL]};
 Blockly.Python.lists_isEmpty=function(a){return["not len("+(Blockly.Python.valueToCode(a,"VALUE",Blockly.Python.ORDER_NONE)||"[]")+")",Blockly.Python.ORDER_LOGICAL_NOT]};
 Blockly.Python.lists_indexOf=function(a){var b=Blockly.Python.valueToCode(a,"FIND",Blockly.Python.ORDER_NONE)||"[]",c=Blockly.Python.valueToCode(a,"VALUE",Blockly.Python.ORDER_NONE)||"''";if(a.workspace.options.oneBasedIndex)var d=" 0",e=" + 1",f="";else d=" -1",e="",f=" - 1";if("FIRST"==a.getFieldValue("END"))return a=Blockly.Python.provideFunction_("first_index",["def "+Blockly.Python.FUNCTION_NAME_PLACEHOLDER_+"(my_list, elem):","  try: index = my_list.index(elem)"+e,"  except: index ="+d,"  return index"]),
 [a+"("+c+", "+b+")",Blockly.Python.ORDER_FUNCTION_CALL];a=Blockly.Python.provideFunction_("last_index",["def "+Blockly.Python.FUNCTION_NAME_PLACEHOLDER_+"(my_list, elem):","  try: index = len(my_list) - my_list[::-1].index(elem)"+f,"  except: index ="+d,"  return index"]);return[a+"("+c+", "+b+")",Blockly.Python.ORDER_FUNCTION_CALL]};

@@ -1010,6 +1010,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Item Frame", "ITEM_FRAME"],
                                                 ["Lever", "LEVER"],
                                                 ["Oak", "OAK_WOOD"], 
+                                                ["Oak Tree Log", "OAK_LOG"],
                                                 ["Observer Block", "OBSERVER"], 
                                                 ["Piston", "PISTON"],                                                
                                                 ["Portal", "LEGACY_PORTAL"],
@@ -1019,6 +1020,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Red Stained Glass", "RED_STAINED_GLASS"],                                                                                                 
                                                 ["Redstone Block", "REDSTONE_BLOCK"],
                                                 ["Redstone Torch", "REDSTONE_TORCH"],
+                                                ["Sand", "SAND"],
                                                 ["Sign on Wall", "LEGACY_SIGN"],
                                                 ["Sign Post (Oak)", "OAK_SIGN"],                                                
                                                 ["Snow Block", "SNOW_BLOCK"],
@@ -2772,6 +2774,7 @@ Blockly.Blocks['eventinfo'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Get block that was clicked on", "getClickedBlock"],
                                                 ["Get face of block that was clicked on", "getBlockFace"],
+                                                ["Get the block", "getBlock"],
                                                 ["Get bow that was fired", "getBow"],
                                                 ["Get the entity doing the damage", "getDamager"],
                                                 ["Get entity", "getEntity"],

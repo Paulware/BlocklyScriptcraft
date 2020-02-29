@@ -35,6 +35,7 @@ Blockly.Python['lists_create_empty'] = function(block) {
 };
 
 Blockly.Python['lists_create_with'] = function(block) {
+  alert ( 'python lists_create_with' );
   // Create a list with any number of elements of any type.
   var elements = new Array(block.itemCount_);
   for (var i = 0; i < block.itemCount_; i++) {
