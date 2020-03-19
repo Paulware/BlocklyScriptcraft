@@ -892,7 +892,6 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Bow", "BOW"],
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Bone Meal", "BONE_MEAL"],
-                                                  ["Chest", "CHEST"],
                                                   ["Compass", "COMPASS"],
                                                   ["Cookie","COOKIE"],
                                                   ["Crossbow", "CROSSBOW"],
@@ -907,7 +906,8 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Heart of the Sea", "HEART_OF_THE_SEA"],              
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
-                                                  ["Oak Sign Post", "OAK_SIGN"],                                                  
+                                                  ["Oak Sign Post", "OAK_SIGN"], 
+                                                  ["Shield", "SHIELD"],                                                  
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Stick", "STICK"],
                                                   ["Snow Block", "SNOW_BLOCK"],
@@ -1003,6 +1003,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Door", "LEGACY_WOODEN_DOOR"],
                                                 ["Farm Land", "FARMLAND"],
                                                 ["Fence", "OAK_FENCE"],
+                                                ["Gold Block", "GOLD_BLOCK"],
                                                 ["Hopper", "HOPPER"],
                                                 ["Iron Block", "IRON_BLOCK"],
                                                 ["Fire", "FIRE"],                                                
@@ -2773,18 +2774,18 @@ Blockly.Blocks['eventinfo'] = {
         .appendField("Event information")    
         .appendField(new Blockly.FieldDropdown([
                                                 ["Get block that was clicked on", "getClickedBlock"],
+                                                ["Get bow that was fired", "getBow"],
+                                                ["Get entity", "getEntity"],
                                                 ["Get face of block that was clicked on", "getBlockFace"],
                                                 ["Get the block", "getBlock"],
-                                                ["Get bow that was fired", "getBow"],
                                                 ["Get the entity doing the damage", "getDamager"],
-                                                ["Get entity", "getEntity"],
+                                                ["Get inventory", "getInventory"],
                                                 ["Get item", "getItem"],
                                                 ["Get item dropped", "getItemDrop"],
-                                                ["Get inventory", "getInventory"],
                                                 ["Get location player moved from", "getFrom"],
+                                                ["Get location player moved to", "getTo"],
                                                 ["Get message that player sent", "getMessage" ],
                                                 ["Get player", "getPlayer"],
-                                                ["Get location player moved to", "getTo"],
                                                 ["Get projectile", "getProjectile"]
                                                ]), "INFORMATION"); 
 
@@ -3149,4 +3150,89 @@ Blockly.Blocks['breakoutofloop'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['blockinradius'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Found");
+    this.appendValueInput ("BLOCKTYPE")
+        .appendField("a");
+    this.appendValueInput("RADIUS")
+        .appendField("block, within"); 
+    this.appendValueInput("LOCATION")
+        .appendField("blocks of location");
+    this.setInputsInline(true);         
+    this.setOutput(true, null);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['cancelfriendlydamage'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Cancel friendly damage");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['friendlynearby'] = {
+  init: function() {
+    this.appendValueInput ("TEAM")
+        .appendField ("Found" );
+    this.appendValueInput("RADIUS")
+        .appendField("player within" );
+    this.appendValueInput ( "LOCATION")
+        .appendField("blocks of location"); 
+    this.setInputsInline(true);        
+        
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['randomizechests'] = {
+  init: function() {
+    this.appendValueInput("GOODIES")
+        .appendField("Randomize chest contents from list");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['m1garand'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("M1-Garand(for player click and projectile launch)");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['minigun'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Minigun(call from player click event)");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 

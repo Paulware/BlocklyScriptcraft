@@ -273,6 +273,7 @@ function bodyLoad() {
                <block type="getBlock"></block>            
                <block type="spawnblock"></block>           
                <block type="blockatlocation"></block>
+               <block type="blockinradius"></block>
            </category>
            <category name="Command Block">
                <block type="setblockcommand"></block>
@@ -305,8 +306,9 @@ function bodyLoad() {
        <category name="Events" colour="40">
           <block type="actiontype"></block>
           <block type="eventlistener"></block>
-		  <block type="eventinfo"></block>
-          <block type="eventcancel"></block>       
+      		  <block type="eventinfo"></block>
+          <block type="eventcancel"></block>    
+          <block type="cancelfriendlydamage"></block>          
        </category>
        <category name="Effects" colour="120">
           <block type="sound"></block>           
@@ -357,6 +359,7 @@ function bodyLoad() {
 		     <block type="removeplayersgear"></block>
        <block type="allplayerssetscore"></block>
        <block type="allplayersmessage"></block>
+       <block type="friendlynearby"></block>
 	   </category>
        <category name="Player">
          <block type="setride"></block>
@@ -365,7 +368,7 @@ function bodyLoad() {
          <block type="iteminhandis"></block>                
          <block type="playerhas"></block>
          <block type="isplayer"></block>
-		 <block type="isspectator"></block>
+		       <block type="isspectator"></block>
          <!block type="instanceof"><!/block> 
          <block type="lookingdirection"></block>         
          <category name="Data">
@@ -406,13 +409,14 @@ function bodyLoad() {
           <block type="materialtype"></block>       
           <block type="eggtype"></block>       
           <block type="dropitem"></block>
-          <block type="modifystack"></block>
+          <block type="randomizechests"></block>
           <category name="Stack"></block>
              <block type="itemstack"></block>
              <!block type="nameastack"><!/block>
 			          <block type="namethestack"></block>
              <block type="nameofstack"></block>
              <block type="materialdata"></block>
+             <block type="modifystack"></block>
           </category>
           <category name="Potions"></block>
              <block type="addpotion"></block> 
@@ -431,6 +435,10 @@ function bodyLoad() {
              <block type="diamondhelmet"></block>
              <block type="goldboots"></block>
              <block type="armorset"></block>              
+          </category>
+          <category name="Special Weapons">
+             <block type="m1garand"></block>
+             <block type="minigun"></block>
           </category>
           <category name="Recipes">
              <block type="addingredient"></block>

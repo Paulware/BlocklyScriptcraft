@@ -163,7 +163,10 @@
       "Set Variable => Scriptcraft Coding, Variables",  
       "Increment Variable => Math", 
       "All Players => Entities => All Players",
-      "Using loop variable => Scriptcraft Coding, Loop ",       
+      "Using loop variable => Scriptcraft Coding, Loop ",  
+      "Create a stack of items => Items Stack",
+      "Set name = => Scripcraft Coding, Variables",  
+      "Randomize chest contents from list => Items",       
    ];
    
    function autocomplete(inp, arr) {

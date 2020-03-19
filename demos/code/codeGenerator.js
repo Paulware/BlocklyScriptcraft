@@ -2372,14 +2372,13 @@ Blockly.Python['locationadd'] = function(block) {
   var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));
   
   var code = '(function() { ' + 
-                'var x = ' + location + '.x + ' + x + ';' + 
-                'var y = ' + location + '.y + ' + y + ';' +
-                'var z = ' + location + '.z + ' + z + ';' +                 
-                'var loc = new org.bukkit.Location(server.worlds[0],x,y,z);' + 
+                'var _x = ' + location + '.x + ' + x + ';' + 
+                'var _y = ' + location + '.y + ' + y + ';' +
+                'var _z = ' + location + '.z + ' + z + ';' +                 
+                'var loc = new org.bukkit.Location(server.worlds[0],_x,_y,_z);' + 
                 'return loc;' + 
              ' })()' 
   
-  // code = location + ".add (" + x + ", " + y + ", " + z + ")"
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -2441,13 +2440,13 @@ Blockly.Python['setplayerhealth'] = function(block) {
   var health = insideParen(Blockly.Python.valueToCode(block, 'HEALTH', Blockly.Python.ORDER_ATOMIC)); 
   
   var code = '(function() { ' + 
-			 '  var h=' + health + ';\n' + 
-			 '  if (' + player + '.setHealth != null) {\n' + 
-			 '    if (h<0) {\n' + 
-			 '       h = 0;\n' + 
-			 '    }\n' + 
-			 '    ' + player + '.setHealth(h);' + 
-			 '  }\n' + 
+		         	 '  var h=' + health + ';\n' + 
+			          '  if (' + player + '.setHealth != null) {\n' + 
+			          '    if (h<0) {\n' + 
+         			 '       h = 0;\n' + 
+         			 '    }\n' + 
+         			 '    ' + player + '.setHealth(h);' + 
+	         		 '  }\n' + 
              ' })();\n'              
   return code;
 };
@@ -2681,7 +2680,204 @@ Blockly.Python['forchinstring'] = function(block) {
 };
 
 Blockly.Python['breakoutofloop'] = function(block) {
-  return "break;";
+  return "break;\n";
 };
+
+Blockly.Python['blockinradius'] = function(block) {   
+  var location = Blockly.Python.valueToCode(block, "LOCATION", Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location)
+  var radius = Blockly.Python.valueToCode(block, "RADIUS", Blockly.Python.ORDER_ATOMIC);
+  radius = insideParen (radius)
+  var blockType = Blockly.Python.valueToCode(block, "BLOCKTYPE", Blockly.Python.ORDER_ATOMIC);
+  blockType = insideParen(blockType);
+  
+  var code = 
+    "function(){var _found;var _block;var _loc;_found=false;\n" + 
+      "for (var x=-" + radius + "; x<parseInt(" + radius + "*2); x++){" + 
+        "for (var y=-" + radius + "; y<parseInt(" + radius + "*2); y++) {" + 
+          "for (var z=-" + radius + "; z<parseInt(" + radius + "*2); z++) {\n" + 
+            "_loc=(function() { var _x = " + location + ".x + x;" + 
+            "var _y = " + location + ".y + y;var _z = " + location + ".z + z;" + 
+            "var _locBlockInRadius = new org.bukkit.Location(server.worlds[0],_x,_y,_z);return _locBlockInRadius; })();\n" + 
+            "_block=server.worlds[0].getBlockAt (_loc);\n" + 
+            "if ((((_block==null)?null:_block.getType()) == (" + blockType + "))){\n" + 
+              "_found=true;" + 
+              "break;" +
+            "}" + 
+          "}" + 
+          "if (_found){" + 
+            "break;" + 
+          "}" +           
+        "}" + 
+        "if (_found){" + 
+          "break;" + 
+        "}" + 
+      "}\n" + 
+    "return _found;" + 
+  "}()\n";
+  
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['cancelfriendlydamage'] = function(block) {
+  var code =
+     "(function () {var _target;var _team1;var _attacker;var _team2;var _owner;var _fd;\n" + 
+        "_target=(event.getEntity== null) ? null : event.getEntity();\n" + 
+        "_team1=(_target== null)? null : (_target.getMetadata == null)?null:(_target.getMetadata(\"_team_\").length == 0)?null:_target.getMetadata(\"_team_\")[0].value();\n" + 
+        "_attacker=(event.getDamager== null) ? null : event.getDamager();\n" + 
+        "_team2=(_attacker== null)? null : (_attacker.getMetadata == null)?null:(_attacker.getMetadata(\"_team_\").length == 0)?null:_attacker.getMetadata(\"_team_\")[0].value();\n" + 
+        "_owner=(_attacker== null)? null : (_attacker.getMetadata == null)?null:(_attacker.getMetadata(\"_owner_\").length == 0)?null:_attacker.getMetadata(\"_owner_\")[0].value();\n" + 
+        "if ((_team1 != null) && (_team2 != null)){" + 
+          "if (_team1 == _team2){" + 
+            "if (_attacker != null ) {" + 
+               "_attacker.sendMessage (\"Ouch! we are on the same team yo\");" + 
+            "}\n" + 
+            "if (_owner != null ) {" + 
+               "_owner.sendMessage (\"Stop! we are friends yo\");" + 
+            "}\n" + 
+            "event.cancelled = true;\n" +
+          "} else {\n" + 
+            "_fd = new org.bukkit.metadata.FixedMetadataValue (__plugin,_attacker);\n" +
+            "if (_target != null) {" + 
+              "if (_target.setMetadata != null ) {" + 
+                "_target.setMetadata (\"_attacker_\", _fd );" + 
+              "}" + 
+            "}\n" + 
+          "}" + 
+        "}" + 
+     "}());\n" 
+  return code;
+};
+
+Blockly.Python['friendlynearby'] = function(block) {   
+  var location = Blockly.Python.valueToCode(block, "LOCATION", Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location)
+  var radius = Blockly.Python.valueToCode(block, "RADIUS", Blockly.Python.ORDER_ATOMIC);
+  radius = insideParen (radius)
+  var team = Blockly.Python.valueToCode(block, "TEAM", Blockly.Python.ORDER_ATOMIC);
+  team = insideParen(team);
+  
+  var code = 
+      "function () { var _near;var _players;var _distance;_near=false;\n" + 
+        "_players=server.getOnlinePlayers();\n" + 
+        "for (var _i=0; _i<_players.length;_i++) {\n" + 
+           "_distance=" + location + ".distance(_players[_i].location);\n" + 
+           "if(_distance <= " + radius + "){" + 
+              "if ((" + team + "== ((_players[_i]== null)? null : (_players[_i].getMetadata == null)?null:(_players[_i].getMetadata(\"_team_\").length == 0)?null:_players[_i].getMetadata(\"_team_\")[0].value()))){" + 
+                 "_near=true;" + 
+                 "break;" + 
+               "}" +
+            "}" +
+         "}\n" +
+       "return _near;" + 
+     "}()";
+  
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['randomizechests'] = function(block) {
+  var goodies = Blockly.Python.valueToCode(block, "GOODIES", Blockly.Python.ORDER_ATOMIC);
+  goodies = insideParen (goodies);
+  var code =
+   "(function () {" + 
+      "var _world;" + 
+      "var _chunks;" +
+      "var _chunk;" + 
+      "var _blocks;" + 
+      "var _blockType;" + 
+      "var _inventory;\n" + 
+      "_world=server.worlds[0];" + 
+      "_chunks=_world.getLoadedChunks();\n" + 
+      "for (var _chunkIndex=0; _chunkIndex<_chunks.length;_chunkIndex++) {\n" + 
+         "_chunk=_chunks[_chunkIndex];" + 
+         "_blocks=_chunk.getTileEntities();\n" + 
+         "for (var _blockIndex=0; _blockIndex<_blocks.length;_blockIndex++) {\n" + 
+            "_blockType=(blocks[_blockIndex]==null)?null:_blocks[_blockIndex].getType();\n" + 
+            "if (_blockType == org.bukkit.Material.CHEST){\n" + 
+               "_inventory=blocks[_blockIndex].getBlockInventory();" + 
+               "_inventory.clear();\n" + 
+               "for (var _goodieIndex=0;_goodieIndex<" + goodies + ".length;_goodieIndex++) {\n" + 
+                  "if ((parseInt (Math.random () * (100-1)) + 1) > 50){" + 
+                     "inventory.addItem (" + goodies + "[_goodieIndex]);\n" + 
+                  "}" +
+               "}" +                
+            "}" + 
+         "}" +
+      "}" +
+    "})();\n"
+  return code;
+};
+
+Blockly.Python['m1garand'] = function(block) {
+  var code =
+    "(function () {var _player;var _inhand;var _stack;var _fireAgain;var _projectile;var _shooter;var _team;var _fd;\n" + 
+       "if (event instanceof org.bukkit.event.player.PlayerInteractEvent){\n" + 
+          "_player=(event.getPlayer== null) ? null : event.getPlayer();\n" + 
+          "_inhand=(_player== null) ? null :(_player.getItemInHand == null)?null:_player.getItemInHand();\n" + 
+          "_stack=(_inhand== null) ? null : (_inhand.getItemMeta == null) ? null : (_inhand.getItemMeta() == null)?null:_inhand.getItemMeta().getDisplayName();\n" + 
+          "if (_stack == \"M1-Garand\"){\n" + 
+            "_fireAgain=(_player== null)? null : (_player.getMetadata == null)?null:(_player.getMetadata(\"_fireagain_\").length == 0)?null:_player.getMetadata(\"_fireagain_\")[0].value();\n" + 
+            "if ((new Date().getTime()) > _fireAgain){\n" + 
+               "_projectile=server.worlds[0].spawnEntity(_player.location,org.bukkit.entity.EntityType.ARROW);" + 
+               "_player.launchProjectile(_projectile.getClass());" + 
+               "_fd = new org.bukkit.metadata.FixedMetadataValue (__plugin,(new Date().getTime()) + 1000);\n" + 
+               "if (_player != null) {\n" + 
+                  "if (_player.setMetadata != null ) {\n" + 
+                     "_player.setMetadata (\"_fireagain_\", _fd );\n" + 
+                  "}" + 
+               "}" +
+            "}" +
+          "}\n" +
+       "}else if (event instanceof org.bukkit.event.entity.ProjectileLaunchEvent){\n" + 
+          "_projectile=(event.getEntity== null) ? null : event.getEntity();" + 
+          "_shooter=(_projectile == null) ? null : (_projectile.getShooter == null) ? null : _projectile.getShooter();" + 
+          "_team=(_shooter== null)? null :(_shooter.getMetadata == null)?null:(_shooter.getMetadata(\"_team_\").length == 0)?null:_shooter.getMetadata(\"_team_\")[0].value();" + 
+          "_fd = new org.bukkit.metadata.FixedMetadataValue (__plugin,_team);\n" + 
+          "if (_projectile != null) {" + 
+             "if (_projectile.setMetadata != null ) {" + 
+                 "_projectile.setMetadata (\"_team_\", _fd );\n" + 
+             "}" +
+          "}" +
+          "_fd = new org.bukkit.metadata.FixedMetadataValue (__plugin,_shooter);" + 
+          "if (_projectile != null) {" + 
+             "if (_projectile.setMetadata != null ) {" + 
+                "_projectile.setMetadata (\"_owner_\", _fd );" + 
+             "}" +
+          "}\n" +
+          "_inhand=(_shooter== null) ? null : ( _shooter.getItemInHand == null) ? null : _shooter.getItemInHand();" + 
+          "_stack=(_inhand== null) ? null : (_inhand.getItemMeta == null) ? null : (_inhand.getItemMeta() == null)?null:_inhand.getItemMeta().getDisplayName();\n" + 
+          "if (stack == \"M1-Garand\"){" + 
+            "(function() {var _vector = _projectile.getVelocity().normalize().multiply(7);if (!isNaN(_vector.x)){_projectile.setVelocity(_vector);}})();\n" +
+          "}" +
+       "}" +
+    "}());";    
+  return code;
+};
+
+Blockly.Python['minigun'] = function(block) {
+  var code =
+    "(function () {var _player;var _inhand;var _name;var _i;var _projectile;\n" + 
+       "if (event instanceof org.bukkit.event.player.PlayerInteractEvent){\n" + 
+          "_player=(event.getPlayer== null) ? null : event.getPlayer();\n" + 
+          "_inhand=(_player== null)?null:( _player.getItemInHand == null) ? null : _player.getItemInHand();\n" + 
+          "_name=(_inhand== null)?null:(_inhand.getItemMeta==null)?null:(_inhand.getItemMeta()==null)?null:_inhand.getItemMeta().getDisplayName();\n" + 
+          "if (_name == \"minigun\"){\n" + 
+             "_i=0;" + 
+             "var _test= setInterval (function () {\n" + 
+                "_i=_i+1;\n" + 
+                "_projectile=server.worlds[0].spawnEntity(_player.location,org.bukkit.entity.EntityType.ARROW);\n" + 
+                "_player.launchProjectile(_projectile.getClass());\n" + 
+                "if (!(_i<10)) {\n" + 
+                   "clearInterval (_test);\n" + 
+                "}\n" + 
+             "}, 200);\n" + 
+           "}\n" +    
+       "}\n" +            
+    "}());";    
+     
+  return code;
+};
+
+
 
 
