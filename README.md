@@ -19,6 +19,8 @@ You can save and load projects to the desktop or other places on your computer.
 <br>
 **Installation of Scriptcraft is described: https://github.com/walterhiggins/ScriptCraft#installation**
 
+**This project has been incorporated into an online lesson plan located: https://sites.google.com/site/multiplayerscratchminecraft/
+
 Google's Blockly is a web-based, visual programming editor.  Users can drag
 blocks together to build programs.  All code is free and open source.
 
