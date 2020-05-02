@@ -1,0 +1,23 @@
+1. Create a free Oracle account :
+    https://login.oracle.com/mysso/signon.jsp
+2. Download java/12. Newer (higher) versions will not run properly 
+    Go To https://www.oracle.com/java/technologies/javase/jdk12-archive-downloads.html
+    Download the macOS dmg to your mac
+    On the mac, double click the dmg
+3. Unzip the .zip file and extract to a directory on the desktop: minecraftServer
+4. Open terminal
+     1. cd Desktop
+     2. cd minecraftServer
+     3. chmod a+x start.command 
+6. Double click on the start.command 
+7. A Minecraft server will appear briefly and stop.  
+   This will create the file: eula.txt in the minecraftServer directory
+8. Edit eula.txt and change eula=false to eula=true
+9. Double click the start.command script again. A Minecraft server should appear 
+
+Note: 
+   To uninstall a java version
+   1. Open a Terminal window
+   2. cd /Library/Java/JavaVirtualMachines
+   3. sudo bash
+   4. rm -rf jdk.Version.you.need.to.remove
