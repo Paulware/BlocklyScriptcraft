@@ -1,0 +1,3 @@
+git clone https://www.github.com/Paulware/BlocklyScriptcraft
+
+git config --global core.autocrlf false
