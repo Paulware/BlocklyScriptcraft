@@ -14,7 +14,7 @@ BlocklyScriptcraft is another <a href="https://en.wikipedia.org/wiki/Scratch_(pr
      </ul> 
 </ul>
   
-After cloning the git repository, you can run blockly Scripcraft by opening C:\BlocklyScriptcraft\blocklyScriptcraft.html use the google chrome browser<br>
+After cloning the git repository, you can run blockly Scripcraft by opening C:\BlocklyScriptcraft\blocklyScriptcraft.html using google chrome (IE will not work)<br>
 
 <h2>Minecraft Server Setup</h2> 
   <a href="http://Paulware.github.io/BlocklyScriptcraft/windowsSetup.html">Windows 10</a><br>
