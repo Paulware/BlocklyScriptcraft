@@ -1,5 +1,5 @@
 # Blockly for Scriptcraft
-<img src="images/blocklyScriptcraft.jpg" width="600"><br>
+<img src="images/blocklyScriptcraft.jpg"><br>
 # Setup Minecraft Server 
   <a href="http://Paulware.github.io/BlocklyScriptcraft/windowsSetup.html">Windows 10</a><br>
   <a href="http://Paulware.github.io/BlocklyScriptcraft/macSetup.html">MAC OS</a><br>
