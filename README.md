@@ -2,19 +2,8 @@
 <img src="images/blocklyScriptcraft.jpg"><br>
 BlocklyScriptcraft is another <a href="https://en.wikipedia.org/wiki/Scratch_(programming_language)">scratch</a>-like utility that allows you to create minecraft plugins<br>
 <h2>Blockly Setup</h2>
-<ul>
-  <li>Download Git for windows: https://git-scm.com/download/win</li>
-  <li>Run the git install executable</li>
-  <li>Open a cmd window (Hold the windows key, press r, then enter the command: cmd)
-  <li>Type the commands:</li>
-     <ul>
-        <li>cd c:\</li>
-        <li>git clone https://www.github.com/Paulware/BlocklyScriptcraft</li>
-     </ul> 
-</ul>
-  
-After cloning the git repository, you can run blockly Scripcraft by opening C:\BlocklyScriptcraft\blocklyScriptcraft.html using google chrome (IE will not work)<br>
-
+  <a href="http://Paulware.github.io/BlocklyScriptcraft/windowsBlocklySetup.html">Windows 10</a><br>
+  <a href="http://Paulware.github.io/BlocklyScriptcraft/macBlocklySetup.html">MAC OS</a><br>
 <h2>Minecraft Server Setup</h2> 
   <a href="http://Paulware.github.io/BlocklyScriptcraft/windowsSetup.html">Windows 10</a><br>
   <a href="http://Paulware.github.io/BlocklyScriptcraft/macSetup.html">MAC OS</a><br>
