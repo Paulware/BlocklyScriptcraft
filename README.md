@@ -1,6 +1,8 @@
 # Blockly for Scriptcraft
-<a href="Javascript/demos/code/index.html">Run online</a><br>
-# Installation
+# Setup Minecraft Server 
+  <a href="http://Paulware.github.io/BlocklyScriptcraft/windowsSetup.html">Windows 10</a><br>
+  <a href="http://Paulware.github.io/BlocklyScriptcraft/macSetup.html">MAC OS</a><br>
+# Blockly Setup
 * Install Git on your system: https://git-scm.com/download/win
 * Open a cmd window
 * Type commands:
