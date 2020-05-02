@@ -21,4 +21,4 @@ You can save and load projects to the desktop or other places on your computer.
 
 **This project has been incorporated into an online lesson plan located: https://sites.google.com/site/multiplayerscratchminecraft/
 
-<h1><a href="http://Paulware.github.io/BlocklyScriptcrdaft/docs/index.html">Design Docs</a></h1>
+<h1><a href="http://Paulware.github.io/BlocklyScriptcraft/docs/index.html">Design Docs</a></h1>
