@@ -1,9 +1,10 @@
-# Blockly for Scriptcraft
+<H1>Blockly for Scriptcraft</H1>
 <img src="images/blocklyScriptcraft.jpg"><br>
-# Setup Minecraft Server 
+BlocklyScriptcraft is another <a href="https://en.wikipedia.org/wiki/Scratch_(programming_language)">scratch</a>-like utility that allows you to create minecraft plugins<br>
+<h2>Minecraft Server Setup</h2> 
   <a href="http://Paulware.github.io/BlocklyScriptcraft/windowsSetup.html">Windows 10</a><br>
   <a href="http://Paulware.github.io/BlocklyScriptcraft/macSetup.html">MAC OS</a><br>
-# Blockly Setup
+<h2>Blockly Setup</h2>
 * Install Git on your system: https://git-scm.com/download/win
 * Open a cmd window
 * Type commands:
@@ -13,16 +14,12 @@
 * To get latest (after git clone command)
   git pull --all
   
-To run the program navigate to C:\BlocklyScriptcraft\demos\code\index.html <br>
+After git clone, to run the blockly Scripcraft open C:\BlocklyScriptcraft\blocklyScriptcraft.html use the google chrome browser<br>
 
-Here is a screen shot of the user interface: 
-![](screenShot.jpg)
-You can save and load projects to the desktop or other places on your computer.
+**The project will generate Javascript that becomes a minecraft plugin<br>
 <br>
-**The project will generate Javascript that is built for Scriptcraft located: https://github.com/walterhiggins/ScriptCraft**
-<br>
-**Installation of Scriptcraft is described: https://github.com/walterhiggins/ScriptCraft#installation**
 
-**This project has been incorporated into an online lesson plan located: https://sites.google.com/site/multiplayerscratchminecraft/
+**This project has an online lesson plan located: https://sites.google.com/site/multiplayerscratchminecraft/<br>
+<h2><a href="http://Paulware.github.io/BlocklyScriptcraft/onlineCourse.html">Online Course</a></h2>
 
-<h1><a href="http://Paulware.github.io/BlocklyScriptcraft/">Information</a></h1>
+<h2><a href="http://Paulware.github.io/BlocklyScriptcraft/">More Information</a></h2>
