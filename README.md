@@ -21,9 +21,4 @@ You can save and load projects to the desktop or other places on your computer.
 
 **This project has been incorporated into an online lesson plan located: https://sites.google.com/site/multiplayerscratchminecraft/
 
-Google's Blockly is a web-based, visual programming editor.  Users can drag
-blocks together to build programs.  All code is free and open source.
-
-**The project page is https://developers.google.com/blockly/**
-
-![](https://developers.google.com/blockly/images/sample.png)
+<h1><a href="http://Paulware.github.io/BlocklyScriptcrdaft/docs/index.html">Design Docs</a></h1>
