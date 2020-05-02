@@ -1,3 +1,4 @@
+<!git config --global core.autocrlf false> 
 <H1>Blockly for Scriptcraft</H1>
 <img src="images/blocklyScriptcraft.jpg"><br>
 BlocklyScriptcraft is another <a href="https://en.wikipedia.org/wiki/Scratch_(programming_language)">scratch</a>-like utility that allows you to create minecraft plugins<br>
