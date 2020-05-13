@@ -658,14 +658,21 @@ Blockly.Python['sendmessage'] = function(block) {
             "  entities[i].sendMessage (" + message + ");\n" + 
             "}\n";
   } else if (player == "server.getOnlinePlayers()") { // All players
-      String.prototype.replaceAll = function(search, replacement) {
-          var target = this;
-          return target.split(search).join(replacement);
-      };  
+      //String.prototype.replaceAll = function(search, replacement) {
+      //    var target = this;
+      //    return target.split(search).join(replacement);
+      //};  
+      // command = "\"tellraw @a [" + message + "]\"";
+      if (message.indexOf ( '\"' ) == -1) { // This is a variable 
+         code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " + 
+                "\"tellraw @a [\\\"\" + " + message + " + \"\\\"]\");\n";
+      } else { 
+         message = message.substring (0,message.length-1)
+         message = message + "\\\""
       
-     command = "\"tellraw @a [" + message + "]\"";
-     code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
-            command + ");\n";
+         code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " + 
+                "\"tellraw @a [\\" + message + "]\");\n";      
+      } 
   } else { 
      var code = '(function() { \n' + 
                 '  if (' + player + ' != null ) { \n' + 
