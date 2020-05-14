@@ -11,6 +11,7 @@
          design = design + "Event: <b>playerJoin</b><br>" 
          design = design + "&nbsp;&nbsp;When a player joins the server (after disconnect), " 
          design = design + "&nbsp;&nbsp;Teleport the player to the x,y,z location of your lobby<br>" 
+         design = design + "&nbsp;&nbsp;And clear their gear (inventory), and de-op them<br>"
       } 
 
       if (document.all.protectBlocks.checked) { 
@@ -31,8 +32,8 @@
       if (document.all.weaponMinigun.checked) { 
          design = design + "<h3>Special weapon: minigun (arrow)</h3>" 
          design = design + "Event: <b>playerClick</b><br>" 
-         design = design + "When player clicks, and they have an object with name: minigun in their hand<br>"         
-         design = design + "&nbsp;&nbsp;Launch projectile arrow from a for loop"         
+         design = design + "When player clicks, and they have an object inhand with the custom name: minigun,<br>"         
+         design = design + "&nbsp;&nbsp;Launch projectile arrows multiple times"         
       }   
 
       if (document.all.randomizeChests.checked) { 
@@ -40,7 +41,35 @@
          design = design + "Event: <b>playerJoin</b><br>" 
          design = design + "When the first player joins your server (after reload), <br>"         
          design = design + "&nbsp;&nbsp;Loop through all chests and fill them with a random selection of items"         
-      }       
+      }   
+
+      if (document.all.cobwebDamage.checked) { 
+         design = design + "<h3>Moving through cobwebs damages health</h3>" 
+         design = design + "Event: <b>playerMove</b><br>" 
+         design = design + "When a player moves and the block at their feet is a cobweb, <br>"         
+         design = design + "&nbsp;&nbsp;Decrease their health"         
+      }
+      
+      if (document.all.friendlyDamage.checked) { 
+         design = design + "<h3>Disable damage from same-team members</h3>" 
+         design = design + "Event: <b>entityDamage</b><br>" 
+         design = design + "When a entity receives damage and their team is the same team as the damager, <br>"         
+         design = design + "&nbsp;&nbsp;Cancel the event"         
+      }      
+      
+      if (document.all.weatherDisabled.checked) { 
+         design = design + "<h3>Disable weather</h3>" 
+         design = design + "Event: <b>playerJoin</b><br>" 
+         design = design + "When the first person joins the server after reboot, <br>"         
+         design = design + "&nbsp;&nbsp;execute the server command: gamerule doWeatherCycle false"         
+      }      
+      
+      if (document.all.keepInventory.checked) { 
+         design = design + "<h3>Player keeps inventory when they die</h3>" 
+         design = design + "Event: <b>playerJoin</b><br>" 
+         design = design + "When the first person joins the server after reboot, <br>"         
+         design = design + "&nbsp;&nbsp;execute the server command: gamerule keepInventory true"         
+      }  
       
       if (document.all.specialFeatures.value != '') { 
          design = design + "<h3>Special Features</h3>" 
@@ -65,6 +94,14 @@
 <label for="weaponMinigun">Special Weapon: Minigun (arrows)</label><br>
 <input type="checkbox" id="randomizeChests" onChange="buildIt();">
 <label for="randomizeChests">Randomize Chest Contents on Start</label><br>
+<input type="checkbox" id="cobwebDamage" onChange="buildIt();">
+<label for="cobwebDamage">Moving through cobwebs do damage</label><br>
+<input type="checkbox" id="friendlyDamage" onChange="buildIt();">
+<label for="friendlyDamage">Disable friendly damage</label><br>
+<input type="checkbox" id="weatherDisabled" onChange="buildIt();">
+<label for="weatherDisabled">Disable Weather</label><br>
+<input type="checkbox" id="keepInventory" onChange="buildIt();">
+<label for="keepInventory">Player keeps gear when they die</label><br>
 
  <h4>Special Features (please explain): </h4><textarea id="specialFeatures" rows="10" cols="60"></textarea><br> 
   
