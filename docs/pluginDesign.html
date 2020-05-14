@@ -13,10 +13,35 @@
          design = design + "&nbsp;&nbsp;Teleport the player to the x,y,z location of your lobby<br>" 
          design = design + "&nbsp;&nbsp;And clear their gear (inventory), and de-op them<br>"
       } 
+      
+      if (document.all.scoreboard.checked) { 
+         design = design + "<h3>Game Scoreboard</h3>" 
+         design = design + "Event: <b>playerRespawn</b><br>" 
+         design = design + "&nbsp;&nbsp;When a player respawns, " 
+         design = design + "&nbsp;&nbsp;&nbsp;Create the scoreboard<br>"
+         design = design + "&nbsp;&nbsp;When an event the game is counting occurs, " 
+         design = design + "&nbsp;&nbsp;&nbsp;Increment the scoreboard<br>"
+      }       
+      
+      if (document.all.coopTeams.checked) { 
+         design = design + "<h3>Choose Teams and Cooperate</h3>" 
+         design = design + "Event: <b>playerRespawn</b><br>" 
+         design = design + "&nbsp;&nbsp;When a player respawns to lobby " 
+         design = design + "&nbsp;&nbsp;&nbsp;Click a sign to select team<br>"
+         design = design + "&nbsp;&nbsp;When a players respawns after selecting team, " 
+         design = design + "&nbsp;&nbsp;&nbsp;Teleport player to team spawn location<br>"
+      } 
 
+      if (document.all.teamArmor.checked) { 
+         design = design + "<h3>Players on the same team will share the same colored armor</h3>" 
+         design = design + "Event: <b>playerRespawn</b><br>" 
+         design = design + "&nbsp;&nbsp;When a players respawns after selecting team, " 
+         design = design + "&nbsp;&nbsp;&nbsp;Give them leather armor in the color of their team<br>"
+      }       
+      
       if (document.all.protectBlocks.checked) { 
          design = design + "<h3>Protect Blocks from destructions</h3>" 
-         design = design + "Event: <b>blockBreak</b>" 
+         design = design + "Event: <b>blockBreak</b><br>" 
          design = design + "&nbsp;&nbsp;Listen for the blockBreak event, when this is detected, cancel the event<br>" 
          design = design + "&nbsp;&nbsp;This will protect all your blocks from destruction<br>" 
          design = design + "&nbsp;&nbsp;If you would like some of the blocks to be allowed to break, surround the cancel code<br>"
@@ -86,6 +111,8 @@
 
 <input type="checkbox" id="lobby" onChange="buildIt();">
 <label for="lobby">Send players to lobby on Start</label><br>
+<input type="checkbox" id="scoreboard" onChange="buildIt();">
+<label for="scoreboard">Include a scoreboard in the game</label><br>
 <input type="checkbox" id="protectBlocks" onChange="buildIt();">
 <label for="protectBlocks">Protect Blocks from Destruction</label><br>
 <input type="checkbox" id="explodingSnowballs" onChange="buildIt();">
@@ -102,6 +129,10 @@
 <label for="weatherDisabled">Disable Weather</label><br>
 <input type="checkbox" id="keepInventory" onChange="buildIt();">
 <label for="keepInventory">Player keeps gear when they die</label><br>
+<input type="checkbox" id="coopTeams" onChange="buildIt();">
+<label for="coopTeams">Players will cooperate in teams</label><br>
+<input type="checkbox" id="teamArmor" onChange="buildIt();">
+<label for="teamArmor">Team members will share the same colored armor</label><br>
 
  <h4>Special Features (please explain): </h4><textarea id="specialFeatures" rows="10" cols="60"></textarea><br> 
   
