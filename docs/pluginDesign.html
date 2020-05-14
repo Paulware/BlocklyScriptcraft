@@ -1,3 +1,4 @@
+<Title>Minecraft Plugin Design Checklist</Title>
 <script>
    function buildIt() {
       var div = document.getElementById ( "design"); 
@@ -39,6 +40,12 @@
          design = design + "When the first player joins your server (after reload), <br>"         
          design = design + "&nbsp;&nbsp;Loop through all chests and fill them with a random selection of items"         
       }       
+      
+      if (document.all.specialFeatures.value != '') { 
+         design = design + "<h3>Special Features</h3>" 
+         design = design + "<pre>" + document.all.specialFeatures.value + "</pre>"
+      }       
+      
       div.innerHTML = design;
    }    
 </script>
@@ -59,7 +66,7 @@
 <input type="checkbox" id="randomizeChests" onChange="buildIt();">
 <label for="randomizeChests">Randomize Chest Contents on Start</label><br>
 
-  
+ <h4>Special Features (please explain): </h4><textarea id="specialFeatures" rows="10" cols="60"></textarea><br> 
   
 <div id="design">
 </div>
