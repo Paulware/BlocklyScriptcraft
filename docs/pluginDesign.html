@@ -1,0 +1,65 @@
+<script>
+   function buildIt() {
+      var div = document.getElementById ( "design"); 
+      name = document.all.name.value;
+      design = "Plugin Name: " + name + "<br>" 
+      
+      if (document.all.lobby.checked) { 
+         design = design + "<h3>Send Players to lobby on game start</h3>" 
+         design = design + "Event: <b>playerJoin</b><br>" 
+         design = design + "&nbsp;&nbsp;When a player joins the server (after disconnect), " 
+         design = design + "&nbsp;&nbsp;Teleport the player to the x,y,z location of your lobby<br>" 
+      } 
+
+      if (document.all.protectBlocks.checked) { 
+         design = design + "<h3>Protect Blocks from destructions</h3>" 
+         design = design + "Event: <b>blockBreak</b>" 
+         design = design + "&nbsp;&nbsp;Listen for the blockBreak event, when this is detected, cancel the event<br>" 
+         design = design + "&nbsp;&nbsp;This will protect all your blocks from destruction<br>" 
+         design = design + "&nbsp;&nbsp;If you would like some of the blocks to be allowed to break, surround the cancel code<br>"
+         design = design + "&nbsp;&nbsp;that checks which type of block is breaking<br>"         
+      } 
+      
+      if (document.all.explodingSnowballs.checked) { 
+         design = design + "<h3>Exploding Snowballs</h3>" 
+         design = design + "Event: <b>projectileHit</b><br>" 
+         design = design + "&nbsp;&nbsp;When a project hits, check the project type, when entity type == snowball, create an explosion<br>"         
+      }    
+
+      if (document.all.weaponMinigun.checked) { 
+         design = design + "<h3>Special weapon: minigun (arrow)</h3>" 
+         design = design + "Event: <b>playerClick</b><br>" 
+         design = design + "When player clicks, and they have an object with name: minigun in their hand<br>"         
+         design = design + "&nbsp;&nbsp;Launch projectile arrow from a for loop"         
+      }   
+
+      if (document.all.randomizeChests.checked) { 
+         design = design + "<h3>Randomize Chest Contents on startup</h3>" 
+         design = design + "Event: <b>playerJoin</b><br>" 
+         design = design + "When the first player joins your server (after reload), <br>"         
+         design = design + "&nbsp;&nbsp;Loop through all chests and fill them with a random selection of items"         
+      }       
+      div.innerHTML = design;
+   }    
+</script>
+<h1>Minecraft Plugin Design</h1>
+<br>
+<h4>Plugin Name: </h4><input value="Name" id="name"><br>
+<p>
+<h2>Features</h2>
+
+<input type="checkbox" id="lobby" onChange="buildIt();">
+<label for="lobby">Send players to lobby on Start</label><br>
+<input type="checkbox" id="protectBlocks" onChange="buildIt();">
+<label for="protectBlocks">Protect Blocks from Destruction</label><br>
+<input type="checkbox" id="explodingSnowballs" onChange="buildIt();">
+<label for="explodingSnowballs">Exploding Snowballs</label><br>
+<input type="checkbox" id="weaponMinigun" onChange="buildIt();">
+<label for="weaponMinigun">Special Weapon: Minigun (arrows)</label><br>
+<input type="checkbox" id="randomizeChests" onChange="buildIt();">
+<label for="randomizeChests">Randomize Chest Contents on Start</label><br>
+
+  
+  
+<div id="design">
+</div>
