@@ -1,0 +1,68 @@
+<h1>Minecraft Server setup<?/h1>
+<h2>Windows 10</h2>
+<ul>
+   <li>Download the .zip file located<a href="windowsServerInstall.zip">here</a></li>
+   <li>Unzip the .zip file and extract to a directory: C:\minecraftServer</li>
+   <li>Run the C:\minecraftServer\runServer.bat (double click from windows explorer)</li> 
+   <li>Edit eula.txt and change eula=false to eula=true</li>
+   <li>Run the C:\minecraftServer\runServer.bat again (this will take a few minutes)</li>
+   <li>A Minecraft server will appear, accept the firewall popup if it appears</li>
+</ul>  
+<h2>MAC OS </h2>
+<pre>
+1. Create a free Oracle account :
+    https://login.oracle.com/mysso/signon.jsp
+2. Download java/12. Newer (higher) versions will not run properly 
+    Go To https://www.oracle.com/java/technologies/javase/jdk12-archive-downloads.html
+    Download the macOS dmg to your mac
+    On the mac, double click the dmg
+3. Unzip the .zip file </pre><a href="MACOSServerInstall.zip">here</a><pre> and extract to a directory on the desktop: minecraftServer
+4. Open terminal
+     1. cd Desktop
+     2. cd minecraftServer
+     3. chmod a+x start.command 
+6. Double click on the start.command 
+7. A Minecraft server will appear briefly and stop.  
+   This will create the file: eula.txt in the minecraftServer directory
+8. Edit eula.txt and change eula=false to eula=true
+9. Double click the start.command script again. A Minecraft server should appear 
+
+Note: 
+   To uninstall a java version
+   1. Open a Terminal window
+   2. cd /Library/Java/JavaVirtualMachines
+   3. sudo bash
+   4. rm -rf jdk.Version.you.need.to.remove
+</pre> 
+   
+<h1>Blockly Setup</h1>
+<h2>Windows 10</H2>
+<h1>Windows Install Git and BlocklyScriptcraft</h1>
+<ul>
+  <li>Download Git for windows: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></li>
+  <li>Run the git install executable</li>
+  <li>Open a cmd window</li>
+    <ul>
+        <li>Hold the Windows key and press the r key</li>
+        <li>Enter the command: cmd</li>
+    </ul>
+  <li>Enter the command:git clone https://www.github.com/Paulware/blocklyScriptcraft</li>
+</ul>
+  
+After cloning the git repository, you can run blockly Scripcraft by opening C:\BlocklyScriptcraft\blocklyScriptcraft.html using google chrome (IE will not work)<br>
+
+<h2>MAC OS</h2>
+<h1>MAC OS git install</h1>
+<ul>
+  <li>Open Terminal and paste the commands:</li>
+  <li>sudo bash</li>
+  <li>Enter your password (Note:it will not appear as you type)</li>
+  <li>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"</li>
+  <li>brew install git</li>
+  <li>git clone https://www.github.com/Paulware/BlocklyScriptcraft</li>
+</ul>
+
+  
+After cloning the git repository, you can run blockly Scripcraft by opening 
+BlocklyScriptcraft\blocklyScriptcraft.html using google chrome (IE will not work)<br>
+  
