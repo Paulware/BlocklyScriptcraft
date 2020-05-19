@@ -102,18 +102,16 @@ input[type=submit] {
      
  function download(filename, text) {
   var element = document.createElement('a');
+  alert ( 'filename: ' + filename )
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   element.setAttribute('download', filename);
-
   element.style.display = 'none';
   document.body.appendChild(element);
-
   element.click();
-
   document.body.removeChild(element);
 }  
 
-
+/*
 function savePluginCode ( code ) {
   var startInd = 0;
   var endInd = code.indexOf ( '\n' );
@@ -137,6 +135,32 @@ function savePluginCode ( code ) {
   msg = msg + "del copyPlug*.*\n"  
   //alert (msg)
   download ( 'copyPlugin.bat', msg );
+} 
+*/
+function loadXml () {
+   alert ( 'load xml' );
+            var fr=new FileReader(); 
+            fr.onload=function(){
+                alert ( 'onload triggered' );
+                alert ( 'got result: ' + fr.result );            
+                //var tempElem = document.createElement ('a');
+                //tempElem.value = fr.result;
+                //document.getElementById('output') 
+                //        .textContent=fr.result; 
+            } 
+              
+            fr.readAsText('C:\SpigotMC\scriptcraft\plugins\spleef.xml');    
+}
+
+function saveXml(myText) {
+   var text = myText;
+   text = document.all.content_xml.value;
+   //var text=JSON.stringify(text);
+   var filename = "project.xml"
+   var tempElem = document.createElement('a');
+   tempElem.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+   tempElem.setAttribute('download', filename);
+   tempElem.click();
 } 
 
 function clipboardCopy (text) {
@@ -197,9 +221,9 @@ function bodyLoad() {
         <table width="100%">
           <tr id="tabRow" height="1em">
             <td id="tab_blocks" class="tabon">...</td>
-            <td class="tabmin">&nbsp;</td>
+            <td class="tabmin">&nbsp;</td>            
             <td id="tab_javascript" class="taboff" >JavaScript
-               <input type="button" value="Download to Plugins Directory" onclick="clipboardCopy (document.all.content_javascript.innerText);">            
+               <input type="button" style="border:1px solid" value="Download to SpigotMC/scriptcraft/plugins" onclick="clipboardCopy (document.all.content_javascript.innerText);">            
             </td>
             <td class="tabmin" style="display:none;">&nbsp;</td>
             <td id="tab_python" class="taboff" style="display:none;">Arduino
@@ -212,7 +236,28 @@ function bodyLoad() {
             <td class="tabmin" style="display:none;">&nbsp;</td>
             <td id="tab_dart" class="taboff" style="display:none;">Dart</td>
             <td class="tabmin" style="display:none;">&nbsp;</td>
-            <td id="tab_xml" class="taboff">Diagram Source
+            <td id="tab_xml" class="taboff">Project<br>
+            
+                  <input type="button" style="border:1px solid" value="Load" onclick="document.getElementById('inputfile').click();" />                                    
+                  <input id="inputfile" type="file" name="inputfile" id="inputfile" style="display:none"/> 
+                  <script type="text/javascript"> 
+                  
+                      document.getElementById('inputfile').onclick = function () {
+                          this.value = null; // To allow selecting the same filename 
+                      };                  
+                      document.getElementById('inputfile') 
+                         .addEventListener('change', function() {                             
+                            var fr=new FileReader(); 
+                            fr.onload=function(){ 
+                               document.all.content_xml.value = fr.result;
+                            }                                
+                            fr.readAsText(this.files[0]); 
+                         }
+                      ) 
+                  </script>             
+            
+               <input type="button" style="border:1px solid" value="Save" onclick="saveXml (document.all.content_xml.value);">                     
+            
             <!input type="button" value="load" onclick="filename=prompt('File?');loadSource(filename);">
             <!input type="button" value="save" onclick="filename=prompt('File?');saveSource(filename);">
             </td>
