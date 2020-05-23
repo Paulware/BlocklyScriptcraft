@@ -3,7 +3,7 @@
 BlocklyScriptcraft is another <a href="https://en.wikipedia.org/wiki/Scratch_(programming_language)">scratch</a>-like utility that allows you to create minecraft plugins<br>
 <h2>Setup</h2>
   <a href="http://Paulware.github.io/BlocklyScriptcraft/windowsSetup.html">Windows</a><br>
-  <a href="http://Paulware.github.io/BlocklyScriptcraft/macBlocklySetup.html">MAC OS</a><br>
+  <a href="http://Paulware.github.io/BlocklyScriptcraft/macSetup.html">MAC OS</a><br>
 
 The project will generate Javascript that is tested as a minecraft plugin<br>
 <br>
