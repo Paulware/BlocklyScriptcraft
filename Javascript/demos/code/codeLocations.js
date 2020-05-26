@@ -166,7 +166,8 @@
       "Using loop variable => Scriptcraft Coding, Loop ",  
       "Create a stack of items => Items Stack",
       "Set name = => Scripcraft Coding, Variables",  
-      "Randomize chest contents from list => Items",       
+      "Randomize chest contents from list => Items",  
+      "Player Data Eq => Entities, Player, Data",       
    ];
    
    function autocomplete(inp, arr) {

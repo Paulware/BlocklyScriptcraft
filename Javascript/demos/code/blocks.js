@@ -1399,7 +1399,6 @@ Blockly.Blocks['removeplayerdata'] = {
   }
 };
 
-
 Blockly.Blocks['getplayerdata'] = {
   init: function() {
     this.appendDummyInput()
@@ -1409,6 +1408,23 @@ Blockly.Blocks['getplayerdata'] = {
         .appendField("For Player/Entity");
     this.setColour(0);
     this.setOutput(true, null);    
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['playerdataeq'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Player Data Equal")
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY");        
+    this.appendValueInput("PLAYER1")
+        .appendField("Player1");
+    this.appendValueInput("PLAYER2")
+        .appendField("Player2");
+    this.setColour(0);
+    this.setOutput(true, null);    
+    this.setInputsInline(true);        
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

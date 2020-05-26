@@ -809,7 +809,28 @@ Blockly.Python['getplayerdata2'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];  
 };
 
-
+Blockly.Python['playerdataeq'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
+  key = '_' + key + '_';
+  
+  var player1 = Blockly.Python.valueToCode(block, 'PLAYER1', Blockly.Python.ORDER_ATOMIC); 
+  player1 = insideParen (player1);
+  var player2 = Blockly.Python.valueToCode(block, 'PLAYER2', Blockly.Python.ORDER_ATOMIC); 
+  player2 = insideParen (player2);
+   
+  var code = '(function() { ' + 
+             '  var value1 = (' + player1 + '== null)? null : (' + player1 + '.getMetadata == null)?null:(' + player1 + 
+             '.getMetadata(\"' + key + '\").length == 0)?null:' + player1 + '.getMetadata(\"' + key + '\")[0].value();' +  
+             '  var value2 = (' + player2 + '== null)? null : (' + player2 + '.getMetadata == null)?null:(' + player2 + 
+             '.getMetadata(\"' + key + '\").length == 0)?null:' + player2 + '.getMetadata(\"' + key + '\")[0].value();' +
+             '  var s = (value1 == value2);' + 
+             '  return s;' + 
+             ' })()'              
+             
+    
+  return [code, Blockly.Python.ORDER_NONE];  
+};
 
 Blockly.Python['repairarmor'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
