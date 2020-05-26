@@ -61,14 +61,14 @@ Blockly.Python['lists_length'] = function(block) {
   // String or array length.
   var list = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_NONE) || '[]';
-  return ['len(' + list + ')', Blockly.Python.ORDER_FUNCTION_CALL];
+  return [list + '.length', Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Python['lists_isEmpty'] = function(block) {
   // Is the string null or array empty?
   var list = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_NONE) || '[]';
-  var code = 'not len(' + list + ')';
+  var code = '(' + list + '.length == 0)';
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
 };
 
@@ -101,7 +101,7 @@ Blockly.Python['lists_indexOf'] = function(block) {
   var functionName = Blockly.Python.provideFunction_(
       'last_index',
       ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(my_list, elem):',
-       '  try: index = len(my_list) - my_list[::-1].index(elem)' +
+       '  try: index = my_list.length - my_list[::-1].index(elem)' +
          lastIndexAdjustment,
        '  except: index =' + errorIndex,
        '  return index']);
@@ -174,7 +174,7 @@ Blockly.Python['lists_getIndex'] = function(block) {
         var functionName = Blockly.Python.provideFunction_(
             'lists_remove_random_item',
             ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
-              '  x = int(random.random() * len(myList))',
+              '  x = int(random.random() * myList.length)',
               '  return myList.pop(x)']);
         code = functionName + '(' + list + ')';
         if (mode == 'GET_REMOVE') {
@@ -246,7 +246,7 @@ Blockly.Python['lists_setIndex'] = function(block) {
         var code = cacheList();
         var xVar = Blockly.Python.variableDB_.getDistinctName(
             'tmp_x', Blockly.Variables.NAME_TYPE);
-        code += xVar + ' = int(random.random() * len(' + list + '))\n';
+        code += xVar + ' = int(random.random() * ' + list + '.length)\n';
         if (mode == 'SET') {
           code += list + '[' + xVar + '] = ' + value + '\n';
           return code;

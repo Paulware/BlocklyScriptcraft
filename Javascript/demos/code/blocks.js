@@ -2919,7 +2919,7 @@ Blockly.Blocks['countcondition'] = {
         .appendField (" in list ");
 
     this.setOutput(true, null);
-    this.setColour(40);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -3119,7 +3119,7 @@ Blockly.Blocks['deletefromlist'] = {
      
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(0);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
