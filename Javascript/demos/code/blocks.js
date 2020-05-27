@@ -1430,6 +1430,17 @@ Blockly.Blocks['playerdataeq'] = {
   }
 };
 
+Blockly.Blocks['activeteams'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Active Team List");
+    this.setColour(0);
+    this.setOutput(true, null);    
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['getplayerdata2'] = {
   init: function() {
     this.appendValueInput("PLAYER")
