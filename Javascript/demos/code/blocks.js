@@ -1430,6 +1430,24 @@ Blockly.Blocks['playerdataeq'] = {
   }
 };
 
+Blockly.Blocks['blocksradius'] = {
+  init: function() {
+   this.appendValueInput ("BLOCKTYPE") 
+        .appendField("List of")
+    this.appendValueInput ("RADIUS")
+        .appendField("within");       
+    this.appendValueInput("LOCATION")
+        .appendField("blocks of location:");
+    this.setColour(200);
+    this.setOutput(true, null);    
+    this.setInputsInline(true);        
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
 Blockly.Blocks['activeteams'] = {
   init: function() {
     this.appendDummyInput()
@@ -2578,7 +2596,7 @@ Blockly.Blocks['nearbyentities'] = {
         .appendField("Entities within " )
         .appendField (new Blockly.FieldTextInput ("5"), "RADIUS")  
   .appendField("blocks of location:" );
-    this.setColour(120);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setOutput(true, null);
@@ -2801,6 +2819,7 @@ Blockly.Blocks['eventinfo'] = {
         .appendField("Event information")    
         .appendField(new Blockly.FieldDropdown([
                                                 ["Get block that was clicked on", "getClickedBlock"],
+                                                ["Get block that was hit", "getHitBlock"],
                                                 ["Get bow that was fired", "getBow"],
                                                 ["Get entity", "getEntity"],
                                                 ["Get face of block that was clicked on", "getBlockFace"],

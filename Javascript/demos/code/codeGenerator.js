@@ -832,6 +832,31 @@ Blockly.Python['playerdataeq'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];  
 };
 
+Blockly.Python['blocksradius'] = function(block) {
+  var radius = Blockly.Python.valueToCode(block, 'RADIUS', Blockly.Python.ORDER_ATOMIC); 
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC); 
+  var blockType = Blockly.Python.valueToCode(block, 'BLOCKTYPE', Blockly.Python.ORDER_ATOMIC); 
+   
+  var code = '(function() { ' + 
+             '  var _blocks = [];\n' +  
+             '  var _blockType;\n' + 
+             '  var _loc;\n' + 
+             '  for (var _x=' + location + '.x-' + radius + ';_x<=' + location + '.x+' + radius + ';_x++) {' + 
+             '    for (var _y=' + location + '.y-' + radius + ';_y<=' + location + '.y+' + radius + ';_y++) {' + 
+             '      for (var _z=' + location + '.z-' + radius + ';_z<=' + location + '.z+' + radius + ';_z++) {' +
+             '         _loc = new org.bukkit.Location(server.worlds[0], _x,_y,_z);' +    
+             '         _blockType =  server.worlds[0].getBlockAt(_loc).getType();\n' +             
+             '         if (_blockType == ' + blockType + ') { _blocks.push (server.worlds[0].getBlockAt(_loc)); } \n' + 
+             '  }}}\n' +  
+             '  console.log ( \"found\" + _blocks.length + \" blocks \" );\n' +              
+             '  return _blocks;\n'  + 
+             ' })()'              
+             
+    
+  return [code, Blockly.Python.ORDER_NONE];  
+};
+
+
 Blockly.Python['activeteams'] = function(block) {
   var code = '(function() { ' + 
              '   var _players=server.getOnlinePlayers();var _teams=[];var _teamColor;\n' + 
