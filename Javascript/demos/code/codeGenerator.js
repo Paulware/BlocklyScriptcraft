@@ -2861,17 +2861,18 @@ Blockly.Python['randomizechests'] = function(block) {
       "var _inventory;\n" + 
       "_world=server.worlds[0];" + 
       "_chunks=_world.getLoadedChunks();\n" + 
-      "for (var _chunkIndex=0; _chunkIndex<_chunks.length;_chunkIndex++) {\n" + 
+      "for (var _chunkIndex=0; _chunkIndex<_chunks.length;_chunkIndex++) {" + 
          "_chunk=_chunks[_chunkIndex];" + 
-         "_blocks=_chunk.getTileEntities();\n" + 
+         "_blocks=_chunk.getTileEntities();" + 
          "for (var _blockIndex=0; _blockIndex<_blocks.length;_blockIndex++) {\n" + 
-            "_blockType=(blocks[_blockIndex]==null)?null:_blocks[_blockIndex].getType();\n" + 
+            "_blockType=(_blocks[_blockIndex]==null)?null:_blocks[_blockIndex].getType();\n" + 
             "if (_blockType == org.bukkit.Material.CHEST){\n" + 
-               "_inventory=blocks[_blockIndex].getBlockInventory();" + 
+               "_inventory=_blocks[_blockIndex].getBlockInventory();" + 
                "_inventory.clear();\n" + 
+               "console.log ( \"add goodies\");\n" + 
                "for (var _goodieIndex=0;_goodieIndex<" + goodies + ".length;_goodieIndex++) {\n" + 
                   "if ((parseInt (Math.random () * (100-1)) + 1) > 50){" + 
-                     "inventory.addItem (" + goodies + "[_goodieIndex]);\n" + 
+                     "_inventory.addItem (" + goodies + "[_goodieIndex]);\n" + 
                   "}" +
                "}" +                
             "}" + 
