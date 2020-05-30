@@ -862,9 +862,11 @@ Blockly.Python['activeteams'] = function(block) {
              '   var _players=server.getOnlinePlayers();var _teams=[];var _teamColor;\n' + 
              '   for (var i=0; i<_players.length;i++) {\n' +   
              '      _teamColor=(_players[i]== null)? null : (_players[i].getMetadata == null)?null:(_players[i].getMetadata(\"_team_\").length == 0)?null:players[i].getMetadata(\"_team_\")[0].value();\n' + 
-             '      if (! ((_teams.indexOf (_teamColor) >= 0))){\n' + 
-             '         if (! ((_players[i] == null ) ? false : (_players[i].getGameMode().toString() == \"SPECTATOR\"))){\n' + 
-             '            _teams.push (_teamColor);\n' + 
+             '      if (_teamColor != null) { \n' + 
+             '         if (! ((_teams.indexOf (_teamColor) >= 0))){\n' + 
+             '            if (! ((_players[i] == null ) ? false : (_players[i].getGameMode().toString() == \"SPECTATOR\"))){\n' + 
+             '               _teams.push (_teamColor);\n' + 
+             '            }\n' + 
              '         }\n' + 
              '      }\n' + 
              '   }\n' + 
