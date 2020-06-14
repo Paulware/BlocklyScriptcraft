@@ -1218,6 +1218,8 @@ Blockly.Blocks['scriptcraftexpression'] = {
         .appendField("Expression")
         .appendField (new Blockly.FieldTextInput ("expression"), "EXPRESSION")
         .setAlign(Blockly.ALIGN_CENTRE);
+    this.appendStatementInput("EXPRESSIONCODE")
+        .setCheck(null);
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setColour(0);

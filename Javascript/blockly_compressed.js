@@ -1444,6 +1444,7 @@ Blockly.Generator.prototype.blockToCode=function(a){
    goog.asserts.assertFunction(b,'Language "%s" does not know how to generate code for block type "%s".',this.name_,a.type);
    if (b == undefined) {
       alert ( 'There is a block that is not attached in your diagram, use - to find it and then delete it' );
+      alert ( 'a: ' + this.statementToCode (a));
       return "";
    } else { 
       b=b.call(a,a);

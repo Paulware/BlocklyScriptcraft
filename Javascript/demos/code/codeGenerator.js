@@ -1538,7 +1538,9 @@ Blockly.Python ['delayedexecution'] = function (block) {
 
 Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
   var expression = block.getFieldValue ('EXPRESSION');
-  code = expression + '\n';
+  var expressionCode = Blockly.Python.statementToCode (block, 'EXPRESSIONCODE' );  
+    
+  code = '//' + expression + '\n' + expressionCode + '\n';
   return code;
 };
 Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
