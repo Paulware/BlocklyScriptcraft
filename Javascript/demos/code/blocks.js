@@ -907,6 +907,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
                                                   ["Oak Sign Post", "OAK_SIGN"], 
+                                                  ["Paper", "PAPER"],
                                                   ["Shield", "SHIELD"],                                                  
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Stick", "STICK"],
