@@ -2956,6 +2956,82 @@ Blockly.Python['minigun'] = function(block) {
   return code;
 };
 
+Blockly.Python['dealcard'] = function(block) {
+  var code =  "(function () {var _length = exports.cardDeck.length;\n" +     
+              "   var _index = parseInt (Math.random () * _length );\n" +
+              "   var _card = exports.cardDeck.splice (_index,1);\n" +
+              "   console.log ( 'dealt a: ' + _card);\n" + 
+              "   return _card;\n" +           
+              "}());";  
+    return [code, Blockly.Python.ORDER_NONE]
+};
 
+Blockly.Python['createdeck'] = function(block) {
+  var code = "exports.cardDeck = [" + 
+             "\'clubs-a\', \'clubs-2\', \'clubs-3\', \'clubs-4\',\'clubs-5\', \'clubs-6\', \'clubs-7\', \'clubs-8\',\'clubs-9\', \'clubs-10\', \'clubs-j\', \'clubs-q\',\'clubs-k\'," +
+             "\'hearts-a\', \'hearts-2\', \'hearts-3\', \'hearts-4\',\'hearts-5\', \'hearts-6\', \'hearts-7\', \'hearts-8\',\'hearts-9\', \'hearts-10\', \'hearts-j\', \'hearts-q\',\'hearts-k\'," +
+             "\'spades-a\', \'spades-2\', \'spades-3\', \'spades-4\',\'spades-5\', \'spades-6\', \'spades-7\', \'spades-8\',\'spades-9\', \'spades-10\', \'spades-j\', \'spades-q\',\'spades-k\'," +
+             "\'diamonds-a\', \'diamonds-2\', \'diamonds-3\', \'diamonds-4\',\'diamonds-5\', \'diamonds-6\', \'diamonds-7\', \'diamonds-8\',\'diamonds-9\', \'diamonds-10\', \'diamonds-j\', \'diamonds-q\',\'diamonds-k\'" +
+             "];\n"
+  return code;
+};
 
-
+Blockly.Python['sumcards'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var code =  "(function () {\n" +     
+              "   var _sum=0;\n" +              
+              "   var _name;\n" + 
+              "   var _index;\n" + 
+              "   var _ch;\n" + 
+              "   var  _ch2;\n" + 
+              "   var _ace = false;\n" + 
+              "   var _inventory = " + player + ".getInventory();\n" +
+              "   for (var _i=0; _i<_inventory.getSize(); _i++) { \n" +
+              "     _name=(player.getInventory().getItem(_i)== null) ? null : (player.getInventory().getItem(_i).getItemMeta == null) ? null : (player.getInventory().getItem(_i).getItemMeta() == null)?null:player.getInventory().getItem(_i).getItemMeta().getDisplayName();\n" + 
+              "     if (_name != null) { \n" +
+              "        _index = _name.indexOf ( '-'); \n" + 
+              "        if (_index > -1) { \n" + 
+              "           _ch = _name.charAt (_index+1);\n" +
+              "           _ch2 = _name.charAt (_index+2);\n" + 
+              "           if ((_ch == \'j\') || (_ch == '\q\') || (_ch == '\k\')) { \n" + 
+              "              _sum = _sum + 10;\n" + 
+              "           } else if (_ch == \'a\') { \n" +
+              "              _ace = true;\n" + 
+              "              _sum = _sum + 1;\n" +               
+              "           } else if (_ch == \'1\') { \n" + 
+              "              if (_ch2 == \'0\') { \n" + 
+              "                 _sum = _sum + 10\n" + 
+              "              } else {\n" +
+              "                 console.log ( \'_ch2:\' + _ch2 );\n" +               
+              "                 _sum = _sum + 1;\n" +
+              "              }\n" +               
+              "           } else if (_ch == \'2\') { \n" + 
+              "              _sum = _sum + 2;\n" + 
+              "           } else if (_ch == \'3\') { \n" + 
+              "              _sum = _sum + 3;\n" + 
+              "           } else if (_ch == \'4\') { \n" + 
+              "              _sum = _sum + 4;\n" + 
+              "           } else if (_ch == \'5\') { \n" + 
+              "              _sum = _sum + 5;\n" + 
+              "           } else if (_ch == \'6\') { \n" + 
+              "              _sum = _sum + 6;\n" + 
+              "           } else if (_ch == \'7\') { \n" + 
+              "              _sum = _sum + 7;\n" + 
+              "           } else if (_ch == \'8\') { \n" + 
+              "              _sum = _sum + 8;\n" + 
+              "           } else if (_ch == \'9\') { \n" + 
+              "              _sum = _sum + 9;\n" + 
+              "           }\n" + 
+              "           console.log ( \'sum: \' + _sum + \' ch: \' + _ch);\n" + 
+              "        }\n" + 
+              "     }\n" + 
+              "   }\n" +   
+              "   if (_ace && (_sum <= 11)) { \n" + 
+              "      _sum = sum + 10;\n" + 
+              "   }\n" +               
+              "   console.log ( \'Got a sum of: \' + _sum );\n" +               
+              "   return _sum;\n" +           
+              "}());";  
+    return [code, Blockly.Python.ORDER_NONE]
+};

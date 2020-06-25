@@ -19,7 +19,7 @@
       "Spawn Block (block) At Location (location) => World, Blocks, Location", 
       "Variables => Scriptcraft Coding, Variables",
       "Set sign text for sign at location => World, Blocks, Sign",
-      "Get Sign's Line for Block => World, Blocks, Sign",
+      "Get Signs Line for Block => World, Blocks, Sign",
       "Set Sign Facing Direction => World, Blocks, Sign",
       "Spawn Structure => World, Blocks, Structures", 
       "Build a structure  => World, Blocks, Structures", 

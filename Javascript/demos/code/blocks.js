@@ -743,7 +743,6 @@ Blockly.Blocks['setName'] = {
     this.setColour(80);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
-    // this.setOutput(true, null);    
   }
 };
 
@@ -3283,5 +3282,40 @@ Blockly.Blocks['minigun'] = {
   }
 };
 
+Blockly.Blocks['dealcard'] = {
+  init: function() { 
+    this.appendDummyInput()
+        .appendField("Deal a card from the deck");        
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);    
+    
+  }
+};
 
+Blockly.Blocks['createdeck'] = {
+  init: function() { 
+    this.appendDummyInput()
+        .appendField("Create a deck");        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+    
+  }
+};
+
+Blockly.Blocks['sumcards'] = {
+  init: function() {        
+    this.appendValueInput("PLAYER")
+        .appendField("Sum cards in inventory for player");
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setOutput(true, null);    
+    
+  }
+};
 
