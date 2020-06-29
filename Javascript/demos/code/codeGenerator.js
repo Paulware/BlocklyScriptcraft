@@ -1865,7 +1865,7 @@ Blockly.Python['getblocktype'] = function(block) {
 Blockly.Python['getsignline'] = function(block) {
   var b = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
   b = insideParen (b);
-  var line = block.getFieldValue("LINE");  
+  var line = parseInt(block.getFieldValue("LINE")) - 1;  
   var code = "(" + b + "==null)?null: (" + b + ".state.getLine == null)?null:" + b + ".state.getLine(" + line + ")";
   return [code, Blockly.Python.ORDER_NONE];
 }
@@ -3041,7 +3041,7 @@ Blockly.Python['starttimer'] = function(block) {
 
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player);
-  var code =  "(function (" + player + "," + timerName + ") {\n" +
+  var code =  "(function () {\n" +
               "  // timerName = " + timerName + ";\n" + 
               "  fd = new org.bukkit.metadata.FixedMetadataValue (__plugin,new Date().getTime());\n" +
               "  if (" + player + " != null) {\n" +
@@ -3062,7 +3062,7 @@ Blockly.Python['elapsedtime'] = function(block) {
   var code =  "(function () {\n" + 
               "   var _startTime = (" + player + "== null)? null : (" + player + ".getMetadata == null)?null:(" + 
               player + ".getMetadata(" + timerName + ").length == 0)?null:" + player + ".getMetadata(" + timerName + ")[0].value();\n" +   
-              "   var _elapsedTime = (new Date().getTime()) - startTime;\n" +     
+              "   var _elapsedTime = (new Date().getTime()) - _startTime;\n" +     
               "   console.log ( \'Elapsed Time: \' + _elapsedTime + \' ms\');\n" +
               "   return _elapsedTime;\n" +               
               "}());";  

@@ -1022,7 +1022,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Redstone Block", "REDSTONE_BLOCK"],
                                                 ["Redstone Torch", "REDSTONE_TORCH"],
                                                 ["Sand", "SAND"],
-                                                ["Sign on Wall", "LEGACY_SIGN"],
+                                                ["Sign on Wall", "OAK_WALL_SIGN"],
                                                 ["Sign Post (Oak)", "OAK_SIGN"],                                                
                                                 ["Snow Block", "SNOW_BLOCK"],
                                                 ["Sticky Piston", "STICKY_PISTON"],
@@ -1881,7 +1881,11 @@ Blockly.Blocks['getsignline'] = {
         .appendField("For Block");
     this.appendDummyInput()
         .appendField("Line: ")
-        .appendField (new Blockly.FieldTextInput ("0"), "LINE");      
+        .appendField(new Blockly.FieldDropdown([
+                                                 ["1","1"],  
+                                                 ["2","2"],  
+                                                 ["3","3"]        
+                                               ]), "LINE");         
     this.setOutput(true, null);
     this.setColour(200);
     this.setTooltip('');
@@ -3322,7 +3326,7 @@ Blockly.Blocks['sumcards'] = {
 Blockly.Blocks['starttimer'] = {
   init: function() { 
     this.appendValueInput("PLAYER")
-        .appendField ("Create Timer named ")
+        .appendField ("Create/Reset Timer named ")
         .appendField (new Blockly.FieldTextInput ( "\"timerName\""), "TIMERNAME")
         .appendField("For Player");             
     this.setPreviousStatement(true, null);
