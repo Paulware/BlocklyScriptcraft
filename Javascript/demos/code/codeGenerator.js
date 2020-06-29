@@ -3035,3 +3035,36 @@ Blockly.Python['sumcards'] = function(block) {
               "}());";  
     return [code, Blockly.Python.ORDER_NONE]
 };
+
+Blockly.Python['starttimer'] = function(block) {
+  var timerName = block.getFieldValue ('TIMERNAME');
+
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var code =  "(function (" + player + "," + timerName + ") {\n" +
+              "  // timerName = " + timerName + ";\n" + 
+              "  fd = new org.bukkit.metadata.FixedMetadataValue (__plugin,new Date().getTime());\n" +
+              "  if (" + player + " != null) {\n" +
+              "    if (" + player + ".setMetadata != null ) {\n" +
+              "       " + player + ".setMetadata (" + timerName + ", fd );\n" +
+              "    }\n" +
+              "  }\n" +
+              "}());\n";
+  return code;
+};
+
+Blockly.Python['elapsedtime'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player); 
+  var timerName = Blockly.Python.valueToCode(block, 'TIMERNAME', Blockly.Python.ORDER_ATOMIC);
+  timerName = insideParen(timerName); 
+
+  var code =  "(function () {\n" + 
+              "   var _startTime = (" + player + "== null)? null : (" + player + ".getMetadata == null)?null:(" + 
+              player + ".getMetadata(" + timerName + ").length == 0)?null:" + player + ".getMetadata(" + timerName + ")[0].value();\n" +   
+              "   var _elapsedTime = (new Date().getTime()) - startTime;\n" +     
+              "   console.log ( \'Elapsed Time: \' + _elapsedTime + \' ms\');\n" +
+              "   return _elapsedTime;\n" +               
+              "}());";  
+    return [code, Blockly.Python.ORDER_NONE]
+};

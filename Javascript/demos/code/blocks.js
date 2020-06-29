@@ -3319,3 +3319,32 @@ Blockly.Blocks['sumcards'] = {
   }
 };
 
+Blockly.Blocks['starttimer'] = {
+  init: function() { 
+    this.appendValueInput("PLAYER")
+        .appendField ("Create Timer named ")
+        .appendField (new Blockly.FieldTextInput ( "\"timerName\""), "TIMERNAME")
+        .appendField("For Player");             
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+    
+  }
+};
+
+Blockly.Blocks['elapsedtime'] = {
+  init: function() {        
+    this.appendValueInput("TIMERNAME")
+        .appendField("Elapsed time for timer");
+    this.appendValueInput("PLAYER")
+        .appendField("assigned to player");
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setInputsInline(true);                    
+    this.setOutput(true, null);    
+    
+  }
+};
