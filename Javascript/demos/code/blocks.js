@@ -3352,3 +3352,18 @@ Blockly.Blocks['elapsedtime'] = {
     
   }
 };
+
+
+Blockly.Blocks['countBet'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Count player\'s bet");   
+    this.appendValueInput("PLAYER")
+        .appendField("assigned to player");
+    this.setOutput(true, null);     
+    this.setInputsInline(true);                    
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

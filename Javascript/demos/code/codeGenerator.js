@@ -231,6 +231,11 @@ function findType (value) {
   return library;
 }
 
+function delCharAt (str, position) {
+   newString = str.slice(0, position) + str.slice(position+1, str.length)        
+   return newString;
+}
+
 function insideParen (value) {   
   if (value == undefined) { 
      return "";
@@ -245,26 +250,35 @@ function insideParen (value) {
      if (startIndex == -1) {
         newValue = value;   
      } else {
-       endIndex = startIndex + 1;
-       count = 1;
-       while (endIndex < value.length-1) {
-         if (endIndex == (value.length -1)) {
-           ch = value.substring (endIndex); 
-         } else {        
-           ch = value.substring (endIndex, endIndex + 1);    
-         }        
-         if (value.substring (endIndex,endIndex+1) == ")") {
-             count = count - 1;
-            if (count == 0) {
-               break;
-            } 
-         } else if (value.substring( endIndex, endIndex + 1) == "(") {
-            count = count + 1;
+       endIndex = value.lastIndexOf ( ')');
+       if (endIndex > -1) {
+           console.log ( 'value: ' + value )
+           value = delCharAt (value, endIndex);
+           value = delCharAt (value, startIndex);
+           newValue = value;
+           console.log ( 'newValue: ' + newValue );
+       } else { 
+         endIndex = startIndex + 1;
+         count = 1;
+         while (endIndex < value.length-1) {
+           if (endIndex == (value.length -1)) {
+             ch = value.substring (endIndex); 
+           } else {        
+             ch = value.substring (endIndex, endIndex + 1);    
+           }        
+           if (value.substring (endIndex,endIndex+1) == ")") {
+               count = count - 1;
+              if (count == 0) {
+                 break;
+              } 
+           } else if (value.substring( endIndex, endIndex + 1) == "(") {
+              count = count + 1;
+           } 
+           endIndex = endIndex + 1;
          } 
-         endIndex = endIndex + 1;
-       } 
-       startIndex = startIndex + 1;
-       newValue = value.substring (startIndex, endIndex );
+         startIndex = startIndex + 1;
+         newValue = value.substring (startIndex, endIndex );
+       }
      }
      //alert ( 'insideParen oldvalue: ' + value + ' newValue: ' + newValue );
      return newValue;
@@ -1419,7 +1433,7 @@ Blockly.Python['varname'] = function(block) {
 Blockly.Python['setvariable'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
   var expression = block.getFieldValue("EXPRESSION");
-  // expression = insideParen (expression); 
+  expression = insideParen (expression); 
   if (varname.indexOf ( '.') == -1) {    
      instantiateVariable (varname);
   }
@@ -2507,8 +2521,8 @@ Blockly.Python['removeplayersgear'] = function(block) {
     
   var code = "players = server.getOnlinePlayers();\n" + 
              "for (var playersIndex=0; playersIndex<players.length; playersIndex++) {\n" + 
-			 "  players[playersIndex].getInventory().clear();\n" + 
-			 "}\n" 
+			          "  players[playersIndex].getInventory().clear();\n" + 
+         			 "}\n" 
   return code;
 };
 
@@ -2988,7 +3002,7 @@ Blockly.Python['sumcards'] = function(block) {
               "   var _ace = false;\n" + 
               "   var _inventory = " + player + ".getInventory();\n" +
               "   for (var _i=0; _i<_inventory.getSize(); _i++) { \n" +
-              "     _name=(player.getInventory().getItem(_i)== null) ? null : (player.getInventory().getItem(_i).getItemMeta == null) ? null : (player.getInventory().getItem(_i).getItemMeta() == null)?null:player.getInventory().getItem(_i).getItemMeta().getDisplayName();\n" + 
+              "     _name=(" + player + ".getInventory().getItem(_i)== null) ? null : (" + player + ".getInventory().getItem(_i).getItemMeta == null) ? null : ("+ player + ".getInventory().getItem(_i).getItemMeta() == null)?null:" + player + ".getInventory().getItem(_i).getItemMeta().getDisplayName();\n" + 
               "     if (_name != null) { \n" +
               "        _index = _name.indexOf ( '-'); \n" + 
               "        if (_index > -1) { \n" + 
@@ -3067,4 +3081,24 @@ Blockly.Python['elapsedtime'] = function(block) {
               "   return _elapsedTime;\n" +               
               "}());";  
     return [code, Blockly.Python.ORDER_NONE]
+};
+
+Blockly.Python['countBet'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var code =  "(function () {\n" +     
+              "   var _sum=0;\n" +              
+              "   var _index;\n" + 
+              "   var _inventory = " + player + ".getInventory();\n" +
+              "   var _count = 0;\n" + 
+              "   for (var _i=0; _i<9; _i++) { \n" +
+              "      _item = _inventory.getItem(_i).getType();\n" +
+              "      console.log ( _i + \"): \" + _item );\n" + 
+              "      if (_item == org.bukkit.Material.EMERALD ){ \n" + 
+              "         _count = _count + 1;\n" + 
+              "      }\n" +               
+              "   }\n" + 
+              "   console.log ( \"Got a bet of:\" + _count + \" emeralds.\" );\n" + 
+              "   return _count;})()"
+  return [code, Blockly.Python.ORDER_NONE];
 };
