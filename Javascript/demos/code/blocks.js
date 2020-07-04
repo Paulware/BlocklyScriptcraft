@@ -3367,3 +3367,18 @@ Blockly.Blocks['countBet'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['clearhotbar'] = {
+  init: function() { 
+    this.appendValueInput("PLAYER")
+        .appendField ("Clear hotbar for player: ");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+    
+  }
+};
+
+
