@@ -1433,7 +1433,6 @@ Blockly.Python['varname'] = function(block) {
 Blockly.Python['setvariable'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
   var expression = block.getFieldValue("EXPRESSION");
-  expression = insideParen (expression); 
   if (varname.indexOf ( '.') == -1) {    
      instantiateVariable (varname);
   }
@@ -2994,55 +2993,26 @@ Blockly.Python['sumcards'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player);
   var code =  "(function () {\n" +     
+              "   var _inventory = " + player + ".getInventory();\n" +
               "   var _sum=0;\n" +              
               "   var _name;\n" + 
               "   var _index;\n" + 
               "   var _ch;\n" + 
-              "   var  _ch2;\n" + 
-              "   var _ace = false;\n" + 
-              "   var _inventory = " + player + ".getInventory();\n" +
-              "   for (var _i=0; _i<_inventory.getSize(); _i++) { \n" +
+              "   var _ch2;\n" +            
+              "   var _values = {'':0, '0':0, '1':10, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'j':10, 'q':10, 'k':10, 'a':1};\n" + 
+              "   for (var _i=0; _i<9; _i++) { \n" +
               "     _name=(" + player + ".getInventory().getItem(_i)== null) ? null : (" + player + ".getInventory().getItem(_i).getItemMeta == null) ? null : ("+ player + ".getInventory().getItem(_i).getItemMeta() == null)?null:" + player + ".getInventory().getItem(_i).getItemMeta().getDisplayName();\n" + 
               "     if (_name != null) { \n" +
               "        _index = _name.indexOf ( '-'); \n" + 
-              "        if (_index > -1) { \n" + 
-              "           _ch = _name.charAt (_index+1);\n" +
-              "           _ch2 = _name.charAt (_index+2);\n" + 
-              "           if ((_ch == \'j\') || (_ch == '\q\') || (_ch == '\k\')) { \n" + 
-              "              _sum = _sum + 10;\n" + 
-              "           } else if (_ch == \'a\') { \n" +
-              "              _ace = true;\n" + 
-              "              _sum = _sum + 1;\n" +               
-              "           } else if (_ch == \'1\') { \n" + 
-              "              if (_ch2 == \'0\') { \n" + 
-              "                 _sum = _sum + 10\n" + 
-              "              } else {\n" +
-              "                 console.log ( \'_ch2:\' + _ch2 );\n" +               
-              "                 _sum = _sum + 1;\n" +
-              "              }\n" +               
-              "           } else if (_ch == \'2\') { \n" + 
-              "              _sum = _sum + 2;\n" + 
-              "           } else if (_ch == \'3\') { \n" + 
-              "              _sum = _sum + 3;\n" + 
-              "           } else if (_ch == \'4\') { \n" + 
-              "              _sum = _sum + 4;\n" + 
-              "           } else if (_ch == \'5\') { \n" + 
-              "              _sum = _sum + 5;\n" + 
-              "           } else if (_ch == \'6\') { \n" + 
-              "              _sum = _sum + 6;\n" + 
-              "           } else if (_ch == \'7\') { \n" + 
-              "              _sum = _sum + 7;\n" + 
-              "           } else if (_ch == \'8\') { \n" + 
-              "              _sum = _sum + 8;\n" + 
-              "           } else if (_ch == \'9\') { \n" + 
-              "              _sum = _sum + 9;\n" + 
-              "           }\n" + 
-              "           console.log ( \'sum: \' + _sum + \' ch: \' + _ch);\n" + 
-              "        }\n" + 
+              "        _ch  = _name.charAt (_index+1);\n" +
+              "        _ch2 = _name.charAt (_index+2);\n" + 
+              "        //console.log ( '_ch,_ch2: [' + _ch + ',' + _ch2 + ']');\n" + 
+              "        _sum = _sum  + _values[_ch] + _values[_ch2];\n" + 
+              "        //console.log ( '_sum: ' + _sum );\n" + 
               "     }\n" + 
               "   }\n" +   
-              "   if (_ace && (_sum <= 11)) { \n" + 
-              "      _sum = sum + 10;\n" + 
+              "   if ((_ch == \'a\') && (_sum <= 11)) { \n" + 
+              "      _sum = _sum + 10;\n" + 
               "   }\n" +               
               "   console.log ( \'Got a sum of: \' + _sum );\n" +               
               "   return _sum;\n" +           
@@ -3114,5 +3084,49 @@ Blockly.Python['clearhotbar'] = function(block) {
               "  " + player + ".getInventory().setItem (_hotbarIndex,new org.bukkit.inventory.ItemStack (org.bukkit.Material.AIR,1) );\n" + 
               "}\n";
   return code;
+};
+
+Blockly.Python['blackjackdealer'] = function(block) {
+  var firstCard = Blockly.Python.valueToCode(block, 'FIRSTCARD', Blockly.Python.ORDER_ATOMIC);
+  firstCard = insideParen(firstCard);
+  var code =  "(function () {\n" +     
+              "   var _count = 0;\n" + 
+              "   var _sum = 0;\n" + 
+              "   var _length;\n" + 
+              "   var _index;\n" + 
+              "   var _card;\n" + 
+              "   var _name;\n" + 
+              "   var _ch;\n" + 
+              "   var _ch2;\n" +   
+              "   var _values = {'':0, '0':0, '1':10, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'j':10, 'q':10, 'k':10, 'a':1};\n" + 
+              "   console.log ( \"Got a first card of: \" + " + firstCard + ");\n" + 
+              "   var _cards = [exports.dealerCard];\n" +  
+              "   while (_sum < 17) {\n" + 
+              "      _sum = 0;\n" + 
+              "      // Dealer gets a random card\n" + 
+              "      _length = exports.cardDeck.length;\n" +     
+              "      _index = parseInt (Math.random () * _length );\n" +
+              "      _card = exports.cardDeck.splice (_index,1);\n" +
+              "      console.log ( 'dealt dealer a: ' + _card);\n" +    
+              "      _cards.push ( _card );\n" + 
+              "      // sum _cards\n" + 
+              "      for (var _i=0; _i<_cards.length; _i++) { \n" +
+              "        //console.log ( '_cards[_i]: [' + _cards[_i] + ']');\n" + 
+              "        _name = _cards[_i].toString();\n" + 
+              "        _index = _name.indexOf ('-'); \n" + 
+              "        //console.log ( '_name: [' + _name + '], _index:' + _index);\n" + 
+              "        _ch  = _name.charAt (_index+1);\n" +
+              "        _ch2 = _name.charAt (_index+2);\n" + 
+              "        //console.log ( '_ch,_ch2: [' + _ch + ',' + _ch2 + ']');\n" + 
+              "        _sum = _sum  + _values[_ch] + _values[_ch2];\n" + 
+              "        //console.log ( 'dealer _sum: ' + _sum );\n" + 
+              "      }\n" +   
+              "      if ((_ch == \'a\') && (_sum <= 11)) { \n" + 
+              "         _sum = _sum + 10;\n" + 
+              "      }\n" +               
+              "      console.log ( \'Got a dealer sum of: \' + _sum );\n" +               
+              "   }\n" + 
+              "   return _sum;})()"
+  return [code, Blockly.Python.ORDER_NONE];
 };
 

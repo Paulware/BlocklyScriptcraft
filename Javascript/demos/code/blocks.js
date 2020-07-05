@@ -3381,4 +3381,17 @@ Blockly.Blocks['clearhotbar'] = {
   }
 };
 
+Blockly.Blocks['blackjackdealer'] = {
+  init: function() { 
+    this.appendValueInput("FIRSTCARD")
+        .appendField ("Get Blackjack dealer\'s hand. First Card:");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+    this.setTooltip('');
+    this.setOutput(true, null);      
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
 
