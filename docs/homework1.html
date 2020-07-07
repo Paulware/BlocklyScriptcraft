@@ -1,0 +1,30 @@
+<H1>Homework: Special effect when a staff is held</h1>
+
+Imagine that in your game there is a special staff that has a special ability.<br>
+<i>Staff of healing</i><br>   
+When it is in the players hand, and the player clicks their mouse, it will raise the players health all the way to full (20).<br>
+
+<h2>Coding description</h2>
+<pre>
+  Inside your function named test (Scriptcraft->Functions)
+    When the "Listener Event" Player Mouse Click occurs(World->Events)
+      Set the player variable to "Event Information Get Player"(World->Events) 
+      When "Material Type in Stack" (Items->Stack) of "Stack in hand of player"(Entities->Player) is a stick 
+      "Set Health for Player" (Entities->Player) to 20    
+
+
+You can test your code by
+   1. Running your local service
+   2. Execute Minecraft
+   3. Muliplayer, direct connect, localhost
+   4. Download the code to C:\MinecraftServer\Scriptcraft\Plugins directory
+   5. /Reload inside the minecraft game
+   6. /js test() inside the minecraft game  
+   7. Damage the player (perhaps be jumping off a tall structure)
+   8. Give the player a stick using the server command: /give @a stick 1 
+   9. Rotate the mouse wheel to place the stick in the players hand
+  10. Click the mouse the health of the player should be restored to full     
+</pre>
+<br>
+  This is the code you can show me at the beginning of class. <br>
+  We will then give a staff a special name so that you can have different sticks in your game with different powers <br>
