@@ -391,15 +391,16 @@ function bodyLoad() {
        <block type="whichplayer"></block>         
        <block type="getentitytype"></block>
        <block type="islivingentity"></block>
-	   <block type="entitydead"></block>
+   	   <block type="entitydead"></block>
        <block type="allentities"></block>
        <block type="spawnentity"></block>
-	   <block type="tameentity"></block>
-	   <block type="attackentity"></block>
+	      <block type="tameentity"></block>
+	      <block type="attackentity"></block>
        <block type="nearbyentities"></block>	   
        <block type="findentitybyname"></block>
        <block type="findentitybycustomname"></block>
-       <block type="findentitybylocation"></block>
+       <!block type="findentitybylocation"><!/block>
+       <block type="assigndamage"></block>
 	   <category name="AllPlayers">
        <block type="allplayers"></block>  
 	      <block type="removeplayersdata"></block>
@@ -542,6 +543,7 @@ function bodyLoad() {
          <block type="namevalue"></block>
        </category>      
        <category name="{catLoops}">
+         <block type="foreachloop"></block>
          <block type="controls_repeat_ext">
            <value name="TIMES">
              <shadow type="math_number">

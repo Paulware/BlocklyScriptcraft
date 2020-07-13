@@ -3130,3 +3130,29 @@ Blockly.Python['blackjackdealer'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['assigndamage'] = function(block) {
+  var damage = Blockly.Python.valueToCode(block, 'DAMAGE', Blockly.Python.ORDER_ATOMIC);
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  entity = insideParen(entity);
+  var code =  entity + ".damage(" + damage + ");\n";
+  return code;
+};
+
+Blockly.Python['foreachloop'] = function(block) {
+  
+  var name = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_ADDITIVE); 
+  name = insideParen (name);
+  var index = block.getFieldValue ('ELEMENT');
+  if (index.indexOf ( "\"" ) > -1) { 
+     index = insideChars ( index,"\"","\"");
+  }
+  
+  var forCode = Blockly.Python.statementToCode (block, 'FORCODE' ); 
+   
+  var code = 'for (var _elementIndex=0; _elementIndex <' + name + '.length;_elementIndex++) {\n'  + 
+             '  ' + index + ' = ' + name + '[_elementIndex];\n' + 
+             forCode + 
+             '};\n';
+  
+  return code;
+};

@@ -371,7 +371,6 @@ Blockly.Blocks['explosion'] = {
   }
 };
 
-
 Blockly.Blocks['eventplayer'] = {
   init: function() {
     this.appendDummyInput()
@@ -2492,6 +2491,7 @@ Blockly.Blocks['spawnentity'] = {
     this.setOutput(true, null);
     this.setColour(0);
     this.setTooltip('');
+    this.setInputsInline(true);      
     this.setHelpUrl('http://www.example.com/');
   }
 };
@@ -2748,6 +2748,7 @@ Blockly.Blocks['attackentity'] = {
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
+    this.setInputsInline(true);      
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
   }
@@ -2824,22 +2825,26 @@ Blockly.Blocks['eventinfo'] = {
     this.appendDummyInput()
         .appendField("Event information")    
         .appendField(new Blockly.FieldDropdown([
-                                                ["Get block that was clicked on", "getClickedBlock"],
-                                                ["Get block that was hit", "getHitBlock"],
-                                                ["Get bow that was fired", "getBow"],
-                                                ["Get entity", "getEntity"],
-                                                ["Get face of block that was clicked on", "getBlockFace"],
-                                                ["Get the block", "getBlock"],
-                                                ["Get the entity doing the damage", "getDamager"],
-                                                ["Get inventory", "getInventory"],
-                                                ["Get item", "getItem"],
-                                                ["Get item dropped", "getItemDrop"],
-                                                ["Get location player moved from", "getFrom"],
-                                                ["Get location player moved to", "getTo"],
-                                                ["Get message that player sent", "getMessage" ],
-                                                ["Get player", "getPlayer"],
-                                                ["Get projectile", "getProjectile"]
-                                               ]), "INFORMATION"); 
+                                        ["Get all affected entities", "getAffectedEntities"],
+                                        ["Get attacker", "getDamager"],
+                                        ["Get block that was clicked on", "getClickedBlock"],
+                                        ["Get block that was hit", "getHitBlock"],
+                                        ["Get bow that was fired", "getBow"],
+                                        ["Get entity", "getEntity"],
+                                        ["Get face of block that was clicked on", "getBlockFace"],
+                                        ["Get the block", "getBlock"],
+                                        ["Get the entity doing the damage", "getDamager"],
+                                        ["Get inventory", "getInventory"],
+                                        ["Get item", "getItem"],
+                                        ["Get item dropped", "getItemDrop"],
+                                        ["Get location player moved from", "getFrom"],
+                                        ["Get location player moved to", "getTo"],
+                                        ["Get message that player sent", "getMessage" ],
+                                        ["Get player", "getPlayer"],
+                                        ["Get projectile", "getProjectile"],
+                                        ["Get shooter", "getEntity().getShooter"]
+                                       ]), "INFORMATION"); 
+
 
     this.setOutput(true, null);
     this.setColour(40);
@@ -3391,6 +3396,38 @@ Blockly.Blocks['blackjackdealer'] = {
     this.setTooltip('');
     this.setOutput(true, null);      
     this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['assigndamage'] = {
+  init: function() { 
+    this.appendValueInput("DAMAGE")
+        .appendField ("Assign ");
+    this.appendValueInput("ENTITY")
+        .appendField ("damage to entity");
+    this.setInputsInline(true);                     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+    
+  }
+};
+
+Blockly.Blocks['foreachloop'] = {
+  init: function() {
+    this.appendValueInput("LIST")
+        .appendField ( "For Each: " )
+        .appendField (new Blockly.FieldTextInput ( "element"), "ELEMENT")    
+        .appendField(" in list: ");
+    this.appendStatementInput("FORCODE")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
   }
 };
 
