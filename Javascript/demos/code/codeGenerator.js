@@ -236,6 +236,15 @@ function delCharAt (str, position) {
    return newString;
 }
 
+function insideBracket (value) { 
+   var startIndex = value.indexOf     ('[');
+   var endIndex   = value.lastIndexOf (']');
+   value = delCharAt (value, endIndex);
+   value = delCharAt (value, startIndex);
+   var newValue = value;
+   return newValue;
+}
+
 function insideParen (value) {   
   if (value == undefined) { 
      return "";
@@ -1675,7 +1684,9 @@ Blockly.Python['setgamemode'] = function(block) {
 }
 
 Blockly.Python['recipe'] = function(block) {
+  var result = "result";
   var result = Blockly.Python.valueToCode(block, 'RESULT', Blockly.Python.ORDER_ATOMIC);
+  console.log ( 'getresult' );
   result = insideParen (result);
   var ch1 = block.getFieldValue ("CH1");
   var ch2 = block.getFieldValue ("CH2");
@@ -1714,29 +1725,41 @@ Blockly.Python['recipe'] = function(block) {
   if (ch9 == "") {
      ch9 = " ";
   }
+  console.log ( "Getshapes");
   var shape0 = ch1 + ch2 + ch3;
   var shape1 = ch4 + ch5 + ch6;
-  var shape2 = ch7 + ch8 + ch9; 
-  var ingrediants = Blockly.Python.statementToCode (block, 'INGREDIENTS' );  
- 
+  var shape2 = ch7 + ch8 + ch9;
+  console.log ( "getingredients");
+  var ingredients = Blockly.Python.valueToCode(block, 'INGREDIENTS', Blockly.Python.ORDER_ATOMIC);
+  ingredients = insideParen ( ingredients);  
+  ingredients = insideBracket (ingredients);
+  console.log ( 'ingredients: ' + ingredients);
   var code = 
-    "var recipe = {\n" + 
-    "                result: " + result + ",\n" + 
-    "                ingredients: {\n" + 
-    ingrediants + 
-    "                },\n" +  
-    "                shape: [\n" + 
-    "                        '" + shape0 + "',\n" + 
-    "                        '" + shape1 + "',\n" + 
-    "                        '" + shape2 + "'\n" + 
-    "                       ]\n" + 
-    "             };\n" + 
-    "var result = new org.bukkit.inventory.ShapedRecipe(recipe.result);\n" + 
-    "result.shape(recipe.shape[0], recipe.shape[1], recipe.shape[2]);\n" + 
-    "for (var i in recipe.ingredients) {\n" + 
-    "  result.setIngredient(new java.lang.Character(i),recipe.ingredients[i].getData());\n" + 
-    "}\n" +       
-    "server.addRecipe(result);\n";
+    "var result = " + result + ";\n" + 
+    "var recipe = new org.bukkit.inventory.ShapedRecipe(result);\n" + 
+    "recipe.shape(\"" + shape0 + "\",\"" + shape1 + "\",\"" + shape2 + "\");\n";
+
+  var ind=-1
+  var startIndex;
+  
+  while (true) { 
+     startIndex = ind + 1;
+     ind = ingredients.indexOf ( ',',startIndex);  
+     if (ind == -1) { break;}
+     ind = ingredients.indexOf ( ',',ind+1);
+     if (ind == -1) {
+        ingredient = ingredients.substring (startIndex,ingredients.length); 
+        code = code + "recipe.setIngredient(" + ingredient.trim() + ");\n";      
+        break;
+     } else {
+        ingredient = ingredients.substring (startIndex,ind).trim(); 
+        code = code + "recipe.setIngredient(" + ingredient + ");\n";
+     }
+ 
+  }
+
+  code = code + "server.addRecipe(recipe);\n";
+   
     
   return code; 
 }
@@ -1745,15 +1768,15 @@ Blockly.Python['addingredient'] = function(block) {
   var ingredient = Blockly.Python.valueToCode(block, 'INGREDIENT', Blockly.Python.ORDER_ATOMIC);
   ingredient = insideParen (ingredient);
   var character = block.getFieldValue ("CHARACTER");
-  var code ="'" + character + "':" + ingredient + "\n";
-  return code;
+  var code ="'" + character + "'," + ingredient;
+  console.log ( 'returning ingredient: [' + code + ']' );
+  return [code, Blockly.Python.ORDER_NONE];
 }
 
 Blockly.Python['itemstack'] = function(block) {
   var blockType = Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_ATOMIC);
   blockType = insideParen (blockType);
   var count =  block.getFieldValue("COUNT"); 
-  
   var code = "new org.bukkit.inventory.ItemStack (" + blockType + "," + count + ")";
   return [code, Blockly.Python.ORDER_NONE];
 }

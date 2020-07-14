@@ -1668,10 +1668,8 @@ Blockly.Blocks['recipe'] = {
         .appendField("Recipe");
     this.appendValueInput("RESULT")
         .appendField("Result Stack");
-    this.appendDummyInput()
-        .appendField("Ingredient Stacks");
-    this.appendStatementInput("INGREDIENTS")
-        .setCheck(null);
+    this.appendValueInput("INGREDIENTS")
+        .appendField("Ingredient List");
     this.appendDummyInput()
         .appendField("Line1") 
         .appendField (new Blockly.FieldTextInput ("D"), "CH1")
@@ -1702,9 +1700,9 @@ Blockly.Blocks['addingredient'] = {
         .appendField (new Blockly.FieldTextInput ("%"), "CHARACTER");
     this.appendValueInput("INGREDIENT")
         .appendField("Ingredient Stack");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
     this.setColour(320);
+    this.setOutput(true, null);
+    this.setInputsInline(true);        
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
