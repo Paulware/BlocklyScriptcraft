@@ -3134,7 +3134,7 @@ Blockly.Python['assigndamage'] = function(block) {
   var damage = Blockly.Python.valueToCode(block, 'DAMAGE', Blockly.Python.ORDER_ATOMIC);
   var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
   entity = insideParen(entity);
-  var code =  entity + ".damage(" + damage + ");\n";
+  var code = "if(" + entity + ".damage != null) {" + entity + ".damage(" + damage + ")};\n";
   return code;
 };
 

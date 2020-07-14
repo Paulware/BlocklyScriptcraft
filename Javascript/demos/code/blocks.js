@@ -886,6 +886,7 @@ Blockly.Blocks['materialtype'] = {
     this.appendDummyInput()
         .appendField("Material")        
         .appendField(new Blockly.FieldDropdown([
+                                                  ["Air", "AIR"],
                                                   ["Arrow", "ARROW"],
                                                   ["Bow", "BOW"],
                                                   ["Baked Potato","BAKED_POTATO"],
