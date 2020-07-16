@@ -500,6 +500,21 @@ Blockly.Blocks['playerlocation'] = {
 Blockly.Blocks['teleport'] = {
   init: function() {
     this.appendValueInput("ENTITY")
+        .appendField("Delayed Teleport Entity");
+    this.appendValueInput("LOCATION")
+        .appendField("Location");      
+    this.setInputsInline(true);             
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['instantteleport'] = {
+  init: function() {
+    this.appendValueInput("ENTITY")
         .appendField("Teleport Entity");
     this.appendValueInput("LOCATION")
         .appendField("Location");      
@@ -895,6 +910,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Cookie","COOKIE"],
                                                   ["Crossbow", "CROSSBOW"],
                                                   ["Diamond", "DIAMOND"],
+                                                  ["Diamond Boots", "DIAMOND_BOOTS"],
                                                   ["Diamond Pick", "DIAMOND_PICKAXE"],
                                                   ["Diamond Shovel", "DIAMOND_SHOVEL"],
                                                   ["Diamond Sword", "DIAMOND_SWORD"],
@@ -903,10 +919,17 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Emerald", "EMERALD"],                                                  
                                                   ["Firework", "FIREWORK_ROCKET"],
                                                   ["Heart of the Sea", "HEART_OF_THE_SEA"],              
+                                                  ["Gold Ingot", "GOLD_INGOT"],
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
+                                                  ["Golden Boots", "GOLDEN_BOOTS"], 
+                                                  ["Iron Boots", "IRON_BOOTS"], 
+                                                  ["Iron Ingot", "IRON_INGOT"],
+                                                  ["Leather Boots", "LEATHER_BOOTS"],
                                                   ["Oak Sign Post", "OAK_SIGN"], 
                                                   ["Paper", "PAPER"],
+                                                  ["Redstone Dust", "REDSTONE"], 
+                                                  ["Redsone Ore", "REDSTONE_ORE"],
                                                   ["Shield", "SHIELD"],                                                  
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Stick", "STICK"],
@@ -3430,4 +3453,24 @@ Blockly.Blocks['foreachloop'] = {
   }
 };
 
+Blockly.Blocks['isjumping'] = {
+  init: function() { 
+    this.appendValueInput("PLAYER")
+        .appendField ("Is jumping, player:");
+    this.setColour(160);
+    this.setTooltip('');
+    this.setOutput(true, null);      
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
 
+Blockly.Blocks['getboots'] = {
+  init: function() { 
+    this.appendValueInput("PLAYER")
+        .appendField ("Get boots worn by player:");
+    this.setColour(160);
+    this.setTooltip('');
+    this.setOutput(true, null);      
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};

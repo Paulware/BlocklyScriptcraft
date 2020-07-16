@@ -958,8 +958,7 @@ Blockly.Python['moveto'] = function(block) {
 }
 
 
-Blockly.Python['teleport'] = function(block) {
-   
+Blockly.Python['teleport'] = function(block) {   
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen (location);
   var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
@@ -967,6 +966,15 @@ Blockly.Python['teleport'] = function(block) {
   var code = "setTimeout (function () {\n" + 
              "  " + entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n" +
              "},2000);\n";    
+  return code;
+}
+
+Blockly.Python['instantteleport'] = function(block) {   
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location);
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
+  entity = insideParen (entity);  
+  var code = entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";    
   return code;
 }
 
@@ -3179,3 +3187,29 @@ Blockly.Python['foreachloop'] = function(block) {
   
   return code;
 };
+
+Blockly.Python['isjumping'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  var code =  "(function () {\n" +                
+              "   var _isJumping = false;\n" + 
+              "   var _velocity=" + player + ".getVelocity().getY();\n" + 
+              "   var _block;\n" + 
+              "   if (((Math.abs(_velocity-0.42)) < (0.01))){\n" + 
+              "      _block=server.worlds[0].getBlockAt (" + player + ".location);\n" + 
+              "      if ((((_block==null)?null:_block.getType()) == (\"AIR\"))){\n" + 
+              "         _isJumping = true;\n" + 
+              "      }\n" + 
+              "   }\n" + 
+              "   return _isJumping;})()";
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['getboots'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  
+  var code = "(" + player + ".getInventory().getBoots()== null) ? null : " + player + ".getInventory().getBoots()";
+        
+  return [code, Blockly.Python.ORDER_NONE];
+}

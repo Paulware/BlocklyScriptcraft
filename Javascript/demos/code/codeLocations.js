@@ -169,7 +169,12 @@
       "Randomize chest contents from list => Items",  
       "Player Data Eq => Entities, Player, Data",  
       "List of Block Type => World, Blocks", 
-      "Active Team List => Entities, AllPlayers",       
+      "Active Team List => Entities, AllPlayers",   
+      "Is Jumping => World, Events",  
+      "For Each Loop => Scriptcraft Coding, Loops",  
+      "Assign Damage => Entities",  
+      "Damage => Entities",  
+      "Get Boots Worn by Player => Items, Gear",       
    ];
    
    function autocomplete(inp, arr) {
