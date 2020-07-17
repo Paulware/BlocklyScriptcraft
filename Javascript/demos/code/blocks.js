@@ -293,6 +293,7 @@ Blockly.Blocks['eventlistener'] = {
             ["Player dropped an item", "playerDropItem"],
             ["An inventory item was selected", "inventoryClick"],  
             ["An inventory got an item", "inventoryPickupItem"],
+            ["An item was crafted", "craftItem"],
             ["An entity moved an inventory item", "inventoryMoveItem"],
             ["Player entered a command", "playerCommandPreprocess" ],    
             ["A player died", "playerDeath"], 
@@ -2852,6 +2853,8 @@ Blockly.Blocks['eventinfo'] = {
                                         ["Get block that was clicked on", "getClickedBlock"],
                                         ["Get block that was hit", "getHitBlock"],
                                         ["Get bow that was fired", "getBow"],
+                                        ["Get the crafted item", "getRecipe().getResult()"],
+                                        ["Get the ItemStack currently in the clicked clot", "getCurrentItem"], 
                                         ["Get entity", "getEntity"],
                                         ["Get face of block that was clicked on", "getBlockFace"],
                                         ["Get the block", "getBlock"],
@@ -2864,7 +2867,8 @@ Blockly.Blocks['eventinfo'] = {
                                         ["Get message that player sent", "getMessage" ],
                                         ["Get player", "getPlayer"],
                                         ["Get projectile", "getProjectile"],
-                                        ["Get shooter", "getEntity().getShooter"]
+                                        ["Get shooter", "getEntity().getShooter"],
+                                        ["Get the player who performed the click", "getWhoClicked"]
                                        ]), "INFORMATION"); 
 
 

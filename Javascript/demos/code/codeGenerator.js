@@ -2519,7 +2519,11 @@ Blockly.Python['isspectator'] = function(block) {
 
 Blockly.Python['eventinfo'] = function(block) {
   var information = block.getFieldValue ('INFORMATION');
-  code = "(event." + information + "== null) ? null : event." + information + "()"; 
+  if (information == 'getRecipe().getResult()') {
+     code = "(event.getRecipe == null)? null : event.getRecipe().getResult()";
+  } else {   
+     code = "(event." + information + "== null) ? null : event." + information + "()"; 
+  }
   return [code, Blockly.Python.ORDER_NONE]; 
 };
 
@@ -3080,7 +3084,7 @@ Blockly.Python['elapsedtime'] = function(block) {
               "   var _elapsedTime = (new Date().getTime()) - _startTime;\n" +     
               "   console.log ( \'Elapsed Time: \' + _elapsedTime + \' ms\');\n" +
               "   return _elapsedTime;\n" +               
-              "}());";  
+              "}())";  
     return [code, Blockly.Python.ORDER_NONE]
 };
 
