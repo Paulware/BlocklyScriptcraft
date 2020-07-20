@@ -1,0 +1,273 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="}duI/Inly5x`]Bh,(o=f" x="137" y="-88">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="recipe" id="xlqzbQCSjhEAPSmD4BLx">
+        <field name="CH1">D</field>
+        <field name="CH2">D</field>
+        <field name="CH3">D</field>
+        <field name="CH4">D</field>
+        <field name="CH5">S</field>
+        <field name="CH6">D</field>
+        <field name="CH7">D</field>
+        <field name="CH8">D</field>
+        <field name="CH9">D</field>
+        <value name="RESULT">
+          <block type="namethestack" id="fQtqRn|XVRgW]an;Ros3">
+            <field name="NAME">"AOTE"</field>
+            <value name="STACK">
+              <block type="itemstack" id="k=;$5j:k07_Ad2EA$#v6">
+                <field name="COUNT">1</field>
+                <value name="ITEM">
+                  <block type="materialtype" id="*;?Z5lciPb+reQa)8rh,">
+                    <field name="MATERIAL">DIAMOND_SWORD</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="INGREDIENTS">
+          <block type="lists_create_with" id="7VD1EcZ-znorCvJ+6J@V">
+            <mutation items="2"></mutation>
+            <value name="ADD0">
+              <block type="addingredient" id="4)R:Wu^K45yV/2@OM|04">
+                <field name="CHARACTER">S</field>
+                <value name="INGREDIENT">
+                  <block type="materialtype" id="odU*4GH9|GuVX$8|!(oh">
+                    <field name="MATERIAL">DIAMOND_SWORD</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="addingredient" id="1^#v_PBlRTLr?7p4khbp">
+                <field name="CHARACTER">D</field>
+                <value name="INGREDIENT">
+                  <block type="materialtype" id="|D%mZ=WpP_L5-7fl1AfY">
+                    <field name="MATERIAL">DIAMOND</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="recipe" id="%.`CQv=hku(dX6T?aYK%">
+            <field name="CH1"></field>
+            <field name="CH2"> </field>
+            <field name="CH3"></field>
+            <field name="CH4"></field>
+            <field name="CH5">E</field>
+            <field name="CH6"></field>
+            <field name="CH7"></field>
+            <field name="CH8"></field>
+            <field name="CH9"></field>
+            <value name="RESULT">
+              <block type="namethestack" id="JB=n^E6FlF/Y=8gmm$[q">
+                <field name="NAME">"Air Jordans"</field>
+                <value name="STACK">
+                  <block type="itemstack" id="^Z:joh,tRl(dtSO?E4CJ">
+                    <field name="COUNT">1</field>
+                    <value name="ITEM">
+                      <block type="materialtype" id="2Lxv[97{*Q0_qAZ#i6$;">
+                        <field name="MATERIAL">LEATHER_BOOTS</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="INGREDIENTS">
+              <block type="lists_create_with" id="fVHgVK=7XCTd5V=$~F29">
+                <mutation items="1"></mutation>
+                <value name="ADD0">
+                  <block type="addingredient" id="jSb8Y~xd@$B%*_?Atm~:">
+                    <field name="CHARACTER">E</field>
+                    <value name="INGREDIENT">
+                      <block type="materialtype" id="l4vBA~zMN;r~+H(={ox?">
+                        <field name="MATERIAL">EMERALD</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="starttimer" id="S6Ztl#=!_^-tjj#*Y8xr">
+                <field name="TIMERNAME">"AOTE"</field>
+                <value name="PLAYER">
+                  <block type="varname" id="vP!2/wwN4yH/C,0mbCmJ">
+                    <field name="VARNAME">self</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="eventlistener" id="kjsuigD0](IU*[K8|!6Z">
+                    <field name="LISTENERTYPE">craftItem</field>
+                    <statement name="LISTENERCODE">
+                      <block type="setvariablevalue" id="}n;q%ON@VU.RJODD7Gu+">
+                        <field name="VARNAME">player</field>
+                        <value name="EXPRESSION">
+                          <block type="eventinfo" id="Xw-S@%XSy1F2]6uzI/?m">
+                            <field name="INFORMATION">getWhoClicked</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="sendmessage" id="p.CCO0RYKmm@^uG!]*P^">
+                            <field name="MESSAGE">player.name + " crafted an item" </field>
+                            <value name="PLAYER">
+                              <block type="varname" id="aPY,4;,0Yu_AG)_9m3[O">
+                                <field name="VARNAME">player</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="eventlistener" id="4O~wIGc3,$F43lJL59UY">
+                        <field name="LISTENERTYPE">playerInteract</field>
+                        <statement name="LISTENERCODE">
+                          <block type="setvariablevalue" id="Y{l@)rjyEXwA2sT`^b@r">
+                            <field name="VARNAME">player</field>
+                            <value name="EXPRESSION">
+                              <block type="eventinfo" id="+Ya`(f^*!gnw[d_cf4l]">
+                                <field name="INFORMATION">getPlayer</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="setvariablevalue" id="IgYXK;w*,GXDK`G:b^}q">
+                                <field name="VARNAME">inhand</field>
+                                <value name="EXPRESSION">
+                                  <block type="nameofstack" id="j*Wx8$(A/{8~hB=1f?S_">
+                                    <value name="STACK">
+                                      <block type="iteminhandis" id="hFc26!tkE}*n%f}d{w_+">
+                                        <value name="PLAYER">
+                                          <block type="varname" id="IF+B(/O.[pKZo`%=Bjjk">
+                                            <field name="VARNAME">player</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_if" id="o~0JVK7VzQJ%mEe^l$O3">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="^c}vQZ6.YpY]GLQeA{Km">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="varname" id="{hzV{g3q`?DJ5Uyc-Udz">
+                                            <field name="VARNAME">inhand</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="varname" id="{sgc%{m`3DEUSAQzGAR1">
+                                            <field name="VARNAME">"AOTE"</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="controls_if" id="H+[_z0r5q5ivbYiy.2:)">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="RYxW}rm%V%Tj0n!IAFqC">
+                                            <field name="OP">GT</field>
+                                            <value name="A">
+                                              <block type="elapsedtime" id=".q?39;..9gP[c*wrpDyZ">
+                                                <value name="TIMERNAME">
+                                                  <block type="varname" id="fk7j(f]l|.Mm6uNLqCs#">
+                                                    <field name="VARNAME">"AOTE"</field>
+                                                  </block>
+                                                </value>
+                                                <value name="PLAYER">
+                                                  <block type="varname" id="`e%mj%H^{Xiuh^z#_M3.">
+                                                    <field name="VARNAME">player</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id="JwH+IZ)#Shjp!!!P0U6O">
+                                                <field name="NUM">5000</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="setvariablevalue" id="fm3IXC@[1fD}w6ybKpcM">
+                                            <field name="VARNAME">block</field>
+                                            <value name="EXPRESSION">
+                                              <block type="lookingat" id="_%LxoK:[1j*AR3cxOL/a">
+                                                <value name="PLAYER">
+                                                  <block type="varname" id="28){(FA=V-c6A^%2zce,">
+                                                    <field name="VARNAME">player</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="instantteleport" id="-cyJ!Oe6n#3ov@bt@ZtQ">
+                                                <value name="ENTITY">
+                                                  <block type="varname" id="h#[9b7i8/F,hIKv.!{6+">
+                                                    <field name="VARNAME">player</field>
+                                                  </block>
+                                                </value>
+                                                <value name="LOCATION">
+                                                  <block type="varname" id="K%cPGuh[?HFk+BXd)9YR">
+                                                    <field name="VARNAME">block.location</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="eventlistener" id="b0~HW0FQ5}qufgj8TOqH">
+                            <field name="LISTENERTYPE">playerMove</field>
+                            <statement name="LISTENERCODE">
+                              <block type="setvariablevalue" id="3Q@E3`w!QaG182`IyO/N">
+                                <field name="VARNAME">player</field>
+                                <value name="EXPRESSION">
+                                  <block type="eventinfo" id="y1AtscD[ZAQNyVA/WSJY">
+                                    <field name="INFORMATION">getPlayer</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="setvariablevalue" id="-=Y?*e(^~)n}yfT9MiRg">
+                                    <field name="VARNAME">boots</field>
+                                    <value name="EXPRESSION">
+                                      <block type="getboots" id="eAa$Cf|FROh+*$pNk}uF">
+                                        <value name="PLAYER">
+                                          <block type="varname" id="O5u#a!F}7{}1,xG*ZGEa">
+                                            <field name="VARNAME">player</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
