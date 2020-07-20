@@ -906,6 +906,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Arrow", "ARROW"],
                                                   ["Bow", "BOW"],
                                                   ["Baked Potato","BAKED_POTATO"],
+                                                  ["Blaze Rod", "BLAZE_ROD"],
                                                   ["Bone Meal", "BONE_MEAL"],
                                                   ["Compass", "COMPASS"],
                                                   ["Cookie","COOKIE"],
@@ -917,7 +918,8 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Diamond Sword", "DIAMOND_SWORD"],
                                                   ["Drinkable Potion", "POTION"],
                                                   ["Elytra (Glider)", "LEGACY_ELYTRA"],   
-                                                  ["Emerald", "EMERALD"],                                                  
+                                                  ["Emerald", "EMERALD"],
+                                                  ["Ender Pearl", "ENDER_PEARL"],                                                  
                                                   ["Firework", "FIREWORK_ROCKET"],
                                                   ["Heart of the Sea", "HEART_OF_THE_SEA"],              
                                                   ["Gold Ingot", "GOLD_INGOT"],
@@ -3246,7 +3248,7 @@ Blockly.Blocks['blockinradius'] = {
         .appendField("blocks of location");
     this.setInputsInline(true);         
     this.setOutput(true, null);
-    this.setColour(260);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -3362,7 +3364,7 @@ Blockly.Blocks['starttimer'] = {
         .appendField("For Player");             
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(160);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');   
     
@@ -3375,7 +3377,7 @@ Blockly.Blocks['elapsedtime'] = {
         .appendField("Elapsed time for timer");
     this.appendValueInput("PLAYER")
         .appendField("assigned to player");
-    this.setColour(160);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setInputsInline(true);                    
@@ -3405,7 +3407,7 @@ Blockly.Blocks['clearhotbar'] = {
         .appendField ("Clear hotbar for player: ");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(160);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');   
     
@@ -3472,7 +3474,7 @@ Blockly.Blocks['getboots'] = {
   init: function() { 
     this.appendValueInput("PLAYER")
         .appendField ("Get boots worn by player:");
-    this.setColour(160);
+    this.setColour(320);
     this.setTooltip('');
     this.setOutput(true, null);      
     this.setHelpUrl('http://www.example.com/');       

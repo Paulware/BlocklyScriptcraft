@@ -174,7 +174,8 @@
       "For Each Loop => Scriptcraft Coding, Loops",  
       "Assign Damage => Entities",  
       "Damage => Entities",  
-      "Get Boots Worn by Player => Items, Gear",       
+      "Get Boots Worn by Player => Items, Gear",     
+      "create list with => Lists",      
    ];
    
    function autocomplete(inp, arr) {
