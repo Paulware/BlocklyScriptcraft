@@ -1,0 +1,107 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="/QNm_s7_lVhRmnQg@tk`" x="-1213" y="-238">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="recipe" id="Vu+sCkD76+ub_E,4=K4R">
+        <field name="CH1">P</field>
+        <field name="CH2">I</field>
+        <field name="CH3">P</field>
+        <field name="CH4">I</field>
+        <field name="CH5">S</field>
+        <field name="CH6">I</field>
+        <field name="CH7">P</field>
+        <field name="CH8">I</field>
+        <field name="CH9">P</field>
+        <value name="RESULT">
+          <block type="namethestack" id="Hr#Dc$ke%k:tE_P%_JGm">
+            <field name="NAME">"Aspect Of The End"</field>
+            <value name="STACK">
+              <block type="itemstack" id=";wJ|Ij#oPLuOi-piM{2K">
+                <field name="COUNT">1</field>
+                <value name="ITEM">
+                  <block type="materialtype" id="h[iltt~3^W`XBSnt*kj[">
+                    <field name="MATERIAL">DIAMOND_SWORD</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="INGREDIENTS">
+          <block type="lists_create_with" id="``+|xQ#t5d6x%_pdbjTl">
+            <mutation items="3"></mutation>
+            <value name="ADD0">
+              <block type="addingredient" id="cNJhIg8*h_%AG;As`Yhf">
+                <field name="CHARACTER">P</field>
+                <value name="INGREDIENT">
+                  <block type="materialtype" id="p)WH=;Bb,u!fmy/Ws=EL">
+                    <field name="MATERIAL">ENDER_PEARL</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="addingredient" id="GmVlKj6vH/S0mkQbX!zj">
+                <field name="CHARACTER">S</field>
+                <value name="INGREDIENT">
+                  <block type="materialtype" id="gV!qUqKg[T=[p[AsqkiR">
+                    <field name="MATERIAL">DIAMOND_SWORD</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="addingredient" id="Q4s,l@92xy1{RV!Weg1+">
+                <field name="CHARACTER">I</field>
+                <value name="INGREDIENT">
+                  <block type="materialtype" id=",G4~hM}|tvkhqe~`3B5S">
+                    <field name="MATERIAL">IRON_INGOT</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="eventlistener" id="B__v?P~PKv-o)92=sGzT">
+            <field name="LISTENERTYPE">craftItem</field>
+            <statement name="LISTENERCODE">
+              <block type="setvariablevalue" id="m9BgM$Z|srR/-yA4AF_C">
+                <field name="VARNAME">player</field>
+                <value name="EXPRESSION">
+                  <block type="eventinfo" id="6}g:uINB/RHdtk8dv]6!">
+                    <field name="INFORMATION">getWhoClicked</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setvariablevalue" id="ozkmv_%wqAEQ+JxK,ytT">
+                    <field name="VARNAME">stack</field>
+                    <value name="EXPRESSION">
+                      <block type="nameofstack" id="he.5|dpo`~O^`B^r*p59">
+                        <value name="STACK">
+                          <block type="eventinfo" id="T?va0nCq/sn,}EY#DJie">
+                            <field name="INFORMATION">getRecipe().getResult()</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="sendmessage" id="h4sG^C_{m+=P1ro[+$ke">
+                        <field name="MESSAGE">"You just crafted" + stack</field>
+                        <value name="PLAYER">
+                          <block type="varname" id="!dr?w;9Xa7r{lM2+`Gm`">
+                            <field name="VARNAME">player</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
