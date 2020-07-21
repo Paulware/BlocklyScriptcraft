@@ -10,16 +10,18 @@ Note: Before trying this homework, you should perform an update as described: <a
 Here is an example starting recipe, you can use your imagination to change the ingredients<br>
 <img src="images/exampleRecipe.jpg"><br>
 After you have created this recipe, download the code, /reload, /js test() and confirm that the code behaves the way you expect<br>
-<h2>Add a custom name</h2>
+You should be able to craft the item at a crafting table<br>
+<h2>Add a custom name</h2>00
 In Items, Stack, the second item is Set name to: Custom Name.<br>
 Insert this between Result Stack and Stack of 1, then change the Custom Name to "Destroyer" or some other name of your choosing<br>
-Note: You must have the double quotes for the code to work properly. 
-After you have inserted this, download the code, /reload, /js test() and check the behavior.
+<b>Note: You must have the double quotes for the code to work properly.</b><br> 
+After you have inserted this, download the code, /reload, /js test() and check the behavior.<br>
+When you craft the item the custom name should appear when it is in your hand<br>
 <h3>Add a player click check</h3>
-From World, Events, Add a Listener Event below the recipe and change the event to Player Mouse Click<br>
-From Scriptcraft Coding, Variables, add a Set Name =, and change name to player<br>
-From World, Events, Grab an Event Information and connect it to the Set player =<br>  
-Change the Event Information from all affected entities to: player<br>
+From World, Events, Add a <b>Listener Event</b> below the recipe and change the event to Player Mouse Click<br>
+From Scriptcraft Coding, Variables, add a <b>Set Name =</b>, and change name to player<br>
+From World, Events, Grab an <b>Event Information</b> and connect it to the Set player =<br>  
+Change the Event Information from all affected entities to: <b>player</b><br>
 From Scriptcraft Coding, Variables, add a <b>Set Name =</b>, and change name to inhand<br>
 From Items, Stack, Connect the <b>Custom Name of Stack</b> to the Set inhand =<br>
 From Entities, Player, Connect the <b>Stack in hand of Player</b> to the Custom name of Stack<br>
