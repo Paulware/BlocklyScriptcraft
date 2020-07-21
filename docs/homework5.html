@@ -1,0 +1,33 @@
+<H1>Recipe and special effect</h1>
+Note: Before trying this homework, you should perform an update as described: <a href="updateBlocklyCode.html">here</a><br>
+<ul>
+<li>We will start by creating a recipe for a special</li>
+<li>We will give it a custom name</li>
+<li>We will check to see if it is inhand when the player clicks</li>
+<li>We will create a kill-aura effect when it is in hand and clicked</li>
+</ul>
+<h2>Starting recipe</h2>
+Here is an example starting recipe, you can use your imagination to change the ingredients<br>
+<img src="images/exampleRecipe.jpg"><br>
+After you have created this recipe, download the code, /reload, /js test() and confirm that the code behaves the way you expect<br>
+<h2>Add a custom name</h2>
+In Items, Stack, the second item is Set name to: Custom Name.<br>
+Insert this between Result Stack and Stack of 1, then change the Custom Name to "Destroyer" or some other name of your choosing<br>
+Note: You must have the double quotes for the code to work properly. 
+After you have inserted this, download the code, /reload, /js test() and check the behavior.
+<h3>Add a player click check</h3>
+From World, Events, Add a Listener Event below the recipe and change the event to Player Mouse Click<br>
+From Scriptcraft Coding, Variables, add a Set Name =, and change name to player<br>
+From World, Events, Grab an Event Information and connect it to the Set player =<br>  
+Change the Event Information from all affected entities to: player<br>
+From Scriptcraft Coding, Variables, add a <b>Set Name =</b>, and change name to inhand<br>
+From Items, Stack, Connect the <b>Custom Name of Stack</b> to the Set inhand =<br>
+From Entities, Player, Connect the <b>Stack in hand of Player</b> to the Custom name of Stack<br>
+From Scriptcraft Coding, Variables, connect <b>variable:name</b> to the Stack in hand of Player<br>
+From Output drag a SendMessage inside the listener Event, below the Set inhand = block<br>
+Change the message from "Hello" to <b>"Inhand: " + inhand</b><br>
+From Scriptcraft Coding, Variables, connect <b>variable:name</b> to the SendMessage and change name to player<br>
+Download the code, /reload, /js test() and check the behavior.<br>
+When you have the special sword in hand and click the mouse you should get a message <br>
+<hr>
+You can use this diagram for reference: <a href="craftAOTE.html">AOTE</a>

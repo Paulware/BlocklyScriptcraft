@@ -928,6 +928,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Golden Boots", "GOLDEN_BOOTS"], 
                                                   ["Iron Boots", "IRON_BOOTS"], 
                                                   ["Iron Ingot", "IRON_INGOT"],
+                                                  ["Iron Sword", "IRON_SWORD"],
                                                   ["Leather Boots", "LEATHER_BOOTS"],
                                                   ["Oak Sign Post", "OAK_SIGN"], 
                                                   ["Paper", "PAPER"],
