@@ -3079,8 +3079,8 @@ Blockly.Python['elapsedtime'] = function(block) {
   timerName = insideParen(timerName); 
 
   var code =  "(function () {\n" + 
-              "   var _startTime = (" + player + "== null)? null : (" + player + ".getMetadata == null)?null:(" + 
-              player + ".getMetadata(" + timerName + ").length == 0)?null:" + player + ".getMetadata(" + timerName + ")[0].value();\n" +   
+              "   var _startTime = (" + player + "== null)? 0 : (" + player + ".getMetadata == null)?0:(" + 
+              player + ".getMetadata(" + timerName + ").length == 0)?0:" + player + ".getMetadata(" + timerName + ")[0].value();\n" +   
               "   var _elapsedTime = (new Date().getTime()) - _startTime;\n" +     
               "   console.log ( \'Elapsed Time: \' + _elapsedTime + \' ms\');\n" +
               "   return _elapsedTime;\n" +               
