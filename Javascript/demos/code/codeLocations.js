@@ -175,7 +175,8 @@
       "Assign Damage => Entities",  
       "Damage => Entities",  
       "Get Boots Worn by Player => Items, Gear",     
-      "create list with => Lists",      
+      "create list with => Lists", 
+      "Give random potion to player => Items => Potions",       
    ];
    
    function autocomplete(inp, arr) {
