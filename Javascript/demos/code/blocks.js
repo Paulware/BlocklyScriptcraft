@@ -314,6 +314,7 @@ Blockly.Blocks['eventlistener'] = {
             ["A block was exploded", "blockExplode"],
             ["A player threw an egg", "playerEggThrow"],
             ["An entity was damaged", "entityDamage"],
+            ["An entity died", "entityDeath"],
             ["An entity was spawned", "entitySpawn"],
             ["A creature was spawned", "creatureSpawn"],
             ["An entity targets another entity", "entityTarget"],
@@ -761,6 +762,36 @@ Blockly.Blocks['setName'] = {
   }
 };
 
+Blockly.Blocks['nameentity'] = {
+  init: function() {
+    this.appendValueInput ("ENTITY") 
+        .appendField ("Set Name of " )
+        
+    this.appendDummyInput()
+        .appendField ("to")
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME");          
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['entityname'] = {
+  init: function() {
+    this.appendValueInput ("ENTITY") 
+        .appendField ("Get Name of entity:" )
+        
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 Blockly.Blocks['entityArmor'] = {
   init: function() {
     this.appendDummyInput()
@@ -884,9 +915,11 @@ Blockly.Blocks['entityType'] = {
                                                 ["Shulker Bullet", "SHULKER_BULLET"],
                                                 ["Skeleton","SKELETON"],
                                                 ["Skeleton Horse", "SKELETON_HORSE"],
+                                                ["Thrown Potion", "THROWN_POTION"],
                                                 ["Trident", "TRIDENT"],
                                                 ["Villager", "VILLAGER"],
                                                 ["Wolf", "WOLF"],
+                                                ["Witch", "WITCH"],
                                                 ["Wither", "WITHER"],
                                                 ["Wither Skull", "WITHER_SKULL"],
                                                 ["Zombie", "ZOMBIE"]
@@ -2229,38 +2262,40 @@ Blockly.Blocks['whicheffect'] = {
     this.appendDummyInput()
         .appendField("Effect")
         .appendField(new Blockly.FieldDropdown([
-                                                ["Add health to health bar", "absorption"],
-                                                ["Get attacked by mobs in a village", "bad_omen"],
-                                                ["Create a thick black fog", "blindness"],
-                                                ["Improve visibility and water mining speed", "conduit_power"], 
-                                                ["Increase swimming speed ", "dolphins_grace"],
-                                                ["Immunity to fire","fire_resistance"],
-                                                ["Display halo around player", "glowing"],
-                                                ["Speed up block breaking","haste"],
-                                                ["Increase max health", "health_boost"],
-                                                ["Allow discount trading", "hero_of_the_village"],
-                                                ["Cause food bar to deplete","hunger"],
-                                                ["Damage player or living mob","instant_damage"],
-                                                ["Give health to player or living mob","instant_health"],
-                                                ["Invisibility","invisibility"],
-                                                ["Higher Jumping","jump_boost"],
-                                                ["Involuntary floating","levitation"],
-                                                ["Increase chance of finding loot","luck"],
-                                                ["Slow you down when breaking blocks","mining_fatigue"],
-                                                ["Twist and warp the screen","nausea"],
-                                                ["Night Vision","night_vision"],
-                                                ["Continually damager health","poison"],
-                                                ["Continually restore health","regeneration"],
-                                                ["Reduce damage received","resistance"],
-                                                ["Replenish food supply","saturation"],
-                                                ["Slow falling","slow_falling"],
-                                                ["Make player slower","slowness"],
-                                                ["Make player faster","speed"],
-                                                ["Increase damage dealt to others","strength"],
-                                                ["Decrease probability of finding loot","unluck"],
-                                                ["Breathe under water","water_breathing"],
-                                                ["Decrease damage dealt to others","weakness"],
-                                                ["Damage health every 2 seconds","wither"]
+                                                ["Make player faster","speed"],                                 // id=01
+                                                ["Make player slower","slowness"],                              // id=02
+                                                ["Speed up block breaking","haste"],                            // id=03
+                                                ["Slow you down when breaking blocks","mining_fatigue"],        // id=04
+                                                ["Increase damage dealt to others","strength"],                 // id=05
+                                                ["Give health to player or living mob","instant_health"],       // id=06
+                                                ["Damage player or living mob","instant_damage"],               // id=07
+                                                ["Higher Jumping","jump_boost"],                                // id=08
+                                                ["Twist and warp the screen","nausea"],                         // id=09
+                                                ["Continually restore health","regeneration"],                  // id=10
+                                                ["Reduce damage received","resistance"],                        // id=11
+                                                ["Immunity to fire","fire_resistance"],                         // id=12
+                                                ["Breathe under water","water_breathing"],                      // id=13
+                                                ["Invisibility","invisibility"],                                // id=14
+                                                
+                                                ["Create a thick black fog", "blindness"],                      // id=15
+                                                ["Night Vision","night_vision"],                                // id=16
+                                                ["Cause food bar to deplete","hunger"],                         // id=17
+                                                ["Decrease damage dealt to others","weakness"],                 // id=18
+                                                ["Continually damager health","poison"],                        // id=19
+                                                ["Damage health every 2 seconds","wither"],                     // id=20
+                                                ["Increase max health", "health_boost"],                        // id=21                  
+                                                ["Add health to health bar", "absorption"],                     // id=22
+                                                ["Replenish food supply","saturation"],                         // id=23
+                                                ["Display halo around player", "glowing"],                      // id=24                                               
+                                                ["Involuntary floating","levitation"],                          // id=25
+                                                ["Increase chance of finding loot","luck"],                     // id=26
+                                                ["Decrease probability of finding loot", "unluck"],             // id=27
+                                                ["Slow falling","slow_falling"],                                // id=28
+                                                ["Improve visibility and water mining speed", "conduit_power"], // id=29
+                                                ["Increase swimming speed ", "dolphins_grace"],                 // id=30
+                                                ["Get attacked by mobs in a village", "bad_omen"],              // id=31
+                                                ["Allow discount trading", "hero_of_the_village"]               // id=32
+                                                
                                                ]), "EFFECT");           
     this.setOutput(true, null);
     this.setColour(320);
@@ -3482,3 +3517,43 @@ Blockly.Blocks['getboots'] = {
     this.setHelpUrl('http://www.example.com/');       
   }
 };
+
+Blockly.Blocks['randompotioneffect'] = {
+  init: function() {
+    this.appendDummyInput () 
+        .appendField ("Random Potion Effect" )
+        
+    this.setOutput(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+Blockly.Blocks['effectid'] = {
+  init: function() {
+    this.appendValueInput ("POTION") 
+        .appendField ("Get Effect Id For Potion: " )
+        
+    this.setOutput(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['giverandompotion'] = {
+  init: function() { 
+    this.appendValueInput("PLAYER")
+        .appendField ("Give Random Potion to player: ");
+    this.setInputsInline(true);                     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+    
+  }
+};
+

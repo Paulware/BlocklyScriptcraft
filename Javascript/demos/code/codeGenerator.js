@@ -3217,3 +3217,65 @@ Blockly.Python['getboots'] = function(block) {
         
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['nameentity'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC); 
+  entity = insideParen (entity);
+  var name =  block.getFieldValue ('NAME');
+  var code = 'if (' + entity + '.setCustomName != null) { \n' + 
+             '  ' + entity + '.setCustomName (' + name + ');\n' + 
+             '}\n'; 
+  return code;
+};
+
+Blockly.Python['entityname'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC); 
+  entity = insideParen (entity);
+  
+  var code = "(" + entity + ".getCustomName == null) ? \"\" : " + entity + ".getCustomName()";
+        
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['randompotioneffect'] = function(block) {   
+  var code =  "(function () {\n" +                
+              "   var _potions = [\"SPEED\",\"SLOWNESS\",\"HASTE\",\"MINING_FATIGUE\",\"STRENGTH\",\"INSTANT_HEALTH\",\"INSTANT_DAMAGE\",\"JUMP_BOOST\",\"NAUSEA\",\"REGENERATION\",\"RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
+              "   var _index = parseInt (Math.random () * (_potions.length) );\n" +   
+              "   return _potions[_index];})()";
+   
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['effectid'] = function(block) {
+  var potion = Blockly.Python.valueToCode(block, 'POTION', Blockly.Python.ORDER_ATOMIC); 
+  potion = insideParen (potion);
+  var code =  "(function () {\n" +                
+              "   var _id=null;\n" + 
+              "   var _potions = [\"SPEED\",\"SLOWNESS\",\"HASTE\",\"MINING_FATIGUE\",\"STRENGTH\",\"INSTANT_HEALTH\",\"INSTANT_DAMAGE\",\"JUMP_BOOST\",\"NAUSEA\",\"REGENERATION\",\"RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
+              "   for (var _i=0; _i<_potions.length; _i++) {\n" + 
+              "      if (_potions[_i]==" + potion + "){\n" + 
+              "         _id = _i + 1;\n" + 
+              "         break;\n" + 
+              "      }\n" + 
+              "   }\n" + 
+              "   return _id;})()";   
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['giverandompotion'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  player = insideParen (player);
+  var name =  block.getFieldValue ('NAME');
+  var code = "(function () {\n" + 
+             "   var _potions = [\"SPEED\",\"SLOWNESS\",\"HASTE\",\"MINING_FATIGUE\",\"STRENGTH\",\"INSTANT_HEALTH\",\"INSTANT_DAMAGE\",\"JUMP_BOOST\",\"NAUSEA\",\"REGENERATION\",\"RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
+             "   var _index = parseInt (Math.random () * (_potions.length) );\n" + 
+             "   var _potion = _potions[_index];\n" + 
+             "   var _cmd=\"give \" + player.name + \" splash_potion{CustomPotionEffects:[{Id:\"+_index+\",Duration:1200}],display:{Name:\\\"\\\\\\\"\" + _potion + \"\\\\\\\"\\\"}}\";\n" + 
+             "   console.log ( _cmd);\n" +  
+             "   org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), _cmd);\n" + 
+             "})();\n";
+  return code;
+         //      var _cmd="give " + attacker.name + " splash_potion" + "{CustomPotionEffects:[{Id:"+id+",Duration:1200}]," + "display:{Name:\"\\\"" + potion + "\\\"\"}}";
+   
+};
+

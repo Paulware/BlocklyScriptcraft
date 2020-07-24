@@ -1,0 +1,39 @@
+<H1>Isabella the witch</h1>
+Note: Before trying this homework, you should perform an update as described: <a href="updateBlocklyCode.html">here</a><br>
+<ul>
+<li>We will start by spawning witch and giving her a custom name (You can use your imagination, I chose: Isabella)</li>
+<li>We will give the player a random potion</li>
+<li>We will record the attacker when an entity is attacked</li>
+<li>We will check if Isabella dies, if she does we will give her attacker a random potion</li>
+<li>Extra Credit: Only spawn Isabella if the player moves to a specific [x,y,z] location</li>
+</ul>
+<H2>Spawn a witch and give her a custom name</H2>
+Start with this diagram: <br>
+<img src="images/spawnIsabella.jpg"><br>
+<H2>Give the player a random potion</H2>
+From ScriptCraftCoding->Variables Insert a <b>Set name = block</b> as the last block in the diagram<br>
+Change <b>name</b> to player<br>
+From ScriptcraftCoding->Variables connect a <b>variable: value</b> to the Set name = block<br>
+Change <b>value</b> to self<br>
+From Items->Potions Insert a <b>Give random potion to player</b> as the last block in the diagram<br>
+From ScriptcraftCoding->Variables connect a <b>variable: value</b> to the Give random potion to player block<br>
+Change the <b>value</b> to player<br>
+Download, /reload, /js test() to test your code<br>
+Was Isabella created and did you receive a random potion?  This means your code is working correctly</br>
+<h2>Record the attacker when an entity is attacked</h2>
+For this will will create a listener event: 
+ 
+Add this listener event at the bottom of your function: <br>
+<img src="images/saveAttacker.jpg"><br>
+Download, /reload, /js test() to test your code, attack Isabella and look at the server console<br>
+Is there a message placed in the server console every time you attack Isabella, saying who is attacking?  This means your code is working properly<br>
+<H2>Check if Isabella dies</H2>
+For this we will use a different listener event.<br>
+Add this listener event code at the bottom of your function:<br>
+<img src="images/checkEntityDeath.jpg"><br>
+Download, /reload, /js test() to test your code, kill Isabella, when she dies is a message sent out telling who attacked her?  This means your code is working properly<br>
+<h2>Give Isabella last attacker a random potion</h2>
+Since we already know how to give a player a random potion, how would you do this only when Isabella dies?   Hint: Use logic if statement that already exists<br>
+<h2>Extra Credit: Only spawn Isabella if the player moves to a specific [x,y,z] location </h2>
+You can use this diagram as a reference: <br>
+<img src="images/witch.jpg">
