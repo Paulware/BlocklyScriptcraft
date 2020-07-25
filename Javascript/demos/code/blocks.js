@@ -916,6 +916,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Skeleton","SKELETON"],
                                                 ["Skeleton Horse", "SKELETON_HORSE"],
                                                 ["Thrown Potion", "THROWN_POTION"],
+                                                ["Tipped Arrow", "TIPPED_ARROW"],
                                                 ["Trident", "TRIDENT"],
                                                 ["Villager", "VILLAGER"],
                                                 ["Wolf", "WOLF"],
@@ -973,6 +974,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Stick", "STICK"],
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
+                                                  ["Tipped Arrow", "TIPPED_ARROW"],
                                                   ["Totem of Undying", "TOTEM_OF_UNDYING"],
                                                   ["White Wool", "WHITE_WOOL"],
                                                   ["Wolf Egg", "WOLF_SPAWN_EGG"],
@@ -996,6 +998,7 @@ Blockly.Blocks['projectileentity'] = {
                                                   ["Firework", "FIREWORK_ROCKET"],
                                                   ["Shulker Bullet", "SHULKER_BULLET"],
                                                   ["SnowBall", "SNOWBALL"],
+                                                  ["Tipped Arrow", "TIPPED_ARROW"],
                                                   ["Trident", "TRIDENT"],
                                                   ["Wither Skull", "WITHER_SKULL"]                                                                                                        
                                                ]), "PROJECTILE");                   
