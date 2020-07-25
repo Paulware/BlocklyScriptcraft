@@ -2217,13 +2217,14 @@ Blockly.Blocks['potionSplashed'] = {
 
 Blockly.Blocks['dropitem'] = {
   init: function() {
-    this.appendValueInput("LOCATION")
-        .appendField("Drop Items At Location:");
     this.appendValueInput("ITEMSTACK")
-        .appendField("Stack of Items");
+        .appendField("Drop Stack of Items: ");
+    this.appendValueInput("LOCATION")
+        .appendField("At Location:");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(320);
+    this.setInputsInline(true);     
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -3550,10 +3551,44 @@ Blockly.Blocks['giverandompotion'] = {
     this.setInputsInline(true);                     
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(0);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');   
     
   }
 };
 
+Blockly.Blocks['addeffecttopotion'] = {
+  init: function() { 
+    this.appendValueInput("EFFECT")
+        .appendField ("Add Potion Effect: ");
+    this.appendValueInput("POTION")
+        .appendField ("To Potion: ");
+    this.appendValueInput("DURATION")
+        .appendField ("Lasting: ");
+    this.appendDummyInput()
+        .appendField ("Seconds");
+    this.setInputsInline(true);                     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['updateplayersinventory'] = {
+  init: function() {
+    this.appendValueInput ("ITEMSTACK")
+        .appendField ("Add stack:")
+    this.appendValueInput ("PLAYER")
+        .appendField ("to inventory for player:")
+    
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);      
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

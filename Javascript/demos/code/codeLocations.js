@@ -99,7 +99,7 @@
       "Custom Name of Item => Items",
       "Material => Items",
       "Egg => Items",
-      "Drop Items At Location => Items",
+      "Drop Stack of Items At Location => Items",
       "Stack of => Items, Stack", 
       "Set name to => Items, Stack",
       "Custom Name of Stack => Items, Stack",
@@ -176,7 +176,9 @@
       "Damage => Entities",  
       "Get Boots Worn by Player => Items, Gear",     
       "create list with => Lists", 
-      "Give random potion to player => Items => Potions",       
+      "Give random potion to player => Items, Potions",   
+      "Add Potion Effect => Items, Potions",  
+      "Add stack to inventory for player => Entities, Player",       
    ];
    
    function autocomplete(inp, arr) {

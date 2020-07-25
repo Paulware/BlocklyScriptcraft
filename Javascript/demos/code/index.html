@@ -422,6 +422,8 @@ function bodyLoad() {
          <block type="playerhas"></block>
          <block type="isplayer"></block>
 		       <block type="isspectator"></block>
+         <block type="updateplayersinventory"></block>
+         
          <!block type="instanceof"><!/block> 
          <block type="lookingdirection"></block>         
          <category name="Data">
@@ -471,16 +473,17 @@ function bodyLoad() {
 			          <block type="namethestack"></block>
              <block type="nameofstack"></block>
              <block type="materialdata"></block>
-             <block type="modifystack"></block>
+             <!block type="modifystack"><!/block>             
           </category>
           <category name="Potions"></block>
-             <block type="addpotion"></block> 
+             <!block type="addpotion"><!/block> 
+             <block type="addeffecttopotion"></block>             
              <block type="addpotioneffect"></block>
              <block type="whicheffect"></block>
              <block type="randompotioneffect"></block>
-             <block type="effectid"></block>
+             <!block type="effectid"><!/block>
              <block type="potionname"></block>  
-             <block type="giverandompotion"></block>             
+             <block type="giverandompotion"></block> 
           </category>
           <category name="Gear">
              <block type="equipmentname"></block>

@@ -1420,20 +1420,12 @@ Blockly.Python['entityProfession'] = function(block) {
   return code;
 };
 
-// splashpotion_blindness_meta.setMainEffect(PotionEffectType.BLINDNESS);
 Blockly.Python['addpotion'] = function(block) {
   var name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
   name = insideChars(name, "\"", "\"");
   var potion = block.getFieldValue ('POTION');
   var count = block.getFieldValue ('COUNT');
-  /*
-  if (potion == "SPLASH_POTION") {
-     potion = name;
-  } else {
-     potion = insideChars(potion, "\"", "\"");
-     // TODO: Add potion attributes
-  } 
-  */
+
   var code = 'var newItems = new org.bukkit.inventory.ItemStack (org.bukkit.Material.' + potion + ',' + count + ');\n' + 
              'var meta = newItems.getItemMeta();\n' + 
              'meta.setDisplayName(\'' + name + '\');\n' +
@@ -3239,9 +3231,15 @@ Blockly.Python['entityname'] = function(block) {
 
 Blockly.Python['randompotioneffect'] = function(block) {   
   var code =  "(function () {\n" +                
-              "   var _potions = [\"SPEED\",\"SLOWNESS\",\"HASTE\",\"MINING_FATIGUE\",\"STRENGTH\",\"INSTANT_HEALTH\",\"INSTANT_DAMAGE\",\"JUMP_BOOST\",\"NAUSEA\",\"REGENERATION\",\"RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
-              "   var _index = parseInt (Math.random () * (_potions.length) );\n" +   
-              "   return _potions[_index];})()";
+              "   var _effects = [org.bukkit.potion.PotionEffectType.SPEED,org.bukkit.potion.PotionEffectType.SLOW,org.bukkit.potion.PotionEffectType.FAST_DIGGING,org.bukkit.potion.PotionEffectType.SLOW_DIGGING,org.bukkit.potion.PotionEffectType.INCREASE_DAMAGE,org.bukkit.potion.PotionEffectType.HEAL,org.bukkit.potion.PotionEffectType.HARM,\n" + 
+              "                   org.bukkit.potion.PotionEffectType.JUMP,org.bukkit.potion.PotionEffectType.CONFUSION,org.bukkit.potion.PotionEffectType.REGENERATION,org.bukkit.potion.PotionEffectType.DAMAGE_RESISTANCE,org.bukkit.potion.PotionEffectType.FIRE_RESISTANCE,org.bukkit.potion.PotionEffectType.WATER_BREATHING,\n" + 
+              "                   org.bukkit.potion.PotionEffectType.INVISIBILITY,org.bukkit.potion.PotionEffectType.BLINDNESS,org.bukkit.potion.PotionEffectType.NIGHT_VISION,org.bukkit.potion.PotionEffectType.HUNGER,org.bukkit.potion.PotionEffectType.WEAKNESS,org.bukkit.potion.PotionEffectType.POISON, \n" + 
+              "                   org.bukkit.potion.PotionEffectType.WITHER,org.bukkit.potion.PotionEffectType.HEALTH_BOOST,org.bukkit.potion.PotionEffectType.ABSORPTION,org.bukkit.potion.PotionEffectType.SATURATION,org.bukkit.potion.PotionEffectType.GLOWING,org.bukkit.potion.PotionEffectType.LEVITATION,\n" + 
+              "                   org.bukkit.potion.PotionEffectType.LUCK,org.bukkit.potion.PotionEffectType.UNLUCK,org.bukkit.potion.PotionEffectType.SLOW_FALLING,org.bukkit.potion.PotionEffectType.CONDUIT_POWER,org.bukkit.potion.PotionEffectType.DOLPHINS_GRACE,org.bukkit.potion.PotionEffectType.BAD_OMEN,\n" + 
+              "                   org.bukkit.potion.PotionEffectType.HERO_OF_THE_VILLAGE];\n" + 
+              "   var _index = parseInt (Math.random () * (_effects.length) );\n" +   
+              "   console.log ( \"Effect:\" + _index );\n" + 
+              "   return _effects[_index];})()";
    
   return [code, Blockly.Python.ORDER_NONE];
 }
@@ -3251,7 +3249,7 @@ Blockly.Python['effectid'] = function(block) {
   potion = insideParen (potion);
   var code =  "(function () {\n" +                
               "   var _id=null;\n" + 
-              "   var _potions = [\"SPEED\",\"SLOWNESS\",\"HASTE\",\"MINING_FATIGUE\",\"STRENGTH\",\"INSTANT_HEALTH\",\"INSTANT_DAMAGE\",\"JUMP_BOOST\",\"NAUSEA\",\"REGENERATION\",\"RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
+              "   var _potions = [\"SPEED\",\"SLOW\",\"FAST_DIGGING\",\"SLOW_DIGGING\",\"INCREASE_DAMAGE\",\"HEAL\",\"HARM\",\"JUMP\",\"CONFUSION\",\"REGENERATION\",\"DAMAGE_RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
               "   for (var _i=0; _i<_potions.length; _i++) {\n" + 
               "      if (_potions[_i]==" + potion + "){\n" + 
               "         _id = _i + 1;\n" + 
@@ -3267,7 +3265,7 @@ Blockly.Python['giverandompotion'] = function(block) {
   player = insideParen (player);
   var name =  block.getFieldValue ('NAME');
   var code = "(function () {\n" + 
-             "   var _potions = [\"SPEED\",\"SLOWNESS\",\"HASTE\",\"MINING_FATIGUE\",\"STRENGTH\",\"INSTANT_HEALTH\",\"INSTANT_DAMAGE\",\"JUMP_BOOST\",\"NAUSEA\",\"REGENERATION\",\"RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
+             "   var _potions = [\"SPEED\",\"SLOW\",\"FAST_DIGGING\",\"SLOW_DIGGING\",\"INCREASE_DAMAGE\",\"HEAL\",\"HARM\",\"JUMP\",\"CONFUSION\",\"REGENERATION\",\"RESISTANCE\",\"FIRE_RESISTANCE\", \"WATER_BREATHING\", \"INVISIBILITY\", \"BLINDNESS\", \"NIGHT_VISION\", \"HUNGER\", \"WEAKNESS\", \"POISON\", \"WITHER\", \"HEALTH_BOOST\", \"ABSORPTION\", \"SATURATION\", \"GLOWING\", \"LEVITATION\", \"LUCK\", \"UNLUCK\", \"SLOW_FALLING\", \"CONDUIT_POWER\", \"DOLPHINS_GRACE\", \"BAD_OMEN\", \"HERO_OF_THE_VILLAGE\"];\n" + 
              "   var _index = parseInt (Math.random () * (_potions.length) );\n" + 
              "   var _potion = _potions[_index];\n" + 
              "   var _cmd=\"give \" + player.name + \" splash_potion{CustomPotionEffects:[{Id:\"+_index+\",Duration:1200}],display:{Name:\\\"\\\\\\\"\" + _potion + \"\\\\\\\"\\\"}}\";\n" + 
@@ -3278,4 +3276,33 @@ Blockly.Python['giverandompotion'] = function(block) {
          //      var _cmd="give " + attacker.name + " splash_potion" + "{CustomPotionEffects:[{Id:"+id+",Duration:1200}]," + "display:{Name:\"\\\"" + potion + "\\\"\"}}";
    
 };
+
+Blockly.Python['addeffecttopotion'] = function(block) {
+  var effect =  Blockly.Python.valueToCode(block, 'EFFECT', Blockly.Python.ORDER_ATOMIC);  
+  effect = insideParen(effect)  
+  var potion =  Blockly.Python.valueToCode(block, 'POTION', Blockly.Python.ORDER_ATOMIC);  
+  potion = insideParen (potion)  
+  var duration =  Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);  
+  duration = parseFloat(insideParen (duration)) * 20.0; // 20 ticks per second
+    
+  instantiateVariable ( "_meta");  
+    
+  code = "_meta = " + potion + ".getItemMeta();\n" + 
+         "if (_meta.addCustomEffect != null) { \n" + 
+         "  _meta.addCustomEffect (new org.bukkit.potion.PotionEffect(" + effect + 
+         "  ," + parseInt (duration) + ",2), true);\n" + 
+         "  " + potion + ".setItemMeta (_meta);\n" +
+         "}\n";           
+  return code; 
+};
+
+Blockly.Python['updateplayersinventory'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  var itemStack = Blockly.Python.valueToCode(block, 'ITEMSTACK', Blockly.Python.ORDER_ATOMIC);
+  itemStack = insideParen (itemStack);
+  var code = player + '.getInventory().addItem (' + itemStack + ');\n';
+  return code;
+};
+
 
