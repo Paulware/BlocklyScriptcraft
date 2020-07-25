@@ -2265,19 +2265,18 @@ Blockly.Blocks['whicheffect'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Make player faster","speed"],                                 // id=01
                                                 ["Make player slower","slowness"],                              // id=02
-                                                ["Speed up block breaking","haste"],                            // id=03
-                                                ["Slow you down when breaking blocks","mining_fatigue"],        // id=04
-                                                ["Increase damage dealt to others","strength"],                 // id=05
-                                                ["Give health to player or living mob","instant_health"],       // id=06
-                                                ["Damage player or living mob","instant_damage"],               // id=07
-                                                ["Higher Jumping","jump_boost"],                                // id=08
-                                                ["Twist and warp the screen","nausea"],                         // id=09
+                                                ["Speed up block breaking","fast_digging"],                            // id=03
+                                                ["Slow you down when breaking blocks","slow_digging"],        // id=04
+                                                ["Increase damage dealt to others","increase_damage"],                 // id=05
+                                                ["Give health to player or living mob","heal"],       // id=06
+                                                ["Damage player or living mob","harm"],               // id=07
+                                                ["Higher Jumping","jump"],                                // id=08
+                                                ["Twist and warp the screen","confusion"],                         // id=09
                                                 ["Continually restore health","regeneration"],                  // id=10
-                                                ["Reduce damage received","resistance"],                        // id=11
+                                                ["Reduce damage received","damage_resistance"],                        // id=11
                                                 ["Immunity to fire","fire_resistance"],                         // id=12
                                                 ["Breathe under water","water_breathing"],                      // id=13
-                                                ["Invisibility","invisibility"],                                // id=14
-                                                
+                                                ["Invisibility","invisibility"],                                // id=14                         
                                                 ["Create a thick black fog", "blindness"],                      // id=15
                                                 ["Night Vision","night_vision"],                                // id=16
                                                 ["Cause food bar to deplete","hunger"],                         // id=17
@@ -3592,3 +3591,21 @@ Blockly.Blocks['updateplayersinventory'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['setstackname'] = {
+  init: function() {
+    this.appendValueInput ("STACK") 
+        .appendField ("Modify stack:" )
+    this.appendValueInput ("NAME") 
+        .appendField ("set custom name:" )    
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);      
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');   
+  }
+};
+
+

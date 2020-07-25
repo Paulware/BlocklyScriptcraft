@@ -3305,4 +3305,14 @@ Blockly.Python['updateplayersinventory'] = function(block) {
   return code;
 };
 
-
+Blockly.Python['setstackname'] = function(block) {
+  var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);
+  stack = insideParen (stack);
+  var name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
+  name = insideParen (name);
+  instantiateVariable ("_meta");
+  var code = "_meta = " + stack + ".getItemMeta();\n" + 
+             "_meta.setDisplayName(" + name + ");\n" + 
+             stack + ".setItemMeta (_meta);\n"   
+  return code;
+};

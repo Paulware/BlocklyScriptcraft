@@ -1,0 +1,32 @@
+<h1>Potions</h1>
+In this lesson we will learn: <br>
+<ul>
+  <li>How to make a splash potion</li>
+  <li>How to make a drinkable potion</li>
+  <li>How to name the potion</li>
+  <li>How to add the potion to a players inventory</li>
+  <li>How to drop the potion on the ground</li>
+  <li>How to combine potion effects</li>
+</ul>
+<br>
+<h2>Give a splash potion to player on mouse click</h2>
+This first example will give a player a random potion when they click their mouse<br>
+<img src="images/giveSplash.jpg"><br>
+<h2>Give a drinkable potion to player on mouse click</h2>
+To make it a drinkable potion, just change "Splash Potion" to "Drinkable Potion":<br>
+<img src="images/giveDrinkable.jpg"><br>
+<h2>Name the potion</h2>
+It would be good to know what we are drinking, so lets give the potion a name: <br>
+We do this by adding a <b>Modify stack set custom name</b> block to the code right before adding it to the player's inventory<br>
+<img src="images/nameDrinkable.jpg"><br>
+<h2>Drop the potion on the groujnd</h2>
+Sometimes we will want to drop the potion rather than giving it to the player directly<br>
+To do this Chang the <b>Add stack to inventory for player</b> block to <b>Drop Stack of Items at Location</b>.  For the location use: player.location<br>
+<img src="images/dropDrinkable.jpg"><br>
+<h2>Combine potion effects</h2>
+Rather than using the random potion effect you can add multiple effects together: <br>
+<img src="images/nameCombinedPotion.jpg"><br>
+<h2>Homework</h2>
+Create a potion that gives a player levitation but ensures that the player would not be damaged when it wore off?  Hint: Combine more than 1 potion effect
+
+
