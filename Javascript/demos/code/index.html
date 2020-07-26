@@ -402,7 +402,8 @@ function bodyLoad() {
 	      <block type="attackentity"></block>
        <block type="nearbyentities"></block>	   
        <block type="findentitybyname"></block>
-       <block type="findentitybycustomname"></block>
+       <!block type="findentitybycustomname"><!/block>
+       <block type="findcustomname"></block>
        <!block type="findentitybylocation"><!/block>
        <block type="assigndamage"></block>
 	   <category name="AllPlayers">
@@ -469,7 +470,7 @@ function bodyLoad() {
           <category name="Stack"></block>
              <block type="itemstack"></block>
              <block type="setstackname"></block>
-			          <block type="namethestack"></block>
+			          <!block type="namethestack"><!/block>
              <block type="nameofstack"></block>
              <block type="materialdata"></block>
              <block type="dropitem"></block>
@@ -654,6 +655,7 @@ function bodyLoad() {
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
       <block type="logic_null"></block>
+      <block type="isnull"></block>
       <block type="logic_ternary"></block>
     </category>
 

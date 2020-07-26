@@ -765,7 +765,7 @@ Blockly.Blocks['setName'] = {
 Blockly.Blocks['nameentity'] = {
   init: function() {
     this.appendValueInput ("ENTITY") 
-        .appendField ("Set Name of " )
+        .appendField ("Set Custom Name of " )
         
     this.appendDummyInput()
         .appendField ("to")
@@ -2822,7 +2822,7 @@ Blockly.Blocks['attackentity'] = {
 Blockly.Blocks['namethestack'] = {
   init: function() {
     this.appendValueInput("STACK")
-        .appendField ("Set name to: ")
+        .appendField ("Set custom name to: ")
         .appendField (new Blockly.FieldTextInput ( "Custom Name"), "NAME")
         .appendField(" for the stack:");        
     this.setOutput(true, null);
@@ -3608,6 +3608,30 @@ Blockly.Blocks['setstackname'] = {
     this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');   
+  }
+};
+
+
+Blockly.Blocks['findcustomname'] = {
+  init: function() {
+    this.appendDummyInput () 
+        .appendField ("Find entity with custom name: " )    
+        .appendField (new Blockly.FieldTextInput ("name"), "NAME");                  
+    this.setColour(0);
+    this.setTooltip('');
+    this.setOutput(true, null);    
+    this.setHelpUrl('http://www.example.com/');    
+  }
+};
+
+Blockly.Blocks['isnull'] = {
+  init: function() {
+    this.appendValueInput ("VARIABLE") 
+        .appendField ("Is null:");                  
+    this.setColour(210);
+    this.setTooltip('');
+    this.setOutput(true, null);    
+    this.setHelpUrl('http://www.example.com/');    
   }
 };
 

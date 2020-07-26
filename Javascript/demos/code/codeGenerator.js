@@ -3273,8 +3273,6 @@ Blockly.Python['giverandompotion'] = function(block) {
              "   org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), _cmd);\n" + 
              "})();\n";
   return code;
-         //      var _cmd="give " + attacker.name + " splash_potion" + "{CustomPotionEffects:[{Id:"+id+",Duration:1200}]," + "display:{Name:\"\\\"" + potion + "\\\"\"}}";
-   
 };
 
 Blockly.Python['addeffecttopotion'] = function(block) {
@@ -3316,3 +3314,28 @@ Blockly.Python['setstackname'] = function(block) {
              stack + ".setItemMeta (_meta);\n"   
   return code;
 };
+
+Blockly.Python['findcustomname'] = function(block) {
+  var name =  block.getFieldValue ('NAME');
+  instantiateVariable ('_entity');
+  instantiateVariable ('_entities');
+  var code =  "(function () {\n" +                
+              "   _entity = null;\n" + 
+              "   _entities = server.worlds[0].getEntities();\n" + 
+              "   for (var _i = 0; _i<_entities.length; _i++) { \n" + 
+              "      if (_entities[_i].getCustomName != null) { \n" + 
+              "         if (_entities[_i].getCustomName() == " + name + ") {\n" + 
+              "            _entity = _entities[_i];\n" +  
+              "            break;\n" + 
+              "         }\n" + 
+              "      }\n" +
+              "   }\n" +  
+              "   return _entity;})()";   
+  return [code, Blockly.Python.ORDER_NONE];
+}
+Blockly.Python['isnull'] = function(block) {
+  var variable = Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC);
+  variable = insideParen (variable);
+  var code =  "(" + variable + " == null)";
+  return [code, Blockly.Python.ORDER_NONE];
+}

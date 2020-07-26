@@ -1,5 +1,90 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="scriptcraftfunction" id="MVRKT_ylf@%CCYS2OFwD" x="-712" y="138">
+  <block type="scriptcraftfunction" id="oWSEN6osyn(4Yx(8nw_f" x="-162" y="38">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="findentitybyname" id="RILqSCRbY*3v`Aw#Bp:q">
+        <field name="NAME">name</field>
+        <next>
+          <block type="eventlistener" id="h2lTQMS^46Q]q.Dp;.Ey">
+            <field name="LISTENERTYPE">playerInteract</field>
+            <statement name="LISTENERCODE">
+              <block type="setvariablevalue" id="x[L=0XXz!/SK[2JXXQZu">
+                <field name="VARNAME">player</field>
+                <value name="EXPRESSION">
+                  <block type="eventinfo" id="l;I=:hg=bka-bnNU4|:C">
+                    <field name="INFORMATION">getPlayer</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setvariablevalue" id="75S[:.*+Ys:0Q@-HF1zV">
+                    <field name="VARNAME">arrows</field>
+                    <value name="EXPRESSION">
+                      <block type="itemstack" id="]O*LIw.GrlDMMu(a5QG*">
+                        <field name="COUNT">16</field>
+                        <value name="ITEM">
+                          <block type="materialtype" id="4@RdZ!Q8is_oIxfH6H|=">
+                            <field name="MATERIAL">TIPPED_ARROW</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="addeffecttopotion" id="j$d_m`c6+^pRkko@rrMP">
+                        <value name="EFFECT">
+                          <block type="whicheffect" id="T^)tP404d*,]C(rh^JX9">
+                            <field name="EFFECT">levitation</field>
+                          </block>
+                        </value>
+                        <value name="POTION">
+                          <block type="varname" id=",aZG[r3ZG/OOv!0_uBUI">
+                            <field name="VARNAME">arrows</field>
+                          </block>
+                        </value>
+                        <value name="DURATION">
+                          <block type="math_number" id="+Yp0,)Rzk!.i8_^;rOW}">
+                            <field name="NUM">12.2</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="setstackname" id="tCzk4.H}Pj5=oYM,m=}t">
+                            <value name="STACK">
+                              <block type="varname" id="nmS03L+gha6M`nD]Z=$i">
+                                <field name="VARNAME">arrows</field>
+                              </block>
+                            </value>
+                            <value name="NAME">
+                              <block type="varname" id="IH8X]YB%kU_4fX5WN:%7">
+                                <field name="VARNAME">"Levitate Yo"</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="dropitem" id="|E}#Hoj(UV)n*g$K`A-z">
+                                <value name="ITEMSTACK">
+                                  <block type="varname" id="lojm3/zB%n,8gl,#YX({">
+                                    <field name="VARNAME">arrows</field>
+                                  </block>
+                                </value>
+                                <value name="LOCATION">
+                                  <block type="varname" id="EmV4DFX^~/Bv^pG[j3kv">
+                                    <field name="VARNAME">player.location</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="scriptcraftfunction" id="MVRKT_ylf@%CCYS2OFwD" x="-762" y="163">
     <field name="nameOfFunction">haunted</field>
     <statement name="FUNCTIONCODE">
       <block type="setvariable" id="nt|(250Ux=d3ldno8^38">
@@ -481,7 +566,7 @@
       </block>
     </statement>
   </block>
-  <block type="setvariablevalue" id="!HP{sb]K,:|wexzw//$9" disabled="true" x="-587" y="1138">
+  <block type="setvariablevalue" id="!HP{sb]K,:|wexzw//$9" disabled="true" x="-162" y="1113">
     <field name="VARNAME">elapsedTime</field>
     <value name="EXPRESSION">
       <block type="elapsedtime" id="u!q1g-ncurIH;`:6jn$F">
