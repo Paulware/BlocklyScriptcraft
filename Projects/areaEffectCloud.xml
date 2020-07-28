@@ -1,0 +1,71 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="MVRKT_ylf@%CCYS2OFwD" x="-862" y="513">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="setvariablevalue" id="2!v6`|3{qYoGH/XJx2G.">
+        <field name="VARNAME">cloud</field>
+        <value name="EXPRESSION">
+          <block type="spawnentity" id="QIb(:ZeH[hG4H%n@Tyve">
+            <value name="ENTITY">
+              <block type="entityType" id="yB=Lb~u@80_8cI?4M4C5">
+                <field name="ENTITY">AREA_EFFECT_CLOUD</field>
+              </block>
+            </value>
+            <value name="LOCATION">
+              <block type="varname" id=".,NIMD_r[2)EvE{o`|3x">
+                <field name="VARNAME">self.location</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="addcustomeffect" id="35SPppH;y%=nMf1dur5M">
+            <value name="EFFECT">
+              <block type="whicheffect" id=";eV9N6JF)|#1C`*P{WZY">
+                <field name="EFFECT">blindness</field>
+              </block>
+            </value>
+            <value name="CLOUD">
+              <block type="varname" id="pUUmjFM6Axt[:}0t-.@p">
+                <field name="VARNAME">cloud</field>
+              </block>
+            </value>
+            <value name="DURATION">
+              <block type="varname" id="s!F}z8tUp@?tM.QigXSU">
+                <field name="VARNAME">5</field>
+              </block>
+            </value>
+            <next>
+              <block type="setduration" id="~T!=^k4l;6^Vdt~rRJ`:">
+                <value name="DURATION">
+                  <block type="varname" id="GZ=E*(VeQ%BKzILFO?Ej">
+                    <field name="VARNAME">20</field>
+                  </block>
+                </value>
+                <value name="CLOUD">
+                  <block type="varname" id="vzKFY1):2lmEz~AwRy07">
+                    <field name="VARNAME">cloud</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setcloudradius" id="{|tr[CqW0DZ{zIDmgB]H">
+                    <value name="RADIUS">
+                      <block type="varname" id="M+x1R-hF$*ImWcll@#Eb">
+                        <field name="VARNAME">20</field>
+                      </block>
+                    </value>
+                    <value name="CLOUD">
+                      <block type="varname" id="!;7}i!.I7hp*;UAp)WF_">
+                        <field name="VARNAME">cloud</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

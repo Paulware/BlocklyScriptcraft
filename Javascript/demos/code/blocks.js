@@ -291,6 +291,7 @@ Blockly.Blocks['eventlistener'] = {
             ["A player moved", "playerMove"],
             ["Player Mouse Click","playerInteract"],  
             ["Player dropped an item", "playerDropItem"],
+            ["Area Effect Cloud Apply", "areaEffectCloudApply"],
             ["An inventory item was selected", "inventoryClick"],  
             ["An inventory got an item", "inventoryPickupItem"],
             ["An item was crafted", "craftItem"],
@@ -889,6 +890,7 @@ Blockly.Blocks['entityType'] = {
         .appendField("Creature Type")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["Arrow", "ARROW"],
+                                                ["Area Effect Cloud", "AREA_EFFECT_CLOUD"],
                                                 ["Bat", "BAT"], 
                                                 ["Bat Cart", "BATCART"],
                                                 ["Cave Spider", "CAVE_SPIDER"],
@@ -904,6 +906,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Fireball", "FIREBALL"],
                                                 ["Horse", "HORSE"], 
                                                 ["Iron Golem", "IRON_GOLEM"],
+                                                ["Lingering Potion", "LINGERING_POTION"],
                                                 ["Minecart", "MINECART"], 
                                                 ["Ocelot", "OCELOT"],
                                                 ["Pig", "PIG"],
@@ -962,9 +965,12 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
                                                   ["Golden Boots", "GOLDEN_BOOTS"], 
                                                   ["Iron Boots", "IRON_BOOTS"], 
+                                                  ["Iron Door", "IRON_DOOR"], 
                                                   ["Iron Ingot", "IRON_INGOT"],
                                                   ["Iron Sword", "IRON_SWORD"],
                                                   ["Leather Boots", "LEATHER_BOOTS"],
+                                                  ["Lingering Potion", "LINGERING_POTION"],
+                                                  ["Oak Door", "OAK_DOOR"], 
                                                   ["Oak Sign Post", "OAK_SIGN"], 
                                                   ["Paper", "PAPER"],
                                                   ["Redstone Dust", "REDSTONE"], 
@@ -975,6 +981,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
                                                   ["Tipped Arrow", "TIPPED_ARROW"],
+                                                  ["TripWire Hook", "TRIPWIRE_HOOK"],
                                                   ["Totem of Undying", "TOTEM_OF_UNDYING"],
                                                   ["White Wool", "WHITE_WOOL"],
                                                   ["Wolf Egg", "WOLF_SPAWN_EGG"],
@@ -3635,4 +3642,56 @@ Blockly.Blocks['isnull'] = {
   }
 };
 
+Blockly.Blocks['addcustomeffect'] = {
+  init: function() { 
+    this.appendValueInput("EFFECT")
+        .appendField ("Add Custom Effect: ");
+    this.appendValueInput("CLOUD")
+        .appendField ("For Cloud: ");
+    this.appendValueInput("DURATION")
+        .appendField ("Lasting: ");
+    this.appendDummyInput()
+        .appendField ("Seconds");
+    this.setInputsInline(true);                     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['setduration'] = {
+  init: function() { 
+    this.appendValueInput("DURATION")
+        .appendField ("Set duration: ");
+    this.appendDummyInput()
+        .appendField ("Seconds");
+    this.appendValueInput("CLOUD")
+        .appendField ("for area effect cloud: ");        
+    this.setInputsInline(true);                     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['setcloudradius'] = {
+  init: function() { 
+    this.appendValueInput("RADIUS")
+        .appendField ("Set radius to ");
+    this.appendDummyInput()
+        .appendField ("blocks");
+    this.appendValueInput("CLOUD")
+        .appendField ("for area effect cloud: ");        
+    this.setInputsInline(true);                     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
 

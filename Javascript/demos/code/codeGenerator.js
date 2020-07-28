@@ -3285,12 +3285,14 @@ Blockly.Python['addeffecttopotion'] = function(block) {
     
   instantiateVariable ( "_meta");  
     
-  code = "_meta = " + potion + ".getItemMeta();\n" + 
-         "if (_meta.addCustomEffect != null) { \n" + 
-         "  _meta.addCustomEffect (new org.bukkit.potion.PotionEffect(" + effect + 
-         "  ," + parseInt (duration) + ",2), true);\n" + 
-         "  " + potion + ".setItemMeta (_meta);\n" +
-         "}\n";           
+  code = "if (" + potion + ".getItemMeta != null) { \n" + 
+         "  _meta = " + potion + ".getItemMeta();\n" + 
+         "  if (_meta.addCustomEffect != null) { \n" + 
+         "    _meta.addCustomEffect (new org.bukkit.potion.PotionEffect(" + effect + 
+         "    ," + parseInt (duration) + ",2), true);\n" + 
+         "    " + potion + ".setItemMeta (_meta);\n" +
+         "  }\n" + 
+         "}\n";         
   return code; 
 };
 
@@ -3339,3 +3341,41 @@ Blockly.Python['isnull'] = function(block) {
   var code =  "(" + variable + " == null)";
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['addcustomeffect'] = function(block) {
+  var effect =  Blockly.Python.valueToCode(block, 'EFFECT', Blockly.Python.ORDER_ATOMIC);  
+  effect = insideParen(effect)  
+  var cloud =  Blockly.Python.valueToCode(block, 'CLOUD', Blockly.Python.ORDER_ATOMIC);  
+  cloud = insideParen (cloud)  
+  var duration =  Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);  
+  duration = parseFloat(insideParen (duration)) * 20.0; // 20 ticks per second
+    
+  code = "if (" + cloud + ".addCustomEffect != null) { \n" + 
+         "    " + cloud + ".addCustomEffect (new org.bukkit.potion.PotionEffect(" + effect + "," + parseInt (duration) + ",2), true);\n" + 
+         "}\n";         
+  return code; 
+};
+
+Blockly.Python['setduration'] = function(block) {  
+  var cloud =  Blockly.Python.valueToCode(block, 'CLOUD', Blockly.Python.ORDER_ATOMIC);  
+  cloud = insideParen (cloud)  
+  var duration =  Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);  
+  duration = parseFloat(insideParen (duration)) * 20.0; // 20 ticks per second
+    
+  code = "if (" + cloud + ".setDuration != null) { \n" + 
+         "    " + cloud + ".setDuration (" + parseInt (duration) + ");\n" + 
+         "}\n";         
+  return code; 
+};
+
+Blockly.Python['setcloudradius'] = function(block) {  
+  var cloud =  Blockly.Python.valueToCode(block, 'CLOUD', Blockly.Python.ORDER_ATOMIC);  
+  cloud = insideParen (cloud)  
+  var radius =  Blockly.Python.valueToCode(block, 'RADIUS', Blockly.Python.ORDER_ATOMIC);  
+  radius = parseInt(insideParen (radius));
+    
+  code = "if (" + cloud + ".setRadius != null) { \n" + 
+         "    " + cloud + ".setRadius (" + parseInt (radius) + ");\n" + 
+         "}\n";         
+  return code; 
+};

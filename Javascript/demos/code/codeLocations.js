@@ -181,7 +181,11 @@
       "Add stack to inventory for player => Entities, Player",  
       "Modify stack set custom name => Items, Stack",  
       "Find entity with custom name => Entities",    
-      "Is null => Logic",       
+      "Is null => Logic",    
+      "Set Custom Name of => Entities", 
+      "Add Custom Effect For Cloud => Items, Area Effect Cloud",   
+      "Set duration Seconds for area effect cloud => Items, Area Effect Cloud",     
+      "Set radius to blocks for area effect cloud => Items, Area Effect Cloud",       
    ];
    
    function autocomplete(inp, arr) {
