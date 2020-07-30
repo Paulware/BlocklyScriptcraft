@@ -3736,7 +3736,7 @@ Blockly.Blocks['givearmor'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Chainmail", "chainmail"],
                                                 ["Diamond", "diamond"],
-                                                ["Gold", "gold"],
+                                                ["Gold", "golden"],
                                                 ["Iron", "iron"], 
                                                 ["Leather", "leather"]
                                                ]), "STYLE");                   
