@@ -1686,7 +1686,6 @@ Blockly.Python['setgamemode'] = function(block) {
 Blockly.Python['recipe'] = function(block) {
   var result = "result";
   var result = Blockly.Python.valueToCode(block, 'RESULT', Blockly.Python.ORDER_ATOMIC);
-  console.log ( 'getresult' );
   result = insideParen (result);
   var ch1 = block.getFieldValue ("CH1");
   var ch2 = block.getFieldValue ("CH2");
@@ -1725,42 +1724,30 @@ Blockly.Python['recipe'] = function(block) {
   if (ch9 == "") {
      ch9 = " ";
   }
-  console.log ( "Getshapes");
   var shape0 = ch1 + ch2 + ch3;
   var shape1 = ch4 + ch5 + ch6;
   var shape2 = ch7 + ch8 + ch9;
-  console.log ( "getingredients");
   var ingredients = Blockly.Python.valueToCode(block, 'INGREDIENTS', Blockly.Python.ORDER_ATOMIC);
   ingredients = insideParen ( ingredients);  
   ingredients = insideBracket (ingredients);
-  console.log ( 'ingredients: ' + ingredients);
   var code = 
     "var result = " + result + ";\n" + 
     "var recipe = new org.bukkit.inventory.ShapedRecipe(result);\n" + 
     "recipe.shape(\"" + shape0 + "\",\"" + shape1 + "\",\"" + shape2 + "\");\n";
 
-  var ind=-1
-  var startIndex;
-  
-  while (true) { 
-     startIndex = ind + 1;
-     ind = ingredients.indexOf ( ',',startIndex);  
-     if (ind == -1) { break;}
-     ind = ingredients.indexOf ( ',',ind+1);
-     if (ind == -1) {
-        ingredient = ingredients.substring (startIndex,ingredients.length); 
-        code = code + "recipe.setIngredient(" + ingredient.trim() + ");\n";      
-        break;
-     } else {
-        ingredient = ingredients.substring (startIndex,ind).trim(); 
-        code = code + "recipe.setIngredient(" + ingredient + ");\n";
+  var gredients = ingredients.split ( '\n' );
+  for (var i=0; i<gredients.length; i++) {
+     if (gredients[i] != '') {
+       ingredient = gredients[i].trim();
+       ch = ingredient.charAt (ingredient.length-1);
+       if (ch == ',') {
+          ingredient = ingredient.substring (0,ingredient.length-1);
+       }       
+       code = code + "recipe.setIngredient(" + ingredient + ");\n";
      }
- 
   }
-
   code = code + "server.addRecipe(recipe);\n";
-   
-    
+       
   return code; 
 }
 
@@ -3378,4 +3365,28 @@ Blockly.Python['setcloudradius'] = function(block) {
          "    " + cloud + ".setRadius (" + parseInt (radius) + ");\n" + 
          "}\n";         
   return code; 
+};
+
+Blockly.Python['getplayerarmor'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  var armor =  block.getFieldValue ('ARMOR');
+  
+  
+  var code = "(" + player + ".getInventory().get" + armor + "== null) ? null : " + player + ".getInventory().get" + armor + "()";
+        
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['givearmor'] = function(block) {
+  var armor =  block.getFieldValue ('ARMOR');
+  var upArmor = armor.charAt (0).toUpperCase() + armor.substring (1);
+  var style =  block.getFieldValue ('STYLE');
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  player = insideParen (player );
+  
+  var code = 
+			 "var items = require ('items');\n" + 
+			 player + ".equipment." + armor + " = items." + style + upArmor + "(1);\n"; // items.diamondHelmet(1);\n" + 
+  return code;
 };

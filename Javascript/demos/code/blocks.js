@@ -946,11 +946,18 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Blaze Rod", "BLAZE_ROD"],
                                                   ["Bone Meal", "BONE_MEAL"],
+                                                  ["Chainmail Boots", "CHAINMAIL_BOOTS"],
+                                                  ["Chainmail ChestPlate", "CHAINMAIL_CHESTPLATE"],
+                                                  ["Chainmail Helmet", "CHAINMAIL_HELMET"],
+                                                  ["Chainmail Leggings", "CHAINMAIL_LEGGINGS"],                                                  
                                                   ["Compass", "COMPASS"],
                                                   ["Cookie","COOKIE"],
                                                   ["Crossbow", "CROSSBOW"],
                                                   ["Diamond", "DIAMOND"],
                                                   ["Diamond Boots", "DIAMOND_BOOTS"],
+                                                  ["Diamond ChestPlate", "DIAMOND_CHESTPLATE"],
+                                                  ["Diamond Helmet", "DIAMOND_HELMET"],
+                                                  ["Diamond Leggings", "DIAMOND_LEGGINGS"],
                                                   ["Diamond Pick", "DIAMOND_PICKAXE"],
                                                   ["Diamond Shovel", "DIAMOND_SHOVEL"],
                                                   ["Diamond Sword", "DIAMOND_SWORD"],
@@ -963,12 +970,18 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Gold Ingot", "GOLD_INGOT"],
                                                   ["Golden Apple","GOLDEN_APPLE"],
                                                   ["Golden Apple (Enchanted)", "ENCHANTED_GOLDEN_APPLE"],
-                                                  ["Golden Boots", "GOLDEN_BOOTS"], 
+                                                  ["Golden Boots", "GOLDEN_BOOTS"],
+                                                  ["Golden ChestPlate", "GOLDEN_CHESTPLATE"],
+                                                  ["Golden Helmet", "GOLDEN_HELMET"],
+                                                  ["Golden Leggings", "GOLDEN_LEGGINGS"],                                                   
                                                   ["Iron Boots", "IRON_BOOTS"], 
                                                   ["Iron Door", "IRON_DOOR"], 
                                                   ["Iron Ingot", "IRON_INGOT"],
                                                   ["Iron Sword", "IRON_SWORD"],
                                                   ["Leather Boots", "LEATHER_BOOTS"],
+                                                  ["Leather ChestPlate", "LEATHER_CHESTPLATE"],
+                                                  ["Leather Helmet", "LEATHER_HELMET"],
+                                                  ["Leather Leggings", "LEATHER_LEGGINGS"],                                                   
                                                   ["Lingering Potion", "LINGERING_POTION"],
                                                   ["Oak Door", "OAK_DOOR"], 
                                                   ["Oak Sign Post", "OAK_SIGN"], 
@@ -1723,7 +1736,7 @@ Blockly.Blocks['setgamemode'] = {
                                                 ["Survival - Normal game mode, no special features", "SURVIVAL"]
                                                ]), "GAMEMODE"); 
     this.appendValueInput("PLAYER")
-        .appendField("Player");
+        .appendField("for player");
     this.setInputsInline(true);        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -1770,7 +1783,7 @@ Blockly.Blocks['addingredient'] = {
         .appendField("Add Ingredient Character:")
         .appendField (new Blockly.FieldTextInput ("%"), "CHARACTER");
     this.appendValueInput("INGREDIENT")
-        .appendField("Ingredient Stack");
+        .appendField("For Material");
     this.setColour(320);
     this.setOutput(true, null);
     this.setInputsInline(true);        
@@ -3694,4 +3707,59 @@ Blockly.Blocks['setcloudradius'] = {
     this.setHelpUrl('http://www.example.com/');       
   }
 };
+
+Blockly.Blocks['getplayerarmor'] = {
+  init: function() { 
+    this.appendDummyInput()
+        .appendField("Get")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Boots", "Boots"],
+                                                ["Chest Plate", "Chestplate"],
+                                                ["Helmet", "Helmet"], 
+                                                ["Leggings", "Leggings"]
+                                               ]), "ARMOR");                   
+    this.appendValueInput("PLAYER")
+        .appendField ("worn by player:");
+        
+    this.setInputsInline(true);                     
+    this.setColour(320);
+    this.setTooltip('');
+    this.setOutput(true, null);      
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['givearmor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Give")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Chainmail", "chainmail"],
+                                                ["Diamond", "diamond"],
+                                                ["Gold", "gold"],
+                                                ["Iron", "iron"], 
+                                                ["Leather", "leather"]
+                                               ]), "STYLE");                   
+    this.appendDummyInput()
+        .appendField (" ")
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Boots", "boots"],
+                                                ["Chest Plate", "chestplate"],
+                                                ["Helmet", "helmet"], 
+                                                ["Leggings", "leggings"]
+                                               ]), "ARMOR");                   
+    this.appendValueInput("PLAYER")
+        .appendField("To entity or player");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);    
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
+
 
