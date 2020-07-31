@@ -3399,3 +3399,18 @@ Blockly.Python['isopen'] = function(block) {
 
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+Blockly.Python['entityeffect'] = function(block) {
+  var effect = 'org.bukkit.EntityEffect.' + block.getFieldValue ("EFFECT");
+  return [effect, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['playeffect'] = function(block) {
+  var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC); 
+  entity = insideParen (entity);
+  var effect = Blockly.Python.valueToCode(block, 'EFFECT', Blockly.Python.ORDER_ATOMIC); 
+  effect = insideParen (effect);
+  var code = entity + ".playEffect (" + effect + ");\n" 
+  return code;
+};
+

@@ -940,8 +940,10 @@ Blockly.Blocks['materialtype'] = {
     this.appendDummyInput()
         .appendField("Material")        
         .appendField(new Blockly.FieldDropdown([
+                                                  ["Acacia Door", "ACACIA_DOOR"],
                                                   ["Air", "AIR"],
                                                   ["Arrow", "ARROW"],
+                                                  ["Birch Door", "BIRCH_DOOR"],
                                                   ["Bow", "BOW"],
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Blaze Rod", "BLAZE_ROD"],
@@ -953,6 +955,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Compass", "COMPASS"],
                                                   ["Cookie","COOKIE"],
                                                   ["Crossbow", "CROSSBOW"],
+                                                  ["Dark Oak Door", "DARK_OAK_DOOR"],
                                                   ["Diamond", "DIAMOND"],
                                                   ["Diamond Boots", "DIAMOND_BOOTS"],
                                                   ["Diamond ChestPlate", "DIAMOND_CHESTPLATE"],
@@ -978,6 +981,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Iron Door", "IRON_DOOR"], 
                                                   ["Iron Ingot", "IRON_INGOT"],
                                                   ["Iron Sword", "IRON_SWORD"],
+                                                  ["Jungle Door", "JUNGLE_DOOR"],
                                                   ["Leather Boots", "LEATHER_BOOTS"],
                                                   ["Leather ChestPlate", "LEATHER_CHESTPLATE"],
                                                   ["Leather Helmet", "LEATHER_HELMET"],
@@ -994,6 +998,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Stick", "STICK"],
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
+                                                  ["Spruce Door", "SPRUCE_DOOR"],
                                                   ["Tipped Arrow", "TIPPED_ARROW"],
                                                   ["TripWire Hook", "TRIPWIRE_HOOK"],
                                                   ["Totem of Undying", "TOTEM_OF_UNDYING"],
@@ -3773,3 +3778,63 @@ Blockly.Blocks['isopen'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+
+Blockly.Blocks['entityeffect'] = {
+  init: function() {
+      
+    this.appendDummyInput()
+        .appendField("Effect Type")        
+        .appendField(new Blockly.FieldDropdown([
+                       ["Armor stand is hit", "ARMOR_STAND_HIT"],
+                       ["Colored particles from a tipped arrow", "ARROW_PARTICLES"],	
+                       ["Silverfish entering block, spawner spawning","ENTITY_POOF"],
+                       ["When a firework explodes", "FIREWORK_EXPLODE"],
+                       ["Guardian sets laser target", "GUARDIAN_TARGET"],
+                       ["When mobs get hurt","HURT"],
+                       ["Entity hurt due to drowning damage","HURT_DROWN"],
+                       ["Entity hurt due to explosion damage","HURT_EXPLOSION"],
+                       ["When an Iron Golem gives a rose", "IRON_GOLEM_ROSE"],
+                       ["Iron golem puts away rose", "IRON_GOLEM_SHEATH"],
+                       ["Hearts from a breeding entity", "LOVE_HEARTS"],	
+                       ["Rabbit jumping", "RABBIT_JUMP"],
+                       ["Shield blocks attack", "SHIELD_BLOCK"],	                       
+                       ["Shield breaks", "SHIELD_BREAK"],
+                       ["Resets squid rotation", "SQUID_ROTATE"],
+                       ["Entity hurt by thorns attack","THORNS_HURT"],	
+                       ["Totem prevents entity death","TOTEM_RESURRECT"],
+                       ["When a villager is angry","VILLAGER_ANGRY"],
+                       ["Happy particles from a villager", "VILLAGER_HAPPY"],	
+                       ["Hearts from a villager","VILLAGER_HEART"],	
+                       ["Magic particles from a witch", "WITCH_MAGIC"],	
+                       ["The hearts when taming a wolf succeeds", "WOLF_HEARTS"],
+                       ["When a wolf shakes (after being wet)", "WOLF_SHAKE"],
+                       ["The smoke when taming a wolf fails","WOLF_SMOKE"],                       
+                       ["When a zombie transforms into a villager by shaking violently","ZOMBIE_TRANSFORM"] 
+                                               ]), "EFFECT");                   
+                                        
+    this.setOutput(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['playeffect'] = {
+  init: function() {
+    this.appendValueInput("EFFECT")
+        .appendField("Play Effect:")        
+        
+    this.appendValueInput("ENTITY")
+        .appendField ("on entity: ")
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);    
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+

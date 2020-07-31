@@ -1,0 +1,57 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="g88#g:4H7QEaP}^eulHq" x="113" y="63">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="setvariablevalue" id="[~j.r#XJ3`VNzvB5.}yf">
+        <field name="VARNAME">wolf</field>
+        <value name="EXPRESSION">
+          <block type="spawnentity" id="gxiAFv*U^4[$dJD=AlyT">
+            <value name="ENTITY">
+              <block type="entityType" id=")5Q/i|HWTX,Q+GuwGN)g">
+                <field name="ENTITY">WOLF</field>
+              </block>
+            </value>
+            <value name="LOCATION">
+              <block type="varname" id="xo+]fVfeg/+E({0R#oD%">
+                <field name="VARNAME">self.location</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="playeffect" id="5lhcYnGUjzkYLHA6MU.K">
+            <value name="EFFECT">
+              <block type="entityeffect" id="ew.N]Jo3c^BEm(;?Umme">
+                <field name="EFFECT">TOTEM_RESURRECT</field>
+              </block>
+            </value>
+            <value name="ENTITY">
+              <block type="varname" id="]]YwLxUWig5_S6ZLIOvT">
+                <field name="VARNAME">self</field>
+              </block>
+            </value>
+            <next>
+              <block type="delayedexecution" id="C2#bcW(!}Ge[OLeDbWCz">
+                <field name="TIMEOUT">2000</field>
+                <statement name="DELAYEDCODE">
+                  <block type="playeffect" id="[iRCDMnSZ*Q6RZ!k`xAL">
+                    <value name="EFFECT">
+                      <block type="entityeffect" id="XNn}-RGP%lggC(VX(BXM">
+                        <field name="EFFECT">WOLF_SHAKE</field>
+                      </block>
+                    </value>
+                    <value name="ENTITY">
+                      <block type="varname" id="L/7gyp2%2NC3^v?[#zW5">
+                        <field name="VARNAME">wolf</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

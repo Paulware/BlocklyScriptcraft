@@ -1,0 +1,30 @@
+<H1>Isabella the witch</h1>
+Note: Before trying this homework, you should perform an update as described: <a href="updateBlocklyCode.html">here</a><br>
+Isabella is spawned when the player goes to a specific [x,y,z] location.   If she is killed, the player that killed her is given a random potion.<br>
+<ul>
+<li>We will start by spawning a witch and giving her a custom name (You can use your imagination, I chose: Isabella)</li>
+<li>We will give the player a random potion</li>
+<li>We will check if Isabella dies, if she does, drop a random potion</li>
+<li>Extra Credit: Only spawn Isabella if the player moves to a specific [x,y,z] location</li>
+<li>Extra Extra Credit: Only spawn Isabella if she is not currently active/alive</li>
+</ul>
+<H2>Spawn a witch and give her a custom name</H2>
+Start with this diagram: <br>
+<img src="images/spawnIsabella.jpg"><br>
+<H2>Drop a random potion</H2>
+Add this code to your test function:<br>
+<img src="images/dropRandomPotion.jpg"><br>
+Download, /reload, /js test() to test your code<br>
+Is a random potion dropped when you run the code? This shows that your code is working properly<br>
+<H2>Check if Isabella dies</H2>
+For this we will use a different listener event.<br>
+Add this listener event code at the bottom of your function:<br>
+<img src="images/checkEntityDeath.jpg"><br>
+Download, /reload, /js test() to test your code, kill Isabella, when she dies is a message sent out telling who attacked her?  This means your code is working properly<br>
+<h2>Have Isabells drop a random potion when she dies</h2>
+Since we already know how to give a player a random potion, how would you do this only when Isabella dies?<br>
+   Hint: Use logic if statement that already exists<br>
+   Also: Location of the dropped potion should be Isabella's location <br>
+<h2>Extra Credit: Only spawn Isabella if she does not currently exist </h2>
+You can use this diagram as a reference: <br>
+<img src="images/witch.jpg">
