@@ -3390,3 +3390,12 @@ Blockly.Python['givearmor'] = function(block) {
 			 player + ".equipment." + armor + " = items." + style + upArmor + "(1);\n"; // items.diamondHelmet(1);\n" + 
   return code;
 };
+
+Blockly.Python['isopen'] = function(block) {
+  var block = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
+  block = insideParen (block);
+  var code = "(" + block + ".getState == null) ? false : (" + block + ".getState().getData == null) ? false : " + 
+             "(" + block + ".getState().getData().isOpen == null) ? false: " + block + ".getState().getData().isOpen()"
+
+  return [code, Blockly.Python.ORDER_NONE];
+}

@@ -1,0 +1,27 @@
+<H1>Door Key</h1>
+Note: Perform an update as described <a href="https://paulware.github.io/BlocklyScriptcraft/updateBlocklyCode.html">here</a> before attempting this homework (thanks).
+<hr>
+Since minecraft has no keys, some people have used a tripwire-hook as it resembles a key in appearance: <br>
+<img src="images/tripWireHook.jpg"  width="200px"><br>
+
+We will make a special tripwire-hook and give it a custom name to allow us to lock doors.
+
+<ul>
+   <li>Create a recipe for a tripwire-hook with a custom name: "OAK_KEY"</li>
+   <li>When a player opens a door, and the OAK_KEY is not in their hand, cancel the event</li>
+   <li>Only cancel the event if the door is not already open (so that can close the door without a key)</li>
+</ul>
+<hr>
+<h2>Recipe for special OAK_KEY</h2>
+<img src="images/oakKeyRecipe.jpg"><br>
+Test out your code by seeing if you can craft an "OAK_KEY"<br>
+<hr>
+<h2>Create a player mouse click listener event to check for "OAK_KEY"</h2>
+<img src="images/mouseClickOakKey.jpg"><br>
+You can test your code by trying to open an oak door when the key is not in your hand.  The door should remain closed.
+<hr>
+<h2>Add a check if the door is not open already</h2>
+Add another if statement to check if the door is open, before cancelling the event<br>
+You can use this complete diagram as a reference: <br>
+<img src="images/oakKey.jpg"><br>
+You can test your code by trying to close the door when the key is <b>NOT</b> in your hand.  It should close, but not open.

@@ -983,7 +983,8 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Leather Helmet", "LEATHER_HELMET"],
                                                   ["Leather Leggings", "LEATHER_LEGGINGS"],                                                   
                                                   ["Lingering Potion", "LINGERING_POTION"],
-                                                  ["Oak Door", "OAK_DOOR"], 
+                                                  ["Oak Door", "OAK_DOOR"],
+                                                  ["Oak Planks", "OAK_PLANKS"],                                                  
                                                   ["Oak Sign Post", "OAK_SIGN"], 
                                                   ["Paper", "PAPER"],
                                                   ["Redstone Dust", "REDSTONE"], 
@@ -3759,7 +3760,16 @@ Blockly.Blocks['givearmor'] = {
   }
 };
 
-
-
-
-
+Blockly.Blocks['isopen'] = {
+  init: function() {
+    this.appendValueInput("BLOCK")
+        .appendField("Door block:");
+    this.appendDummyInput()
+        .appendField ("is open")
+    this.setOutput(true, null);
+    this.setInputsInline(true);                     
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

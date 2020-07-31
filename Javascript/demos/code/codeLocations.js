@@ -185,7 +185,8 @@
       "Set Custom Name of => Entities", 
       "Add Custom Effect For Cloud => Items, Area Effect Cloud",   
       "Set duration Seconds for area effect cloud => Items, Area Effect Cloud",     
-      "Set radius to blocks for area effect cloud => Items, Area Effect Cloud",       
+      "Set radius to blocks for area effect cloud => Items, Area Effect Cloud", 
+      "Door block is open => World=>Blocks",       
    ];
    
    function autocomplete(inp, arr) {
