@@ -1,0 +1,95 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="g88#g:4H7QEaP}^eulHq" x="63" y="38">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="playsound" id="I{A8_U(D3_2Oqe+MpCi?" disabled="true">
+        <field name="VOLUME">10</field>
+        <value name="EFFECT">
+          <block type="soundeffect" id=":8l!}K+_fD0;#OLH?P@)">
+            <field name="EFFECT">WEATHER_RAIN</field>
+          </block>
+        </value>
+        <value name="PLAYER">
+          <block type="varname" id=".pP^Bfz)WyOLiBClmSEA">
+            <field name="VARNAME">self</field>
+          </block>
+        </value>
+        <next>
+          <block type="playsound" id="6#Vx0#8$+{?VlU*7P#~L" disabled="true">
+            <field name="VOLUME">10</field>
+            <value name="EFFECT">
+              <block type="soundeffect" id="Tv5hTM@~kk4H#ojKp@;y">
+                <field name="EFFECT">ENTITY_ENDERMAN_SCREAM</field>
+              </block>
+            </value>
+            <value name="PLAYER">
+              <block type="varname" id="|.OfTe*.%ZP*(j,eLJB}">
+                <field name="VARNAME">self</field>
+              </block>
+            </value>
+            <next>
+              <block type="playsound" id="gz8$kq6XjL]pSj-M]fA1" disabled="true">
+                <field name="VOLUME">10</field>
+                <value name="EFFECT">
+                  <block type="soundeffect" id="%aVCONT;YB`=p/$C#a^0">
+                    <field name="EFFECT">BLOCK_BELL_RESONATE</field>
+                  </block>
+                </value>
+                <value name="PLAYER">
+                  <block type="varname" id="1!N=vGkihhiK.nuD+=$*">
+                    <field name="VARNAME">self</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="playsound" id=",ROQ/yJLi)s,SfQOk1D*" disabled="true">
+                    <field name="VOLUME">10</field>
+                    <value name="EFFECT">
+                      <block type="soundeffect" id="D;VGnihE.pt0|!)k!p%N">
+                        <field name="EFFECT">ENTITY_ENDERMAN_STARE</field>
+                      </block>
+                    </value>
+                    <value name="PLAYER">
+                      <block type="varname" id="B_o[uQ#PxMEkujQc5%TE">
+                        <field name="VARNAME">self</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="playsound" id=";K]NMJNi~ojQpsyPbm}i" disabled="true">
+                        <field name="VOLUME">10</field>
+                        <value name="EFFECT">
+                          <block type="soundeffect" id="kUh{Qc)z*Yp:G,+)vL.e">
+                            <field name="EFFECT">EVENT_RAID_HORN</field>
+                          </block>
+                        </value>
+                        <value name="PLAYER">
+                          <block type="varname" id="gBlRO6M@;-@0aX0Ml?k4">
+                            <field name="VARNAME">self</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="playsound" id="NOHA(_[9qs6(3WKOgbPP">
+                            <field name="VOLUME">100</field>
+                            <value name="EFFECT">
+                              <block type="soundeffect" id="7+lEWu@Zgq2EX#K~QCx_">
+                                <field name="EFFECT">BLOCK_BELL_USE</field>
+                              </block>
+                            </value>
+                            <value name="PLAYER">
+                              <block type="varname" id="}YR~F7WHpBC3iC7wl|nZ">
+                                <field name="VARNAME">self</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

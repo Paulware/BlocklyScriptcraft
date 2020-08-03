@@ -261,11 +261,11 @@ function insideParen (value) {
      } else {
        endIndex = value.lastIndexOf ( ')');
        if (endIndex > -1) {
-           console.log ( 'value: ' + value )
+           //console.log ( 'value: ' + value )
            value = delCharAt (value, endIndex);
            value = delCharAt (value, startIndex);
            newValue = value;
-           console.log ( 'newValue: ' + newValue );
+           //console.log ( 'newValue: ' + newValue );
        } else { 
          endIndex = startIndex + 1;
          count = 1;
@@ -3411,6 +3411,22 @@ Blockly.Python['playeffect'] = function(block) {
   var effect = Blockly.Python.valueToCode(block, 'EFFECT', Blockly.Python.ORDER_ATOMIC); 
   effect = insideParen (effect);
   var code = entity + ".playEffect (" + effect + ");\n" 
+  return code;
+};
+
+Blockly.Python['soundeffect'] = function(block) {
+  var effect = 'org.bukkit.Sound.' + block.getFieldValue ("EFFECT");
+  return [effect, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['playsound'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
+  player = insideParen (player);
+  var effect = Blockly.Python.valueToCode(block, 'EFFECT', Blockly.Python.ORDER_ATOMIC); 
+  effect = insideParen (effect);
+  var volume = block.getFieldValue ("VOLUME");
+  
+  var code = "server.worlds[0].playSound (" + player + ".getLocation(), " + effect + ", " + volume + ", 1);\n"; 
   return code;
 };
 

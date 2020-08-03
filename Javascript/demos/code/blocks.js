@@ -922,6 +922,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Tipped Arrow", "TIPPED_ARROW"],
                                                 ["Trident", "TRIDENT"],
                                                 ["Villager", "VILLAGER"],
+                                                ["Wandering Trader", "WANDERING_TRADER"],
                                                 ["Wolf", "WOLF"],
                                                 ["Witch", "WITCH"],
                                                 ["Wither", "WITHER"],
@@ -3836,5 +3837,164 @@ Blockly.Blocks['playeffect'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+
+
+Blockly.Blocks['soundeffect'] = {
+  init: function() {
+      
+    this.appendDummyInput()
+        .appendField("Sound Effect")        
+        .appendField(new Blockly.FieldDropdown([
+                       ["Anvil Fall", "BLOCK_ANVIL_FALL"], 
+                       ["Arrow Shoot", "ENTITY_ARROW_SHOOT"],
+                       ["Bat", "ENTITY_BAT_AMBIENT"],
+                       ["Bat Takeoff", "ENTITY_BAT_TAKEOFF"],
+                       ["Beacon", "BLOCK_BEACON_AMBIENT"],
+                       ["Bell Resonate", "BLOCK_BELL_RESONATE"],
+                       ["Bell Use", "BLOCK_BELL_USE"],
+                       ["Blast Furnace Fire Crackle", "BLOCK_BLASTFURNACE_FIRE_CRACKLE"],
+                       ["Blaze", "ENTITY_BLAZE_AMBIENT"],
+                       ["Blaze Burn", "ENTITY_BLASE_BURN"],
+                       ["Brewing Stand Brew", "BLOCK_BREWING_STAND_BREW"],
+                       ["Bubble Column Bubble Pop", "BLOCK_BUBBLE_COLUMN_BUBBLE_POP"],
+                       ["Campfire Crackle", "BLOCK_CAMPFIRE_CRACKLE"],
+                       ["Cave", "AMBIENT_CAVE"],  
+                       ["Chest Close", "BLOCK_CHEST_CLOSE"],
+                       ["Chest Locked", "BLOCK_CHEST_LOCKED"],
+                       ["Chest Open", "BLOCK_CHEST_OPEN"],
+                       ["Composter Ready", "BLOCK_COMPOSTER_READY"],
+                       ["Conduit Activate", "BLOCK_CONDUIT_ACTIVATE"],
+                       ["Ender Chest Close", "BLOCK_ENDER_CHEST_CLOSE"],
+                       ["Ender Chest Open", "BLOCK_ENDER_CHEST_OPEN"],
+                       ["Enderman", "ENTITY_ENDERMAN_AMBIENT"],
+                       ["Enderman Scream", "ENTITY_ENDERMAN_SCREAM"],
+                       ["Enderman Stare", "ENTITY_ENDERMAN_STARE"],
+                       ["Enderman Teleport", "ENTITY_ENDERMAN_TELEPORT"],
+                       ["Event Raid Horn", "EVENT_RAID_HORN"],
+                       ["Evoker", "ENTITY_EVOKER_AMBIENT"],
+                       ["Evoker Celebrate", "ENTITY_EVOKER_CELEBRATE"],
+                       ["Evoker Fangs Attack", "ENTITY_EVOKER_FANGS_ATTACK"],
+                       ["Fence Gate Close", "BLOCK_FENCE_GATE_CLOSE"],
+                       ["Fence Gate Open", "BLOCK_FENCE_GATE_OPEN"],
+                       ["Fire", "BLOCK_FIRE_AMBIENT"],
+                       ["Fire Extinguish", "BLOCK_FIRE_EXTINGUISH"],
+                       ["Firework Rocket Blast", "ENTITY_FIREWORK_ROCKET_BLAST"],
+                       ["Firework Rocket Launch", "ENTITY_FIREWORK_ROCKET_LAUNCH"],
+                       ["Firework Rocket Shoot", "ENTITY_FIREWORK_ROCKET_SHOOT"],
+                       ["Fox", "ENTITY_FOX_AMBIENT"],
+                       ["Fox Screech", "ENTITY_FOX_SCREECH"],
+                       ["Furnace Fire Crackle", "BLOCK_FURNANCE_FIRE_CRACKLE"],
+                       ["Ghast", "ENTITY_GHAST_AMBIENT"],
+                       ["Ghast Scream", "ENTITY_GHAST_SCREAM"],
+                       ["Ghast Warn", "ENTITY_GHAST_WARN"],
+                       ["Glass Break", "BLOCK_GLASS_BREAK"],
+                       ["Glass Step", "BLOCK_GLASS_STEP"],
+                       ["Gravel Break", "BLOCK_GRAVEL_BREAK"],
+                       ["Grave Step", "BLOCK_GRAVEL_STEP"],
+                       ["Horse", "ENTITY_HORSE_AMBIENT"],
+                       ["Horse Gallup", "ENTITY_HORSE_GALLUP"],                       
+                       ["Iron Door Close", "BLOCK_IRON_DOOR_CLOSE"],
+                       ["Iron Door Open", "BLOCK_IRON_DOOR_OPEN"],
+                       ["Ladder Break", "BLOCK_LADDER_BREAK"],
+                       ["Ladder Fall", "BLOCK_LADDER_FALL"],
+                       ["Ladder Step", "BLOCK_LADDER_STEP"],
+                       ["Lava Pop", "BLOCK_LAVA_POP"],
+                       ["Lightning Bolt Impact", "ENTITY_LIGHTNING_BOLT_IMPACT"],
+                       ["Lightning Bolt Thunder", "ENTITY_LIGHTNING_BOLT_THUNDER"],
+                       ["Metal Pressure Plate Click Off", "BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF"],
+                       ["Metal Pressure Plate Click On", "BLOCK_METAL_PRESSURE_PLATE_CLICK_ON"],
+                       ["Minecart Inside", "ENTITY_MINECART_INSIDE"],
+                       ["Minecart Riding", "ENTITY_MINECART_RIDING"],
+                       ["Music Disk 11", "MUSIC_DISC_11"],
+                       ["Music Disk 13", "MUSIC_DISC_13"],
+                       ["Music End", "MUSIC_END"],
+                       ["Music Game", "MUSIC_GAME"],
+                       ["Note Banjo", "BLOCK_NOTE_BLOCK_BANJO"],
+                       ["Note Base Drum", "BLOCK_NOTE_BLOCK_BASEDRUM"],
+                       ["Note Bell", "BLOCK_NOTE_BLOCK_BASS"],
+                       ["Note CowBell", "BLOCK_NOTE_BLOCK_COW_BELL"],
+                       ["Note Didgeridoo", "BLOCK_NOTE_BLOCK_DIDGERIDOO"],
+                       ["Note Guitar", "BLOCK_NOTE_BLOCK_GUITAR"],
+                       ["Note Harp", "BLOCK_NOTE_BLOCK_HARP"],
+                       ["Note Iron Xylophone", "BLOCK_NOTE_BLOCK_IRON_XYLOPHONE"],
+                       ["Note Pling", "BLOCK_NOTE_BLOCK_PLING"],
+                       ["Note Snare", "BLOCK_NOTE_BLOCK_SNARE"],
+                       ["Note Xylophone", "BLOCK_NOTE_BLOCK_XYLOPHONE"],
+                       ["Panda", "ENTITY_PANDA_AMBIENT"],
+                       ["Panda Pre Sneeze", "ENTITY_PANDA_PRE_SNEEZE"],
+                       ["Panda Sneeze", "ENTITY_PANDA_SNEEZE"],
+                       ["Phantom", "ENTITY_PHANTOM_AMBIENGT"],
+                       ["Phantom Swoop", "ENTITY_PHANTOM_SWOOP"],
+                       ["Pillager", "ENTITY_PILLAGER_AMBIENT"],
+                       ["Pillager Celebrate", "ENTITY_PILLAGER_CELEBRATE"],
+                       ["Piston Contract", "BLOCK_PISTON_CONTRACT"],
+                       ["Piston Extend", "BLOCK_PISTON_EXTEND"],
+                       ["Player Death", "ENTITY_PLAYER_DEATH"],
+                       ["Player Burp", "ENTITY_PLAYER_BURP"],
+                       ["Polar Bear", "ENTITY_POLAR_BEAR_AMBIENT"],
+                       ["Portal", "BLOCK_PORTAL_AMBIENT"],
+                       ["Portal Travel", "BLOCK_PORTAL_TRAVEL"],
+                       ["Portal Trigger", "BLOCK_PORTAL_TRIGGER"],
+                       ["Pumpkin Carve", "BLOCK_PUMPKIN_CARVE"],
+                       ["Ravager", "ENTITY_RAVAGER_AMBIENT"],
+                       ["Ravager Attack", "ENTITY_RAVAGER_ATTACK"],
+                       ["Ravager Celebrate", "ENTITY_RAVAGER_CELEBRATE"],
+                       ["Shulker Box Close", "BLOCK_SHULKER_BOX_CLOSE"],
+                       ["Shulker Box Open", "BLOCK_SHULKER_BOX_OPEN"],
+                       ["Snowball Throw", "ENTITY_SNOWBALL_THROW"],
+                       ["Tripwire Click Off ", "BLOCK_TRIPWIRE_CLICK_OFF"],
+                       ["Tripwire Click On", "BLOCK_TRIPEWIRE_CLOCK_ON"],
+                       ["Button Click", "UI_BUTTON_CLICK"],
+                       ["Villager Yes", "ENTITY_VILLAGER_YES"],
+                       ["Vindicator", "ENTITY_VINDICATOR_AMBIENT"],
+                       ["Vindicator Celebrate", "ENTITY_VINDICATOR_CELEBRATE"],
+                       ["Water", "BLOCK_WATER_AMBIENT"],
+                       ["Wet Grass Step", "BLOCK_WET_GRASS_STEP"],
+                       ["Wandering Trader", "ENTITY_WANDERING_TRADER_AMBIENT"],
+                       ["Wandering Trader No", "ENTITY_WANDERING_TRADER_NO"],
+                       ["Wandering Trader Yes", "ENTITY_WANDERING_TRADER_YES"],                       
+                       ["Weather Rain", "WEATHER_RAIN"],
+                       ["Weather Rain Above", "WEATHER_RAIN_ABOVE"],
+                       ["Witch", "ENTITY_WITCH_AMBIENT"],
+                       ["Witch Celebrate", "ENTITY_WITCH_CELEBRATE"],
+                       ["Wood Step", "BLOCK_WOOD_STEP"],
+                       ["Wolf", "ENTITY_WOLF_AMBIENT"],
+                       ["Wolf Growl", "ENTITY_WOLF_GROWL"],
+                       ["Wolf Whine", "ENTITY_WOLF_WHINE"],
+                       ["Wooden Trapdoor Open", "BLOCK_WOODEN_TRAPDOOR_OPEN"],
+                       ["Wooden Trapdoor Close", "BLOCK_WOODEN_TRAPDOOR_CLOSE"]
+                                               ]), "EFFECT");                   
+                                        
+    this.setOutput(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['playsound'] = {
+  init: function() {
+    this.appendValueInput("EFFECT")
+        .appendField("Play Sound:") 
+        
+
+    this.appendDummyInput()
+        .appendField ("at volume ")
+        .appendField (new Blockly.FieldTextInput ( "10"), "VOLUME")
+
+        
+    this.appendValueInput("PLAYER")
+        .appendField ("for player: ")
+        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);    
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 
 
