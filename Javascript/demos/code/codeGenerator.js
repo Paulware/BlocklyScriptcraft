@@ -974,6 +974,8 @@ Blockly.Python['instantteleport'] = function(block) {
   location = insideParen (location);
   var entity = Blockly.Python.valueToCode(block, 'ENTITY', Blockly.Python.ORDER_ATOMIC);
   entity = insideParen (entity);  
+  //var yaw = entity + '.location.yaw';
+  //var pitch = entity + '.location.pitch';
   var code = entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";    
   return code;
 }
@@ -3429,4 +3431,37 @@ Blockly.Python['playsound'] = function(block) {
   var code = "server.worlds[0].playSound (" + player + ".getLocation(), " + effect + ", " + volume + ", 1);\n"; 
   return code;
 };
+
+Blockly.Python['modplayerlocation'] = function(block) {
+  var x = block.getFieldValue ('X'); 
+  var y = block.getFieldValue ('Y');
+  var z = block.getFieldValue ('Z');
+
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC));
+  var location = player + '.location';
+  var yaw = player + '.yaw';
+  var pitch = player + '.pitch'
+  
+  var code = '(function() { ' + 
+                'var _x = ' + location + '.x + ' + x + ';' + 
+                'var _y = ' + location + '.y + ' + y + ';' +
+                'var _z = ' + location + '.z + ' + z + ';' +                 
+                'var loc = new org.bukkit.Location(server.worlds[0],_x,_y,_z);' + // ,' + yaw + ',' + pitch + ');' + 
+                'return loc;' + 
+             ' })()' 
+  
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['islocation'] = function(block) {
+  var x = block.getFieldValue ('X'); 
+  var y = block.getFieldValue ('Y');
+  var z = block.getFieldValue ('Z');
+
+  var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));  
+  var code = '(' + location + '.x!=' + x + ') ? false :(' + location + '.y!=' + y + ') ? false : (' +location+'.z!='+z+') ? false : true'; 
+  
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
 

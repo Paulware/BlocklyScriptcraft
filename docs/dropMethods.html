@@ -1,0 +1,35 @@
+<H1>Methods for dropping/creating custom items</h1>
+This topic will discuss various methods for players to obtain a custom item:<br>
+<ul>
+<li>Dropped at player's location when a player pushes a specific button</li>
+<li>Use an Anvil to give an item a custom name</li>
+<li>From a chest</li>
+<li>From a recipe</li>
+<li>Dropped by a boss monster when killed</li>
+<li>Dropped when a player moves over a specific [x,y,z] location</li>
+</ul>
+<H2>Drop on item on button push</H2>
+Add an oak button to your world, and then use F3 to get the location of the button.<br>
+Use this information to populate the X,Y,Z location in the if statement: <br>
+Note: You do not need to check that an oak button was the type of block clicked on.  In this regard you can also use a sign<br>
+You also might want to have some kind of sign to indicate what the button will give you<br>
+<i>You could also have a cost for the item, and check how many gold, emerald or diamonds are in their hotbar</i>
+<br>
+<img src="images/buttonDropItem.jpg"><br>
+<H2>Use an anvil</H2>
+Using an anvil you can give any item a custom name<br>
+<img src="images/anvilNameTag.jpg"><br>
+<h2>From a chest</h2>
+You can use this code to randomize chest contents when your test procedure is run<br>
+<img src="images/randomizeChestContents.jpg"><br>
+<h2>Create a custom item from a recipe</h2>
+You can have a user craft the special item using a custom recipe: <br>
+<img src="images/oakKeyRecipe.jpg"><br>
+<h2>Drop the item when a boss monster is killed</h2>
+This code will drop a splash potion when a boss monster with custom name "Isabella" is killed. 
+<img src="images/entityDied.jpg"><br>
+<h2>Drop the item when the player moves over a specific [x,y,z] location</h2>
+You can use F3 to see the location of blocks around your world.  Doorways work well to get locations that players must move through<br>
+<img src="images/playerMoveDrop.jpg"><br>
+
+

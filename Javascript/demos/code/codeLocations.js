@@ -188,7 +188,9 @@
       "Set radius to blocks for area effect cloud => Items, Area Effect Cloud", 
       "Door block is open => World=>Blocks",     
       "Play Effect => Entities, Effects", 
-      "Effect Type => Entities, Effects",       
+      "Effect Type => Entities, Effects", 
+      "Location = =>World Location", 
+      "Create list with => Lists",    
    ];
    
    function autocomplete(inp, arr) {

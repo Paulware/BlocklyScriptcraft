@@ -1022,7 +1022,7 @@ Blockly.Blocks['projectileentity'] = {
                                                   ["Arrow", "ARROW"],
                                                   ["Dragon Fireball", "DRAGON_FIREBALL"],
                                                   ["Fireball", "FIREBALL"],
-                                                  ["Firework", "FIREWORK_ROCKET"],
+                                                  ["Firework", "FIREWORK"],
                                                   ["Shulker Bullet", "SHULKER_BULLET"],
                                                   ["SnowBall", "SNOWBALL"],
                                                   ["Tipped Arrow", "TIPPED_ARROW"],
@@ -1096,6 +1096,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Fence", "OAK_FENCE"],
                                                 ["Gold Block", "GOLD_BLOCK"],
                                                 ["Hopper", "HOPPER"],
+                                                ["Ice", "ICE"],
                                                 ["Iron Block", "IRON_BLOCK"],
                                                 ["Fire", "FIRE"],                                                
                                                 ["Gate (Oak)", "OAK_FENCE_GATE"],
@@ -2877,6 +2878,24 @@ Blockly.Blocks['locationadd'] = {
   }
 };
 
+Blockly.Blocks['modplayerlocation'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField("Modify location")
+        .appendField("X")
+        .appendField (new Blockly.FieldTextInput ("0"), "X")          
+        .appendField("Y")
+        .appendField (new Blockly.FieldTextInput ("100"), "Y")          
+        .appendField("Z")
+        .appendField (new Blockly.FieldTextInput ("0"), "Z") 
+        .appendField ("for player:");  
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['changelocation'] = {
   init: function() {
     this.appendValueInput ( "LOCATION" )
@@ -3991,6 +4010,28 @@ Blockly.Blocks['playsound'] = {
     this.setNextStatement(true, null);
     this.setInputsInline(true);    
     this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['islocation'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Location");
+        
+    this.appendDummyInput()
+        .appendField("= [ X")
+        .appendField (new Blockly.FieldTextInput ("0"), "X")          
+        .appendField("Y")
+        .appendField (new Blockly.FieldTextInput ("0"), "Y")          
+        .appendField("Z")
+        .appendField (new Blockly.FieldTextInput ("0"), "Z")
+        .appendField(" ]");
+        
+    this.setInputsInline(true);    
+    this.setOutput(true, null);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
