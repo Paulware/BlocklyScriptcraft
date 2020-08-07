@@ -479,7 +479,7 @@ Blockly.Python['definename'] = function(block) {
 Blockly.Python['tostring'] = function (block) {
   var val = Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC);
   val = insideParen (val)  
-  var code  = val + ".toString()"; 
+  var code  = "(" + val + "==null)?\"\":(" + val + ".toString==null)?\"\":" + val + ".toString()"; 
   
   return [code, Blockly.Python.ORDER_NONE];
 };
@@ -3461,6 +3461,32 @@ Blockly.Python['islocation'] = function(block) {
   var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));  
   var code = '(' + location + '.x!=' + x + ') ? false :(' + location + '.y!=' + y + ') ? false : (' +location+'.z!='+z+') ? false : true'; 
   
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['counthotbar'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var material = insideParen(Blockly.Python.valueToCode(block, 'MATERIAL', Blockly.Python.ORDER_ATOMIC));
+
+  var code =  "(function () {\n" +     
+              "   var _sum=0;\n" +              
+              "   var _index;\n" + 
+              "   var _stack;\n" +
+              "   var _stackType;\n" +              
+              "   var _inventory = " + player + ".getInventory().getContents();\n" +
+              "   var _count = 0;\n" +               
+              "   for (var _i=0; _i<_inventory.length; _i++)  {\n" +   
+              "      _stack = _inventory[_i];\n" +
+              "      _stackType = (_stack == null ) ? null : (_stack.getType == null) ? null : _stack.getType();\n" +               
+              "      // console.log ( _i + \"): \" + _stackType );\n" + 
+              "      if (_stackType == " + material + " ){ \n" + 
+              "         _count = _count + _stack.getAmount();\n" + 
+              "      }\n" + 
+              "      if (_i == 8) { break; }\n" +               
+              "   }\n" + 
+              "   console.log ( \"Got a hotbar quantity of:\" + _count + \" " + material + "\" );\n" + 
+              "   return _count;})()"
   return [code, Blockly.Python.ORDER_NONE];
 };
 

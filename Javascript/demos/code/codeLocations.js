@@ -190,7 +190,8 @@
       "Play Effect => Entities, Effects", 
       "Effect Type => Entities, Effects", 
       "Location = =>World Location", 
-      "Create list with => Lists",    
+      "Create list with => Lists", 
+      "Count Players Bet => Entities, Player"      
    ];
    
    function autocomplete(inp, arr) {

@@ -107,7 +107,7 @@ Blockly.Python['text_isEmpty'] = function(block) {
 Blockly.Python['text_indexOf'] = function(block) {
   // Search the text for a substring.
   // Should we allow for non-case sensitive???
-  var operator = block.getFieldValue('END') == 'FIRST' ? 'find' : 'rfind';
+  var operator = block.getFieldValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
   var substring = Blockly.Python.valueToCode(block, 'FIND',
       Blockly.Python.ORDER_NONE) || '\'\'';
   var text = Blockly.Python.valueToCode(block, 'VALUE',

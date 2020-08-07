@@ -162,7 +162,7 @@ Blockly.Blocks['potionname'] = {
 Blockly.Blocks['tostring'] = {
   init: function() {
     this.appendValueInput("VARIABLE")
-        .appendField("Var to string, Variable:");   
+        .appendField("convert to string, Variable:");   
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setOutput(true, "String");  
@@ -942,9 +942,11 @@ Blockly.Blocks['materialtype'] = {
         .appendField("Material")        
         .appendField(new Blockly.FieldDropdown([
                                                   ["Acacia Door", "ACACIA_DOOR"],
+                                                  ["Acacia Planks", "ACACIA_PLANKS"],
                                                   ["Air", "AIR"],
                                                   ["Arrow", "ARROW"],
                                                   ["Birch Door", "BIRCH_DOOR"],
+                                                  ["Birch Planks", "BIRCH_PLANKS"],                                                
                                                   ["Bow", "BOW"],
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Blaze Rod", "BLAZE_ROD"],
@@ -957,6 +959,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Cookie","COOKIE"],
                                                   ["Crossbow", "CROSSBOW"],
                                                   ["Dark Oak Door", "DARK_OAK_DOOR"],
+                                                  ["Dark Oak Planks", "DARK_OAK_PLANKS"],
                                                   ["Diamond", "DIAMOND"],
                                                   ["Diamond Boots", "DIAMOND_BOOTS"],
                                                   ["Diamond ChestPlate", "DIAMOND_CHESTPLATE"],
@@ -983,6 +986,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Iron Ingot", "IRON_INGOT"],
                                                   ["Iron Sword", "IRON_SWORD"],
                                                   ["Jungle Door", "JUNGLE_DOOR"],
+                                                  ["Jungle Planks", "JUNGLE_PLANKS"],
                                                   ["Leather Boots", "LEATHER_BOOTS"],
                                                   ["Leather ChestPlate", "LEATHER_CHESTPLATE"],
                                                   ["Leather Helmet", "LEATHER_HELMET"],
@@ -1000,6 +1004,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Snow Block", "SNOW_BLOCK"],
                                                   ["Splash Potion", "SPLASH_POTION"],
                                                   ["Spruce Door", "SPRUCE_DOOR"],
+                                                  ["Spruce Planks", "SPRUCE_PLANKS"],
                                                   ["Tipped Arrow", "TIPPED_ARROW"],
                                                   ["TripWire Hook", "TRIPWIRE_HOOK"],
                                                   ["Totem of Undying", "TOTEM_OF_UNDYING"],
@@ -3481,7 +3486,7 @@ Blockly.Blocks['countBet'] = {
         .appendField("assigned to player");
     this.setOutput(true, null);     
     this.setInputsInline(true);                    
-    this.setColour(160);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -4031,6 +4036,20 @@ Blockly.Blocks['islocation'] = {
         
     this.setInputsInline(true);    
     this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['counthotbar'] = {
+  init: function() {
+    this.appendValueInput("MATERIAL")
+        .appendField("Count number of Material");   
+    this.appendValueInput("PLAYER")
+        .appendField("in hotbar for player: ");
+    this.setOutput(true, null);     
+    this.setInputsInline(true);                    
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
