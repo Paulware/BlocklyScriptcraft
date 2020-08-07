@@ -191,7 +191,9 @@
       "Effect Type => Entities, Effects", 
       "Location = =>World Location", 
       "Create list with => Lists", 
-      "Count Players Bet => Entities, Player"      
+      "Count Players Bet => Entities, Player",
+      "In text find first occurence of text => Text",   
+      "Convert to string, Variable: => Text",       
    ];
    
    function autocomplete(inp, arr) {
