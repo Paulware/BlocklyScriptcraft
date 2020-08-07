@@ -24,293 +24,154 @@
                       </block>
                     </value>
                     <next>
-                      <block type="setvariablevalue" id="vV$X**Fjg`PrJz*YzZPG">
-                        <field name="VARNAME">inhand</field>
+                      <block type="setvariablevalue" id="~O5n89yk=6mR0j#j74E]">
+                        <field name="VARNAME">blockType</field>
                         <value name="EXPRESSION">
-                          <block type="iteminhandis" id="%K{uo@}t9R]ZySxMSHaG">
-                            <value name="PLAYER">
-                              <block type="varname" id="fAiz+/v*QXQ)~-l[3n)3">
-                                <field name="VARNAME">player</field>
+                          <block type="getblocktype" id="t!F%Uu#Ujm|FH}!esf8h">
+                            <value name="BLOCK">
+                              <block type="varname" id="DNnUZK^P:}[d{5SJ7FD}">
+                                <field name="VARNAME">block</field>
                               </block>
                             </value>
                           </block>
                         </value>
                         <next>
-                          <block type="setvariablevalue" id="s*l}.v@di(WEsg_-4(No">
-                            <field name="VARNAME">name</field>
+                          <block type="setvariablevalue" id=".FG4y~ldRFza|W;;KEjs">
+                            <field name="VARNAME">index</field>
                             <value name="EXPRESSION">
-                              <block type="nameofstack" id="}3sbbP[FBgHF4*Gk]OZB">
-                                <value name="STACK">
-                                  <block type="varname" id="B.Bd`K4Xs1`_W#z|.[7P">
-                                    <field name="VARNAME">inhand</field>
+                              <block type="text_indexOf" id="Nr_N-XZK?fw]?2f]oV|}">
+                                <field name="END">FIRST</field>
+                                <value name="VALUE">
+                                  <block type="tostring" id="ZQe8Ub4TN:Qpo05u![lf">
+                                    <value name="VARIABLE">
+                                      <block type="varname" id="Apc8k~s?flR;jEd7w8(8">
+                                        <field name="VARNAME">blockType</field>
+                                      </block>
+                                    </value>
                                   </block>
+                                </value>
+                                <value name="FIND">
+                                  <shadow type="text" id="w!UPxDmPC~Yy7u3.,0GS">
+                                    <field name="TEXT">DOOR</field>
+                                  </shadow>
                                 </value>
                               </block>
                             </value>
                             <next>
-                              <block type="consolelog" id="ZG5lN#2G++jB0G3DM72)">
-                                <value name="NAME">
-                                  <block type="getblocktype" id="R`!6oZ+)/eS`]-=z=$d7">
-                                    <value name="BLOCK">
-                                      <block type="varname" id="H5@L@wfIb^)s%6U{Tini">
-                                        <field name="VARNAME">block</field>
+                              <block type="controls_if" id="MRl/E.kW9^-ue2lTYEmd">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="l5YM~?zRs{Yzv(QlRDl-">
+                                    <field name="OP">GT</field>
+                                    <value name="A">
+                                      <block type="varname" id="d?%3SH+*(;`6DP$9,h7W">
+                                        <field name="VARNAME">index</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="?u9*kg!5;7VzwlNRDPEf">
+                                        <field name="NUM">0</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
-                                <next>
-                                  <block type="controls_if" id="`WLntczsCFj!jrBfE;],">
-                                    <mutation elseif="3"></mutation>
-                                    <value name="IF0">
-                                      <block type="logic_compare" id=";?F^={xTPSg(+idjcv2}">
-                                        <field name="OP">EQ</field>
-                                        <value name="A">
-                                          <block type="getblocktype" id="DB|YxpSY4?d`{~NHHgF`">
-                                            <value name="BLOCK">
-                                              <block type="varname" id="7umd[]V4vL,`MT-kpu$l">
-                                                <field name="VARNAME">block</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="materialtype" id="Ne9Ja0)r@1l]h2r(8X;+">
-                                            <field name="MATERIAL">DARK_OAK_DOOR</field>
+                                <statement name="DO0">
+                                  <block type="setvariablevalue" id="58y0.IDlmAqf#Z0/+Cz$">
+                                    <field name="VARNAME">inhand</field>
+                                    <value name="EXPRESSION">
+                                      <block type="iteminhandis" id="mp#mM.Lmy2sED,/jc},l">
+                                        <value name="PLAYER">
+                                          <block type="varname" id="M@p,Nw=|0;ei=Dss:E21">
+                                            <field name="VARNAME">player</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
-                                    <statement name="DO0">
-                                      <block type="controls_if" id="fDf=K^vUd`xp}lGwYx%0">
-                                        <mutation else="1"></mutation>
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="z|GR]-sL5)Rp72h%E:HR">
-                                            <field name="OP">EQ</field>
-                                            <value name="A">
-                                              <block type="varname" id="5*A(d,ivQz7V.ep|UCd-">
-                                                <field name="VARNAME">name</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="varname" id="|A==Xx}+WLRwh.+h1p0T">
-                                                <field name="VARNAME">"DARK_OAK_KEY"</field>
+                                    <next>
+                                      <block type="setvariablevalue" id="yscw`937?BeuNi^mZ0q6">
+                                        <field name="VARNAME">name</field>
+                                        <value name="EXPRESSION">
+                                          <block type="nameofstack" id="kP4$1bm}*m+COQ=mNb,5">
+                                            <value name="STACK">
+                                              <block type="varname" id="xoT*7nxWilWzIUM=9wAT">
+                                                <field name="VARNAME">inhand</field>
                                               </block>
                                             </value>
                                           </block>
                                         </value>
-                                        <statement name="DO0">
-                                          <block type="sendmessage" id="u.w,uuduBodE`0ax2],L">
-                                            <field name="MESSAGE">"Welcome " + player.name</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="7pG5ndT-5jeRSS9y3rbF">
-                                                <field name="VARNAME">player</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </statement>
-                                        <statement name="ELSE">
-                                          <block type="sendmessage" id="]l4Q4cqERZC(QCV.;JL~">
-                                            <field name="MESSAGE">"You need an DARK OAK KEY to open this door"</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="O?Y%7#%HQe:P!t?9DZRj">
-                                                <field name="VARNAME">player</field>
+                                        <next>
+                                          <block type="setvariablevalue" id="}`VYe}Uuzmrd+9_S.):D">
+                                            <field name="VARNAME">index</field>
+                                            <value name="EXPRESSION">
+                                              <block type="text_indexOf" id="S$xppSLY*#%xoE88zMR)">
+                                                <field name="END">FIRST</field>
+                                                <value name="VALUE">
+                                                  <block type="varname" id="pH7p-dTSOCIU5L[x:H0h">
+                                                    <field name="VARNAME">name</field>
+                                                  </block>
+                                                </value>
+                                                <value name="FIND">
+                                                  <shadow type="text" id="w!UPxDmPC~Yy7u3.,0GS">
+                                                    <field name="TEXT">abc</field>
+                                                  </shadow>
+                                                  <block type="tostring" id="GT`7A{u_CMO2$K$gw/B)">
+                                                    <value name="VARIABLE">
+                                                      <block type="varname" id="G:E?4rt]i,k2^=-18l~D">
+                                                        <field name="VARNAME">blockType</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="eventcancel" id="KSsLV1M[jq3jw+MKiFP5"></block>
+                                              <block type="controls_if" id="`WLntczsCFj!jrBfE;],">
+                                                <mutation else="1"></mutation>
+                                                <value name="IF0">
+                                                  <block type="logic_compare" id=";?F^={xTPSg(+idjcv2}">
+                                                    <field name="OP">GT</field>
+                                                    <value name="A">
+                                                      <block type="varname" id="Y8.8ppbY`(Hj2p:xk}~O">
+                                                        <field name="VARNAME">index</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="(|3IQ*pmmmZH4/T*O_58">
+                                                        <field name="NUM">0</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="sendmessage" id="u.w,uuduBodE`0ax2],L">
+                                                    <field name="MESSAGE">"Welcome " + player.name</field>
+                                                    <value name="PLAYER">
+                                                      <block type="varname" id="7pG5ndT-5jeRSS9y3rbF">
+                                                        <field name="VARNAME">player</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <statement name="ELSE">
+                                                  <block type="sendmessage" id="]l4Q4cqERZC(QCV.;JL~">
+                                                    <field name="MESSAGE">"You need an KEY for a " + blockType</field>
+                                                    <value name="PLAYER">
+                                                      <block type="varname" id="O?Y%7#%HQe:P!t?9DZRj">
+                                                        <field name="VARNAME">player</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="eventcancel" id="KSsLV1M[jq3jw+MKiFP5"></block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                              </block>
                                             </next>
                                           </block>
-                                        </statement>
+                                        </next>
                                       </block>
-                                    </statement>
-                                    <value name="IF1">
-                                      <block type="logic_compare" id="Pj3zg;gs%8)dn(#lP[3`">
-                                        <field name="OP">EQ</field>
-                                        <value name="A">
-                                          <block type="getblocktype" id="mBGI`VZ;t+eTejdc~[[Q">
-                                            <value name="BLOCK">
-                                              <block type="varname" id="0TF+`ywUD+.+~{WLA]9b">
-                                                <field name="VARNAME">block</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="materialtype" id="/iDA8Bhc8Cv04-uLh36r">
-                                            <field name="MATERIAL">BIRCH_DOOR</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="DO1">
-                                      <block type="controls_if" id="Wfb]?/|B3]wLcLNHmlRb">
-                                        <mutation else="1"></mutation>
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="9Z_C++!(Yr!}Wn#@:T}.">
-                                            <field name="OP">EQ</field>
-                                            <value name="A">
-                                              <block type="varname" id="]#|SZx!;YH.SS7HBsK6y">
-                                                <field name="VARNAME">name</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="varname" id="F.^B(#:$JbVMqAR4(AHO">
-                                                <field name="VARNAME">"BIRCH_KEY"</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="DO0">
-                                          <block type="sendmessage" id="L3-ZMLB3TpiIuCe;9;dT">
-                                            <field name="MESSAGE">"Welcome " + player.name</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="@i-!D`t(pgXc2EeWa2Pp">
-                                                <field name="VARNAME">player</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </statement>
-                                        <statement name="ELSE">
-                                          <block type="sendmessage" id="DZIx6)8kN_$)ShsJw34C">
-                                            <field name="MESSAGE">"You need an BIRCH KEY to open this door"</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="|%?R^}ytg#NT,/tOA8h?">
-                                                <field name="VARNAME">player</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="eventcancel" id="LL?6QUK0kHk}/loo`sZ*"></block>
-                                            </next>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </statement>
-                                    <value name="IF2">
-                                      <block type="logic_compare" id="XruY:)|m`xl}`?Q)W_M4">
-                                        <field name="OP">EQ</field>
-                                        <value name="A">
-                                          <block type="getblocktype" id="S~q47L]p8$!W9}D):G@6">
-                                            <value name="BLOCK">
-                                              <block type="varname" id="UT|-i`Fgs519.KHI7PeB">
-                                                <field name="VARNAME">block</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="materialtype" id="I+s*t]xCA(tu(#*M}aeO">
-                                            <field name="MATERIAL">JUNGLE_DOOR</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="DO2">
-                                      <block type="controls_if" id="w]8M-u7_u[%^iD9{D^})">
-                                        <mutation else="1"></mutation>
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="CmS*SI3UQU;nJU{$rOh:">
-                                            <field name="OP">EQ</field>
-                                            <value name="A">
-                                              <block type="varname" id="Hj$zWmcqlY(CH2w,tIfO">
-                                                <field name="VARNAME">name</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="varname" id="T+I{/(CCX8M9Sr#8:Pfh">
-                                                <field name="VARNAME">"JUNGLE_KEY"</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="DO0">
-                                          <block type="sendmessage" id="~0Gj6[.DAs-`i?%XVm?2">
-                                            <field name="MESSAGE">"Welcome " + player.name</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="k9~p-(b:2CRl,*jzw/J%">
-                                                <field name="VARNAME">player</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </statement>
-                                        <statement name="ELSE">
-                                          <block type="sendmessage" id=",%!NO{=vni?loVF_2-%/">
-                                            <field name="MESSAGE">"You need an JUNGLE KEY to open this door"</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="BxQcFAk3iXADDQEd]N+v">
-                                                <field name="VARNAME">player</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="eventcancel" id="Z!d~M2vjqB]UF}[*bBl]"></block>
-                                            </next>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </statement>
-                                    <value name="IF3">
-                                      <block type="logic_compare" id="k|}2k1*2He|pgBF~^o[`">
-                                        <field name="OP">EQ</field>
-                                        <value name="A">
-                                          <block type="getblocktype" id="o;JYQv*R3xCvXi-QO93A">
-                                            <value name="BLOCK">
-                                              <block type="varname" id="GgR=xw!iiQ33%{Mh)FXn">
-                                                <field name="VARNAME">block</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="materialtype" id="v*30m+2(]52JQ|`i3/IV">
-                                            <field name="MATERIAL">SPRUCE_DOOR</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="DO3">
-                                      <block type="controls_if" id="B91Ir~mbi=*~BU=-b.te">
-                                        <mutation else="1"></mutation>
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="*,JQ3oYTv:!d=pt/UW}Q">
-                                            <field name="OP">EQ</field>
-                                            <value name="A">
-                                              <block type="varname" id="WlAN}GRwPtDOMIhmofA]">
-                                                <field name="VARNAME">name</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="varname" id="t-53J^?|jR.ijO.7P2G(">
-                                                <field name="VARNAME">"SPRUCE_KEY"</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="DO0">
-                                          <block type="sendmessage" id="jm?dnZW(6iT]z_Q7K*HD">
-                                            <field name="MESSAGE">"Welcome " + player.name</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="(wK0t-YruJl7RmbkiU.B">
-                                                <field name="VARNAME">player</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </statement>
-                                        <statement name="ELSE">
-                                          <block type="sendmessage" id="vtDtG*HX6Ys-O{s52.|i">
-                                            <field name="MESSAGE">"You need an SPRUCE KEY to open this door"</field>
-                                            <value name="PLAYER">
-                                              <block type="varname" id="}RCBIf0Q_v;3`cg9{E6k">
-                                                <field name="VARNAME">player</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="eventcancel" id="OZk9;SPcV*7gVWOZQ-ZX"></block>
-                                            </next>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </statement>
+                                    </next>
                                   </block>
-                                </next>
+                                </statement>
                               </block>
                             </next>
                           </block>
@@ -326,27 +187,27 @@
       </block>
     </statement>
   </block>
-  <block type="scriptcraftfunction" id="D3`e$lb4sZ!W5~$$#q!r" x="588" y="-412">
+  <block type="scriptcraftfunction" id="D3`e$lb4sZ!W5~$$#q!r" x="663" y="-387">
     <field name="nameOfFunction">makeRecipes</field>
     <statement name="FUNCTIONCODE">
-      <block type="recipe" id="`{WDyC}+~a`*s`)._.ss">
+      <block type="recipe" id="?Y3baBD.[cO.j]GIC2)%">
         <field name="CH1">O</field>
-        <field name="CH2">T</field>
+        <field name="CH2"></field>
         <field name="CH3"></field>
         <field name="CH4"></field>
-        <field name="CH5"></field>
+        <field name="CH5">T</field>
         <field name="CH6"></field>
         <field name="CH7"></field>
         <field name="CH8"></field>
         <field name="CH9"></field>
         <value name="RESULT">
-          <block type="namethestack" id="InnYUYKx3JyNPSwIUa12">
-            <field name="NAME">"OAK_KEY"</field>
+          <block type="namethestack" id="o^m0X*@h}8_oM;-5.:;+">
+            <field name="NAME">"ACACIA_DOOR_KEY"</field>
             <value name="STACK">
-              <block type="itemstack" id="=Pj5y,_OoLCE@$j?$|+]">
+              <block type="itemstack" id="r60.,RjTnP*71tKd}J5}">
                 <field name="COUNT">1</field>
                 <value name="ITEM">
-                  <block type="materialtype" id="jLmD?Ev)3V?Z|NW^=WSk">
+                  <block type="materialtype" id="fWCXWRG(^~OpYZ*q/hR:">
                     <field name="MATERIAL">TRIPWIRE_HOOK</field>
                   </block>
                 </value>
@@ -355,23 +216,23 @@
           </block>
         </value>
         <value name="INGREDIENTS">
-          <block type="lists_create_with" id="L,8A?gI|FabG?{gMkz*j">
+          <block type="lists_create_with" id="B`_MfT8]d!-7;JZ_ZfxY">
             <mutation items="2"></mutation>
             <value name="ADD0">
-              <block type="addingredient" id="H?{]3fKg]6WqHBd_m(0/">
+              <block type="addingredient" id="cE9F/q]}N8!!]/r{sDW4">
                 <field name="CHARACTER">O</field>
                 <value name="INGREDIENT">
-                  <block type="materialtype" id="]m$9D#PW0xBej0{$LzPL">
-                    <field name="MATERIAL">OAK_PLANKS</field>
+                  <block type="materialtype" id="2s!Q%^HiY-|_6f%I}SfN">
+                    <field name="MATERIAL">ACACIA_PLANKS</field>
                   </block>
                 </value>
               </block>
             </value>
             <value name="ADD1">
-              <block type="addingredient" id="GABE`Wd$(:X79V%n)u_w">
+              <block type="addingredient" id="bSN[(w8.~-FXD(!Wqut8">
                 <field name="CHARACTER">T</field>
                 <value name="INGREDIENT">
-                  <block type="materialtype" id="qe_4ZHUxpZ6!jwRSd`H0">
+                  <block type="materialtype" id="rCVgZ0.$4*;uCz_IS3I#">
                     <field name="MATERIAL">TRIPWIRE_HOOK</field>
                   </block>
                 </value>
@@ -380,24 +241,24 @@
           </block>
         </value>
         <next>
-          <block type="recipe" id="^LCaaP4:u)30S?WKKXdF">
+          <block type="recipe" id="j(#O5$s{^bI=pzQA:ll-">
             <field name="CH1">O</field>
             <field name="CH2"></field>
-            <field name="CH3">T</field>
+            <field name="CH3"></field>
             <field name="CH4"></field>
-            <field name="CH5"></field>
+            <field name="CH5">T</field>
             <field name="CH6"></field>
             <field name="CH7"></field>
             <field name="CH8"></field>
             <field name="CH9"></field>
             <value name="RESULT">
-              <block type="namethestack" id="~=ONkXjY[7%T,i4L9U$q">
-                <field name="NAME">"BIRCH_KEY"</field>
+              <block type="namethestack" id="M!OoS;kRMr$p]`X[-%ox">
+                <field name="NAME">"DARK_OAK_DOOR_KEY"</field>
                 <value name="STACK">
-                  <block type="itemstack" id="Px,:Hxa7^%a;x,A5FdE5">
+                  <block type="itemstack" id="H%${rp{E3AAZUYiND]Rf">
                     <field name="COUNT">1</field>
                     <value name="ITEM">
-                      <block type="materialtype" id="91*w3E8e1,x{@##I;eJe">
+                      <block type="materialtype" id="v0*v;/=a2PBia`^}yLj1">
                         <field name="MATERIAL">TRIPWIRE_HOOK</field>
                       </block>
                     </value>
@@ -406,23 +267,23 @@
               </block>
             </value>
             <value name="INGREDIENTS">
-              <block type="lists_create_with" id="^?a-Cm_awESM`4Or6o(p">
+              <block type="lists_create_with" id="Wk4#0}A]J29:0~gE*`Nb">
                 <mutation items="2"></mutation>
                 <value name="ADD0">
-                  <block type="addingredient" id="Hp+YuEiE{h@5yLVz`91$">
+                  <block type="addingredient" id="VyB4;))^zuXiEVX}%t]W">
                     <field name="CHARACTER">O</field>
                     <value name="INGREDIENT">
-                      <block type="materialtype" id="Et?haU{umDHUrN/hjP@7">
-                        <field name="MATERIAL">OAK_PLANKS</field>
+                      <block type="materialtype" id="!-^rL}GHb4pS8O]pp.g]">
+                        <field name="MATERIAL">DARK_OAK_PLANKS</field>
                       </block>
                     </value>
                   </block>
                 </value>
                 <value name="ADD1">
-                  <block type="addingredient" id="Dj5KOd}O1]`MpJ;8FGpH">
+                  <block type="addingredient" id="g4!o.W#653x,Oh2Xi|FS">
                     <field name="CHARACTER">T</field>
                     <value name="INGREDIENT">
-                      <block type="materialtype" id="+R[eRG4J0aP{-Y%^PKo)">
+                      <block type="materialtype" id="H7+?z3|OU#KpJ*Fau,u}">
                         <field name="MATERIAL">TRIPWIRE_HOOK</field>
                       </block>
                     </value>
@@ -431,24 +292,24 @@
               </block>
             </value>
             <next>
-              <block type="recipe" id="~fb-06PI$bj6MyjhZ7tv">
+              <block type="recipe" id="`{WDyC}+~a`*s`)._.ss">
                 <field name="CH1">O</field>
                 <field name="CH2"></field>
                 <field name="CH3"></field>
                 <field name="CH4"></field>
-                <field name="CH5"></field>
-                <field name="CH6">T</field>
+                <field name="CH5">T</field>
+                <field name="CH6"></field>
                 <field name="CH7"></field>
                 <field name="CH8"></field>
                 <field name="CH9"></field>
                 <value name="RESULT">
-                  <block type="namethestack" id="w}$RDqb[LBxk1P=:0]wF">
-                    <field name="NAME">"JUNGLE_KEY"</field>
+                  <block type="namethestack" id="InnYUYKx3JyNPSwIUa12">
+                    <field name="NAME">"OAK_DOOR_KEY"</field>
                     <value name="STACK">
-                      <block type="itemstack" id="F%Gv]:ZJ[BlsCO:sbaLz">
+                      <block type="itemstack" id="=Pj5y,_OoLCE@$j?$|+]">
                         <field name="COUNT">1</field>
                         <value name="ITEM">
-                          <block type="materialtype" id="%6][_eSr.v%M?zRMuA4]">
+                          <block type="materialtype" id="jLmD?Ev)3V?Z|NW^=WSk">
                             <field name="MATERIAL">TRIPWIRE_HOOK</field>
                           </block>
                         </value>
@@ -457,23 +318,23 @@
                   </block>
                 </value>
                 <value name="INGREDIENTS">
-                  <block type="lists_create_with" id=")_[Pj;~P`Ii`d(IbSqT0">
+                  <block type="lists_create_with" id="L,8A?gI|FabG?{gMkz*j">
                     <mutation items="2"></mutation>
                     <value name="ADD0">
-                      <block type="addingredient" id="/D,ycLB}qF2O3G.o1(Wh">
+                      <block type="addingredient" id="H?{]3fKg]6WqHBd_m(0/">
                         <field name="CHARACTER">O</field>
                         <value name="INGREDIENT">
-                          <block type="materialtype" id="N=8t|~*W=GT-@O|Ye!Y=">
+                          <block type="materialtype" id="]m$9D#PW0xBej0{$LzPL">
                             <field name="MATERIAL">OAK_PLANKS</field>
                           </block>
                         </value>
                       </block>
                     </value>
                     <value name="ADD1">
-                      <block type="addingredient" id="%jh|1t4NL-Z56;qM8s=T">
+                      <block type="addingredient" id="GABE`Wd$(:X79V%n)u_w">
                         <field name="CHARACTER">T</field>
                         <value name="INGREDIENT">
-                          <block type="materialtype" id="tatz?=wK)ZEPz/C8H,-J">
+                          <block type="materialtype" id="qe_4ZHUxpZ6!jwRSd`H0">
                             <field name="MATERIAL">TRIPWIRE_HOOK</field>
                           </block>
                         </value>
@@ -482,24 +343,24 @@
                   </block>
                 </value>
                 <next>
-                  <block type="recipe" id="KX1!y`40^X1u^^r4t,)Q">
+                  <block type="recipe" id="^LCaaP4:u)30S?WKKXdF">
                     <field name="CH1">O</field>
                     <field name="CH2"></field>
                     <field name="CH3"></field>
                     <field name="CH4"></field>
-                    <field name="CH5"></field>
+                    <field name="CH5">T</field>
                     <field name="CH6"></field>
                     <field name="CH7"></field>
                     <field name="CH8"></field>
-                    <field name="CH9">T</field>
+                    <field name="CH9"></field>
                     <value name="RESULT">
-                      <block type="namethestack" id="t/+d?yEJP=s;qX,X-3rt">
-                        <field name="NAME">"SPRUCE_KEY"</field>
+                      <block type="namethestack" id="~=ONkXjY[7%T,i4L9U$q">
+                        <field name="NAME">"BIRCH_DOOR_KEY"</field>
                         <value name="STACK">
-                          <block type="itemstack" id="17?,v8E*4WQJTPd*x/?6">
+                          <block type="itemstack" id="Px,:Hxa7^%a;x,A5FdE5">
                             <field name="COUNT">1</field>
                             <value name="ITEM">
-                              <block type="materialtype" id="ZS=r(`HGO,ki@|?hK;z^">
+                              <block type="materialtype" id="91*w3E8e1,x{@##I;eJe">
                                 <field name="MATERIAL">TRIPWIRE_HOOK</field>
                               </block>
                             </value>
@@ -508,23 +369,23 @@
                       </block>
                     </value>
                     <value name="INGREDIENTS">
-                      <block type="lists_create_with" id="oQBPL:@N*{QMGSBe)gVr">
+                      <block type="lists_create_with" id="^?a-Cm_awESM`4Or6o(p">
                         <mutation items="2"></mutation>
                         <value name="ADD0">
-                          <block type="addingredient" id="LK/LWCkDaExphE!YzHDn">
+                          <block type="addingredient" id="Hp+YuEiE{h@5yLVz`91$">
                             <field name="CHARACTER">O</field>
                             <value name="INGREDIENT">
-                              <block type="materialtype" id="%sJ{BlPeDZfw%O_%g3zd">
-                                <field name="MATERIAL">OAK_PLANKS</field>
+                              <block type="materialtype" id="Et?haU{umDHUrN/hjP@7">
+                                <field name="MATERIAL">BIRCH_PLANKS</field>
                               </block>
                             </value>
                           </block>
                         </value>
                         <value name="ADD1">
-                          <block type="addingredient" id="!B%$5Yb6zItjwJsUi3AT">
+                          <block type="addingredient" id="Dj5KOd}O1]`MpJ;8FGpH">
                             <field name="CHARACTER">T</field>
                             <value name="INGREDIENT">
-                              <block type="materialtype" id="vg(E2TmkZjVxWT!QXF*b">
+                              <block type="materialtype" id="+R[eRG4J0aP{-Y%^PKo)">
                                 <field name="MATERIAL">TRIPWIRE_HOOK</field>
                               </block>
                             </value>
@@ -532,6 +393,112 @@
                         </value>
                       </block>
                     </value>
+                    <next>
+                      <block type="recipe" id="~fb-06PI$bj6MyjhZ7tv">
+                        <field name="CH1">O</field>
+                        <field name="CH2"></field>
+                        <field name="CH3"></field>
+                        <field name="CH4"></field>
+                        <field name="CH5">T</field>
+                        <field name="CH6"></field>
+                        <field name="CH7"></field>
+                        <field name="CH8"></field>
+                        <field name="CH9"></field>
+                        <value name="RESULT">
+                          <block type="namethestack" id="w}$RDqb[LBxk1P=:0]wF">
+                            <field name="NAME">"JUNGLE_DOOR_KEY"</field>
+                            <value name="STACK">
+                              <block type="itemstack" id="F%Gv]:ZJ[BlsCO:sbaLz">
+                                <field name="COUNT">1</field>
+                                <value name="ITEM">
+                                  <block type="materialtype" id="%6][_eSr.v%M?zRMuA4]">
+                                    <field name="MATERIAL">TRIPWIRE_HOOK</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="INGREDIENTS">
+                          <block type="lists_create_with" id=")_[Pj;~P`Ii`d(IbSqT0">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="addingredient" id="/D,ycLB}qF2O3G.o1(Wh">
+                                <field name="CHARACTER">O</field>
+                                <value name="INGREDIENT">
+                                  <block type="materialtype" id="N=8t|~*W=GT-@O|Ye!Y=">
+                                    <field name="MATERIAL">JUNGLE_PLANKS</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="addingredient" id="%jh|1t4NL-Z56;qM8s=T">
+                                <field name="CHARACTER">T</field>
+                                <value name="INGREDIENT">
+                                  <block type="materialtype" id="tatz?=wK)ZEPz/C8H,-J">
+                                    <field name="MATERIAL">TRIPWIRE_HOOK</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="recipe" id="KX1!y`40^X1u^^r4t,)Q">
+                            <field name="CH1">O</field>
+                            <field name="CH2"></field>
+                            <field name="CH3"></field>
+                            <field name="CH4"></field>
+                            <field name="CH5"></field>
+                            <field name="CH6"></field>
+                            <field name="CH7"></field>
+                            <field name="CH8"></field>
+                            <field name="CH9">T</field>
+                            <value name="RESULT">
+                              <block type="namethestack" id="t/+d?yEJP=s;qX,X-3rt">
+                                <field name="NAME">"SPRUCE_DOOR_KEY"</field>
+                                <value name="STACK">
+                                  <block type="itemstack" id="17?,v8E*4WQJTPd*x/?6">
+                                    <field name="COUNT">1</field>
+                                    <value name="ITEM">
+                                      <block type="materialtype" id="ZS=r(`HGO,ki@|?hK;z^">
+                                        <field name="MATERIAL">TRIPWIRE_HOOK</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="INGREDIENTS">
+                              <block type="lists_create_with" id="oQBPL:@N*{QMGSBe)gVr">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="addingredient" id="LK/LWCkDaExphE!YzHDn">
+                                    <field name="CHARACTER">O</field>
+                                    <value name="INGREDIENT">
+                                      <block type="materialtype" id="%sJ{BlPeDZfw%O_%g3zd">
+                                        <field name="MATERIAL">SPRUCE_PLANKS</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="addingredient" id="!B%$5Yb6zItjwJsUi3AT">
+                                    <field name="CHARACTER">T</field>
+                                    <value name="INGREDIENT">
+                                      <block type="materialtype" id="vg(E2TmkZjVxWT!QXF*b">
+                                        <field name="MATERIAL">TRIPWIRE_HOOK</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
                   </block>
                 </next>
               </block>
