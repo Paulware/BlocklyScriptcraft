@@ -336,11 +336,6 @@ function bodyLoad() {
                <block type="structures"></block>
                <block type="buildstructure"></block>
            </category>       
-           <category name="Block Data">
-               <block type="setblockdata"></block>
-               <block type="getblockdata"></block>
-               <block type="existsblockdata"></block>
-           </category>       
        </category>               
        <category name="Location">
           <!block type="location"><!/block>
@@ -436,13 +431,6 @@ function bodyLoad() {
          <!block type="instanceof"><!/block> 
          <block type="lookingdirection"></block> 
          <block type="counthotbar"></block>        
-         <category name="Data">
-            <block type="existsplayerdata"></block>		 
-            <block type="setplayerdata"></block>
-            <block type="getplayerdata2"></block>
-            <block type="playerdataeq"></block>
-            <block type="removeplayerdata"></block>
-         </category>
        </category> 
        <category name="Projectiles">
           <block type="projectileentity"></block>       
@@ -467,6 +455,18 @@ function bodyLoad() {
        </category>
        <!block type="typeString"><!/block>
     </category> 
+    <category name="Data">
+       <block type="setglobal"></block>
+       <block type="globalvariable"></block>
+       <block type="setblockdata"></block>
+       <block type="getblockdata"></block>
+       <block type="existsblockdata"></block>    
+       <block type="existsplayerdata"></block>		 
+       <block type="setplayerdata"></block>
+       <block type="getplayerdata2"></block>
+       <block type="playerdataeq"></block>
+       <block type="removeplayerdata"></block>       
+    </category>
     <category name="Items" colour="320">
           <block type="updateinventory"></block>
           <block type="playerinventory"></block>
@@ -670,7 +670,7 @@ function bodyLoad() {
       <block type="logic_boolean"></block>
       <block type="logic_null"></block>
       <block type="isnull"></block>
-      <block type="logic_ternary"></block>
+      <!block type="logic_ternary"><!/block>
     </category>
 
     <category name="{catMath}" colour="230">

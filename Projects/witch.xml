@@ -1,6 +1,6 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="scriptcraftfunction" id="MVRKT_ylf@%CCYS2OFwD" x="-862" y="437">
-    <field name="nameOfFunction">haunted</field>
+    <field name="nameOfFunction">test</field>
     <statement name="FUNCTIONCODE">
       <block type="eventlistener" id="lo|r3LG9qGx6tKV8*oJN">
         <field name="LISTENERTYPE">playerMove</field>
@@ -23,96 +23,55 @@
                 <next>
                   <block type="controls_if" id="[$2.H]=KC7Kv4@M19~Z6">
                     <value name="IF0">
-                      <block type="logic_compare" id="Jt}C}JWG0`RrDY1VSq!v">
-                        <field name="OP">EQ</field>
-                        <value name="A">
-                          <block type="varname" id="5C`1FxDzbPUzGb-;CU,)">
-                            <field name="VARNAME">parseInt(location.x)</field>
-                          </block>
-                        </value>
-                        <value name="B">
-                          <block type="math_number" id=";SoVIb@~9:ImcnAz?aA:">
-                            <field name="NUM">399</field>
+                      <block type="islocation" id="W7OH][jF$N_ux`o_VlT|">
+                        <field name="X">399</field>
+                        <field name="Y">28</field>
+                        <field name="Z">626</field>
+                        <value name="LOCATION">
+                          <block type="varname" id="8Nekrftl.:NOm5ucMl=h">
+                            <field name="VARNAME">location</field>
                           </block>
                         </value>
                       </block>
                     </value>
                     <statement name="DO0">
-                      <block type="controls_if" id="0Xg[)sAJ(tz5;0UjCPo4">
+                      <block type="controls_if" id="/ry[DBTK+0_i}xdhtkK;">
                         <value name="IF0">
-                          <block type="logic_compare" id="NtwklRSJ6HAU(V(@jwr#">
-                            <field name="OP">EQ</field>
-                            <value name="A">
-                              <block type="varname" id="fK/E^YWunCEXbep4VC(q">
-                                <field name="VARNAME">parseInt(location.y)</field>
-                              </block>
-                            </value>
-                            <value name="B">
-                              <block type="math_number" id="b-Ok95`*S5`{r,T,Fc@D">
-                                <field name="NUM">28</field>
+                          <block type="isnull" id="m^v|CK4!cG6vsWtK?{)g">
+                            <value name="VARIABLE">
+                              <block type="findcustomname" id="FMo@[`Px7|:z!w`oWBvY">
+                                <field name="NAME">"Isabella"</field>
                               </block>
                             </value>
                           </block>
                         </value>
                         <statement name="DO0">
-                          <block type="controls_if" id="z7zEH1fA2Mmo[}gcJVv]">
-                            <value name="IF0">
-                              <block type="logic_compare" id="=^]biA!%VX0]p`#]g#Ym">
-                                <field name="OP">EQ</field>
-                                <value name="A">
-                                  <block type="varname" id="N(?:5eUi5V^9r,;XG#ic">
-                                    <field name="VARNAME">parseInt(location.z)</field>
+                          <block type="setvariablevalue" id="?KVW{Uc8zhP]O=mNY@q1">
+                            <field name="VARNAME">witch</field>
+                            <value name="EXPRESSION">
+                              <block type="spawnentity" id="qWjvR@),F?pEgNaQ~fhf">
+                                <value name="ENTITY">
+                                  <block type="entityType" id="+6ef=KGGGHL:#R;/;zaD">
+                                    <field name="ENTITY">WITCH</field>
                                   </block>
                                 </value>
-                                <value name="B">
-                                  <block type="math_number" id="gNjgI~rKay5G~:~96V*u">
-                                    <field name="NUM">626</field>
+                                <value name="LOCATION">
+                                  <block type="varname" id="8@q@$1W4;]Nc!40$4S#,">
+                                    <field name="VARNAME">location</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
-                            <statement name="DO0">
-                              <block type="controls_if" id="/ry[DBTK+0_i}xdhtkK;">
-                                <value name="IF0">
-                                  <block type="isnull" id="m^v|CK4!cG6vsWtK?{)g">
-                                    <value name="VARIABLE">
-                                      <block type="findcustomname" id="FMo@[`Px7|:z!w`oWBvY">
-                                        <field name="NAME">"Isabella"</field>
-                                      </block>
-                                    </value>
+                            <next>
+                              <block type="nameentity" id="l/Tx.mn4lHWWG0MZ(L`x">
+                                <field name="NAME">"Isabella"</field>
+                                <value name="ENTITY">
+                                  <block type="varname" id="$(z90TW98AA6wDVB@m=c">
+                                    <field name="VARNAME">witch</field>
                                   </block>
                                 </value>
-                                <statement name="DO0">
-                                  <block type="setvariablevalue" id="?KVW{Uc8zhP]O=mNY@q1">
-                                    <field name="VARNAME">witch</field>
-                                    <value name="EXPRESSION">
-                                      <block type="spawnentity" id="qWjvR@),F?pEgNaQ~fhf">
-                                        <value name="ENTITY">
-                                          <block type="entityType" id="+6ef=KGGGHL:#R;/;zaD">
-                                            <field name="ENTITY">WITCH</field>
-                                          </block>
-                                        </value>
-                                        <value name="LOCATION">
-                                          <block type="varname" id="8@q@$1W4;]Nc!40$4S#,">
-                                            <field name="VARNAME">location</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <block type="nameentity" id="l/Tx.mn4lHWWG0MZ(L`x">
-                                        <field name="NAME">"Isabella"</field>
-                                        <value name="ENTITY">
-                                          <block type="varname" id="$(z90TW98AA6wDVB@m=c">
-                                            <field name="VARNAME">witch</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </statement>
                               </block>
-                            </statement>
+                            </next>
                           </block>
                         </statement>
                       </block>

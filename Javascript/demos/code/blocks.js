@@ -1467,12 +1467,12 @@ Blockly.Blocks['killplayer'] = {
 Blockly.Blocks['setplayerdata'] = {
   init: function() {
     this.appendValueInput("VALUE")
-        .appendField("Set Entity Data")  
+        .appendField("Set Data")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
         .appendField(" = ");
   
     this.appendValueInput("PLAYER")
-        .appendField("For ");
+        .appendField("For entity");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -1485,10 +1485,10 @@ Blockly.Blocks['setplayerdata'] = {
 Blockly.Blocks['removeplayerdata'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Delete Player Data")  
+        .appendField("Delete Data")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
     this.appendValueInput("PLAYER")
-        .appendField("For Player/Entity");
+        .appendField("For Entity");
     this.setInputsInline(true);             
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -1501,10 +1501,10 @@ Blockly.Blocks['removeplayerdata'] = {
 Blockly.Blocks['getplayerdata'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Get Player Data")
+        .appendField("Get Data")
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY");        
     this.appendValueInput("PLAYER")
-        .appendField("For Player/Entity");
+        .appendField("For Entity");
     this.setColour(0);
     this.setOutput(true, null);    
     this.setTooltip('');
@@ -1561,9 +1561,9 @@ Blockly.Blocks['activeteams'] = {
 Blockly.Blocks['getplayerdata2'] = {
   init: function() {
     this.appendValueInput("PLAYER")
-        .appendField("Get Player Data")
+        .appendField("Get Data")
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")      
-        .appendField("For: ");
+        .appendField("For entity ");
     this.setColour(0);
     this.setOutput(true, null);    
     this.setTooltip('');
@@ -1576,9 +1576,8 @@ Blockly.Blocks['existsplayerdata'] = {
     this.appendValueInput("PLAYER")
         .appendField("Data Exists?")  
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
-  .appendField("For:");
-    //this.appendValueInput("PLAYER")
-    //    .appendField("For Player/Entity");
+        .appendField("For entity");
+
     this.setColour(0);
     this.setTooltip('');
     this.setOutput(true, "Boolean");
@@ -2205,6 +2204,7 @@ Blockly.Blocks['setblockdata'] = {
     this.appendValueInput("LOCATION")
         .appendField("Block Location");
     this.setPreviousStatement(true, null);
+    this.setInputsInline(true);    
     this.setNextStatement(true, null);
     this.setColour(200);
     this.setTooltip('');
@@ -2219,6 +2219,7 @@ Blockly.Blocks['getblockdata'] = {
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY");        
     this.appendValueInput("LOCATION")
         .appendField("Block Location");
+    this.setInputsInline(true);    
     this.setColour(200);
     this.setOutput(true, null);    
     this.setTooltip('');
@@ -2233,6 +2234,7 @@ Blockly.Blocks['existsblockdata'] = {
         .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
     this.appendValueInput("LOCATION")
         .appendField("Block Location");
+    this.setInputsInline(true);            
     this.setColour(200);
     this.setTooltip('');
     this.setOutput(true, "Boolean");
@@ -4053,6 +4055,36 @@ Blockly.Blocks['counthotbar'] = {
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['setglobal']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   this.appendValueInput ("EXPRESSION")
+      .appendField("Set Global ")
+      .appendField (new Blockly.FieldTextInput ("name"), "VARNAME")      
+      .appendField("=");
+   var a=this;
+   this.setTooltip('');
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+Blockly.Blocks['globalvariable']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   this.appendDummyInput().appendField("Global variable:")
+       .appendField (new Blockly.FieldTextInput ("value"), "VARNAME");
+   this.setOutput(true, null);
+   var a=this;
+   this.setTooltip('');
+   this.setHelpUrl('http://www.example.com/');
   }
 };
 

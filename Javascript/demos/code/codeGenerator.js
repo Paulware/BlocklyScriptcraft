@@ -3490,4 +3490,21 @@ Blockly.Python['counthotbar'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['setglobal'] = function(block) {
+  var varname = block.getFieldValue ('VARNAME'); 
+  var expression = insideParen(Blockly.Python.valueToCode(block, 'EXPRESSION', Blockly.Python.ORDER_ATOMIC));
+  if (varname.indexOf ( '.') == -1) {    
+     instantiateVariable (varname);
+  }
+  // alert ( 'expression: ' + expression)
+  var code = 'exports.' + varname + '=' + expression + ';\n';
+  return code;
+};
+
+Blockly.Python['globalvariable'] = function(block) {
+  var code = 'exports.' + block.getFieldValue("VARNAME"); 
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
 
