@@ -1590,16 +1590,16 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
   return code;
 };
 
-Blockly.JavaScript ['dataexpression'] = function (block) {
-  var name = block.getFieldValue ('VARNAME');
+Blockly.Python ['dataexpression'] = function (block) {  
   var expression = Blockly.Python.statementToCode (block, 'EXPRESSION' );    
   var ch = expression.charAt (expression.length-1);
   var ind;
   if (ch == ',' ) { // remove final comma
      expression = expression.substring (0,expression.length-1);
   } 
-  var code = "exports." + name + "={" + expression + "};";
-  return code;
+  
+  var code = "{" + expression + "}";
+  return [code, Blockly.Python.ORDER_NONE];  
 };
 
 Blockly.Python ['datavalue'] = function (block) {
@@ -3042,7 +3042,6 @@ Blockly.Python['starttimer'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player);
   var code =  "(function () {\n" +
-              "  // timerName = " + timerName + ";\n" + 
               "  fd = new org.bukkit.metadata.FixedMetadataValue (__plugin,new Date().getTime());\n" +
               "  if (" + player + " != null) {\n" +
               "    if (" + player + ".setMetadata != null ) {\n" +
@@ -3056,8 +3055,7 @@ Blockly.Python['starttimer'] = function(block) {
 Blockly.Python['elapsedtime'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen(player); 
-  var timerName = Blockly.Python.valueToCode(block, 'TIMERNAME', Blockly.Python.ORDER_ATOMIC);
-  timerName = insideParen(timerName); 
+  var timerName = block.getFieldValue ('TIMERNAME');
 
   var code =  "(function () {\n" + 
               "   var _startTime = (" + player + "== null)? 0 : (" + player + ".getMetadata == null)?0:(" + 
@@ -3459,7 +3457,9 @@ Blockly.Python['islocation'] = function(block) {
   var z = block.getFieldValue ('Z');
 
   var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));  
-  var code = '(' + location + '.x!=' + x + ') ? false :(' + location + '.y!=' + y + ') ? false : (' +location+'.z!='+z+') ? false : true'; 
+  var code = '( parseInt(' + location + '.x) !=' + x + ') ? false :' + 
+             '( parseInt(' + location + '.y) !=' + y + ') ? false :' + 
+             '( parseInt(' + location + '.z) !=' + z + ') ? false : true'; 
   
   return [code, Blockly.Python.ORDER_NONE];
 };
@@ -3492,12 +3492,14 @@ Blockly.Python['counthotbar'] = function(block) {
 
 Blockly.Python['setglobal'] = function(block) {
   var varname = block.getFieldValue ('VARNAME'); 
-  var expression = insideParen(Blockly.Python.valueToCode(block, 'EXPRESSION', Blockly.Python.ORDER_ATOMIC));
-  if (varname.indexOf ( '.') == -1) {    
-     instantiateVariable (varname);
-  }
-  // alert ( 'expression: ' + expression)
+  var expression = Blockly.Python.valueToCode(block, 'EXPRESSION', Blockly.Python.ORDER_ATOMIC);
+  expression = insideParen(expression);
+  //if (varname.indexOf ( '.') == -1) {    
+  //   instantiateVariable (varname);
+  //}
+  
   var code = 'exports.' + varname + '=' + expression + ';\n';
+  
   return code;
 };
 

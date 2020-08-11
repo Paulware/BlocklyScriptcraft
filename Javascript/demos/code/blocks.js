@@ -1620,12 +1620,12 @@ Blockly.Blocks['scriptcraftfunction'] = {
 Blockly.Blocks['dataexpression'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Data Structure")
-        .appendField (new Blockly.FieldTextInput ("variable"), "VARNAME");
+        .appendField("Dictionary Structure");
     this.appendStatementInput("EXPRESSION")
         .setCheck(null);
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
+    this.setOutput(true,null);    
     this.setColour(330);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -3353,7 +3353,7 @@ Blockly.Blocks['cancelfriendlydamage'] = {
         .appendField("Cancel friendly damage");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(40);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -3466,8 +3466,9 @@ Blockly.Blocks['starttimer'] = {
 
 Blockly.Blocks['elapsedtime'] = {
   init: function() {        
-    this.appendValueInput("TIMERNAME")
-        .appendField("Elapsed time for timer");
+    this.appendDummyInput()
+        .appendField("Elapsed time for timer")
+        .appendField (new Blockly.FieldTextInput ( "\"timerName\""), "TIMERNAME");
     this.appendValueInput("PLAYER")
         .appendField("assigned to player");
     this.setColour(120);
@@ -3556,7 +3557,7 @@ Blockly.Blocks['isjumping'] = {
   init: function() { 
     this.appendValueInput("PLAYER")
         .appendField ("Is jumping, player:");
-    this.setColour(160);
+    this.setColour(40);
     this.setTooltip('');
     this.setOutput(true, null);      
     this.setHelpUrl('http://www.example.com/');       

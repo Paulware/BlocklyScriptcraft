@@ -139,7 +139,7 @@
       "Set (variable) => Scriptcraft Coding, Variables",
       "Expression (expression) => Scriptcraft Coding, Variables",
       "Add to list => Lists",
-      "Data Structure => Scriptcraft Coding, Variables",
+      "Dictionary Structure => Scriptcraft Coding, Variables",
       "Data Value => Scriptcraft Coding, Variables",
       "Data Name => Scriptcraft Coding, Variables",
       "Repeat times use variable => Scriptcraft Coding, Loops", 

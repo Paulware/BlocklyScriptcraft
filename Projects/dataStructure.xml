@@ -1,0 +1,31 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="w/!^Gp/3=GLH{J1?#?23" x="88" y="37">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="setglobal" id="~yN(;9U$MUUUFRt=0?GB">
+        <field name="VARNAME">locations</field>
+        <value name="EXPRESSION">
+          <block type="dataexpression" id=".]{Y*%K}fo*AqHQB_v@P">
+            <statement name="EXPRESSION">
+              <block type="namevalue" id="c_~Z~`l:vs`G%5-vSJz0">
+                <field name="VARNAME">"Lobby"</field>
+                <field name="EXPRESSION">5</field>
+                <next>
+                  <block type="datavalue" id="Zl,PWKV;fLp~GbJIaKH(">
+                    <field name="HEADER">BLUE</field>
+                    <statement name="EXPRESSION">
+                      <block type="namevalue" id="Qbn1*^775:8GAhBzAg.=">
+                        <field name="VARNAME">location</field>
+                        <field name="EXPRESSION">-80</field>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -456,16 +456,25 @@ function bodyLoad() {
        <!block type="typeString"><!/block>
     </category> 
     <category name="Data">
-       <block type="setglobal"></block>
-       <block type="globalvariable"></block>
-       <block type="setblockdata"></block>
-       <block type="getblockdata"></block>
-       <block type="existsblockdata"></block>    
-       <block type="existsplayerdata"></block>		 
-       <block type="setplayerdata"></block>
-       <block type="getplayerdata2"></block>
-       <block type="playerdataeq"></block>
-       <block type="removeplayerdata"></block>       
+       <category name="Global">
+          <block type="setglobal"></block>
+          <block type="globalvariable"></block>
+       </category>
+       <category name="Block">
+          <block type="setblockdata"></block>
+          <block type="getblockdata"></block>
+          <block type="existsblockdata"></block>  
+       </category> 
+       <category name="Entity">       
+          <block type="existsplayerdata"></block>		 
+          <block type="setplayerdata"></block>
+          <block type="getplayerdata2"></block>
+          <block type="playerdataeq"></block>
+          <block type="removeplayerdata"></block>    
+       </category>         
+       <block type="dataexpression"></block>
+       <block type="datavalue"></block>
+       <block type="namevalue"></block>       
     </category>
     <category name="Items" colour="320">
           <block type="updateinventory"></block>
@@ -564,9 +573,6 @@ function bodyLoad() {
          <block type="setvariable"></block>      
          <block type="setvariablevalue"></block>
          <block type="runexpression"></block>                  
-         <block type="dataexpression"></block>
-         <block type="datavalue"></block>
-         <block type="namevalue"></block>
        </category>      
        <category name="{catLoops}">
          <block type="foreachloop"></block>

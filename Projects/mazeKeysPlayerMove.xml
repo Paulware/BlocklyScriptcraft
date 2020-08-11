@@ -210,11 +210,21 @@
                         <statement name="DO0">
                           <block type="controls_if" id="7i`8L8]U=|:*OnGJzpfV">
                             <value name="IF0">
-                              <block type="elapsedtime" id="7oiS;~m`cV2#huoxe]];">
-                                <field name="TIMERNAME">"goldDoor"</field>
-                                <value name="PLAYER">
-                                  <block type="varname" id=".VK:DgE1INKcrcQ.x@A;">
-                                    <field name="VARNAME">player</field>
+                              <block type="logic_compare" id="uHNUCLIIef|:,SSJes@{">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="elapsedtime" id="7oiS;~m`cV2#huoxe]];">
+                                    <field name="TIMERNAME">"goldDoor"</field>
+                                    <value name="PLAYER">
+                                      <block type="varname" id=".VK:DgE1INKcrcQ.x@A;">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="Kc*WTtPu5VEoo[x|NYt(">
+                                    <field name="NUM">2000</field>
                                   </block>
                                 </value>
                               </block>

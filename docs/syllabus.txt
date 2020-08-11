@@ -1,0 +1,33 @@
+Syllabus
+   The intent of this 24 class course is to walk the student through the creation of their own custom maze mini-game.
+   Three sessions each consisting of 8 classes are used to help the student with this mini-game   
+   Session I - Introduction to Minecraft Events and Scriptcraft Blocks 
+      Setup 
+      Function Test, Send Message to Player, Player Move Event
+      Console output, Player Mouse Click Event 
+      Entity Damaged Event 
+      Entity Died Event 
+      Projectile-Hit Event, Stacks 
+      Lists, For Each Loop 
+      If-Else If-Else Statements 
+      
+   Session II - Building custom armor and items for your game 
+      Coding a custom recipe
+      Other Recipes
+      Coding a Costum Item 
+      Other Custom Items 
+      Coding Drop Event 
+      Other Drop Events
+      Reading custom item in hand 
+      Reading the custom armor item
+      
+   Session III - Building a challenging maze 
+      IceBoots 
+      Building your maze overview 
+      Coding a boss monster
+      Other boss Monsters
+      Locking and unlocking Door opening events
+      Area Effect Clouds 
+      Timers
+      Placing your mini-game on a public server 
+            
