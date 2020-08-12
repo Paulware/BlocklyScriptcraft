@@ -1,0 +1,122 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="MVRKT_ylf@%CCYS2OFwD" x="38" y="-212">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="sethotbar" id="K58Pf2`_j*[U/5w6Q|,J">
+        <field name="SLOT">1</field>
+        <value name="PLAYER">
+          <block type="varname" id="k~v-G@y0HXRKs#5SdWRU">
+            <field name="VARNAME">self</field>
+          </block>
+        </value>
+        <value name="STACK">
+          <block type="namethestack" id="r;IDpKPLA$:N;$mVkCQO">
+            <field name="NAME">"SCUBA"</field>
+            <value name="STACK">
+              <block type="itemstack" id="FKSN(saGwp}U]?0uN5sp">
+                <field name="COUNT">1</field>
+                <value name="ITEM">
+                  <block type="materialtype" id="?VB#y*[Rb291Qk)`gavv">
+                    <field name="MATERIAL">DIAMOND_CHESTPLATE</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="eventlistener" id="b;[V7Kt#9@NL2]FZ))I+">
+            <field name="LISTENERTYPE">playerMove</field>
+            <statement name="LISTENERCODE">
+              <block type="setvariablevalue" id="[YYY/]Ojl7w)WCd],m#`">
+                <field name="VARNAME">player</field>
+                <value name="EXPRESSION">
+                  <block type="eventinfo" id="_eO3h5HI:$f=bQXegw1_">
+                    <field name="INFORMATION">getPlayer</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setvariablevalue" id="7)d?DgSn^2?VC1}n%XxS">
+                    <field name="VARNAME">chestplate</field>
+                    <value name="EXPRESSION">
+                      <block type="getplayerarmor" id="~i*,]|cF#gBz0-l5t{a!">
+                        <field name="ARMOR">Chestplate</field>
+                        <value name="PLAYER">
+                          <block type="varname" id="U_jG`JjRSITC0$;L9?zY">
+                            <field name="VARNAME">player</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="setvariablevalue" id="^*m.@pCe#gO?v-u:e%zV">
+                        <field name="VARNAME">name</field>
+                        <value name="EXPRESSION">
+                          <block type="nameofstack" id="4t^QBk|RP|!7x2h#q_yt">
+                            <value name="STACK">
+                              <block type="varname" id="aMUh1TM}eWjZu,G#*SP/">
+                                <field name="VARNAME">chestplate</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if" id="i;~~72N0/H#6$9ILh(1}">
+                            <value name="IF0">
+                              <block type="logic_compare" id="K.N`Z!n{14344XiJKwx,">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="varname" id="S1^mjJ8a$f~q[3Z%)0;b">
+                                    <field name="VARNAME">name</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="text" id="YYP8QR=f0s4s7Uw1eKhb">
+                                    <field name="TEXT">SCUBA</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="addpotioneffect" id="pk#%n(y(iQph+wwtrCfh">
+                                <value name="EFFECT">
+                                  <block type="whicheffect" id="%r~-c%Bw}G0w~tzQ1g_P">
+                                    <field name="EFFECT">water_breathing</field>
+                                  </block>
+                                </value>
+                                <value name="PLAYER">
+                                  <block type="varname" id="~f#~J25sr;1%[l%h@$Q)">
+                                    <field name="VARNAME">player</field>
+                                  </block>
+                                </value>
+                                <value name="DURATION">
+                                  <block type="math_number" id="zhxH/FziWpqf^Vi)r%W@">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="sendmessage" id="sFJiCYrSd^s28P{Ns`{[">
+                                    <field name="MESSAGE">"You are wearing scuba gear"</field>
+                                    <value name="PLAYER">
+                                      <block type="varname" id="JlE%#rk5KdG_F:N#qlZr">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -2385,6 +2385,11 @@ Blockly.Python['nameofstack'] = function(block) {
   var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);  
   stack = insideParen(stack);
   var code = '(' + stack + '== null) ? null : (' + stack + '.getItemMeta == null) ? null : (' + stack + '.getItemMeta() == null)?null:' + stack + '.getItemMeta().getDisplayName()'; 
+  var code = '(function() { ' + 
+             '  var _value = ' + code + ';\n' + 
+             '  console.log ( \'Custom name: [\' + _value + \']\');\n' + 
+             '  return _value;' + 
+             ' })()'   
   return [code, Blockly.Python.ORDER_NONE];
 }
 
