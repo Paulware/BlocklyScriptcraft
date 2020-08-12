@@ -4053,7 +4053,7 @@ Blockly.Blocks['counthotbar'] = {
         .appendField("in hotbar for player: ");
     this.setOutput(true, null);     
     this.setInputsInline(true);                    
-    this.setColour(0);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -4086,6 +4086,25 @@ Blockly.Blocks['globalvariable']={
    var a=this;
    this.setTooltip('');
    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['removeitemhotbar'] = {
+  init: function() {
+    this.appendValueInput("MATERIAL")
+       .appendField("Remove ")
+       .appendField (new Blockly.FieldTextInput ("1"), "COUNT")       
+       .appendField(" Material: ");
+       
+    this.appendValueInput("PLAYER")
+        .appendField("from hotbar for player: ");   
+        
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setInputsInline(true);     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
   }
 };
 

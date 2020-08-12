@@ -1,0 +1,127 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="MVRKT_ylf@%CCYS2OFwD" x="-762" y="63">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="b/DxA?T0Z-UDj*~?rwRO">
+        <field name="LISTENERTYPE">playerInteract</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id="E)8aQ/(F3[X?c35CzLOe">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="84T:Tylp*=zEoLGBI:LS">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="P(62Gou_Ea:?stO:Ft!u">
+                <field name="VARNAME">count</field>
+                <value name="EXPRESSION">
+                  <block type="counthotbar" id="FOyGVJ=4zZIbP.lX3mdP">
+                    <value name="MATERIAL">
+                      <block type="materialtype" id="O{yb8do]eix)hBC~Lh,t">
+                        <field name="MATERIAL">EMERALD</field>
+                      </block>
+                    </value>
+                    <value name="PLAYER">
+                      <block type="varname" id=")NW.]R+|Nq1!]-(*3s4v">
+                        <field name="VARNAME">player</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="consolelog" id="1IJ.Q6@a7{kP;NMkN,w|">
+                    <value name="NAME">
+                      <block type="varname" id="taEI$=hC_fEo2RZ])VQv">
+                        <field name="VARNAME">"Number of emeralds: " + count</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="r(=x2/#0TWSjL+#SZ013">
+                        <value name="IF0">
+                          <block type="logic_compare" id="qj!{^QqAz:i$D,96kp6@">
+                            <field name="OP">GT</field>
+                            <value name="A">
+                              <block type="elapsedtime" id="SN1ftsTIX[;iz+F+Sjmz">
+                                <field name="TIMERNAME">"payEmeralds"</field>
+                                <value name="PLAYER">
+                                  <block type="varname" id="X_D3Amqg]LO[LtlT^!vg">
+                                    <field name="VARNAME">player</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="(sNT3nXB5;fl`I?424#1">
+                                <field name="NUM">2000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="starttimer" id="2pl%4dfsOi!6,}ZgPRug">
+                            <field name="TIMERNAME">"payEmeralds"</field>
+                            <value name="PLAYER">
+                              <block type="varname" id="[Pg8u3Cm{3}KxCB!z:B%">
+                                <field name="VARNAME">player</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_if" id="6{uoRO,A^i4g9|5o|fZ}">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="logic_compare" id="Hl)~uG,l$/~@.eLgTf=L">
+                                    <field name="OP">GTE</field>
+                                    <value name="A">
+                                      <block type="varname" id="ewY`5=a[;/Pe)FrOEboo">
+                                        <field name="VARNAME">count</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id=")ugR=KTE{-KVVDqiZWIr">
+                                        <field name="NUM">2</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="removeitemhotbar" id=";19zB|(u/{nbU8f|m{J)">
+                                    <field name="COUNT">2</field>
+                                    <value name="MATERIAL">
+                                      <block type="materialtype" id="-UqmSlt@2/(GYRKrq([f">
+                                        <field name="MATERIAL">EMERALD</field>
+                                      </block>
+                                    </value>
+                                    <value name="PLAYER">
+                                      <block type="varname" id="r~B#LRpEKfF8~Tc}se]3">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="sendmessage" id="c4!OH2Hi=DK#WVTEg`DP">
+                                    <field name="MESSAGE">"2 emerald minimum sir"</field>
+                                    <value name="PLAYER">
+                                      <block type="varname" id="^6a?d3RNAIBf+Eb9@;2M">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

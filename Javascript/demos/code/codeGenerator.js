@@ -3508,5 +3508,41 @@ Blockly.Python['globalvariable'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['removeitemhotbar'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player);
+  var material = insideParen(Blockly.Python.valueToCode(block, 'MATERIAL', Blockly.Python.ORDER_ATOMIC));
+  var count = block.getFieldValue ("COUNT");
+
+  var code =  "(function () {\n" +     
+              "   var _sum=0;\n" +              
+              "   var _index;\n" + 
+              "   var _stack;\n" +
+              "   var _stackType;\n" +              
+              "   var _inventory = " + player + ".getInventory().getContents();\n" +
+              "   var _remaining = " + count + ";\n" +       
+              "   var _count;\n" + 
+              "   var _newStack;\n" +               
+              "   for (var _i=0; _i<8; _i++)  {\n" +   
+              "      _stack = _inventory[_i];\n" +
+              "      _stackType = (_stack == null ) ? null : (_stack.getType == null) ? null : _stack.getType();\n" +                
+              "      if (_stackType == " + material + " ){ \n" +  
+              "         if (_remaining == 0) break;\n" + 
+              "         _count = _stack.getAmount();\n" + 
+              "         if (_count >= _remaining) { \n" + 
+              "            _count = _count - _remaining;\n" + 
+              "            _remaining = 0;\n" + 
+              "         } else { \n" + 
+              "            _remaining = _remaining - _count; \n" + 
+              "            _count = 0;\n" + 
+              "         }\n" + 
+              "         _newStack = new org.bukkit.inventory.ItemStack (" + material + ",_count);\n" + 
+              "         " + player + ".getInventory().setItem (_i,_newStack);\n" + 
+              "      }\n" +              
+              "   }\n" + 
+              "})();\n"
+  return code;
+};
+
 
 

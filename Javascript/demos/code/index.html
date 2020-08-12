@@ -430,7 +430,12 @@ function bodyLoad() {
          <block type="updateplayersinventory"></block>        
          <!block type="instanceof"><!/block> 
          <block type="lookingdirection"></block> 
-         <block type="counthotbar"></block>        
+         <category name="Hotbar">
+            <block type="counthotbar"></block> 
+            <block type="clearhotbar"></block>   
+	        	  <block type="sethotbar"></block>   
+            <block type="removeitemhotbar"></block>            
+         </category>         
        </category> 
        <category name="Projectiles">
           <block type="projectileentity"></block>       
@@ -480,7 +485,6 @@ function bodyLoad() {
           <block type="updateinventory"></block>
           <block type="playerinventory"></block>
           <block type="clearinventory"></block>
-          <block type="clearhotbar"></block>
           <block type="nameofitem"></block>
           <block type="materialtype"></block>       
           <block type="eggtype"></block>       
@@ -514,7 +518,6 @@ function bodyLoad() {
              <block type="getcolor"></block>
              <block type="playerinventory"></block>
              <block type="getplayerarmor"></block>
-		        	  <block type="sethotbar"></block>
              <!block type="chestplate"><!/block>
              <block type="getequipmentname"></block>
              <block type="givearmor"></block>
