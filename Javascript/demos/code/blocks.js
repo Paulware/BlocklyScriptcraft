@@ -4121,10 +4121,16 @@ Blockly.Blocks['locationof']={
   }
 };
 
-Blockly.Blocks['closedoor'] = {
+Blockly.Blocks['setdoor'] = {
   init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([
+                       ["Open", "OPEN"],
+                       ["Close", "CLOSE"]
+                                               ]), "EFFECT");      
+   
     this.appendValueInput("LOCATION")
-       .appendField("Close door at location: ");
+       .appendField("door at location: ");
        
     this.setColour(320);
     this.setTooltip('');

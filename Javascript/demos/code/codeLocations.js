@@ -200,7 +200,7 @@
       "Set Global => Data, Global", 
       "Global Variable: => Data, Global", 
       "Location Of => World, Location",
-      "Close Door => World, Blocks, Door",      
+      "Open Door at Location => World, Blocks, Door",      
    ];
    
    function autocomplete(inp, arr) {

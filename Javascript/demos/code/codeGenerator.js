@@ -3556,9 +3556,10 @@ Blockly.Python['locationof'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.Python['closedoor'] = function(block) {
+Blockly.Python['setdoor'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen(location);
+  var effect = block.getFieldValue ("EFFECT");  
   
   var code = 
               "(function () {\n" +                    
@@ -3572,8 +3573,14 @@ Blockly.Python['closedoor'] = function(block) {
               "        _block = server.worlds[0].getBlockAt ( _loc ); \n" + 
               "     }\n" + 
               "     var _state = _block.getState();\n" + 
-              "     var _info  = _state.getData();\n" + 
-              "     _info.setOpen (false);\n" + 
+              "     var _info  = _state.getData();\n";
+  if (effect == "OPEN") {
+     code = code + "     _info.setOpen (true);\n";    
+  } else {
+     code = code + "     _info.setOpen (false);\n";    
+  }
+
+  code = code +             
               "     _state.setData (_info);\n" + 
               "     _state.update();\n" + 
               "   }\n" +               
