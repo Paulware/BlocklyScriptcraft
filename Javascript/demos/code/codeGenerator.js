@@ -3549,5 +3549,35 @@ Blockly.Python['removeitemhotbar'] = function(block) {
   return code;
 };
 
+Blockly.Python['locationof'] = function(block) {
+  var obj = Blockly.Python.valueToCode(block, 'OBJECT', Blockly.Python.ORDER_ATOMIC);
+  obj = insideParen(obj);
+  var code = '(' + obj + '== null)?null:' + obj + '.location';
+  return [code, Blockly.Python.ORDER_NONE];
+};
 
-
+Blockly.Python['closedoor'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location);
+  
+  var code = 
+              "(function () {\n" +                    
+              "   if (" + location + "!= null) { \n" + 
+              "     var _block=server.worlds[0].getBlockAt(" + location + ");\n" +           
+              "     var _myString = _block.toString();\n" + 
+              "     var _isTop = _myString.indexOf ( \"half=upper\") > -1;\n" +  
+              "     console.log ( \"closedoor Is top: \" + _isTop ); \n" + 
+              "     if (_isTop) {\n" + 
+              "        var _loc=(function() { var _x = " + location + ".x;var _y = " + location + ".y+-1;var _z = " + location + ".z;var __loc = new org.bukkit.Location(server.worlds[0],_x,_y,_z);return __loc; })();\n" + 
+              "        _block = server.worlds[0].getBlockAt ( _loc ); \n" + 
+              "     }\n" + 
+              "     var _state = _block.getState();\n" + 
+              "     var _info  = _state.getData();\n" + 
+              "     _info.setOpen (false);\n" + 
+              "     _state.setData (_info);\n" + 
+              "     _state.update();\n" + 
+              "   }\n" +               
+              "})();\n"
+  
+  return code;
+};

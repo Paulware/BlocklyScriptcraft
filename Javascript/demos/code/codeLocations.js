@@ -199,7 +199,8 @@
       "Convert to string, Variable: => Text",  
       "Set Global => Data", 
       "Global Variable: => Data", 
-           
+      "Location Of => World, Location",
+      "Close Door => World, Blocks, Door",      
    ];
    
    function autocomplete(inp, arr) {

@@ -89,7 +89,7 @@ Blockly.Dart['text_indexOf'] = function(block) {
       Blockly.Dart.ORDER_NONE) || '\'\'';
   var text = Blockly.Dart.valueToCode(block, 'VALUE',
       Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
-  var code = text + '.' + operator + '(' + substring + ')';
+  var code = '(' + text + '== null) ? 0 : ' + text + '.' + operator + '(' + substring + ')';
   if (block.workspace.options.oneBasedIndex) {
     return [code + ' + 1', Blockly.Dart.ORDER_ADDITIVE];
   }

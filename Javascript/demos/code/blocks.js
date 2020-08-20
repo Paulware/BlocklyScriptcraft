@@ -4109,4 +4109,28 @@ Blockly.Blocks['removeitemhotbar'] = {
 };
 
 
+Blockly.Blocks['locationof']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(0);
+   this.appendValueInput("OBJECT")
+       .appendField("Location of ");
+   this.setOutput(true, null);
+   this.setTooltip('');
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
 
+Blockly.Blocks['closedoor'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+       .appendField("Close door at location: ");
+       
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setInputsInline(true);     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
