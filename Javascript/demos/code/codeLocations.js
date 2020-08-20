@@ -197,8 +197,8 @@
       "Count Players Bet => Entities, Player",
       "In text find first occurence of text => Text",   
       "Convert to string, Variable: => Text",  
-      "Set Global => Data", 
-      "Global Variable: => Data", 
+      "Set Global => Data, Global", 
+      "Global Variable: => Data, Global", 
       "Location Of => World, Location",
       "Close Door => World, Blocks, Door",      
    ];
