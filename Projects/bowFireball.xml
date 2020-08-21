@@ -1,0 +1,130 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="w1|+YwRu3c_Lsd+$XQ7F" x="213" y="38">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="sethotbar" id="V{i%UhSFojW8qvP}is|p">
+        <field name="SLOT">1</field>
+        <value name="PLAYER">
+          <block type="varname" id="=(2D4#M{Ih,h41ofyQ~+">
+            <field name="VARNAME">self</field>
+          </block>
+        </value>
+        <value name="STACK">
+          <block type="namethestack" id="pG_R?14Yq4G7#=x{D99_">
+            <field name="NAME">"Wither Bow"</field>
+            <value name="STACK">
+              <block type="itemstack" id="_vzjoMvCFT;3v-IVokqQ">
+                <field name="COUNT">1</field>
+                <value name="ITEM">
+                  <block type="materialtype" id="WUUfwwET^f(o@?=D^.;b">
+                    <field name="MATERIAL">BOW</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="eventlistener" id="J+]f77E#`pSzC^]XJmx+">
+            <field name="LISTENERTYPE">projectileLaunch</field>
+            <statement name="LISTENERCODE">
+              <block type="setvariablevalue" id="u^(Nm8G1Kd3uRr^aa#An">
+                <field name="VARNAME">player</field>
+                <value name="EXPRESSION">
+                  <block type="eventinfo" id="^xF:%SniSj;3%NU3IRVj">
+                    <field name="INFORMATION">getEntity().getShooter</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setvariablevalue" id="6!qk^%EkEKfmgQ~-#7^:">
+                    <field name="VARNAME">inhand</field>
+                    <value name="EXPRESSION">
+                      <block type="iteminhandis" id="Ylum},6C{=4xXw9g=ke@">
+                        <value name="PLAYER">
+                          <block type="varname" id="xDAmO?ewsX^~Fgt,)0zq">
+                            <field name="VARNAME">player</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="setvariablevalue" id="}IYNT?YK[.HqW2G{k=ir">
+                        <field name="VARNAME">weapon</field>
+                        <value name="EXPRESSION">
+                          <block type="materialdata" id=";vcAN:uJ2)xdij7~CD+}">
+                            <value name="STACK">
+                              <block type="varname" id=";E5MPbzGmsWA:.n)Chy,">
+                                <field name="VARNAME">inhand</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="consolelog" id="SW/oaSw/BHT{9AWcfL0q">
+                            <value name="NAME">
+                              <block type="varname" id="z;nS+7j#zY)z:vu]w2oy">
+                                <field name="VARNAME">weapon</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_if" id="BN8)@FQJFOgoPWQ=@7ZC">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="ll![5*c,0]8R/0KZHI=q">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="varname" id="k2J(%7SCIlHG)S,le0,1">
+                                        <field name="VARNAME">weapon</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="text" id="/s,],%oM9KVMq{[Y5WAf">
+                                        <field name="TEXT">BOW</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="launchprojectile" id="aeNW$oxGNYIkFCfI353q">
+                                    <value name="ENTITY">
+                                      <block type="varname" id="W*]74#R(}qF8%y[%lbES">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                    <value name="PROJECTILE">
+                                      <block type="projectileentity" id="@+w%))B7f/9]DZY{QRz_">
+                                        <field name="PROJECTILE">FIREBALL</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="eventlistener" id="n.1~O1alIjm-)iWA/OkU">
+                <field name="LISTENERTYPE">playerInteract</field>
+                <statement name="LISTENERCODE">
+                  <block type="setvariablevalue" id="G5;s]I~~$uCFFV@$k._Y">
+                    <field name="VARNAME">player</field>
+                    <value name="EXPRESSION">
+                      <block type="eventinfo" id="]jR|jrF|be_D#5ZmcZ6$">
+                        <field name="INFORMATION">getPlayer</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

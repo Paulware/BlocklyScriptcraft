@@ -378,7 +378,14 @@ Blockly.Blocks['eventplayer'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("For Which Player?")
-        .appendField(new Blockly.FieldDropdown([["calling function", "self"], ["causing event","event.player"],["event entity", "event.entity"],["shooter","event.entity.shooter"], ["All affected entities", "event.getAffectedEntities()"], ["Attacker", "event.damager"]]), "PLAYER");           
+        .appendField(new Blockly.FieldDropdown([
+                                                  ["calling function", "self"], 
+                                                  ["causing event","event.player"],
+                                                  ["event entity", "event.entity"],
+                                                  ["shooter","event.entity.shooter"],
+                                                  ["All affected entities", "event.getAffectedEntities()"], 
+                                                  ["Attacker", "event.damager"]
+                                               ]), "PLAYER");           
     this.setPreviousStatement(false, null);
     this.setNextStatement(false, null);
     this.setColour(120);
@@ -2963,6 +2970,7 @@ Blockly.Blocks['eventinfo'] = {
                                         ["Get player", "getPlayer"],
                                         ["Get projectile", "getProjectile"],
                                         ["Get shooter", "getEntity().getShooter"],
+                                        ["Get target", "getTarget"],
                                         ["Get the player who performed the click", "getWhoClicked"]
                                        ]), "INFORMATION"); 
 

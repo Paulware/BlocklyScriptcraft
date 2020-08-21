@@ -3375,10 +3375,9 @@ Blockly.Python['setcloudradius'] = function(block) {
 Blockly.Python['getplayerarmor'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
   player = insideParen (player);
-  var armor =  block.getFieldValue ('ARMOR');
+  var armor =  block.getFieldValue ('ARMOR');  
   
-  
-  var code = "(" + player + ".getInventory().get" + armor + "== null) ? null : " + player + ".getInventory().get" + armor + "()";
+  var code = "(" + player + "==null)?null:(" + player + ".getInventory == null)?null:(" + player + ".getInventory().get" + armor + "== null) ? null : " + player + ".getInventory().get" + armor + "()";
         
   return [code, Blockly.Python.ORDER_NONE];
 }
