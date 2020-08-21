@@ -870,8 +870,10 @@ Blockly.Python['blocksradius'] = function(block) {
              '         _loc = new org.bukkit.Location(server.worlds[0], _x,_y,_z);' +    
              '         _blockType =  server.worlds[0].getBlockAt(_loc).getType();\n' +             
              '         if (_blockType == ' + blockType + ') { _blocks.push (server.worlds[0].getBlockAt(_loc)); } \n' + 
-             '  }}}\n' +  
-             '  console.log ( \"found\" + _blocks.length + \" blocks \" );\n' +              
+             '  }}}\n' + 
+             '  if (_blocks.length > 0) { \n' +              
+             '     console.log ( \"found\" + _blocks.length + \" blocks \" );\n' +           
+             '  }\n' +              
              '  return _blocks;\n'  + 
              ' })()'              
              
@@ -1826,7 +1828,9 @@ Blockly.Python['equipmentname'] = function(block) {
 Blockly.Python['updateinventory'] = function(block) {
   var itemStack = Blockly.Python.valueToCode(block, 'ITEMSTACK', Blockly.Python.ORDER_ATOMIC);
   itemStack = insideParen (itemStack);
-  var code = 'inventory.addItem (' + itemStack + ');\n';
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  var code = 'if (' + player + ' != null) { ' + player + '.getInventory().addItem (' + itemStack + '); }\n';
   return code;
 };
 
@@ -3587,3 +3591,48 @@ Blockly.Python['setdoor'] = function(block) {
   
   return code;
 };
+
+Blockly.Python['fill'] = function(block) {
+  var material  = insideParen(Blockly.Python.valueToCode(block, 'MATERIAL',  Blockly.Python.ORDER_ATOMIC));
+  var location1 = insideParen(Blockly.Python.valueToCode(block, 'LOCATION1', Blockly.Python.ORDER_ATOMIC));
+  var location2 = insideParen(Blockly.Python.valueToCode(block, 'LOCATION2', Blockly.Python.ORDER_ATOMIC));
+  material = material.toLowerCase();
+  index = material.lastIndexOf ( '.' );
+  material = 'minecraft:' + material.substring (index+1);
+    
+  var code =   
+              "(function () {\n" +   
+              "   var _x1 = parseInt ( " + location1 + ".x );\n" +               
+              "   var _y1 = parseInt ( " + location1 + ".y );\n" +               
+              "   var _z1 = parseInt ( " + location1 + ".z );\n" +               
+              "   var _x2 = parseInt ( " + location2 + ".x );\n" +               
+              "   var _y2 = parseInt ( " + location2 + ".y );\n" +               
+              "   var _z2 = parseInt ( " + location2 + ".z );\n" +               
+              "   var _command = \"fill \" + _x1 + \" \" + _y1 + \" \" + _z1 + \" \" + _x2 + \" \" + _y2 + \" \" + _z2 + \" " + material + " replace\";\n" + 
+              "   console.log ( \"command: \" + _command );\n" +             
+              "   org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), _command );\n" + 
+              "})();\n"
+    
+  return code;
+}
+
+Blockly.Python['invincibility'] = function(block) {
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC)); 
+  var ticks  = insideParen(Blockly.Python.valueToCode(block, 'TICKS', Blockly.Python.ORDER_ATOMIC)); 
+  
+  var code = player + '.setNoDamageTicks (' + ticks + ');\n';
+  return code;
+};
+
+Blockly.Python['removearmor'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  var armor =  block.getFieldValue ('ARMOR');  
+  
+  var code = 
+       player + '.getInventory().set' + armor + '(null);\n' + 
+       'console.log ( \'' + armor + ' removed for player: \' + ' + player + '.name );\n'; 
+        
+  return code;
+}
+

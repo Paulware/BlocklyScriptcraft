@@ -219,5 +219,9 @@ Blockly.Python.controls_if=function(a){
 };
 Blockly.Python.logic_operation=function(a){var b="AND"==a.getFieldValue("OP")?"&&":"||",c="and"==b?Blockly.Python.ORDER_LOGICAL_AND:Blockly.Python.ORDER_LOGICAL_OR,d=Blockly.Python.valueToCode(a,"A",c);a=Blockly.Python.valueToCode(a,"B",c);if(d||a){var e="and"==b?"true":"false";d||(d=e);a||(a=e)}else a=d="false";return[d+" "+b+" "+a,c]};
 Blockly.Python.logic_negate=function(a){return["! "+(Blockly.Python.valueToCode(a,"BOOL",Blockly.Python.ORDER_LOGICAL_NOT)||"true"),Blockly.Python.ORDER_LOGICAL_NOT]};
-Blockly.Python.logic_boolean=function(a){return["true"==a.getFieldValue("BOOL")?"true":"false",Blockly.Python.ORDER_ATOMIC]};Blockly.Python.logic_null=function(a){return["None",Blockly.Python.ORDER_ATOMIC]};
+Blockly.Python.logic_boolean=function(a){
+ //alert ( 'logic _boolean ' + a.getFieldValue ("BOOL") );
+ return["TRUE"==a.getFieldValue("BOOL")?"true":"false",Blockly.Python.ORDER_ATOMIC] 
+};
+Blockly.Python.logic_null=function(a){return["None",Blockly.Python.ORDER_ATOMIC]};
 Blockly.Python.logic_ternary=function(a){var b=Blockly.Python.valueToCode(a,"IF",Blockly.Python.ORDER_CONDITIONAL)||"false",c=Blockly.Python.valueToCode(a,"THEN",Blockly.Python.ORDER_CONDITIONAL)||"None";a=Blockly.Python.valueToCode(a,"ELSE",Blockly.Python.ORDER_CONDITIONAL)||"None";return[c+" if "+b+" else "+a,Blockly.Python.ORDER_CONDITIONAL]};

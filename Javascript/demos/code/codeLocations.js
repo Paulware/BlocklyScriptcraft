@@ -200,7 +200,9 @@
       "Set Global => Data, Global", 
       "Global Variable: => Data, Global", 
       "Location Of => World, Location",
-      "Open Door at Location => World, Blocks, Door",      
+      "Open Door at Location => World, Blocks, Door",    
+      "Fill Block Type => World, Server", 
+      "Set invincibility for player => Entities, Player",      
    ];
    
    function autocomplete(inp, arr) {

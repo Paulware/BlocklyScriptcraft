@@ -323,6 +323,7 @@ Blockly.Blocks['eventlistener'] = {
             ["An entity exploded", "entityExplode"],
             ["A player, monster or animal was damaged", "entityDamage"],
             ["A server command was executed", "serverCommand"],
+            ["A server reload has completed", "serverLoad"], 
             ["A vehicle moved", "vehicleMove"],
             ["A vehicle collided with a block", "vehicleBlockCollision"],
             ["A vehicle was entered", "vehicleEnter"],
@@ -777,7 +778,7 @@ Blockly.Blocks['nameentity'] = {
         
     this.appendDummyInput()
         .appendField ("to")
-        .appendField (new Blockly.FieldTextInput ("name"), "NAME");          
+        .appendField (new Blockly.FieldTextInput ("\"NAME\""), "NAME");          
         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -1113,6 +1114,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Fire", "FIRE"],                                                
                                                 ["Gate (Oak)", "OAK_FENCE_GATE"],
                                                 ["Item Frame", "ITEM_FRAME"],
+                                                ["Lava", "LAVA"], 
                                                 ["Lever", "LEVER"],
                                                 ["Oak", "OAK_WOOD"], 
                                                 ["Oak Tree Log", "OAK_LOG"],
@@ -1884,8 +1886,10 @@ Blockly.Blocks['equipmentname'] = {
 Blockly.Blocks['updateinventory'] = {
   init: function() {
     this.appendValueInput ("ITEMSTACK")
-        .appendField ("Add to inventory, itemstack:")
-    
+        .appendField ("Add stack:");
+    this.appendValueInput ("PLAYER")
+        .appendField ("to inventory for player:");
+    this.setInputsInline(true);         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(320);
@@ -4148,3 +4152,63 @@ Blockly.Blocks['setdoor'] = {
     this.setNextStatement(true, null);
   }
 };
+
+Blockly.Blocks['fill'] = {
+  init: function() {
+    this.appendValueInput("MATERIAL")
+       .appendField("Fill Block Type: ");
+    this.appendValueInput("LOCATION1")
+       .appendField("From location: ");
+    this.appendValueInput("LOCATION2")
+       .appendField("To location: ");
+       
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setInputsInline(true);     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['invincibility'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+       .appendField("Set invincibility for player ");
+    this.appendValueInput("TICKS")
+       .appendField("for");
+    this.appendDummyInput()
+       .appendField(" ticks ");
+       
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    this.setInputsInline(true);     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['removearmor'] = {
+  init: function() { 
+    this.appendDummyInput()
+        .appendField("Remove ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Boots", "Boots"],
+                                                ["Chest Plate", "Chestplate"],
+                                                ["Helmet", "Helmet"], 
+                                                ["Leggings", "Leggings"]
+                                               ]), "ARMOR");                   
+    this.appendValueInput("PLAYER")
+        .appendField ("worn by player:");
+        
+    this.setInputsInline(true);                     
+    this.setColour(320);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+
