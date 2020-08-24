@@ -196,7 +196,7 @@ Blockly.Python['text_getSubstring'] = function(block) {
     default:
       throw 'Unhandled option (text_getSubstring)';
   }
-  var code = text + '[' + at1 + ' : ' + at2 + ']';
+  var code = text + '.substring(' + at1 + ',' + at2 + ')';
   return [code, Blockly.Python.ORDER_MEMBER];
 };
 

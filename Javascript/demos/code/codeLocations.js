@@ -130,7 +130,7 @@
       "Echo => Output", 
       "SendMessage To Player => Output", 
       "Send UDP (Message) (Port) => Output", 
-      "Expression => Scriptcraft Coding", 
+      "Setup Code => Scriptcraft Coding", 
       "Function => Scriptcraft Coding, Functions", 
       "Call Function => Scriptcraft Coding, Functions",
       "Repeat Execution Name: => Scriptcraft Coding, Functions",
@@ -202,7 +202,10 @@
       "Location Of => World, Location",
       "Open Door at Location => World, Blocks, Door",    
       "Fill Block Type => World, Server", 
-      "Set invincibility for player => Entities, Player",      
+      "Set invincibility for player => Entities, Player",
+      "Remove Boots Worn by player => Items, Gear",  
+      "Remove All Armor Worn by player => Items, Gear",  
+      "Basic Map Render Function => Items, Map",       
    ];
    
    function autocomplete(inp, arr) {

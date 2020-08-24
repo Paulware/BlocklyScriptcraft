@@ -30,7 +30,9 @@ Blockly.Python.init=function(a){
 Blockly.Python.finish=function(a){var b=[],c=[],d;for(d in Blockly.Python.definitions_){var e=Blockly.Python.definitions_[d];e.match(/^(from\s+\S+\s+)?import\s+\S+/)?b.push(e):c.push(e)}delete Blockly.Python.definitions_;delete Blockly.Python.functionNames_;Blockly.Python.variableDB_.reset();return(b.join("\n")+"\n\n"+c.join("\n\n")).replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n\n")+a};Blockly.Python.scrubNakedValue=function(a){return a+"\n"};
 Blockly.Python.quote_=function(a){a=a.replace(/\\/g,"\\\\").replace(/\n/g,"\\\n").replace(/\%/g,"\\%").replace(/'/g,"\\'");return"\""+a+"\""};
 Blockly.Python.scrub_=function(a,b){var c="";if(!a.outputConnection||!a.outputConnection.targetConnection){var d=a.getCommentText();(d=Blockly.utils.wrap(d,Blockly.Python.COMMENT_WRAP-3))&&(c=a.getProcedureDef?c+('//!'+d+'\n//\n'):c+Blockly.Python.prefixLines(d+"\n","// "));for(var e=0;e<a.inputList.length;e++)a.inputList[e].type==Blockly.INPUT_VALUE&&(d=a.inputList[e].connection.targetBlock())&&(d=Blockly.Python.allNestedComments(d))&&(c+=Blockly.Python.prefixLines(d,"// "))}e=a.nextConnection&&a.nextConnection.targetBlock();
-e=Blockly.Python.blockToCode(e);return c+b+e};Blockly.Python.getAdjustedInt=function(a,b,c,d){c=c||0;a.workspace.options.oneBasedIndex&&c--;var e=a.workspace.options.oneBasedIndex?"1":"0";a=Blockly.Python.valueToCode(a,b,c?Blockly.Python.ORDER_ADDITIVE:Blockly.Python.ORDER_NONE)||e;Blockly.isNumber(a)?(a=parseInt(a,10)+c,d&&(a=-a)):(a=0<c?"int("+a+" + "+c+")":0>c?"int("+a+" - "+-c+")":"int("+a+")",d&&(a="-"+a));return a};Blockly.Python.lists={};Blockly.Python.lists_create_empty=function(a){return["[]",Blockly.Python.ORDER_ATOMIC]};
+e=Blockly.Python.blockToCode(e);return c+b+e};
+Blockly.Python.getAdjustedInt=function(a,b,c,d){
+ c=c||0;a.workspace.options.oneBasedIndex&&c--;var e=a.workspace.options.oneBasedIndex?"1":"0";a=Blockly.Python.valueToCode(a,b,c?Blockly.Python.ORDER_ADDITIVE:Blockly.Python.ORDER_NONE)||e;Blockly.isNumber(a)?(a=parseInt(a,10)+c,d&&(a=-a)):(a=0<c?"int("+a+" + "+c+")":0>c?"parseInt("+a+" - "+-c+")":"parseInt("+a+")",d&&(a="-"+a));return a};Blockly.Python.lists={};Blockly.Python.lists_create_empty=function(a){return["[]",Blockly.Python.ORDER_ATOMIC]};
 Blockly.Python.lists_create_with=function(a){
    var element;
    //alert ( 'python_compressed list create with' );
@@ -174,8 +176,41 @@ Blockly.Python.text_length=function(a){return["len("+(Blockly.Python.valueToCode
 Blockly.Python.text_indexOf=function(a){var b="FIRST"==a.getFieldValue("END")?"indexOf":"lastIndexOf",c=Blockly.Python.valueToCode(a,"FIND",Blockly.Python.ORDER_NONE)||"''",b=(Blockly.Python.valueToCode(a,"VALUE",Blockly.Python.ORDER_MEMBER)||"''")+"."+b+"("+c+")";return a.workspace.options.oneBasedIndex?[b+" + 1",Blockly.Python.ORDER_ADDITIVE]:[b,Blockly.Python.ORDER_FUNCTION_CALL]};
 Blockly.Python.text_charAt=function(a){var b=a.getFieldValue("WHERE")||"FROM_START",c=Blockly.Python.valueToCode(a,"VALUE",Blockly.Python.ORDER_MEMBER)||"''";switch(b){case "FIRST":return[c+"[0]",Blockly.Python.ORDER_MEMBER];case "LAST":return[c+"[-1]",Blockly.Python.ORDER_MEMBER];case "FROM_START":return a=Blockly.Python.getAdjustedInt(a,"AT"),[c+"["+a+"]",Blockly.Python.ORDER_MEMBER];case "FROM_END":return a=Blockly.Python.getAdjustedInt(a,"AT",1,!0),[c+"["+a+"]",Blockly.Python.ORDER_MEMBER];case "RANDOM":return Blockly.Python.definitions_.import_random=
 "import random",[Blockly.Python.provideFunction_("text_random_letter",["def "+Blockly.Python.FUNCTION_NAME_PLACEHOLDER_+"(text):","  x = int(random.random() * len(text))","  return text[x];"])+"("+c+")",Blockly.Python.ORDER_FUNCTION_CALL]}throw"Unhandled option (text_charAt).";};
-Blockly.Python.text_getSubstring=function(a){var b=a.getFieldValue("WHERE1"),c=a.getFieldValue("WHERE2"),d=Blockly.Python.valueToCode(a,"STRING",Blockly.Python.ORDER_MEMBER)||"''";switch(b){case "FROM_START":b=Blockly.Python.getAdjustedInt(a,"AT1");"0"==b&&(b="");break;case "FROM_END":b=Blockly.Python.getAdjustedInt(a,"AT1",1,!0);break;case "FIRST":b="";break;default:throw"Unhandled option (text_getSubstring)";}switch(c){case "FROM_START":a=Blockly.Python.getAdjustedInt(a,"AT2",1);break;case "FROM_END":a=
-Blockly.Python.getAdjustedInt(a,"AT2",0,!0);Blockly.isNumber(String(a))?"0"==a&&(a=""):(Blockly.Python.definitions_.import_sys="import sys",a+=" or sys.maxsize");break;case "LAST":a="";break;default:throw"Unhandled option (text_getSubstring)";}return[d+"["+b+" : "+a+"]",Blockly.Python.ORDER_MEMBER]};
+Blockly.Python.text_getSubstring=function(a){
+ var b=a.getFieldValue("WHERE1"),c=a.getFieldValue("WHERE2"),d=Blockly.Python.valueToCode(a,"STRING",Blockly.Python.ORDER_MEMBER)||"''";
+ switch(b){
+  case "FROM_START":
+    b=Blockly.Python.getAdjustedInt(a,"AT1");
+    "0"==b&&(b="");
+    break;
+  case "FROM_END":
+    b=Blockly.Python.getAdjustedInt(a,"AT1",1,!0);
+    break;
+  case "FIRST":
+    b="";
+    break;
+  default:throw"Unhandled option (text_getSubstring)";
+ }
+ switch(c){
+  case "FROM_START":
+    a=Blockly.Python.getAdjustedInt(a,"AT2",1);
+    break;
+  case "FROM_END":
+    a=Blockly.Python.getAdjustedInt(a,"AT2",0,!0);
+    Blockly.isNumber(String(a))?"0"==a&&(a=""):(Blockly.Python.definitions_.import_sys="import sys",a+=" or sys.maxsize");
+    break;
+  case "LAST":
+    a="";
+    break;
+  default:
+    throw"Unhandled option (text_getSubstring)";
+ }
+ if (a != "") {
+   return[d+".substring ("+b+","+a+")",Blockly.Python.ORDER_MEMBER]  
+ } else {
+   return[d+".substring ("+b+")",Blockly.Python.ORDER_MEMBER]  
+ }
+};
 Blockly.Python.text_changeCase=function(a){
    var b={UPPERCASE:".toUpperCase()",LOWERCASE:".toLowerCase()",TITLECASE:".title()"}[a.getFieldValue("CASE")];
    return[(Blockly.Python.valueToCode(a,"TEXT",Blockly.Python.ORDER_MEMBER)||"''")+b,

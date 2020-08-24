@@ -1321,9 +1321,8 @@ Blockly.Blocks['setvariablevalue']={
 Blockly.Blocks['scriptcraftexpression'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Expression")
-        .appendField (new Blockly.FieldTextInput ("expression"), "EXPRESSION")
-        .setAlign(Blockly.ALIGN_CENTRE);
+        .appendField("Setup Code");
+
     this.appendStatementInput("EXPRESSIONCODE")
         .setCheck(null);
     this.setPreviousStatement(false, null);
@@ -2970,7 +2969,7 @@ Blockly.Blocks['eventinfo'] = {
                                         ["Get item dropped", "getItemDrop"],
                                         ["Get location player moved from", "getFrom"],
                                         ["Get location player moved to", "getTo"],
-                                        ["Get message that player sent", "getMessage" ],
+                                        ["Get message", "getMessage" ],
                                         ["Get player", "getPlayer"],
                                         ["Get projectile", "getProjectile"],
                                         ["Get shooter", "getEntity().getShooter"],
@@ -3374,7 +3373,7 @@ Blockly.Blocks['cancelfriendlydamage'] = {
 Blockly.Blocks['friendlynearby'] = {
   init: function() {
     this.appendValueInput ("TEAM")
-        .appendField ("Found" );
+        .appendField ("Found team " );
     this.appendValueInput("RADIUS")
         .appendField("player within" );
     this.appendValueInput ( "LOCATION")
@@ -4211,4 +4210,46 @@ Blockly.Blocks['removearmor'] = {
   }
 };
 
+Blockly.Blocks['playernearby'] = {
+  init: function() {
+    this.appendValueInput ("PLAYER")
+        .appendField ("Found player " );
+    this.appendValueInput("RADIUS")
+        .appendField("within" );
+    this.appendValueInput ( "LOCATION")
+        .appendField("blocks of location"); 
+    this.setInputsInline(true);        
+        
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['removeallarmor'] = {
+  init: function() {                 
+    this.appendValueInput("PLAYER")
+        .appendField ("Remove all armor worn by player:");
+        
+    this.setInputsInline(true);                     
+    this.setColour(320);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['basicrenderfunction'] = {
+  init: function() {   
+    this.appendDummyInput()
+        .appendField("Basic Map Render Function")       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null); 
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 

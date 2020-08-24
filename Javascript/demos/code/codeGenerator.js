@@ -1496,7 +1496,7 @@ Blockly.Python['mapRenderer'] = function(block) {
   var code = "// Change renderer for all maps\n" + 
              "var renderers;\n" +
              "var mapView;\n" + 
-             "var count = 0;\n" + 
+             "var count = 1;\n" + 
              "while (true) {\n" +  
              "  mapView = server.getMap (count);\n" + 
              "  if (mapView == undefined) {\n" +  
@@ -1563,10 +1563,9 @@ Blockly.Python ['delayedexecution'] = function (block) {
 };
 
 Blockly.JavaScript ['scriptcraftexpression'] = function (block) {
-  var expression = block.getFieldValue ('EXPRESSION');
   var expressionCode = Blockly.Python.statementToCode (block, 'EXPRESSIONCODE' );  
     
-  code = '//' + expression + '\n' + expressionCode + '\n';
+  code = expressionCode + '\n';
   return code;
 };
 Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
@@ -3636,3 +3635,60 @@ Blockly.Python['removearmor'] = function(block) {
   return code;
 }
 
+Blockly.Python['playernearby'] = function(block) {   
+  var location = Blockly.Python.valueToCode(block, "LOCATION", Blockly.Python.ORDER_ATOMIC);
+  location = insideParen (location)
+  var radius = Blockly.Python.valueToCode(block, "RADIUS", Blockly.Python.ORDER_ATOMIC);
+  radius = insideParen (radius)
+  var player = insideParen(Blockly.Python.valueToCode(block, "PLAYER", Blockly.Python.ORDER_ATOMIC));
+  var code = 
+      "function () { var _near;var _players;var _distance;_near=false;\n" + 
+        "_players=server.getOnlinePlayers();\n" + 
+        "for (var _i=0; _i<_players.length;_i++) {\n" + 
+           "_distance=" + location + ".distance(_players[_i].location);\n" + 
+           "if(_distance <= " + radius + "){" + 
+              "if (" + player + "== _players[_i]){\n" + 
+                 "_near=true;" + 
+                 "break;" + 
+               "}" +
+            "}" +
+         "}\n" +
+       "return _near;" + 
+     "}()";
+  
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['removeallarmor'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen (player);
+  
+  var code = 
+       player + '.getInventory().setHelmet(null);\n' + 
+       player + '.getInventory().setLeggings(null);\n' + 
+       player + '.getInventory().setChestplate(null);\n' + 
+       player + '.getInventory().setBoots(null);\n' + 
+       'console.log ( \'All armor removed for player: \' + ' + player + '.name );\n'; 
+        
+  return code;
+}
+
+Blockly.Python['basicrenderfunction'] = function(block) {
+  
+  var code = 
+     'exports.render  = function (mapView, mapCanvas, player) {\n' + 
+     '  var _mapId;\n' + 
+     '  var _filename;\n' + 
+     '  var _title;\n' + 
+     '  _mapId=mapView.getId();\n' + 
+     '  _filename=\'scriptcraft/plugins/images/\' + _mapId + \'.jpg\';\n' + 
+     '  if (new java.io.File (_filename).exists()){\n' + 
+     '    mapCanvas.drawImage (0,0,org.bukkit.map.MapPalette.resizeImage (new javax.swing.ImageIcon(_filename).getImage()) );\n' + 
+     '  } else {\n' + 
+     '    _title=\'scriptcraft/plugins/\\nimages/\' + _mapId + \'.jpg\\n\\nDoes not exist yet\';\n' + 
+     '    mapCanvas.drawText ( 10,10,org.bukkit.map.MinecraftFont.Font, _title);\n' + 
+     '  }\n' + 
+     '};\n';
+        
+  return code;
+}
