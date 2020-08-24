@@ -1,5 +1,5 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="scriptcraftexpression" id="MjoZxLLU+rmb@I*w$%Gv" x="-562" y="-537">
+  <block type="scriptcraftexpression" id="MjoZxLLU+rmb@I*w$%Gv" x="-487" y="-387">
     <statement name="EXPRESSIONCODE">
       <block type="eventlistener" id="Hd@Z%P[SXPZ{ng^FWwQg">
         <field name="LISTENERTYPE">playerJoin</field>
@@ -114,6 +114,9 @@
                     </next>
                   </block>
                 </statement>
+                <next>
+                  <block type="basicrenderfunction" id="bmkDsl,7%(xAqh^t*k;}"></block>
+                </next>
               </block>
             </next>
           </block>
@@ -440,11 +443,6 @@
           </block>
         </next>
       </block>
-    </statement>
-  </block>
-  <block type="scriptcraftexpression" id="*B[n8Lur5Mo6nVlf]a^f" x="-487" y="37">
-    <statement name="EXPRESSIONCODE">
-      <block type="basicrenderfunction" id="bmkDsl,7%(xAqh^t*k;}"></block>
     </statement>
   </block>
   <block type="scriptcraftfunction" id="z^HlvQ?i{{;|W/-w=@Nr" x="-488" y="113">
