@@ -4253,3 +4253,55 @@ Blockly.Blocks['basicrenderfunction'] = {
   }
 };
 
+Blockly.Blocks['title'] = {
+  init: function() { 
+    this.appendDummyInput()
+        .appendField("Send ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["actionbar", "actionbar"],
+                                                ["subtitle", "subtitle"], 
+                                                ["title", "title"]
+                                               ]), "MESSAGETYPE");                   
+                                              
+    this.appendValueInput("PLAYER")
+        .appendField ("message ")
+        .appendField (new Blockly.FieldTextInput ( "Hello"), "MESSAGE")
+        .appendField("To Player");        
+  
+  
+    this.appendDummyInput()
+        .appendField("in color ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["aqua", "aqua"],
+                                                ["black", "black"],
+                                                ["blue", "blue"],
+                                                ["dark_aqua", "dark_aqua"],
+                                                ["dark_blue", "dark_blue"],
+                                                ["dark_gray", "dark_gray"],
+                                                ["dark_purple", "dark_purple"],
+                                                ["dark_red", "dark_red"],
+                                                ["gold", "gold"],
+                                                ["gray", "gray"],
+                                                ["green", "green"],
+                                                ["light_purple", "light_purple"],
+                                                ["red", "red"],
+                                                ["white", "white"],
+                                                ["yellow", "yellow"] 
+                                               ]), "COLOR");  
+
+    this.appendDummyInput()
+        .appendField('in bold')
+        .appendField(new Blockly.FieldCheckbox('FALSE'), 'BOLD'); 
+        
+    this.appendDummyInput()
+        .appendField('in italic')
+        .appendField(new Blockly.FieldCheckbox('FALSE'), 'ITALIC');  
+        
+    this.setInputsInline(true);                     
+    this.setColour(320);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};

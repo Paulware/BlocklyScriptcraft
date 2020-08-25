@@ -3692,3 +3692,28 @@ Blockly.Python['basicrenderfunction'] = function(block) {
         
   return code;
 }
+
+Blockly.Python['title'] = function(block) {
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC));
+  var messageType = block.getFieldValue ("MESSAGETYPE");   
+  var message = block.getFieldValue ("MESSAGE");   
+  var color = block.getFieldValue ("COLOR");  
+  var bold = block.getFieldValue ("BOLD");  
+  if (bold == "TRUE") {
+     bold = 'true';
+  } else {
+     bold = 'false';
+  }
+  var italic = block.getFieldValue ("ITALIC");  
+  if (italic == "TRUE") {
+     italic = 'true';
+  } else {
+     italic = 'false';
+  }
+  
+  var command = '\"title \" + ' + player + '.name + \" ' + messageType + ' {\\\"text\\\":\\\"' + message + 
+  '\\\",\\\"italic\\\":' + italic + ',\\\"bold\\\":' + bold + ',\\\"color\\\":\\\"' + color + '\\\"}\"';
+  var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " + command + ");\n";      
+
+  return code;
+}
