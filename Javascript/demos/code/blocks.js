@@ -1919,6 +1919,7 @@ Blockly.Blocks['playerhas'] = {
         .appendField (new Blockly.FieldTextInput ("name"), "NAME"); 
 
     this.setOutput(true, null);
+    this.setInputsInline(true);     
     this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -4303,5 +4304,22 @@ Blockly.Blocks['title'] = {
     this.setNextStatement(true, null);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['playerinbox']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(0);
+   this.appendValueInput("PLAYER")
+       .appendField ("Player ");
+   this.appendValueInput("LOCATION1")
+       .appendField("is within area bounded by Location1  ");
+   this.appendValueInput("LOCATION2")
+       .appendField("and Location2 ");
+   // this.setInputsInline(true);        
+   this.setOutput(true, null);
+   this.setTooltip('');
+   this.setHelpUrl('http://www.example.com/');
   }
 };

@@ -3673,8 +3673,7 @@ Blockly.Python['removeallarmor'] = function(block) {
   return code;
 }
 
-Blockly.Python['basicrenderfunction'] = function(block) {
-  
+Blockly.Python['basicrenderfunction'] = function(block) { 
   var code = 
      'exports.render  = function (mapView, mapCanvas, player) {\n' + 
      '  var _mapId;\n' + 
@@ -3716,4 +3715,36 @@ Blockly.Python['title'] = function(block) {
   var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " + command + ");\n";      
 
   return code;
+}
+
+Blockly.Python['playerinbox'] = function(block) {   
+  var location1 = insideParen(Blockly.Python.valueToCode(block, "LOCATION1", Blockly.Python.ORDER_ATOMIC));
+  var location2 = insideParen(Blockly.Python.valueToCode(block, "LOCATION2", Blockly.Python.ORDER_ATOMIC));  
+  var player    = insideParen(Blockly.Python.valueToCode(block, "PLAYER",    Blockly.Python.ORDER_ATOMIC));
+  
+  var code = 
+      "function () { var _x1; var _x2; var _y1; var _y2; var _z1; var _z2; var _inBox=false;\n" + 
+      "  _x1 = Math.min (parseInt (" + location1 + ".x), parseInt (" + location2 + ".x));\n" +
+      "  _y1 = Math.min (parseInt (" + location1 + ".y), parseInt (" + location2 + ".y));\n" +
+      "  _z1 = Math.min (parseInt (" + location1 + ".z), parseInt (" + location2 + ".z));\n" +
+      "  _x2 = Math.max (" + location1 + ".x, " + location2 + ".x);\n" +
+      "  _y2 = Math.max (" + location1 + ".y, " + location2 + ".y);\n" +
+      "  _z2 = Math.max (" + location1 + ".z, " + location2 + ".z);\n" +
+      "  if (parseInt(" + player + ".location.x) >= _x1) {\n" +
+      "    if (parseInt(" + player + ".location.y) >= _y1) {\n" +
+      "      if (parseInt(" + player + ".location.z) >= _z1) {\n" +
+      "        if (parseInt(" + player + ".location.x) <= _x2) {\n" +
+      "          if (parseInt(" + player + ".location.y) <= _y2) {\n" +
+      "            if (parseInt(" + player + ".location.z) <= _z2) {\n" +
+      "               _inBox = true;\n" +
+      "            }\n" +
+      "          }\n" +
+      "        }\n" +
+      "      }\n" +
+      "    }\n" +
+      "  }\n" +     
+      "  return _inBox;" +
+     "}()";
+  
+  return [code, Blockly.Python.ORDER_NONE];
 }
