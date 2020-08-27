@@ -601,7 +601,7 @@
                                                                                 </value>
                                                                                 <statement name="DO0">
                                                                                   <block type="title" id="(t8~xtm+Q#Rt)88Fj2Dc">
-                                                                                    <field name="MESSAGETYPE">actionbar</field>
+                                                                                    <field name="MESSAGETYPE">title</field>
                                                                                     <field name="MESSAGE">Entering room 1</field>
                                                                                     <field name="COLOR">aqua</field>
                                                                                     <field name="BOLD">TRUE</field>

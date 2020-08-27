@@ -1,0 +1,237 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="5R(v3?xu;;%DhG$K8y?P" x="-13" y="113">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="jy(rcYI{g3$Y(w,Sem?T">
+        <field name="LISTENERTYPE">playerInteract</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id="-x.$rqZ=BddsKr6b@z+_">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="C_3f90?6Z%-xu?hMhb63">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="~8MWX$}o]:_Sd?awy_=Q">
+                <field name="VARNAME">elytra</field>
+                <value name="EXPRESSION">
+                  <block type="getplayerarmor" id="AnG[sw^.na:X4.]I=X(_">
+                    <field name="ARMOR">Chestplate</field>
+                    <value name="PLAYER">
+                      <block type="varname" id="h)u;cEA$4S+^d5|`Q3c-">
+                        <field name="VARNAME">player</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="consolelog" id="u^CB$!UKstwk;8ymIgRe">
+                    <value name="NAME">
+                      <block type="varname" id="OO#Ce=`aEdymZ~IfykXG">
+                        <field name="VARNAME">"Durability: " + elytra.getDurability()</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="wg/zrb+W$l4F?H.3x.t=">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="5$N#L~DgfWEvM3~EmAL[">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="eventinfo" id=")LQ]db%AY^Um2Gq4$cn@">
+                                <field name="INFORMATION">getAction</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="actiontype" id="y%(hX(%vO8xi508$;(@4">
+                                <field name="ACTION">LEFT_CLICK_AIR</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="controls_if" id="xAA-vW{mW@*Z^^JXZ*=w">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="2o-t-I}nx.Jy6DaKUjck">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="varname" id="u0fH_IYnxw.RHX*{J-3j">
+                                    <field name="VARNAME">elytra.getDurability()</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="oyERknRaDc*!=08aolTU">
+                                    <field name="NUM">400</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="sendmessage" id="8;?:!)^U]p/Uw%.B4BYL">
+                                <field name="MESSAGE">"Your Elytra is broken sorry you are now infantry"</field>
+                                <value name="PLAYER">
+                                  <block type="varname" id="`QeWhUYVAFg|;eycyegM">
+                                    <field name="VARNAME">player</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="controls_if" id="}CiO34nY}Dy(s%3;TDox">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="varname" id="8~J9q,/TS!)i-E[Rr+*/">
+                                    <field name="VARNAME">player.isOnGround()</field>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="setvariablevalue" id="CIlcBmcsr`^yvuU:_@*;">
+                                    <field name="VARNAME">newLocation</field>
+                                    <value name="EXPRESSION">
+                                      <block type="locationadd" id="leA2/+dWwSHjoUb/oEHn">
+                                        <field name="X">0</field>
+                                        <field name="Y">20</field>
+                                        <field name="Z">0</field>
+                                        <value name="LOCATION">
+                                          <block type="locationof" id="J}BDcr:cSWsaxE:~)#}X">
+                                            <value name="OBJECT">
+                                              <block type="varname" id="X+ZLm:!3Rq|zfn6~xn%G">
+                                                <field name="VARNAME">player</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="instantteleport" id="{3SOzqBOe^Cjg0q[d1br">
+                                        <value name="ENTITY">
+                                          <block type="varname" id="t8*4BnGfP#h8X._~TMd4">
+                                            <field name="VARNAME">player</field>
+                                          </block>
+                                        </value>
+                                        <value name="LOCATION">
+                                          <block type="varname" id="18f1R{!8OG+R,4{wgy3Q">
+                                            <field name="VARNAME">newLocation</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="addpotioneffect" id="1zFPOb%9?-_Pn)5*a6Y{">
+                                            <value name="EFFECT">
+                                              <block type="whicheffect" id="kXB#(K(?EJR0~9BCY{W+">
+                                                <field name="EFFECT">slow_falling</field>
+                                              </block>
+                                            </value>
+                                            <value name="PLAYER">
+                                              <block type="varname" id="*9}yKXAp.ti(%f}=tL.C">
+                                                <field name="VARNAME">player</field>
+                                              </block>
+                                            </value>
+                                            <value name="DURATION">
+                                              <block type="math_number" id="rlTcN@}gFI1kpB=8%58F">
+                                                <field name="NUM">10</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="setvariablevalue" id="s9FF~B3P!E~(@D$:X?bL">
+                                    <field name="VARNAME">vector</field>
+                                    <value name="EXPRESSION">
+                                      <block type="getvectorvelocity" id="v[=k%d$J-Wd9TVQ[_9AB">
+                                        <value name="ENTITY">
+                                          <block type="varname" id="h0djvKharBqKO:]gmm!5">
+                                            <field name="VARNAME">player</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="setvariablevalue" id="o47iV;;Ywr]]u_cj*qO-">
+                                        <field name="VARNAME">vector</field>
+                                        <value name="EXPRESSION">
+                                          <block type="multiplyvector" id="S!+s6+lw0~:5M$-!nCS(">
+                                            <field name="SCALAR">2</field>
+                                            <value name="VECTOR">
+                                              <block type="varname" id="+v(`Mq}|$lBr)SsF#K~*">
+                                                <field name="VARNAME">vector</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="setvectorvelocity" id="(`Zl^T:T6g|UmvfPlm|`">
+                                            <value name="ENTITY">
+                                              <block type="varname" id="2t9VyF9Aon]$s{SIx[C1">
+                                                <field name="VARNAME">player</field>
+                                              </block>
+                                            </value>
+                                            <value name="VECTOR">
+                                              <block type="varname" id="~b}opbfZgiV%p0QMQbSd">
+                                                <field name="VARNAME">vector</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="setvariablevalue" id="NZxgp}}u)[mAQM8arEiQ">
+                            <field name="VARNAME">newLocation</field>
+                            <value name="EXPRESSION">
+                              <block type="locationadd" id="Ge@/5lsW]ZBsg;+UB;D?">
+                                <field name="X">0</field>
+                                <field name="Y">-1</field>
+                                <field name="Z">0</field>
+                                <value name="LOCATION">
+                                  <block type="locationof" id="sk^/CE-lO5)gq~x-_}4R">
+                                    <value name="OBJECT">
+                                      <block type="varname" id="(Rew:5j7;pOa,+?eNMJm">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_repeat_ext" id="coL.:gwpDbG|R/F0!|5;">
+                                <field name="VAR">i</field>
+                                <value name="TIMES">
+                                  <shadow type="math_number" id="ep0:]D=x|LF6gIS^j$CP">
+                                    <field name="NUM">10</field>
+                                  </shadow>
+                                </value>
+                                <statement name="DO">
+                                  <block type="runexpression" id="-%(Do/K]C$`=$apJW[gb">
+                                    <field name="EXPRESSION">server.worlds[0].spawnArrow (newLocation,player.getLocation().getDirection(), 5.0, 4.0);</field>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

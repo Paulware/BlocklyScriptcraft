@@ -2954,6 +2954,7 @@ Blockly.Blocks['eventinfo'] = {
     this.appendDummyInput()
         .appendField("Event information")    
         .appendField(new Blockly.FieldDropdown([
+                                        ["Get action", "getAction"],
                                         ["Get all affected entities", "getAffectedEntities"],
                                         ["Get attacker", "getDamager"],
                                         ["Get block that was clicked on", "getClickedBlock"],
@@ -4323,3 +4324,58 @@ Blockly.Blocks['playerinbox']={
    this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['playerpointed']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(0);
+   this.appendDummyInput()
+        .appendField("Get ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["pitch", "Pitch"],
+                                                ["yaw", "Yaw"]
+                                               ]), "PITCHYAW");  
+   this.appendValueInput("PLAYER")
+       .appendField ("for player ");
+   this.setInputsInline(true);        
+   this.setOutput(true, null);
+   this.setTooltip('');
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['setinhand'] = {
+  init: function() { 
+                                       
+    this.appendValueInput("ITEM")
+        .appendField ("Set stack inhand to ");        
+                                               
+    this.appendValueInput("PLAYER")
+        .appendField ("for player ");
+   
+    this.setInputsInline(true);                     
+    this.setColour(320);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');       
+  }
+};
+
+Blockly.Blocks['playerinsphere']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(0);
+   this.appendValueInput("PLAYER")
+       .appendField ("Player ");
+   this.appendValueInput("LOCATION")
+       .appendField("is within sphere with center at location  ");
+   this.appendValueInput("RADIUS")
+       .appendField("and radius ");
+   this.setInputsInline(true);        
+   this.setOutput(true, null);
+   this.setTooltip('');
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
+

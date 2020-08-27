@@ -978,7 +978,19 @@ Blockly.Python['instantteleport'] = function(block) {
   entity = insideParen (entity);  
   //var yaw = entity + '.location.yaw';
   //var pitch = entity + '.location.pitch';
-  var code = entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";    
+  var code = 
+      "(function () { var _pitch; var _yaw; var _velocity;\n" +
+      "  _pitch    = " + entity + ".location.getPitch();\n" + 
+      "  _yaw      = " + entity + ".location.getYaw();\n" + 
+      "  _velocity = " + entity + ".getVelocity();\n" + 
+      "  " + location + ".setPitch (_pitch);\n" + 
+      "  " + location + ".setYaw   (_yaw);\n" + 
+      "  " + entity + ".teleport(" + location + 
+            ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n" + 
+      "  " + entity + ".setVelocity(_velocity);\n" +       
+      "})();\n";  
+  
+  // var code = entity + ".teleport(" + location + ", org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.PLUGIN);\n";    
   return code;
 }
 
@@ -3187,8 +3199,7 @@ Blockly.Python['isjumping'] = function(block) {
               "   var _velocity=" + player + ".getVelocity().getY();\n" + 
               "   var _block;\n" + 
               "   if (((Math.abs(_velocity-0.42)) < (0.01))){\n" + 
-              "      _block=server.worlds[0].getBlockAt (" + player + ".location);\n" + 
-              "      if ((((_block==null)?null:_block.getType()) == (\"AIR\"))){\n" + 
+              "      if (!" + player + ".isOnGround()) { \n" + 
               "         _isJumping = true;\n" + 
               "      }\n" + 
               "   }\n" + 
@@ -3744,6 +3755,41 @@ Blockly.Python['playerinbox'] = function(block) {
       "    }\n" +
       "  }\n" +     
       "  return _inBox;" +
+     "}()";
+  
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['playerpointed'] = function(block) {    
+  var player    = insideParen(Blockly.Python.valueToCode(block, "PLAYER",    Blockly.Python.ORDER_ATOMIC));
+  var pitchYaw = block.getFieldValue ("PITCHYAW"); 
+  var code = '(' + player + '== null)?null: ' + player + '.location.get' + pitchYaw + '()'
+  
+  return [code, Blockly.Python.ORDER_NONE];
+}
+
+Blockly.Python['setinhand'] = function(block) {
+  var player = insideParen(Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC));
+  var item   = insideParen(Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_ATOMIC));
+  code       = player + '.getInventory().setItemInHand (' + item + ');\n'; 
+  return code;
+}
+
+Blockly.Python['playerinsphere'] = function(block) {   
+  var location = insideParen(Blockly.Python.valueToCode(block, "LOCATION", Blockly.Python.ORDER_ATOMIC));
+  var radius   = insideParen(Blockly.Python.valueToCode(block, "RADIUS",   Blockly.Python.ORDER_ATOMIC));  
+  var player   = insideParen(Blockly.Python.valueToCode(block, "PLAYER",   Blockly.Python.ORDER_ATOMIC));
+  
+  var code = 
+      "function () { _inSphere = false;\n" + 
+      "  if (Math.abs(" + player + ".location.x - " + location + ".x) <= " + radius + "){ \n"  + 
+      "     if (Math.abs(" + player + ".location.y - " + location + ".y) <= " + radius + "){ \n"  + 
+      "        if (Math.abs(" + player + ".location.z - " + location + ".z) <= " + radius + "){ \n"  +
+      "           _inSphere = true;\n" + 
+      "        }\n" + 
+      "     } \n" + 
+      "  }\n" +       
+      "  return _inSphere;\n" +
      "}()";
   
   return [code, Blockly.Python.ORDER_NONE];

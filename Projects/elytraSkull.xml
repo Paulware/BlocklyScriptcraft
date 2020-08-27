@@ -1,0 +1,105 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="5R(v3?xu;;%DhG$K8y?P" x="413" y="88">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="jy(rcYI{g3$Y(w,Sem?T">
+        <field name="LISTENERTYPE">playerInteract</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id="-x.$rqZ=BddsKr6b@z+_">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="C_3f90?6Z%-xu?hMhb63">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="Cho!F2{=;}OYdD:w6F_Z">
+                <field name="VARNAME">location</field>
+                <value name="EXPRESSION">
+                  <block type="varname" id="hSI+p1d[o12lHV`+)Us9">
+                    <field name="VARNAME">player.location</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setvariablevalue" id="h,jzq9rcMUP@m,)tMyn/">
+                    <field name="VARNAME">airClick</field>
+                    <value name="EXPRESSION">
+                      <block type="actiontype" id="y%(hX(%vO8xi508$;(@4">
+                        <field name="ACTION">RIGHT_CLICK_AIR</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="setvariablevalue" id="XGULOMY0a-f6MN$//0mN">
+                        <field name="VARNAME">rightClick</field>
+                        <value name="EXPRESSION">
+                          <block type="varname" id="?4[tR3kr%CO$8(vwl;CQ">
+                            <field name="VARNAME">event.getAction().equals(airClick)</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if" id="wg/zrb+W$l4F?H.3x.t=">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="varname" id="t$]`z@RoiX;Iw/b}Jt(B">
+                                <field name="VARNAME">rightClick</field>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="launchprojectile" id="*dZ3_ow{H5rRI/5UvKT~">
+                                <value name="ENTITY">
+                                  <block type="varname" id="M=O38`MocQI?9cZ{u.t~">
+                                    <field name="VARNAME">player</field>
+                                  </block>
+                                </value>
+                                <value name="PROJECTILE">
+                                  <block type="projectileentity" id="J#bAa)~}5BPxgZt{Rr]Z">
+                                    <field name="PROJECTILE">WITHER_SKULL</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="setvariablevalue" id="CIlcBmcsr`^yvuU:_@*;">
+                                <field name="VARNAME">newLocation</field>
+                                <value name="EXPRESSION">
+                                  <block type="locationadd" id="leA2/+dWwSHjoUb/oEHn">
+                                    <field name="X">0</field>
+                                    <field name="Y">2</field>
+                                    <field name="Z">0</field>
+                                    <value name="LOCATION">
+                                      <block type="varname" id="X+ZLm:!3Rq|zfn6~xn%G">
+                                        <field name="VARNAME">location</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="instantteleport" id="{3SOzqBOe^Cjg0q[d1br">
+                                    <value name="ENTITY">
+                                      <block type="varname" id="t8*4BnGfP#h8X._~TMd4">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                    <value name="LOCATION">
+                                      <block type="varname" id="18f1R{!8OG+R,4{wgy3Q">
+                                        <field name="VARNAME">newLocation</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

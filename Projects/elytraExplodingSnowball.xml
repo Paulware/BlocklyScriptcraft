@@ -1,0 +1,141 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="5R(v3?xu;;%DhG$K8y?P" x="163" y="88">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="jy(rcYI{g3$Y(w,Sem?T">
+        <field name="LISTENERTYPE">playerInteract</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id="-x.$rqZ=BddsKr6b@z+_">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="C_3f90?6Z%-xu?hMhb63">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="wg/zrb+W$l4F?H.3x.t=">
+                <value name="IF0">
+                  <block type="logic_compare" id="5$N#L~DgfWEvM3~EmAL[">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="eventinfo" id=")LQ]db%AY^Um2Gq4$cn@">
+                        <field name="INFORMATION">getAction</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="actiontype" id="y%(hX(%vO8xi508$;(@4">
+                        <field name="ACTION">LEFT_CLICK_AIR</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="setvariablevalue" id="CIlcBmcsr`^yvuU:_@*;">
+                    <field name="VARNAME">newLocation</field>
+                    <value name="EXPRESSION">
+                      <block type="locationadd" id="leA2/+dWwSHjoUb/oEHn">
+                        <field name="X">0</field>
+                        <field name="Y">20</field>
+                        <field name="Z">0</field>
+                        <value name="LOCATION">
+                          <block type="locationof" id="J}BDcr:cSWsaxE:~)#}X">
+                            <value name="OBJECT">
+                              <block type="varname" id="X+ZLm:!3Rq|zfn6~xn%G">
+                                <field name="VARNAME">player</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="instantteleport" id="{3SOzqBOe^Cjg0q[d1br">
+                        <value name="ENTITY">
+                          <block type="varname" id="t8*4BnGfP#h8X._~TMd4">
+                            <field name="VARNAME">player</field>
+                          </block>
+                        </value>
+                        <value name="LOCATION">
+                          <block type="varname" id="18f1R{!8OG+R,4{wgy3Q">
+                            <field name="VARNAME">newLocation</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="setinhand" id="NE[aWUJ0T~~=K5~X8ia+">
+                            <value name="ITEM">
+                              <block type="itemstack" id="G.y=-dlE9`7W$v?_sp-E">
+                                <field name="COUNT">64</field>
+                                <value name="ITEM">
+                                  <block type="materialtype" id="tv^`zT(NmYUEm9Cbb}ai">
+                                    <field name="MATERIAL">SNOWBALL</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="PLAYER">
+                              <block type="varname" id="gZVm.~G^@!!o0s5i0;.y">
+                                <field name="VARNAME">player</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="eventlistener" id="OBr.F3pHk`#Xs,)@;8Xd">
+            <field name="LISTENERTYPE">projectileHit</field>
+            <statement name="LISTENERCODE">
+              <block type="setvariablevalue" id="`AqwKTo,=2O.|k0SWLOr">
+                <field name="VARNAME">projectile</field>
+                <value name="EXPRESSION">
+                  <block type="eventinfo" id="{{TQ(`l4!HIE@GEWvB0~">
+                    <field name="INFORMATION">getEntity</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="Axx*q[1`fT}4pLg(h{(a">
+                    <value name="IF0">
+                      <block type="logic_compare" id="Vptcy`G0W^6g{,.77kBg">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="getentitytype" id="]V=acdYYwq:)t=40Cf*#">
+                            <value name="ENTITY">
+                              <block type="varname" id=",8A|92vWBSy140@1_YEV">
+                                <field name="VARNAME">projectile</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="projectileentity" id="(iSW6$T}BQ(a#M3{^*F)">
+                            <field name="PROJECTILE">SNOWBALL</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="explosion" id="]gAz0G^Cvz}-]QZFonn%">
+                        <field name="SIZE">2</field>
+                        <value name="LOCATION">
+                          <block type="varname" id="d6XF+@.CS(1GUMp(v:wH">
+                            <field name="VARNAME">projectile.location</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
