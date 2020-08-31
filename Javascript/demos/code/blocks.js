@@ -912,6 +912,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Evoker", "EVOKER"],
                                                 ["Evoker Fangs", "EVOKER_FANGS"],
                                                 ["Fireball", "FIREBALL"],
+                                                ["Firework", "FIREWORK"],
                                                 ["Horse", "HORSE"], 
                                                 ["Iron Golem", "IRON_GOLEM"],
                                                 ["Lingering Potion", "LINGERING_POTION"],
@@ -4379,3 +4380,61 @@ Blockly.Blocks['playerinsphere']={
   }
 };
 
+Blockly.Blocks['customizefirework']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(0);
+   
+   this.appendValueInput("FIREWORK")
+       .appendField ("Customize firework: ");
+       
+   this.appendDummyInput()
+        .appendField("add color ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Aqua", "AQUA"],
+                                                ["Black", "BLACK"],
+                                                ["Blue", "BLUE"],
+                                                ["Fuchsia", "FUCHSIA"],
+                                                ["Gray", "GRAY"],
+                                                ["Green", "GREEN"],
+                                                ["Lime", "LIME"],
+                                                ["Maroon", "MAROON"],
+                                                ["Navy", "NAVY"],
+                                                ["Olive", "OLIVE"],
+                                                ["Orange", "ORANGE"],
+                                                ["Purple", "PURPLE"],
+                                                ["Red", "RED"],
+                                                ["Silver", "SILVER"],
+                                                ["Teal", "TEAL"],
+                                                ["White", "WHITE"],
+                                                ["Yellow", "YELLOW"]
+                                               ]), "COLOR");  
+                                               
+   this.appendDummyInput()
+        .appendField("with effect ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Ball", "BALL"],
+                                                ["Large Ball", "BALL_LARGE"],
+                                                ["Burst", "BURST"],
+                                                ["Creeper", "CREEPER"],
+                                                ["Star", "STAR"]
+                                               ]), "EFFECT");                                                
+
+   this.setInputsInline(true);        
+   this.setTooltip('');
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);   
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['locationtovector'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField ("Get vector from location:" );   
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

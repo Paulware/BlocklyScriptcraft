@@ -1,0 +1,103 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="]3#Cw_vMTqNSSnhvxuLl" x="113" y="63">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="VVs:5O*Y;MS6hZNb=y9y">
+        <field name="LISTENERTYPE">playerInteract</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id="~jqsZ|-r(s~x}d3WX$A!">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="$aHP*i9K$TU#);,`UVJF">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_repeat_ext" id="ZB}DLx+?_*J*u%%~llo;">
+                <field name="VAR">i</field>
+                <value name="TIMES">
+                  <shadow type="math_number" id="g;s^Dy1CR5:4s8BckzQ#">
+                    <field name="NUM">10</field>
+                  </shadow>
+                </value>
+                <statement name="DO">
+                  <block type="setvariablevalue" id="N3.^3o4+]Ei@X6-v]Y?_">
+                    <field name="VARNAME">entity</field>
+                    <value name="EXPRESSION">
+                      <block type="spawnentity" id="sE(~v!LV1Dw+cL.4[S*1">
+                        <value name="ENTITY">
+                          <block type="entityType" id="Pu.LALVW:`W/PfA({Zdf">
+                            <field name="ENTITY">FIREWORK</field>
+                          </block>
+                        </value>
+                        <value name="LOCATION">
+                          <block type="varname" id="v_z?p.rOu{N1TU)%qc7Y">
+                            <field name="VARNAME">player.location</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="customizefirework" id=",{3IuGbX=]_U.@E!}Y:?">
+                        <field name="COLOR">AQUA</field>
+                        <field name="EFFECT">STAR</field>
+                        <value name="FIREWORK">
+                          <block type="varname" id="s*ankqWd1tHWaT5ed^y=">
+                            <field name="VARNAME">entity</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="setvariablevalue" id="HSh?+Ri63BUCYQA2ZJW5">
+                            <field name="VARNAME">vector</field>
+                            <value name="EXPRESSION">
+                              <block type="locationtovector" id="~L`m}$8td{RU32]lzHk0">
+                                <value name="LOCATION">
+                                  <block type="varname" id="EWu|[L8`sC;F9K%F#0p$">
+                                    <field name="VARNAME">player.location</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="setvariablevalue" id="2!(09Uqi_u+6E~)@A{U]">
+                                <field name="VARNAME">vector</field>
+                                <value name="EXPRESSION">
+                                  <block type="multiplyvector" id="ox[-csSsT[]|{+{14gOk">
+                                    <field name="SCALAR">2</field>
+                                    <value name="VECTOR">
+                                      <block type="varname" id="^KAvs)q/C~wv`vcx0c:c">
+                                        <field name="VARNAME">vector</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="setvectorvelocity" id="J=kzQ(~D[tjJPP%2oZ1c">
+                                    <value name="ENTITY">
+                                      <block type="varname" id="_RWEdIP|G#2U),o5s_ib">
+                                        <field name="VARNAME">entity</field>
+                                      </block>
+                                    </value>
+                                    <value name="VECTOR">
+                                      <block type="varname" id="kkvX`564t@3LFl;}5LYR">
+                                        <field name="VARNAME">vector</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

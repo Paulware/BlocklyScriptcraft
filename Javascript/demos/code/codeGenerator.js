@@ -3794,3 +3794,28 @@ Blockly.Python['playerinsphere'] = function(block) {
   
   return [code, Blockly.Python.ORDER_NONE];
 }
+
+
+Blockly.Python['customizefirework'] = function(block) {
+  var firework = insideParen(Blockly.Python.valueToCode(block, 'FIREWORK', Blockly.Python.ORDER_ATOMIC));
+  var color = block.getFieldValue ("COLOR");
+  var effect = block.getFieldValue ("EFFECT");
+  
+  var code = 
+      "var _meta = org.bukkit.Bukkit.getItemFactory().getItemMeta(org.bukkit.Material.FIREWORK_ROCKET);\n" + 
+      "_meta.setPower(0);\n" +         
+      "_meta.addEffect(org.bukkit.FireworkEffect.builder()\n" + 
+      "                   .withColor(org.bukkit.Color." + color + ")\n" + 
+      "                   .with(org.bukkit.FireworkEffect.Type." + effect + ")\n" + 
+      "                   .withTrail()\n" + 
+      "                   .build());\n" +       
+      firework + ".setFireworkMeta(_meta);\n"    
+  return code;
+};
+
+Blockly.Python['locationtovector'] = function(block) {
+  var location =  Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);   
+  location = insideParen (location)
+  code = location + ".getDirection().normalize()";
+  return [code, Blockly.Python.ORDER_NONE];
+};
