@@ -337,21 +337,24 @@ Blockly.Python['lists_sort'] = function(block) {
 
 Blockly.Python['lists_split'] = function(block) {
   // Block for splitting text into a list, or joining a list into text.
+  var input = Blockly.JavaScript.valueToCode(block, 'INPUT',
+      Blockly.JavaScript.ORDER_MEMBER);
+  var delimiter = Blockly.JavaScript.valueToCode(block, 'DELIM',
+      Blockly.JavaScript.ORDER_NONE) || '\'\'';
   var mode = block.getFieldValue('MODE');
   if (mode == 'SPLIT') {
-    var value_input = Blockly.Python.valueToCode(block, 'INPUT',
-        Blockly.Python.ORDER_MEMBER) || '\'\'';
-    var value_delim = Blockly.Python.valueToCode(block, 'DELIM',
-        Blockly.Python.ORDER_NONE);
-    var code = value_input + '.split(' + value_delim + ')';
+    if (!input) {
+      input = '\'\'';
+    }
+    var functionName = 'split';
   } else if (mode == 'JOIN') {
-    var value_input = Blockly.Python.valueToCode(block, 'INPUT',
-        Blockly.Python.ORDER_NONE) || '[]';
-    var value_delim = Blockly.Python.valueToCode(block, 'DELIM',
-        Blockly.Python.ORDER_MEMBER) || '\'\'';
-    var code = value_delim + '.join(' + value_input + ')';
+    if (!input) {
+      input = '[]';
+    }
+    var functionName = 'join';
   } else {
     throw 'Unknown mode: ' + mode;
   }
-  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+  var code = input + '.' + functionName + '(' + delimiter + ')';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

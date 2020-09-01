@@ -16,11 +16,50 @@ d&&(a=c?"-("+a+")":"-"+a,g=Blockly.Dart.ORDER_UNARY_PREFIX);g=Math.floor(g);e=Ma
 Blockly.Dart.lists_repeat=function(a){var b=Blockly.Dart.valueToCode(a,"ITEM",Blockly.Dart.ORDER_NONE)||"null";return["new List.filled("+(Blockly.Dart.valueToCode(a,"NUM",Blockly.Dart.ORDER_NONE)||"0")+", "+b+")",Blockly.Dart.ORDER_UNARY_POSTFIX]};Blockly.Dart.lists_length=function(a){return[(Blockly.Dart.valueToCode(a,"VALUE",Blockly.Dart.ORDER_UNARY_POSTFIX)||"[]")+".length",Blockly.Dart.ORDER_UNARY_POSTFIX]};
 Blockly.Dart.lists_isEmpty=function(a){return[(Blockly.Dart.valueToCode(a,"VALUE",Blockly.Dart.ORDER_UNARY_POSTFIX)||"[]")+".isEmpty",Blockly.Dart.ORDER_UNARY_POSTFIX]};
 Blockly.Dart.lists_indexOf=function(a){var b="FIRST"==a.getFieldValue("END")?"indexOf":"lastIndexOf",c=Blockly.Dart.valueToCode(a,"FIND",Blockly.Dart.ORDER_NONE)||"''",b=(Blockly.Dart.valueToCode(a,"VALUE",Blockly.Dart.ORDER_UNARY_POSTFIX)||"[]")+"."+b+"("+c+")";return a.workspace.options.oneBasedIndex?[b+" + 1",Blockly.Dart.ORDER_ADDITIVE]:[b,Blockly.Dart.ORDER_UNARY_POSTFIX]};
-Blockly.Dart.lists_getIndex=function(a){function b(){var a=Blockly.Dart.variableDB_.getDistinctName("tmp_list",Blockly.Variables.NAME_TYPE),b="List "+a+" = "+e+";\n";e=a;return b}var c=a.getFieldValue("MODE")||"GET",d=a.getFieldValue("WHERE")||"FROM_START",e=Blockly.Dart.valueToCode(a,"VALUE","RANDOM"==d||"FROM_END"==d?Blockly.Dart.ORDER_NONE:Blockly.Dart.ORDER_UNARY_POSTFIX)||"[]";if(("RANDOM"!=d||"REMOVE"!=c)&&"FROM_END"!=d||e.match(/^\w+$/))switch(d){case "FIRST":if("GET"==c)return[e+".first",
-Blockly.Dart.ORDER_UNARY_POSTFIX];if("GET_REMOVE"==c)return[e+".removeAt(0)",Blockly.Dart.ORDER_UNARY_POSTFIX];if("REMOVE"==c)return e+".removeAt(0);\n";break;case "LAST":if("GET"==c)return[e+".last",Blockly.Dart.ORDER_UNARY_POSTFIX];if("GET_REMOVE"==c)return[e+".removeLast()",Blockly.Dart.ORDER_UNARY_POSTFIX];if("REMOVE"==c)return e+".removeLast();\n";break;case "FROM_START":d=Blockly.Dart.getAdjusted(a,"AT");if("GET"==c)return[e+"["+d+"]",Blockly.Dart.ORDER_UNARY_POSTFIX];if("GET_REMOVE"==c)return[e+
-".removeAt("+d+")",Blockly.Dart.ORDER_UNARY_POSTFIX];if("REMOVE"==c)return e+".removeAt("+d+");\n";break;case "FROM_END":d=Blockly.Dart.getAdjusted(a,"AT",1,!1,Blockly.Dart.ORDER_ADDITIVE);if("GET"==c)return[e+"["+e+".length - "+d+"]",Blockly.Dart.ORDER_UNARY_POSTFIX];if("GET_REMOVE"==c||"REMOVE"==c){a=e+".removeAt("+e+".length - "+d+")";if("GET_REMOVE"==c)return[a,Blockly.Dart.ORDER_UNARY_POSTFIX];if("REMOVE"==c)return a+";\n"}break;case "RANDOM":Blockly.Dart.definitions_.import_dart_math="import 'dart:math' as Math;";
-if("REMOVE"==c)return c=Blockly.Dart.variableDB_.getDistinctName("tmp_x",Blockly.Variables.NAME_TYPE),"int "+c+" = new Math.Random().nextInt("+e+".length);\n"+(e+".removeAt("+c+");\n");if("GET"==c)return c=Blockly.Dart.provideFunction_("lists_get_random_item",["dynamic "+Blockly.Dart.FUNCTION_NAME_PLACEHOLDER_+"(List my_list) {","  int x = new Math.Random().nextInt(my_list.length);","  return my_list[x];","}"]),[c+"("+e+")",Blockly.Dart.ORDER_UNARY_POSTFIX];if("GET_REMOVE"==c)return c=Blockly.Dart.provideFunction_("lists_remove_random_item",
-["dynamic "+Blockly.Dart.FUNCTION_NAME_PLACEHOLDER_+"(List my_list) {","  int x = new Math.Random().nextInt(my_list.length);","  return my_list.removeAt(x);","}"]),[c+"("+e+")",Blockly.Dart.ORDER_UNARY_POSTFIX]}else{if("RANDOM"==d)return Blockly.Dart.definitions_.import_dart_math="import 'dart:math' as Math;",a=b(),c=Blockly.Dart.variableDB_.getDistinctName("tmp_x",Blockly.Variables.NAME_TYPE),a+("int "+c+" = new Math.Random().nextInt("+e+".length);\n")+(e+".removeAt("+c+");\n");if("REMOVE"==c)return d=
+
+Blockly.Dart.lists_getIndex=function(a){
+ alert ( 'lists_getIndex');
+ function b(){
+   var a=Blockly.Dart.variableDB_.getDistinctName("tmp_list",Blockly.Variables.NAME_TYPE),
+   b="List "+a+" = "+e+";\n";e=a;
+   return b
+ }
+ var c=a.getFieldValue("MODE")||"GET",d=a.getFieldValue("WHERE")||"FROM_START",e=Blockly.Dart.valueToCode(a,"VALUE","RANDOM"==d||"FROM_END"==d?Blockly.Dart.ORDER_NONE:Blockly.Dart.ORDER_UNARY_POSTFIX)||"[]";
+ alert ( 'e: ' + e );
+ if(("RANDOM"!=d||"REMOVE"!=c)&&"FROM_END"!=d||e.match(/^\w+$/))
+  switch(d){
+   case "FIRST":
+     if("GET"==c)return[e+".first",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("GET_REMOVE"==c)return[e+".removeAt(0)",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("REMOVE"==c)return e+".removeAt(0);\n";
+     break;
+   case "LAST":
+     if("GET"==c)return[e+".last",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("GET_REMOVE"==c)return[e+".removeLast()",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("REMOVE"==c)return e+".removeLast();\n";
+     break;
+   case "FROM_START":
+     d=Blockly.Dart.getAdjusted(a,"AT");
+     if("GET"==c)return[e+"["+d+"]",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("GET_REMOVE"==c)return[e+".removeAt("+d+")",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("REMOVE"==c)return e+".removeAt("+d+");\n";
+     break;
+   case "FROM_END":
+     d=Blockly.Dart.getAdjusted(a,"AT",1,!1,Blockly.Dart.ORDER_ADDITIVE);
+     if("GET"==c)return[e+"["+e+".length - "+d+"]",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("GET_REMOVE"==c||"REMOVE"==c)
+        a=e+".removeAt("+e+".length - "+d+")";
+        if("GET_REMOVE"==c)return[a,Blockly.Dart.ORDER_UNARY_POSTFIX];
+        if("REMOVE"==c)return a+";\n"
+     }
+     break;
+   case "RANDOM":
+     Blockly.Dart.definitions_.import_dart_math="import 'dart:math' as Math;";
+     if("REMOVE"==c)return c=Blockly.Dart.variableDB_.getDistinctName("tmp_x",Blockly.Variables.NAME_TYPE),"int "+c+" = new Math.Random().nextInt("+e+".length);\n"+(e+".removeAt("+c+");\n");
+     if("GET"==c)return c=Blockly.Dart.provideFunction_("lists_get_random_item",["dynamic "+Blockly.Dart.FUNCTION_NAME_PLACEHOLDER_+"(List my_list) {","  int x = new Math.Random().nextInt(my_list.length);","  return my_list[x];","}"]),[c+"("+e+")",Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("GET_REMOVE"==c)return c=Blockly.Dart.provideFunction_("lists_remove_random_item",
+        ["dynamic "+Blockly.Dart.FUNCTION_NAME_PLACEHOLDER_+"(List my_list) {","  int x = new Math.Random().nextInt(my_list.length);","  return my_list.removeAt(x);","}"]),[c+"("+e+")",Blockly.Dart.ORDER_UNARY_POSTFIX]
+        }else{if("RANDOM"==d)return Blockly.Dart.definitions_.import_dart_math="import 'dart:math' as Math;",a=b(),c=Blockly.Dart.variableDB_.getDistinctName("tmp_x",Blockly.Variables.NAME_TYPE),a+("int "+c+" = new Math.Random().nextInt("+e+".length);\n")+(e+".removeAt("+c+");\n");if("REMOVE"==c)return d=
 Blockly.Dart.getAdjusted(a,"AT",1,!1,Blockly.Dart.ORDER_ADDITIVE),a=b(),a+=e+".removeAt("+e+".length - "+d+");\n";if("GET"==c)return d=Blockly.Dart.getAdjusted(a,"AT",1),c=Blockly.Dart.provideFunction_("lists_get_from_end",["dynamic "+Blockly.Dart.FUNCTION_NAME_PLACEHOLDER_+"(List my_list, num x) {","  x = my_list.length - x;","  return my_list[x];","}"]),[c+"("+e+", "+d+")",Blockly.Dart.ORDER_UNARY_POSTFIX];if("GET_REMOVE"==c)return d=Blockly.Dart.getAdjusted(a,"AT",1),c=Blockly.Dart.provideFunction_("lists_remove_from_end",
 ["dynamic "+Blockly.Dart.FUNCTION_NAME_PLACEHOLDER_+"(List my_list, num x) {","  x = my_list.length - x;","  return my_list.removeAt(x);","}"]),[c+"("+e+", "+d+")",Blockly.Dart.ORDER_UNARY_POSTFIX]}throw"Unhandled combination (lists_getIndex).";};
 Blockly.Dart.lists_setIndex=function(a){function b(){if(e.match(/^\w+$/))return"";var a=Blockly.Dart.variableDB_.getDistinctName("tmp_list",Blockly.Variables.NAME_TYPE),b="List "+a+" = "+e+";\n";e=a;return b}var c=a.getFieldValue("MODE")||"GET",d=a.getFieldValue("WHERE")||"FROM_START",e=Blockly.Dart.valueToCode(a,"LIST",Blockly.Dart.ORDER_UNARY_POSTFIX)||"[]",f=Blockly.Dart.valueToCode(a,"TO",Blockly.Dart.ORDER_ASSIGNMENT)||"null";switch(d){case "FIRST":if("SET"==c)return e+"[0] = "+f+";\n";if("INSERT"==

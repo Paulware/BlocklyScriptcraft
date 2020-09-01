@@ -1,0 +1,153 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="(6oqkRrfRvdZbq:46{AR" x="163" y="13">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="TiY$h-?bsgoY|^Ee=A|6">
+        <field name="LISTENERTYPE">playerCommandPreprocess</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id=";Nnzm;5=Odr1^yNNr~5E">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="w5UCYv!?!7W0trTbumgC">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="`8QEuoD$%tYR.jk:lN+$">
+                <field name="VARNAME">message</field>
+                <value name="EXPRESSION">
+                  <block type="eventinfo" id="LBCc!p^Hr,$:F,szDhTW">
+                    <field name="INFORMATION">getMessage</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setvariablevalue" id="uXw|W`.)B0zq40e$~3g(">
+                    <field name="VARNAME">data</field>
+                    <value name="EXPRESSION">
+                      <block type="lists_split" id="WR2hChD7($Ity090uj!+">
+                        <mutation mode="SPLIT"></mutation>
+                        <field name="MODE">SPLIT</field>
+                        <value name="INPUT">
+                          <block type="varname" id="K^#c#~k,vqtCU__ugr6|">
+                            <field name="VARNAME">message</field>
+                          </block>
+                        </value>
+                        <value name="DELIM">
+                          <shadow type="text" id="Vq7?j+n~*vCd}31M-@3]">
+                            <field name="TEXT"> </field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="setvariablevalue" id="QKxTFqE(s9zF6G+SNO]C">
+                        <field name="VARNAME">cmd</field>
+                        <value name="EXPRESSION">
+                          <block type="lists_getIndex" id="!Q%qrZUUa:R:0U8uU#=:">
+                            <mutation statement="false" at="false"></mutation>
+                            <field name="MODE">GET_REMOVE</field>
+                            <field name="WHERE">FIRST</field>
+                            <value name="VALUE">
+                              <block type="varname" id="E4$IbCiZCL!/XWoGk}@=">
+                                <field name="VARNAME">data</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if" id="k^V)dZf_Q4x|y:`bD/Tz">
+                            <value name="IF0">
+                              <block type="logic_compare" id="qN#zCji1g!8Mt9.j`F9u">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="varname" id="[#i|DtD/H`JKZ6Fpc.M[">
+                                    <field name="VARNAME">cmd</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="varname" id="b6x?%]m{P#y6t)nr4s_e">
+                                    <field name="VARNAME">"/t"</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="setvariablevalue" id="v0qgZDoKrb+(%xyBg.1{">
+                                <field name="VARNAME">message</field>
+                                <value name="EXPRESSION">
+                                  <block type="lists_split" id="%)FdvD`O$3N[(w!{@;Bn">
+                                    <mutation mode="JOIN"></mutation>
+                                    <field name="MODE">JOIN</field>
+                                    <value name="INPUT">
+                                      <block type="varname" id=":TVM*JqK/xz(.vUfxY=-">
+                                        <field name="VARNAME">data</field>
+                                      </block>
+                                    </value>
+                                    <value name="DELIM">
+                                      <shadow type="text" id="3_3=M,#^ZM,Z)?*|9k98">
+                                        <field name="TEXT"> </field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="foreachloop" id="GBP=fZ~^;.57Kjzda!mm">
+                                    <field name="ELEMENT">neighbor</field>
+                                    <value name="LIST">
+                                      <block type="allplayers" id="zbch`X,=.n_i;S3LY~MW"></block>
+                                    </value>
+                                    <statement name="FORCODE">
+                                      <block type="controls_if" id="4_PBn6R:W3~J##B?-:YP">
+                                        <value name="IF0">
+                                          <block type="playernearby" id="7=.+^,hwaj/_S-~cX*q@">
+                                            <value name="PLAYER">
+                                              <block type="varname" id="U69a8pAb,X/b8UKkMau#">
+                                                <field name="VARNAME">neighbor</field>
+                                              </block>
+                                            </value>
+                                            <value name="RADIUS">
+                                              <block type="math_number" id="Y=9s2n?I[;/wg?`(zsX%">
+                                                <field name="NUM">5</field>
+                                              </block>
+                                            </value>
+                                            <value name="LOCATION">
+                                              <block type="locationof" id="E]#=IuY_3l}I1Mj`fT{f">
+                                                <value name="OBJECT">
+                                                  <block type="varname" id="Lqu+zPVAtD(JBiNY$DhA">
+                                                    <field name="VARNAME">player</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="sendmessage" id="nn_=VRDa~.R(})R*O5wq">
+                                            <field name="MESSAGE">message</field>
+                                            <value name="PLAYER">
+                                              <block type="varname" id="OQLbZU[LR%bJC2b,;F:C">
+                                                <field name="VARNAME">neighbor</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

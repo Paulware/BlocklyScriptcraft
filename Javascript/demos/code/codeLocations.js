@@ -205,7 +205,10 @@
       "Set invincibility for player => Entities, Player",
       "Remove Boots Worn by player => Items, Gear",  
       "Remove All Armor Worn by player => Items, Gear",  
-      "Basic Map Render Function => Items, Map",       
+      "Basic Map Render Function => Items, Map",  
+      "Found Player => Entities, All Players",  
+      "Make List from Text => Lists", 
+      "Make Text from List => Lists",       
    ];
    
    function autocomplete(inp, arr) {

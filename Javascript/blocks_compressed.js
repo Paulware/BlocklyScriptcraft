@@ -24,8 +24,26 @@ Blockly.Blocks.lists_length={init:function(){this.jsonInit({message0:Blockly.Msg
 Blockly.Blocks.lists_isEmpty={init:function(){this.jsonInit({message0:Blockly.Msg.LISTS_ISEMPTY_TITLE,args0:[{type:"input_value",name:"VALUE",check:["String","Array"]}],output:"Boolean",colour:Blockly.Blocks.lists.HUE,tooltip:Blockly.Msg.LISTS_ISEMPTY_TOOLTIP,helpUrl:Blockly.Msg.LISTS_ISEMPTY_HELPURL})}};
 Blockly.Blocks.lists_indexOf={init:function(){var a=[[Blockly.Msg.LISTS_INDEX_OF_FIRST,"FIRST"],[Blockly.Msg.LISTS_INDEX_OF_LAST,"LAST"]];this.setHelpUrl(Blockly.Msg.LISTS_INDEX_OF_HELPURL);this.setColour(Blockly.Blocks.lists.HUE);this.setOutput(!0,"Number");this.appendValueInput("VALUE").setCheck("Array").appendField(Blockly.Msg.LISTS_INDEX_OF_INPUT_IN_LIST);this.appendValueInput("FIND").appendField(new Blockly.FieldDropdown(a),"END");this.setInputsInline(!0);this.setTooltip(function(){return Blockly.Msg.LISTS_INDEX_OF_TOOLTIP.replace("%1",
 this.workspace.options.oneBasedIndex?"0":"-1")})}};
-Blockly.Blocks.lists_getIndex={init:function(){var a=[[Blockly.Msg.LISTS_GET_INDEX_GET,"GET"],[Blockly.Msg.LISTS_GET_INDEX_GET_REMOVE,"GET_REMOVE"],[Blockly.Msg.LISTS_GET_INDEX_REMOVE,"REMOVE"]];this.WHERE_OPTIONS=[[Blockly.Msg.LISTS_GET_INDEX_FROM_START,"FROM_START"],[Blockly.Msg.LISTS_GET_INDEX_FROM_END,"FROM_END"],[Blockly.Msg.LISTS_GET_INDEX_FIRST,"FIRST"],[Blockly.Msg.LISTS_GET_INDEX_LAST,"LAST"],[Blockly.Msg.LISTS_GET_INDEX_RANDOM,"RANDOM"]];this.setHelpUrl(Blockly.Msg.LISTS_GET_INDEX_HELPURL);
-this.setColour(Blockly.Blocks.lists.HUE);a=new Blockly.FieldDropdown(a,function(a){this.sourceBlock_.updateStatement_("REMOVE"==a)});this.appendValueInput("VALUE").setCheck("Array").appendField(Blockly.Msg.LISTS_GET_INDEX_INPUT_IN_LIST);this.appendDummyInput().appendField(a,"MODE").appendField("","SPACE");this.appendDummyInput("AT");Blockly.Msg.LISTS_GET_INDEX_TAIL&&this.appendDummyInput("TAIL").appendField(Blockly.Msg.LISTS_GET_INDEX_TAIL);this.setInputsInline(!0);this.setOutput(!0);this.updateAt_(!0);
+Blockly.Blocks.lists_getIndex={init:function(){
+   var a=[
+           [Blockly.Msg.LISTS_GET_INDEX_GET,"GET"],
+           [Blockly.Msg.LISTS_GET_INDEX_GET_REMOVE,"GET_REMOVE"],
+           [Blockly.Msg.LISTS_GET_INDEX_REMOVE,"REMOVE"]
+         ];
+   this.WHERE_OPTIONS=[
+                       [Blockly.Msg.LISTS_GET_INDEX_FROM_START,"FROM_START"],
+                       [Blockly.Msg.LISTS_GET_INDEX_FROM_END,"FROM_END"],
+                       [Blockly.Msg.LISTS_GET_INDEX_FIRST,"FIRST"],
+                       [Blockly.Msg.LISTS_GET_INDEX_LAST,"LAST"] //,
+                       // [Blockly.Msg.LISTS_GET_INDEX_RANDOM,"RANDOM"]
+                      ];
+   this.setHelpUrl(Blockly.Msg.LISTS_GET_INDEX_HELPURL);
+   this.setColour(Blockly.Blocks.lists.HUE);
+   a=new Blockly.FieldDropdown(a,function(a){
+    this.sourceBlock_.updateStatement_("REMOVE"==a)
+   });
+   this.appendValueInput("VALUE").setCheck("Array").appendField(Blockly.Msg.LISTS_GET_INDEX_INPUT_IN_LIST);
+   this.appendDummyInput().appendField(a,"MODE").appendField("","SPACE");this.appendDummyInput("AT");Blockly.Msg.LISTS_GET_INDEX_TAIL&&this.appendDummyInput("TAIL").appendField(Blockly.Msg.LISTS_GET_INDEX_TAIL);this.setInputsInline(!0);this.setOutput(!0);this.updateAt_(!0);
 var b=this;this.setTooltip(function(){var a=b.getFieldValue("MODE"),e=b.getFieldValue("WHERE"),d="";switch(a+" "+e){case "GET FROM_START":case "GET FROM_END":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM;break;case "GET FIRST":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FIRST;break;case "GET LAST":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_LAST;break;case "GET RANDOM":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM;break;case "GET_REMOVE FROM_START":case "GET_REMOVE FROM_END":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM;
 break;case "GET_REMOVE FIRST":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST;break;case "GET_REMOVE LAST":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST;break;case "GET_REMOVE RANDOM":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM;break;case "REMOVE FROM_START":case "REMOVE FROM_END":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM;break;case "REMOVE FIRST":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST;break;case "REMOVE LAST":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST;
 break;case "REMOVE RANDOM":d=Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM}if("FROM_START"==e||"FROM_END"==e)d+="  "+("FROM_START"==e?Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP:Blockly.Msg.LISTS_INDEX_FROM_END_TOOLTIP).replace("%1",b.workspace.options.oneBasedIndex?"#1":"#0");return d})},mutationToDom:function(){var a=document.createElement("mutation");a.setAttribute("statement",!this.outputConnection);var b=this.getInput("AT").type==Blockly.INPUT_VALUE;a.setAttribute("at",b);return a},domToMutation:function(a){var b=
