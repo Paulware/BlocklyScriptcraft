@@ -4368,7 +4368,7 @@ Blockly.Blocks['playerinsphere']={
    this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
    this.setColour(0);
    this.appendValueInput("PLAYER")
-       .appendField ("Player ");
+       .appendField ("Player/Entity ");
    this.appendValueInput("LOCATION")
        .appendField("is within sphere with center at location  ");
    this.appendValueInput("RADIUS")
@@ -4411,6 +4411,28 @@ Blockly.Blocks['customizefirework']={
                                                ]), "COLOR");  
                                                
    this.appendDummyInput()
+        .appendField("with fade color ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Aqua", "AQUA"],
+                                                ["Black", "BLACK"],
+                                                ["Blue", "BLUE"],
+                                                ["Fuchsia", "FUCHSIA"],
+                                                ["Gray", "GRAY"],
+                                                ["Green", "GREEN"],
+                                                ["Lime", "LIME"],
+                                                ["Maroon", "MAROON"],
+                                                ["Navy", "NAVY"],
+                                                ["Olive", "OLIVE"],
+                                                ["Orange", "ORANGE"],
+                                                ["Purple", "PURPLE"],
+                                                ["Red", "RED"],
+                                                ["Silver", "SILVER"],
+                                                ["Teal", "TEAL"],
+                                                ["White", "WHITE"],
+                                                ["Yellow", "YELLOW"]
+                                               ]), "FADE");                                                
+                                               
+   this.appendDummyInput()
         .appendField("with effect ")        
         .appendField(new Blockly.FieldDropdown([
                                                 ["Ball", "BALL"],
@@ -4418,8 +4440,12 @@ Blockly.Blocks['customizefirework']={
                                                 ["Burst", "BURST"],
                                                 ["Creeper", "CREEPER"],
                                                 ["Star", "STAR"]
-                                               ]), "EFFECT");                                                
+                                               ]), "EFFECT");  
 
+  this.appendDummyInput()
+        .appendField('flicker')
+        .appendField(new Blockly.FieldCheckbox('FALSE'), 'FLICKER');                                                                                               
+        
    this.setInputsInline(true);        
    this.setTooltip('');
    this.setPreviousStatement(true, null);

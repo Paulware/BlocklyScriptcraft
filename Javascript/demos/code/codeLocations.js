@@ -208,7 +208,9 @@
       "Basic Map Render Function => Items, Map",  
       "Found Player => Entities, All Players",  
       "Make List from Text => Lists", 
-      "Make Text from List => Lists",       
+      "Make Text from List => Lists",  
+      "Player/Entity is within phere => Entities, Player",
+      "Player is within area => Entities, Player",       
    ];
    
    function autocomplete(inp, arr) {

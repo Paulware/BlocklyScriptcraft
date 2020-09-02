@@ -3799,15 +3799,21 @@ Blockly.Python['playerinsphere'] = function(block) {
 Blockly.Python['customizefirework'] = function(block) {
   var firework = insideParen(Blockly.Python.valueToCode(block, 'FIREWORK', Blockly.Python.ORDER_ATOMIC));
   var color = block.getFieldValue ("COLOR");
+  var fadeColor = block.getFieldValue ("FADE");
   var effect = block.getFieldValue ("EFFECT");
+  
+  var flicker = block.getFieldValue ("FLICKER");  
+  flicker = (flicker == "TRUE")?true:false;
   
   var code = 
       "var _meta = org.bukkit.Bukkit.getItemFactory().getItemMeta(org.bukkit.Material.FIREWORK_ROCKET);\n" + 
       "_meta.setPower(0);\n" +         
       "_meta.addEffect(org.bukkit.FireworkEffect.builder()\n" + 
       "                   .withColor(org.bukkit.Color." + color + ")\n" + 
+      "                   .withFade(org.bukkit.Color." + fadeColor + ")\n" + 
       "                   .with(org.bukkit.FireworkEffect.Type." + effect + ")\n" + 
-      "                   .withTrail()\n" + 
+      "                   .trail(false)\n" +
+      "                   .flicker(" + flicker + ")\n" +       
       "                   .build());\n" +       
       firework + ".setFireworkMeta(_meta);\n"    
   return code;
