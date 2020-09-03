@@ -56,6 +56,7 @@
                         </value>
                         <next>
                           <block type="controls_if" id="k^V)dZf_Q4x|y:`bD/Tz">
+                            <mutation elseif="1"></mutation>
                             <value name="IF0">
                               <block type="logic_compare" id="qN#zCji1g!8Mt9.j`F9u">
                                 <field name="OP">EQ</field>
@@ -137,6 +138,38 @@
                                 </next>
                               </block>
                             </statement>
+                            <value name="IF1">
+                              <block type="logic_compare" id=".15{P9@o`!ZaHSr(l,b!">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="varname" id="$^KC634$Ty=cLX1/;M@B">
+                                    <field name="VARNAME">cmd</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="varname" id="9s(_Js6`YNzvJiA7fWFy">
+                                    <field name="VARNAME">"/h"</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO1">
+                              <block type="setplayerhealth" id="CgiERPKt=:1`*mZUVPDc">
+                                <value name="HEALTH">
+                                  <block type="math_number" id="`(e,87p2.Z5aRlRdsp:k">
+                                    <field name="NUM">20</field>
+                                  </block>
+                                </value>
+                                <value name="PLAYER">
+                                  <block type="varname" id="zv?2wuV#`QauTE;-bN:J">
+                                    <field name="VARNAME">player</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="eventcancel" id="9FD0.9Wo]!c:BlTJkg{J"></block>
+                            </next>
                           </block>
                         </next>
                       </block>
