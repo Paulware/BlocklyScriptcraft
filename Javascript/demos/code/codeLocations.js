@@ -210,7 +210,8 @@
       "Make List from Text => Lists", 
       "Make Text from List => Lists",  
       "Player/Entity is within phere => Entities, Player",
-      "Player is within area => Entities, Player",       
+      "Player is within area => Entities, Player",    
+      "Spawn Arrow => Entities",       
    ];
    
    function autocomplete(inp, arr) {

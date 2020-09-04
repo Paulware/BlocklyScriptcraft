@@ -4464,3 +4464,25 @@ Blockly.Blocks['locationtovector'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['spawnarrow'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .appendField("Spawn arrow at location"); 
+    this.appendValueInput("VECTOR")
+        .appendField("with vector");         
+    this.appendDummyInput()
+        .appendField ("speed ")
+        .appendField (new Blockly.FieldTextInput ( "0.6"), "SPEED")
+        .appendField ("spread")        
+        .appendField (new Blockly.FieldTextInput ( "12"), "SPREAD");
+         
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setInputsInline(true);      
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+

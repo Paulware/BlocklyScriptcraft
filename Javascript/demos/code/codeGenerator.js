@@ -889,7 +889,7 @@ Blockly.Python['activeteams'] = function(block) {
              '      _teamColor=(_players[i]== null)? null : (_players[i].getMetadata == null)?null:(_players[i].getMetadata(\"_team_\").length == 0)?null:players[i].getMetadata(\"_team_\")[0].value();\n' + 
              '      if (_teamColor != null) { \n' + 
              '         if (! ((_teams.indexOf (_teamColor) >= 0))){\n' + 
-             '            if (! ((_players[i] == null ) ? false : (_players[i].getGameMode().toString() == \"SPECTATOR\"))){\n' + 
+             '            if (! ((_players[i] == null ) ? false : (_players[i].getGameMode().toString() != \"SPECTATOR\"))){\n' + 
              '               _teams.push (_teamColor);\n' + 
              '            }\n' + 
              '         }\n' + 
@@ -3825,3 +3825,15 @@ Blockly.Python['locationtovector'] = function(block) {
   code = location + ".getDirection().normalize()";
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['spawnarrow'] = function(block) {
+  var location = insideParen(Blockly.Python.valueToCode(block, "LOCATION", Blockly.Python.ORDER_ATOMIC)); 
+  var vector = insideParen(Blockly.Python.valueToCode(block, "VECTOR", Blockly.Python.ORDER_ATOMIC)); 
+  var speed = block.getFieldValue ("SPEED");
+  var spread = block.getFieldValue ("SPREAD");
+  
+  var code = "server.worlds[0].spawnArrow(" + location + "," + vector + "," + speed + "," + spread + ");\n";  
+  return code;
+};
+
+
