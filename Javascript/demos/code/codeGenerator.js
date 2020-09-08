@@ -885,6 +885,7 @@ Blockly.Python['blocksradius'] = function(block) {
 Blockly.Python['activeteams'] = function(block) {
   var code = '(function() { ' + 
              '   var _players=server.getOnlinePlayers();var _teams=[];var _teamColor;\n' + 
+             '   console.log ( \'Number of players: \' + _players.length );\n' + 
              '   for (var i=0; i<_players.length;i++) {\n' +   
              '      _teamColor=(_players[i]== null)? null : (_players[i].getMetadata == null)?null:(_players[i].getMetadata(\"_team_\").length == 0)?null:players[i].getMetadata(\"_team_\")[0].value();\n' + 
              '      if (_teamColor != null) { \n' + 
@@ -901,8 +902,6 @@ Blockly.Python['activeteams'] = function(block) {
               
   return [code, Blockly.Python.ORDER_NONE];  
 };
-
-
 
 Blockly.Python['repairarmor'] = function(block) {
   var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC); 
@@ -3831,9 +3830,13 @@ Blockly.Python['spawnarrow'] = function(block) {
   var vector = insideParen(Blockly.Python.valueToCode(block, "VECTOR", Blockly.Python.ORDER_ATOMIC)); 
   var speed = block.getFieldValue ("SPEED");
   var spread = block.getFieldValue ("SPREAD");
-  
+  //alert ( 'location: ' + location);
+  //alert ( 'vector: ' + vector);
+  //alert ( 'speed: ' + speed );
+  //alert ( 'spread: ' + spread);
   var code = "server.worlds[0].spawnArrow(" + location + "," + vector + "," + speed + "," + spread + ");\n";  
-  return code;
+  //alert ( 'code: ' + code );
+  return [code, Blockly.Python.ORDER_NONE];
 };
 
 

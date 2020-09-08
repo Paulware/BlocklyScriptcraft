@@ -1,0 +1,67 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="(6oqkRrfRvdZbq:46{AR" x="113" y="13">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="TiY$h-?bsgoY|^Ee=A|6">
+        <field name="LISTENERTYPE">playerInteract</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id=";Nnzm;5=Odr1^yNNr~5E">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="w5UCYv!?!7W0trTbumgC">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="8@UcAKhS@L7a;CtW59AA">
+                <field name="VARNAME">blocks</field>
+                <value name="EXPRESSION">
+                  <block type="blocksradius" id=".jjTmSpFMhX/ecqv4Y%|">
+                    <value name="BLOCKTYPE">
+                      <block type="blocktype" id="a:3Y;ftK[{Z+*8~l.~uP">
+                        <field name="BLOCKTYPE">TNT</field>
+                      </block>
+                    </value>
+                    <value name="RADIUS">
+                      <block type="varname" id="A1qeJ)w6~SS}g`gQfFv@">
+                        <field name="VARNAME">100</field>
+                      </block>
+                    </value>
+                    <value name="LOCATION">
+                      <block type="varname" id="?bhz}o:T:iBgwJ}qS!M{">
+                        <field name="VARNAME">player.location</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="consolelog" id="r(iPd:lW{TY5j#Kqp(:I">
+                    <value name="NAME">
+                      <block type="varname" id="SI9zB*DIP}KbMNtT2$yW">
+                        <field name="VARNAME">blocks</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="eventcancel" id="9FD0.9Wo]!c:BlTJkg{J" disabled="true">
+                        <next>
+                          <block type="setvariablevalue" id="`8QEuoD$%tYR.jk:lN+$" disabled="true">
+                            <field name="VARNAME">message</field>
+                            <value name="EXPRESSION">
+                              <block type="eventinfo" id="LBCc!p^Hr,$:F,szDhTW">
+                                <field name="INFORMATION">getMessage</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -919,6 +919,7 @@ Blockly.Blocks['entityType'] = {
                                                 ["Minecart", "MINECART"], 
                                                 ["Ocelot", "OCELOT"],
                                                 ["Pig", "PIG"],
+                                                ["Primed TNT", "PRIMED_TNT"],                                                
                                                 ["Rabbit", "RABBIT"],
                                                 ["Ravager", "RAVAGER"],
                                                 ["Sheep", "SHEEP"],  
