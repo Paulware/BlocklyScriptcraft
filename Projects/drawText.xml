@@ -1,0 +1,57 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="Q_@`@/@^U-Z{nlyF:{}y" x="-512" y="-237">
+    <field name="nameOfFunction">render (mapView, mapCanvas, player)</field>
+    <statement name="FUNCTIONCODE">
+      <block type="setvariable" id="!@#=fw=O9]zkef5Q/?!e">
+        <field name="VARNAME">mapId</field>
+        <field name="EXPRESSION">mapView.getId()</field>
+        <next>
+          <block type="controls_if" id="v8g?+(}zL1DR1;NFu=QM">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="xmwgxwGNLJ~{[/ftYoP4">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="varname" id="xBUYSL.:8*DMvye$LH^)">
+                    <field name="VARNAME">mapId</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="zwZ[eggEC%Hk^Y(F;h`W">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="drawImage" id="G7+*c;GN^_fr~o-*IV=-">
+                <field name="FILENAME">'scriptcraft/plugins/images/falloutMonitor.jpg'</field>
+                <field name="SCALE">FALSE</field>
+                <next>
+                  <block type="drawText" id="bJH?OIrotfHF??%wqv]^">
+                    <field name="TEXT">"Name 1\nName 2"</field>
+                    <field name="COLOR">126</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="drawText" id="nK?Ff86J*/G;R|.|l~0B">
+                <field name="TEXT">"mapId=" + mapId</field>
+                <field name="COLOR">76</field>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="scriptcraftfunction" id="1R6OB5=Vn9/,}6Jx-n*q" x="-512" y="-12">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="mapRenderer" id="UFM5/Au00l)$u}qtEtk6">
+        <field name="RENDERER">render</field>
+      </block>
+    </statement>
+  </block>
+</xml>

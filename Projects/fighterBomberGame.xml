@@ -222,7 +222,7 @@
                                     <field name="ELEMENT">bed</field>
                                     <value name="LIST">
                                       <block type="globalvariable" id="Rt6ir:NCmD)o1I-vZ!MB">
-                                        <field name="VARNAME">beds</field>
+                                        <field name="VARNAME">bedLocations</field>
                                       </block>
                                     </value>
                                     <statement name="FORCODE">

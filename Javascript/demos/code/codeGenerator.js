@@ -1532,14 +1532,26 @@ Blockly.Python['fileExists'] = function(block) {
 
 Blockly.Python['drawImage'] = function(block) {
   var filename = block.getFieldValue ("FILENAME");
-  var code = "mapCanvas.drawImage (0,0,org.bukkit.map.MapPalette.resizeImage (" + 
-             "new javax.swing.ImageIcon(filename).getImage()) );\n"
+  var scale = block.getFieldValue ("SCALE");  
+  if (scale == "TRUE") {
+     scale = 'true';
+  } else {
+     scale = 'false';
+  }
+  var code;
+  if (scale) { 
+     code = "mapCanvas.drawImage (0,0,org.bukkit.map.MapPalette.resizeImage (" + 
+            "new javax.swing.ImageIcon(" + filename + ").getImage()) );\n"
+  } else { 
+     code = "mapCanvas.drawImage (0,0," + "new javax.swing.ImageIcon(" + filename + ").getImage());\n"
+  }
   return code;
 };
 
 Blockly.Python['drawText'] = function(block) {
   var text = block.getFieldValue ( "TEXT");
-  var code = "mapCanvas.drawText ( 10,10,org.bukkit.map.MinecraftFont.Font, " + text + ");"; 
+  var color = block.getFieldValue ("COLOR");
+  var code = "mapCanvas.drawText ( 10,10,org.bukkit.map.MinecraftFont.Font,String.fromCharCode(167) + \"" + color + ";\" + " + text + ");"; 
   return code + "\n";
 };
 
@@ -3830,12 +3842,13 @@ Blockly.Python['spawnarrow'] = function(block) {
   var vector = insideParen(Blockly.Python.valueToCode(block, "VECTOR", Blockly.Python.ORDER_ATOMIC)); 
   var speed = block.getFieldValue ("SPEED");
   var spread = block.getFieldValue ("SPREAD");
-  //alert ( 'location: ' + location);
-  //alert ( 'vector: ' + vector);
-  //alert ( 'speed: ' + speed );
-  //alert ( 'spread: ' + spread);
   var code = "server.worlds[0].spawnArrow(" + location + "," + vector + "," + speed + "," + spread + ");\n";  
-  //alert ( 'code: ' + code );
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['equipmentslot'] = function(block) {
+  var slot = block.getFieldValue ("SLOT");
+  var code = "org.bukkit.inventory.EquipmentSlot." + slot;  
   return [code, Blockly.Python.ORDER_NONE];
 };
 

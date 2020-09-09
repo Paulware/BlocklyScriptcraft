@@ -1,56 +1,190 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="scriptcraftfunction" id="(6oqkRrfRvdZbq:46{AR" x="113" y="13">
+  <block type="scriptcraftexpression" id="bd9v~v:.{eHc!R_9n:OR" x="-62" y="-12">
+    <statement name="EXPRESSIONCODE">
+      <block type="basicrenderfunction" id="Z47(i0m1YQb}x9)6_|;8"></block>
+    </statement>
+  </block>
+  <block type="drawText" id="jRi}(^u,/!ovt?)n%;hg" x="313" y="38">
+    <field name="TEXT">Hello World</field>
+  </block>
+  <block type="scriptcraftfunction" id="(6oqkRrfRvdZbq:46{AR" x="-38" y="62">
     <field name="nameOfFunction">test</field>
     <statement name="FUNCTIONCODE">
-      <block type="eventlistener" id="TiY$h-?bsgoY|^Ee=A|6">
-        <field name="LISTENERTYPE">playerInteract</field>
-        <statement name="LISTENERCODE">
-          <block type="setvariablevalue" id=";Nnzm;5=Odr1^yNNr~5E">
-            <field name="VARNAME">player</field>
-            <value name="EXPRESSION">
-              <block type="eventinfo" id="w5UCYv!?!7W0trTbumgC">
-                <field name="INFORMATION">getPlayer</field>
-              </block>
-            </value>
-            <next>
-              <block type="setvariablevalue" id="8@UcAKhS@L7a;CtW59AA">
-                <field name="VARNAME">blocks</field>
+      <block type="mapRenderer" id="u/Vf?+son(].H.mqXOaf">
+        <field name="RENDERER">render</field>
+        <next>
+          <block type="eventlistener" id="TiY$h-?bsgoY|^Ee=A|6">
+            <field name="LISTENERTYPE">playerInteract</field>
+            <statement name="LISTENERCODE">
+              <block type="setvariablevalue" id=";Nnzm;5=Odr1^yNNr~5E">
+                <field name="VARNAME">player</field>
                 <value name="EXPRESSION">
-                  <block type="blocksradius" id=".jjTmSpFMhX/ecqv4Y%|">
-                    <value name="BLOCKTYPE">
-                      <block type="blocktype" id="a:3Y;ftK[{Z+*8~l.~uP">
-                        <field name="BLOCKTYPE">TNT</field>
-                      </block>
-                    </value>
-                    <value name="RADIUS">
-                      <block type="varname" id="A1qeJ)w6~SS}g`gQfFv@">
-                        <field name="VARNAME">100</field>
-                      </block>
-                    </value>
-                    <value name="LOCATION">
-                      <block type="varname" id="?bhz}o:T:iBgwJ}qS!M{">
-                        <field name="VARNAME">player.location</field>
-                      </block>
-                    </value>
+                  <block type="eventinfo" id="w5UCYv!?!7W0trTbumgC">
+                    <field name="INFORMATION">getPlayer</field>
                   </block>
                 </value>
                 <next>
-                  <block type="consolelog" id="r(iPd:lW{TY5j#Kqp(:I">
-                    <value name="NAME">
-                      <block type="varname" id="SI9zB*DIP}KbMNtT2$yW">
-                        <field name="VARNAME">blocks</field>
+                  <block type="setvariablevalue" id="3)Y/S?$d;l@03Q=1k,qn">
+                    <field name="VARNAME">action</field>
+                    <value name="EXPRESSION">
+                      <block type="eventinfo" id="n6U*EeIcKS}}VFG{rWd(">
+                        <field name="INFORMATION">getAction</field>
                       </block>
                     </value>
                     <next>
-                      <block type="eventcancel" id="9FD0.9Wo]!c:BlTJkg{J" disabled="true">
-                        <next>
-                          <block type="setvariablevalue" id="`8QEuoD$%tYR.jk:lN+$" disabled="true">
-                            <field name="VARNAME">message</field>
-                            <value name="EXPRESSION">
-                              <block type="eventinfo" id="LBCc!p^Hr,$:F,szDhTW">
-                                <field name="INFORMATION">getMessage</field>
+                      <block type="controls_if" id=".rmI~#((a2Q_p8M259G7">
+                        <value name="IF0">
+                          <block type="logic_compare" id="GDai(yc8Vhq$`g2$73WN">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="varname" id="!-0rqx6.Fn~vd%bBOXIe">
+                                <field name="VARNAME">action</field>
                               </block>
                             </value>
+                            <value name="B">
+                              <block type="actiontype" id="/!pms}q3wXMcPOxhb_S!">
+                                <field name="ACTION">LEFT_CLICK_BLOCK</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="setvariablevalue" id="xqr(F37}[tGT$w+_OeM7">
+                            <field name="VARNAME">tnt</field>
+                            <value name="EXPRESSION">
+                              <block type="clickedBlock" id=":PO~m7WVYPybWCnIW4*T"></block>
+                            </value>
+                            <next>
+                              <block type="spawnblock" id="5o9+zS!U^1~YuVIe[o.}" disabled="true">
+                                <value name="TYPE">
+                                  <block type="blocktype" id="0aksV/LsTrF}iSiRGEn+">
+                                    <field name="BLOCKTYPE">OAK_WOOD</field>
+                                  </block>
+                                </value>
+                                <value name="LOCATION">
+                                  <block type="varname" id="]17lASq~8oYhd_ije|a+">
+                                    <field name="VARNAME">tnt.location</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="changeBlock" id="%p=:~NyIgV/fLLNsTiSj" disabled="true">
+                                    <value name="BLOCK">
+                                      <block type="varname" id="aOOddwga3`BLg|0YZAmi">
+                                        <field name="VARNAME">tnt</field>
+                                      </block>
+                                    </value>
+                                    <value name="TYPEOFBLOCK">
+                                      <block type="blocktype" id="T(FSMC)G({B)pX6;^:]e">
+                                        <field name="BLOCKTYPE">TNT</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="spawnblock" id="9Sr9,UE8_-_KqI]h7C4u">
+                                        <value name="TYPE">
+                                          <block type="blocktype" id="vKx];#~E4ym.wT/e90+y">
+                                            <field name="BLOCKTYPE">TNT</field>
+                                          </block>
+                                        </value>
+                                        <value name="LOCATION">
+                                          <block type="varname" id=")c6{JpOtPO%$^}$Eq({u">
+                                            <field name="VARNAME">tnt.location</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="consolelog" id="+yvYb+UFO6!z*SfqVOq6" disabled="true">
+                                            <value name="NAME">
+                                              <block type="varname" id=".,XH*1x9_lR)^,m%i:.J">
+                                                <field name="VARNAME">"spawning tnt at: " + tnt.location</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="runexpression" id="CrKc[6ii2FpNm!l296GY" disabled="true">
+                                                <field name="EXPRESSION">tnt.setType (org.bukkit.Material.TNT)</field>
+                                                <next>
+                                                  <block type="eventcancel" id="h[zYCUE31Up]PpivowJ|">
+                                                    <next>
+                                                      <block type="setvariablevalue" id="#n4/Pakn1JIYhvhh)~PF" disabled="true">
+                                                        <field name="VARNAME">tnt</field>
+                                                        <value name="EXPRESSION">
+                                                          <block type="spawnentity" id="N.]Pu7NP1gW`0#{5/{JN">
+                                                            <value name="ENTITY">
+                                                              <block type="entityType" id="`4rru!f!yk^xulp3ItIB">
+                                                                <field name="ENTITY">PRIMED_TNT</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="LOCATION">
+                                                              <block type="varname" id="5)nxnpG#2`+yNF=-oITY">
+                                                                <field name="VARNAME">tnt.location</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="setvariablevalue" id="8@UcAKhS@L7a;CtW59AA" disabled="true">
+                            <field name="VARNAME">blocks</field>
+                            <value name="EXPRESSION">
+                              <block type="blocksradius" id=".jjTmSpFMhX/ecqv4Y%|">
+                                <value name="BLOCKTYPE">
+                                  <block type="blocktype" id="a:3Y;ftK[{Z+*8~l.~uP">
+                                    <field name="BLOCKTYPE">TNT</field>
+                                  </block>
+                                </value>
+                                <value name="RADIUS">
+                                  <block type="varname" id="A1qeJ)w6~SS}g`gQfFv@">
+                                    <field name="VARNAME">10</field>
+                                  </block>
+                                </value>
+                                <value name="LOCATION">
+                                  <block type="varname" id="?bhz}o:T:iBgwJ}qS!M{">
+                                    <field name="VARNAME">player.location</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="eventcancel" id="9FD0.9Wo]!c:BlTJkg{J" disabled="true">
+                                <next>
+                                  <block type="setvariablevalue" id="`8QEuoD$%tYR.jk:lN+$" disabled="true">
+                                    <field name="VARNAME">message</field>
+                                    <value name="EXPRESSION">
+                                      <block type="eventinfo" id="LBCc!p^Hr,$:F,szDhTW">
+                                        <field name="INFORMATION">getMessage</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="modifyEntity" id="1HM;vc!.oWICM?^lvCze" disabled="true">
+                                        <value name="ENTITY">
+                                          <block type="entityType" id="|k(O)o)nR-1mwCHiW?4l">
+                                            <field name="ENTITY">PRIMED_TNT</field>
+                                          </block>
+                                        </value>
+                                        <value name="LOCATION">
+                                          <block type="varname" id="B`Hm8UL^O;56#/n3|Q@?">
+                                            <field name="VARNAME">player.location</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
                           </block>
                         </next>
                       </block>
@@ -58,9 +192,9 @@
                   </block>
                 </next>
               </block>
-            </next>
+            </statement>
           </block>
-        </statement>
+        </next>
       </block>
     </statement>
   </block>

@@ -1421,7 +1421,10 @@ Blockly.Blocks['drawImage'] = {
     this.appendDummyInput()
         .appendField("Draw Image")
         .appendField (new Blockly.FieldTextInput ("1.jpg"), "FILENAME");
-        
+    this.appendDummyInput()
+        .appendField('scale the image')
+        .appendField(new Blockly.FieldCheckbox('FALSE'), 'SCALE'); 
+    this.setInputsInline(true);         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null); 
     this.setColour(120);
@@ -1437,6 +1440,21 @@ Blockly.Blocks['drawText'] = {
         .appendField("Draw Text")
         .appendField (new Blockly.FieldTextInput ("Hello World"), "TEXT");
         
+    this.appendDummyInput()
+        .appendField("in color")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Black",        "0"],
+                                                ["Brown",        "106"],
+                                                ["Cyan",         "126"],
+                                                ["Dark Grey",    "86"],
+                                                ["Green",        "76"],
+                                                ["Light Blue",   "22"],
+                                                ["Light Grey",   "56"],
+                                                ["Light Purple", "66"],
+                                                ["Purple",       "96"]
+                                                
+                                               ]), "COLOR");                   
+    this.setInputsInline(true);         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null); 
     this.setColour(120);
@@ -2978,7 +2996,8 @@ Blockly.Blocks['eventinfo'] = {
                                         ["Get projectile", "getProjectile"],
                                         ["Get shooter", "getEntity().getShooter"],
                                         ["Get target", "getTarget"],
-                                        ["Get the player who performed the click", "getWhoClicked"]
+                                        ["Get the player who performed the click", "getWhoClicked"],
+                                        ["Get which hand triggered the event", "getHand"]
                                        ]), "INFORMATION"); 
 
 
@@ -4482,6 +4501,25 @@ Blockly.Blocks['spawnarrow'] = {
     this.setColour(0);
     this.setTooltip('');
     this.setInputsInline(true);      
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['equipmentslot'] = {
+  init: function() {
+   this.appendDummyInput()
+        .appendField("Equipment Slot: ")        
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Chest", "Chest"],
+                                                ["Feet",  "FEET"],
+                                                ["Hand",  "HAND"],
+                                                ["Head",  "HEAD"],
+                                                ["Legs",  "LEGS"],
+                                                ["Off Hand", "OFF_HAND"]
+                                               ]), "SLOT");    
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
