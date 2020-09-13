@@ -883,16 +883,22 @@ Blockly.Python['blocksradius'] = function(block) {
 
 
 Blockly.Python['activeteams'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);  
+  if (player == "") {
+      player = 'undefined';
+  }
   var code = '(function() { ' + 
              '   var _players=server.getOnlinePlayers();var _teams=[];var _teamColor;\n' + 
              '   console.log ( \'Number of players: \' + _players.length );\n' + 
              '   for (var i=0; i<_players.length;i++) {\n' +   
-             '      _teamColor=(_players[i]== null)? null : (_players[i].getMetadata == null)?null:(_players[i].getMetadata(\"_team_\").length == 0)?null:players[i].getMetadata(\"_team_\")[0].value();\n' + 
-             '      if (_teamColor != null) { \n' + 
-             '         if (! ((_teams.indexOf (_teamColor) >= 0))){\n' + 
-             '            if (! ((_players[i] == null ) ? false : (_players[i].getGameMode().toString() != \"SPECTATOR\"))){\n' + 
-             '               _teams.push (_teamColor);\n' + 
-             '            }\n' + 
+             '      if (' + player + ' != _players[i] ) {\n' + 
+             '         _teamColor=(_players[i]== null)? null : (_players[i].getMetadata == null)?null:(_players[i].getMetadata(\"_team_\").length == 0)?null:_players[i].getMetadata(\"_team_\")[0].value();\n' + 
+             '         if (_teamColor != null) { \n' + 
+             '            if (_teams.indexOf (_teamColor) == -1){\n' + 
+             '               if (_players[i].getGameMode().toString() != \"SPECTATOR\"){\n' + 
+             '                 _teams.push (_teamColor);\n' + 
+             '               }\n' +
+             '            }\n' +              
              '         }\n' + 
              '      }\n' + 
              '   }\n' + 
@@ -1157,8 +1163,8 @@ Blockly.Python['spawnblock'] = function(block) {
   instantiateVariable ("sign");
   instantiateVariable ("data");
   blockType = insideParen(blockType); 
-  if (blockType == "LEGACY_WOODEN_DOOR") {
-     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y)+1, parseInt(location.z));\n" + 
+  if (blockType == "org.bukkit.Material.LEGACY_WOODEN_DOOR") {
+     code =  "loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y)+1, parseInt(" + location + ".z));\n" + 
              "server.worlds[0].getBlockAt (loc).setType (org.bukkit.Material.OAK_DOOR);\n" + 
              "block = server.worlds[0].getBlockAt (loc);\n" + 
              "data = org.bukkit.Material.OAK_DOOR.createBlockData();\n" + 
@@ -1171,8 +1177,9 @@ Blockly.Python['spawnblock'] = function(block) {
              "data.setHalf(org.bukkit.block.data.Bisected.Half.BOTTOM); // TOP or BOTTOM\n" + 
              "//data.setFacing(org.bukkit.block.BlockFace.NORTH); // Facing\n" + 
              "block.setBlockData (data);\n"; 
-  } else if (blockType == "LEGACY_BED_BLOCK") {
-     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y), parseInt(location.z));\n" + 
+  } else if (blockType == "org.bukkit.Material.LEGACY_BED_BLOCK") {
+     code = "console.log ( \"Spawn a legacy bed yo\");\n" + 
+            "loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y), parseInt(" + location + ".z));\n" + 
             "block = server.worlds[0].getBlockAt (loc);\n" + 
             "block.setType (org.bukkit.Material.LEGACY_BED_BLOCK);\n" +
             "data = org.bukkit.Material.LEGACY_BED_BLOCK.createBlockData();\n" + 
@@ -1184,8 +1191,8 @@ Blockly.Python['spawnblock'] = function(block) {
             "data = org.bukkit.Material.LEGACY_BED_BLOCK.createBlockData();\n" + 
             "data.setPart (org.bukkit.block.data.type.Bed.Part.FOOT);\n" + 
             "block.setBlockData (data);\n";                        
-  } else if (blockType == "OAK_SIGN") {
-     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(location.x), parseInt(location.y), parseInt(location.z));\n" + 
+  } else if (blockType == "org.bukkit.Material.OAK_SIGN") {
+     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y), parseInt(" + location + ".z));\n" + 
             "block = server.worlds[0].getBlockAt(loc);\n" +   
             "block.setType (org.bukkit.Material.OAK_SIGN);\n" + 
             "sign = block.getState();\n" + 
@@ -1888,13 +1895,16 @@ Blockly.Python['playerhas'] = function(block) {
 
 Blockly.Python['servercommand'] = function(block) {
   var command = block.getFieldValue ("COMMAND");
+  var code = "";
   if ((command.indexOf ( "\"" ) == -1) && (command.indexOf ( "'") == -1 )) {
      if (command.indexOf ( " " ) > -1) { 
         command = "\"" + command + "\""; // Add double quotes.
-     } 
+     } else {
+        code = "console.log ( " + command + ");\n" 
+     }
   }
-  var code = "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " +
-         command + ");\n";
+  var code = code + 
+      "org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), " + command + ");\n";
   return code;
 }
 
@@ -3615,25 +3625,19 @@ Blockly.Python['setdoor'] = function(block) {
 
 Blockly.Python['fill'] = function(block) {
   var material  = insideParen(Blockly.Python.valueToCode(block, 'MATERIAL',  Blockly.Python.ORDER_ATOMIC));
-  var location1 = insideParen(Blockly.Python.valueToCode(block, 'LOCATION1', Blockly.Python.ORDER_ATOMIC));
-  var location2 = insideParen(Blockly.Python.valueToCode(block, 'LOCATION2', Blockly.Python.ORDER_ATOMIC));
-  material = material.toLowerCase();
-  index = material.lastIndexOf ( '.' );
-  material = 'minecraft:' + material.substring (index+1);
-    
-  var code =   
-              "(function () {\n" +   
-              "   var _x1 = parseInt ( " + location1 + ".x );\n" +               
-              "   var _y1 = parseInt ( " + location1 + ".y );\n" +               
-              "   var _z1 = parseInt ( " + location1 + ".z );\n" +               
-              "   var _x2 = parseInt ( " + location2 + ".x );\n" +               
-              "   var _y2 = parseInt ( " + location2 + ".y );\n" +               
-              "   var _z2 = parseInt ( " + location2 + ".z );\n" +               
-              "   var _command = \"fill \" + _x1 + \" \" + _y1 + \" \" + _z1 + \" \" + _x2 + \" \" + _y2 + \" \" + _z2 + \" " + material + " replace\";\n" + 
-              "   console.log ( \"command: \" + _command );\n" +             
-              "   org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), _command );\n" + 
-              "})();\n"
-    
+  var location = insideParen(Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC));  
+  var x = insideParen(Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC));
+  var y = insideParen(Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC));
+  var z = insideParen(Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_ATOMIC));
+ 
+  var code =  "for (var _x = 0; _x<" + x + ";_x++) { \n" +  
+              "  for (var _y = 0; _y<" + y + ";_y++) { \n" + 
+              "    for (var _z = 0; _z<" + z + ";_z++) { \n" +   
+              "       var _loc = new org.bukkit.Location(server.worlds[0], parseInt(" + location + ".x+_x), parseInt(" + location + ".y+_y), parseInt(" + location + ".z+_z));\n" +              
+              "       server.worlds[0].getBlockAt (_loc).setType (" + material + ");\n" +                
+              "    }\n" + 
+              "  }\n" + 
+              "}\n";    
   return code;
 }
 
@@ -3840,9 +3844,9 @@ Blockly.Python['locationtovector'] = function(block) {
 Blockly.Python['spawnarrow'] = function(block) {
   var location = insideParen(Blockly.Python.valueToCode(block, "LOCATION", Blockly.Python.ORDER_ATOMIC)); 
   var vector = insideParen(Blockly.Python.valueToCode(block, "VECTOR", Blockly.Python.ORDER_ATOMIC)); 
-  var speed = block.getFieldValue ("SPEED");
+  //var speed = block.getFieldValue ("SPEED");
   var spread = block.getFieldValue ("SPREAD");
-  var code = "server.worlds[0].spawnArrow(" + location + "," + vector + "," + speed + "," + spread + ");\n";  
+  var code = "server.worlds[0].spawnArrow(" + location + "," + vector + "," + vector + ".length()," + spread + ");\n";  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -3852,4 +3856,9 @@ Blockly.Python['equipmentslot'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['normalizevector'] = function(block) {
+  var vector = insideParen(Blockly.Python.valueToCode(block, "VECTOR", Blockly.Python.ORDER_ATOMIC)); 
+  var code = vector + '.normalize()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
 

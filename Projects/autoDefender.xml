@@ -1,0 +1,167 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="scriptcraftfunction" id="EtJ!!gJC2l(Wa7!HOzxj" x="237" y="13">
+    <field name="nameOfFunction">test</field>
+    <statement name="FUNCTIONCODE">
+      <block type="eventlistener" id="oHi=y)WvzUJ2PZcq-Aml">
+        <field name="LISTENERTYPE">playerMove</field>
+        <statement name="LISTENERCODE">
+          <block type="setvariablevalue" id=",fUsY(r4}ku8E8]*]xzR">
+            <field name="VARNAME">player</field>
+            <value name="EXPRESSION">
+              <block type="eventinfo" id="U+7VB}WvAgat+Y}jW[tg">
+                <field name="INFORMATION">getPlayer</field>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="0$y7Khii=l|~s,:lu9jL">
+                <field name="VARNAME">loc</field>
+                <value name="EXPRESSION">
+                  <block type="absolutelocation" id="MDe#8EktV:Ysv7:qJj0*">
+                    <field name="X">413</field>
+                    <field name="Y">20</field>
+                    <field name="Z">650</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="setvariablevalue" id="l-vPon4,W]FVVGuO9lqT">
+                    <field name="VARNAME">distance</field>
+                    <value name="EXPRESSION">
+                      <block type="distancebetweenlocations" id="?Q):o#_9|#`Zn%GaYuPg">
+                        <value name="LOCATION1">
+                          <block type="locationof" id=":il8KgB+uV6Zhs9r2?ZS">
+                            <value name="OBJECT">
+                              <block type="varname" id="3QUocgS*#@cEprM2^b#d">
+                                <field name="VARNAME">player</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="LOCATION2">
+                          <block type="varname" id="sqdW7JbQoCdLew+5BtnJ">
+                            <field name="VARNAME">loc</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="AindSfk(+#ngr{o*FfQL">
+                        <value name="IF0">
+                          <block type="logic_compare" id="WfJ4_c3YrT5bla{!WAIU">
+                            <field name="OP">LT</field>
+                            <value name="A">
+                              <block type="varname" id="kqI{Mscvn)xxRq:`k31h">
+                                <field name="VARNAME">distance</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="varname" id="pf*S{~vbUv_%wA8jmmd$">
+                                <field name="VARNAME">20</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="setvariablevalue" id="-,Q3~n.[dhHq.(vgq|Ub">
+                            <field name="VARNAME">vector</field>
+                            <value name="EXPRESSION">
+                              <block type="normalizevector" id="I7!U7!n)Q:3CS{e=+vg]">
+                                <value name="VECTOR">
+                                  <block type="vector2points" id="v,,_)+=U2-p,5|]:NUV~">
+                                    <value name="LOCATION1">
+                                      <block type="absolutelocation" id="c~h$$NiBwtONo3b4H}V:">
+                                        <field name="X">413</field>
+                                        <field name="Y">20</field>
+                                        <field name="Z">650</field>
+                                      </block>
+                                    </value>
+                                    <value name="LOCATION2">
+                                      <block type="locationof" id="HBD@$Y)F|G[2tkBx3-a*">
+                                        <value name="OBJECT">
+                                          <block type="varname" id="M+?JE]@)1pWzvLZjEY0o">
+                                            <field name="VARNAME">player</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="setvariablevalue" id="26LxL/u2Hv.ePUvU-*1W">
+                                <field name="VARNAME">vector</field>
+                                <value name="EXPRESSION">
+                                  <block type="multiplyvector" id="3EYJ4!S}(W5/9F+y=|QG">
+                                    <field name="SCALAR">1.5</field>
+                                    <value name="VECTOR">
+                                      <block type="varname" id="!,}m=!q1`_Ua5KQ}aza+">
+                                        <field name="VARNAME">vector</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="setvariablevalue" id="pUTUv[3/5*2|edy:V;bR">
+                                    <field name="VARNAME">newLocation</field>
+                                    <value name="EXPRESSION">
+                                      <block type="locationadd" id="D?`07:b|ai+[V@kN:I:-">
+                                        <field name="X">0</field>
+                                        <field name="Y">2</field>
+                                        <field name="Z">0</field>
+                                        <value name="LOCATION">
+                                          <block type="absolutelocation" id="|:%9b./8Lt3Ic~H;7*s4">
+                                            <field name="X">413</field>
+                                            <field name="Y">20</field>
+                                            <field name="Z">650</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="controls_repeat_ext" id="elsrV.qK8R=ULn8Tmkn;">
+                                        <field name="VAR">i</field>
+                                        <value name="TIMES">
+                                          <shadow type="math_number" id="NPB`u%j}W(.jrLg[q9#!">
+                                            <field name="NUM">5</field>
+                                          </shadow>
+                                        </value>
+                                        <statement name="DO">
+                                          <block type="setvariablevalue" id="k_X1`JPM_(_!5gkvR57x">
+                                            <field name="VARNAME">arrow</field>
+                                            <value name="EXPRESSION">
+                                              <block type="spawnarrow" id="Es$E=$yO2=Ex)cZ)@c/+">
+                                                <field name="SPREAD">12</field>
+                                                <value name="LOCATION">
+                                                  <block type="varname" id="pQ,.H(bwd-/E6`dNE`bh">
+                                                    <field name="VARNAME">newLocation</field>
+                                                  </block>
+                                                </value>
+                                                <value name="VECTOR">
+                                                  <block type="varname" id="Q=2x^aKA6x!E``?%w!0/">
+                                                    <field name="VARNAME">vector</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -1094,7 +1094,8 @@ Blockly.Blocks['blocktype'] = {
         .appendField(new Blockly.FieldDropdown([
                                                 ["Air", "AIR"],
                                                 ["Beacon", "BEACON"],
-                                                ["Bed", "LEGACY_BED_BLOCK"],              
+                                                ["Bed", "LEGACY_BED_BLOCK"],      
+                                                ["Blue Concrete", "BLUE_CONCRETE"],                                                
                                                 ["Blue Stained Glass", "BLUE_STAINED_GLASS"], 
                                                 ["Button (Oak)", "OAK_BUTTON"],                                                
                                                 ["Chest", "CHEST"],
@@ -1126,6 +1127,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Pressure Plate (Oak)", "OAK_PRESSURE_PLATE"],
                                                 ["Rail", "RAIL"],
                                                 ["Rail Powered", "POWERED_RAIL"],
+                                                ["Red Concreate", "RED_CONCRETE"], 
                                                 ["Red Stained Glass", "RED_STAINED_GLASS"],                                                                                                 
                                                 ["Redstone Block", "REDSTONE_BLOCK"],
                                                 ["Redstone Torch", "REDSTONE_TORCH"],
@@ -1573,12 +1575,12 @@ Blockly.Blocks['blocksradius'] = {
   }
 };
 
-
-
 Blockly.Blocks['activeteams'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Active Team List");
+    this.appendValueInput ("PLAYER")
+        .appendField("Ignoring player: ")
     this.setColour(0);
     this.setOutput(true, null);    
     this.setTooltip('');
@@ -2078,21 +2080,21 @@ Blockly.Blocks['blockfacingdirection'] = {
         .appendField("Block Facing Direction")
         .appendField(new Blockly.FieldDropdown([
                                                  ["DOWN","DOWN"],  
-                                                 ["EAST","EAST"],  
+                                                 ["EAST (Positive X)","EAST"],  
                                                  ["EAST_NORTH_EAST","EAST_NORTH_EAST"],  
                                                  ["EAST_SOUTH_EAST","EAST_SOUTH_EAST"],  
-                                                 ["NORTH","NORTH"],  
+                                                 ["NORTH (Negative Z)","NORTH"],  
                                                  ["NORTH_EAST","NORTH_EAST"],  
                                                  ["NORTH_NORTH_EAST","NORTH_NORTH_EAST"],  
                                                  ["NORTH_NORTH_WEST","NORTH_NORTH_WEST"],  
                                                  ["NORTH_WEST","NORTH_WEST"],  
-                                                 ["SOUTH","SOUTH"],  
+                                                 ["SOUTH (Positive Z)","SOUTH"],  
                                                  ["SOUTH_EAST","SOUTH_EAST"],  
                                                  ["SOUTH_SOUTH_EAST","SOUTH_SOUTH_EAST"],  
                                                  ["SOUTH_SOUTH_WEST","SOUTH_SOUTH_WEST"],  
                                                  ["SOUTH_WEST","SOUTH_WEST"],  
                                                  ["UP","UP"],  
-                                                 ["WEST","WEST"],  
+                                                 ["WEST (Negative X)","WEST"],  
                                                  ["WEST_NORTH_WEST","WEST_NORTH_WEST"],  
                                                  ["WEST_SOUTH_WEST","WEST_SOUTH_WEST"]        
                                                ]), "DIRECTION"); 
@@ -4179,10 +4181,14 @@ Blockly.Blocks['fill'] = {
   init: function() {
     this.appendValueInput("MATERIAL")
        .appendField("Fill Block Type: ");
-    this.appendValueInput("LOCATION1")
-       .appendField("From location: ");
-    this.appendValueInput("LOCATION2")
-       .appendField("To location: ");
+    this.appendValueInput("LOCATION")
+       .appendField("From start location: ");
+    this.appendValueInput("X")
+       .appendField("X offset ");
+    this.appendValueInput("Y")
+       .appendField("Y offset ");
+    this.appendValueInput("Z")
+       .appendField("Z offset ");
        
     this.setColour(120);
     this.setTooltip('');
@@ -4492,8 +4498,6 @@ Blockly.Blocks['spawnarrow'] = {
     this.appendValueInput("VECTOR")
         .appendField("with vector");         
     this.appendDummyInput()
-        .appendField ("speed ")
-        .appendField (new Blockly.FieldTextInput ( "0.6"), "SPEED")
         .appendField ("spread")        
         .appendField (new Blockly.FieldTextInput ( "12"), "SPREAD");
          
@@ -4524,4 +4528,13 @@ Blockly.Blocks['equipmentslot'] = {
   }
 };
 
-
+Blockly.Blocks['normalizevector'] = {
+  init: function() {
+    this.appendValueInput("VECTOR")
+        .appendField ("Normalize vector: " );   
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

@@ -1,0 +1,27 @@
+<h1>Data Dictionary</h1>
+A data dictionary is a list of all variables and what they stand for<br>
+<hr>
+<H2>Global Data</h2>
+<table border="2pxsolid">
+  <tr><th>Name</th><th>Description</th></tr>
+  <tr><td>lobbyLocation</td><td>Location of the main lobby where the players select their team</td></tr>
+  <tr><td>careerLocation</td><td>Location where the players select their career (fighter or bomber)</td></tr>
+  <tr><td>blueDefenders</td><td>A list of locations where there is an air defense structure that targets red players</td></tr>
+  <tr><td>redDefenders</td><td>A list of locations where there is an air defense structure that targets blue players</td></tr>
+  <tr><td>redBed</td><td>Location of the red bed, this is also the spawn point for a red player when they have selected a career</td></tr>
+  <tr><td>blueBed</td><td>Location of the blue bed, this is also the spawn point for the blue player when they have selected a career</td></tr>
+  <tr><td>spawnPoints</td><td>Protected areas which cannot be bombed.  They are the locations of the signs which allow players to select team and career</td></tr> 
+</table>
+<br>
+This code will set the locations for the bed/air wars (Your locations will be different)<br>
+<img src="images/bedWarLocations.jpg"><br>
+The reload event will also set some global variables:<br>
+<table border="2pxsolid">
+  <tr><th>Name</th><th>Description</th></tr>
+  <tr><td>gameId</td><td>Current time when the server finishes its reload.  Each player will have a gameId that is set to the global gameId when they are playing.  If their gameId does not match the global gameId, this means that the server has started a new game, since the player last connected.  When this occurs the player is sent to the lobby to select a team.</td></tr>
+  <tr><td>gameStarted</td><td>False on server reload, true when more than 1 team is active</td></tr>
+</table>
+<hr>
+<H2>Player Data</h2>
+<hr>
+<center><img src="images/ironGolemRose.jpg"></center>
