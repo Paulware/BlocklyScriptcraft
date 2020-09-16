@@ -15,13 +15,10 @@ A data dictionary is a list of all variables and what they stand for<br>
 <br>
 This code will set the locations for the bed/air wars (Your locations will be different)<br>
 <img src="images/bedWarLocations.jpg"><br>
-The reload event will also set some global variables:<br>
+The reload event will also set the global variable:<br>
 <table border="2pxsolid">
   <tr><th>Name</th><th>Description</th></tr>
   <tr><td>gameId</td><td>Current time when the server finishes its reload.  Each player will have a gameId that is set to the global gameId when they are playing.  If their gameId does not match the global gameId, this means that the server has started a new game, since the player last connected.  When this occurs the player is sent to the lobby to select a team.</td></tr>
-  <tr><td>gameStarted</td><td>False on server reload, true when more than 1 team is active</td></tr>
 </table>
-<hr>
-<H2>Player Data</h2>
 <hr>
 <center><img src="images/ironGolemRose.jpg"></center>
