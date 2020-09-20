@@ -201,7 +201,7 @@
       "Global Variable: => Data, Global", 
       "Location Of => World, Location",
       "Open Door at Location => World, Blocks, Door",    
-      "Fill Block Type => World, Server", 
+      "Fill Block Type => World, Blocks, Location", 
       "Set invincibility for player => Entities, Player",
       "Remove Boots Worn by player => Items, Gear",  
       "Remove All Armor Worn by player => Items, Gear",  

@@ -4190,7 +4190,7 @@ Blockly.Blocks['fill'] = {
     this.appendValueInput("Z")
        .appendField("Z offset ");
        
-    this.setColour(120);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     this.setInputsInline(true);     

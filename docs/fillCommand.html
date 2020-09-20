@@ -1,0 +1,14 @@
+<H1>Fill command</h1>
+The server /fill command is a way to add many blocks to a world quickly<br>
+There is however a "flaw" with the command<br>
+If you try to initialize a world with the fill command, there is a good chance you will get this error:<br>
+<pre>
+   That position is not loaded
+</pre>
+<br>
+The issue is that the server fill command only works on world blocks that are currently loaded.<br>
+This behavior will not work for us, so I created a "fill" command that spawns blocks in a loop instead:<br>
+<img src="images/fillBlock.jpg"><br>
+You add the type of block, location to start and the x,y,z offsets which indicate how width, height, and long you want to fill<br>
+<hr>
+<center><img src="images/ironGolemRose.jpg"></center>
