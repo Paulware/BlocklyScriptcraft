@@ -1389,8 +1389,8 @@ Blockly.Python['setride'] = function(block) {
 };
 
 Blockly.Python['functionCall'] = function(block) {
-  var name = block.getFieldValue ('FUNCTIONNAME'); // Blockly.Python.valueToCode(block, 'FUNCTIONNAME', Blockly.Python.ORDER_ATOMIC);
-  // name = insideChars ( name,"\"","\"");
+  var name = block.getFieldValue ('FUNCTIONNAME'); 
+
   if (name.indexOf ( '(') == -1) {
      name = name + "()";
   } else if (name.indexOf ( ')' ) == -1) { // Right parenthesis is missing from name 
@@ -1612,7 +1612,7 @@ Blockly.JavaScript ['scriptcraftfunction'] = function (block) {
      functionName = functionName.substring (0,ind);
   } 
   var functionCode = Blockly.Python.statementToCode (block, 'FUNCTIONCODE' );  
-  var code = 'exports.' + functionName + ' = function ' + params + ' {\n';
+  var code = 'function ' + functionName + ' ' + params + ' {\n';
   var first = true;
   code = showInstantiations (code, params );
   code = code +   
