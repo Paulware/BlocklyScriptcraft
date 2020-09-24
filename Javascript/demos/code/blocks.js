@@ -1127,6 +1127,7 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Pressure Plate (Oak)", "OAK_PRESSURE_PLATE"],
                                                 ["Rail", "RAIL"],
                                                 ["Rail Powered", "POWERED_RAIL"],
+                                                ["Red Bed", "RED_BED"],
                                                 ["Red Concreate", "RED_CONCRETE"], 
                                                 ["Red Stained Glass", "RED_STAINED_GLASS"],                                                                                                 
                                                 ["Redstone Block", "REDSTONE_BLOCK"],
