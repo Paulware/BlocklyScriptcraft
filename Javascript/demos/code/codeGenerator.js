@@ -1164,36 +1164,36 @@ Blockly.Python['spawnblock'] = function(block) {
   instantiateVariable ("data");
   blockType = insideParen(blockType); 
   if (blockType == "org.bukkit.Material.LEGACY_WOODEN_DOOR") {
-     code =  "loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y)+1, parseInt(" + location + ".z));\n" + 
-             "server.worlds[0].getBlockAt (loc).setType (org.bukkit.Material.OAK_DOOR);\n" + 
-             "block = server.worlds[0].getBlockAt (loc);\n" + 
+     code =  "_loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y)+1, parseInt(" + location + ".z));\n" + 
+             "server.worlds[0].getBlockAt (_loc).setType (org.bukkit.Material.OAK_DOOR);\n" + 
+             "block = server.worlds[0].getBlockAt (_loc);\n" + 
              "data = org.bukkit.Material.OAK_DOOR.createBlockData();\n" + 
              "data.setHalf(org.bukkit.block.data.Bisected.Half.TOP); // TOP or BOTTOM\n" + 
              "//data.setFacing (org.bukkit.block.BlockFace.NORTH); // Facing\n" + 
              "block.setBlockData (data);\n" + 
-             "loc = new org.bukkit.Location (server.worlds[0], parseInt(loc.x), parseInt(loc.y)-1, parseInt(loc.z));\n" + 
-             "block = server.worlds[0].getBlockAt (loc);\n" + 
+             "_loc = new org.bukkit.Location (server.worlds[0], parseInt(_loc.x), parseInt(_loc.y)-1, parseInt(_loc.z));\n" + 
+             "block = server.worlds[0].getBlockAt (_loc);\n" + 
              "block.setType (org.bukkit.Material.OAK_DOOR);\n" + 
              "data.setHalf(org.bukkit.block.data.Bisected.Half.BOTTOM); // TOP or BOTTOM\n" + 
              "//data.setFacing(org.bukkit.block.BlockFace.NORTH); // Facing\n" + 
              "block.setBlockData (data);\n"; 
   } else if (blockType == "org.bukkit.Material.LEGACY_BED_BLOCK") {
      code = "console.log ( \"Spawn a legacy bed yo\");\n" + 
-            "loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y), parseInt(" + location + ".z));\n" + 
-            "block = server.worlds[0].getBlockAt (loc);\n" + 
+            "_loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y), parseInt(" + location + ".z));\n" + 
+            "block = server.worlds[0].getBlockAt (_loc);\n" + 
             "block.setType (org.bukkit.Material.LEGACY_BED_BLOCK);\n" +
             "data = org.bukkit.Material.LEGACY_BED_BLOCK.createBlockData();\n" + 
             "data.setPart (org.bukkit.block.data.type.Bed.Part.HEAD);\n" + 
             "block.setBlockData (data);\n" +             
-            "loc = new org.bukkit.Location (server.worlds[0], parseInt(loc.x), parseInt(loc.y), parseInt(loc.z)+1);\n" + 
-            "block = server.worlds[0].getBlockAt (loc);\n" + 
+            "_loc = new org.bukkit.Location (server.worlds[0], parseInt(_loc.x), parseInt(_loc.y), parseInt(_loc.z)+1);\n" + 
+            "block = server.worlds[0].getBlockAt (_loc);\n" + 
             "block.setType (org.bukkit.Material.LEGACY_BED_BLOCK);\n" +       
             "data = org.bukkit.Material.LEGACY_BED_BLOCK.createBlockData();\n" + 
             "data.setPart (org.bukkit.block.data.type.Bed.Part.FOOT);\n" + 
             "block.setBlockData (data);\n";                        
   } else if (blockType == "org.bukkit.Material.OAK_SIGN") {
-     code = "loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y), parseInt(" + location + ".z));\n" + 
-            "block = server.worlds[0].getBlockAt(loc);\n" +   
+     code = "_loc = new org.bukkit.Location (server.worlds[0], parseInt(" + location + ".x), parseInt(" + location + ".y), parseInt(" + location + ".z));\n" + 
+            "block = server.worlds[0].getBlockAt(_loc);\n" +   
             "block.setType (org.bukkit.Material.OAK_SIGN);\n" + 
             "sign = block.getState();\n" + 
             "data = new org.bukkit.Material.Sign (org.bukkit.Material.OAK_SIGN);\n" + 
@@ -2518,8 +2518,8 @@ Blockly.Python['locationadd'] = function(block) {
                 'var _x = ' + location + '.x + ' + x + ';' + 
                 'var _y = ' + location + '.y + ' + y + ';' +
                 'var _z = ' + location + '.z + ' + z + ';' +                 
-                'var loc = new org.bukkit.Location(server.worlds[0],_x,_y,_z);' + 
-                'return loc;' + 
+                'var _loc = new org.bukkit.Location(server.worlds[0],_x,_y,_z);' + 
+                'return _loc;' + 
              ' })()' 
   
   return [code, Blockly.Python.ORDER_NONE];
@@ -3483,8 +3483,8 @@ Blockly.Python['modplayerlocation'] = function(block) {
                 'var _x = ' + location + '.x + ' + x + ';' + 
                 'var _y = ' + location + '.y + ' + y + ';' +
                 'var _z = ' + location + '.z + ' + z + ';' +                 
-                'var loc = new org.bukkit.Location(server.worlds[0],_x,_y,_z);' + // ,' + yaw + ',' + pitch + ');' + 
-                'return loc;' + 
+                'var _loc = new org.bukkit.Location(server.worlds[0],_x,_y,_z);' + // ,' + yaw + ',' + pitch + ');' + 
+                'return _loc;' + 
              ' })()' 
   
   return [code, Blockly.Python.ORDER_NONE];
