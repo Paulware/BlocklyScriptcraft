@@ -4539,3 +4539,16 @@ Blockly.Blocks['normalizevector'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['playeronground'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")
+        .appendField ("Player" );   
+    this.appendDummyInput()
+        .appendField ("is on the ground");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

@@ -3862,3 +3862,9 @@ Blockly.Python['normalizevector'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['playeronground'] = function(block) {
+  var player = insideParen(Blockly.Python.valueToCode(block, "PLAYER", Blockly.Python.ORDER_ATOMIC)); 
+  var code = player + '.isOnGround()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+

@@ -212,7 +212,8 @@
       "Player/Entity is within phere => Entities, Player",
       "Player is within area => Entities, Player",    
       "Spawn Arrow => Entities",  
-      "Block that was clicked on => World, Blocks"      
+      "Block that was clicked on => World, Blocks",  
+      "Player on ground => Entities, Player",      
    ];
    
    function autocomplete(inp, arr) {
