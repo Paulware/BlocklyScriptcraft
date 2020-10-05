@@ -1,6 +1,10 @@
 <h1>Mouse Click Types</h1>
 
-There are 4 types of mouse clicks that can occur:<br>
+<b>Note:</b> In Minecraft when you left or right click the mouse, you get <b>2</b> events one from the main hand and one from the off-hand<br>
+To make sure that you don't count the click twice, add logic: <br>
+<img src="images/clickFromHand.jpg"><br>
+
+There are also 4 types of mouse clicks that can occur:<br>
 <ol>
   <li>Left click on air</li>
   <li>Left click on block</li>
@@ -14,5 +18,14 @@ You should then see on the server: <br>
 To handle the different types of mouse clicks you can make an if-else if structure: <br>
 <img src="images/handleMouseClickTypes.jpg"><br>
 Note: "click on air" does not necessarily mean you are clicking in the sky.  You may be pointed at a block, but the block is out of range to be selected<br>
+<hr>
+The last thing you need to know about mouse clicks is that sometimes right clicks do not occur unless you have something in your off-hand<br>
+Test out this code: <br>
+<img src="images/testHandAction.jpg"><br>
+A right click in the air may not trigger an event if nothing is selected<br>
+We will need to instruct the player to select an item for a right-click hand combination<br>
+  You can place an item in the off-hand by using the 'f' key.<br>
+  Also by selecting an item in the hotbar with the mouse wheel will cause a right click to occur in the air<br>
+  Left-click does not have any restriction<br>
 <hr>
 <center><img src="images/ironGolemRose.jpg"></center>

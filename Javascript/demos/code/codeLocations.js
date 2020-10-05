@@ -214,7 +214,9 @@
       "Spawn Arrow => Entities",  
       "Block that was clicked on => World, Blocks",  
       "Player on ground => Entities, Player",   
-      "Get durability => Items",       
+      "Get durability => Items",     
+      "Equipment Slot => Items, Gear",  
+      "Spawn Arrow at Location => Entities",       
    ];
    
    function autocomplete(inp, arr) {
