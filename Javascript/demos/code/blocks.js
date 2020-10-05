@@ -4552,3 +4552,14 @@ Blockly.Blocks['playeronground'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['getdurability'] = {
+  init: function() {
+    this.appendValueInput("ITEM")
+        .appendField ("Get durability of item" );   
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

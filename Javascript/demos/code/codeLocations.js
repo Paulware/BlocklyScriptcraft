@@ -213,7 +213,8 @@
       "Player is within area => Entities, Player",    
       "Spawn Arrow => Entities",  
       "Block that was clicked on => World, Blocks",  
-      "Player on ground => Entities, Player",      
+      "Player on ground => Entities, Player",   
+      "Get durability => Items",       
    ];
    
    function autocomplete(inp, arr) {

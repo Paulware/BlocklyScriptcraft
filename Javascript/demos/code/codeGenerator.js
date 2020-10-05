@@ -3868,3 +3868,8 @@ Blockly.Python['playeronground'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['getdurability'] = function(block) {
+  var item = insideParen(Blockly.Python.valueToCode(block, "ITEM", Blockly.Python.ORDER_ATOMIC)); 
+  var code = '(' + item + '==null)?-1:(' + item + '.getDurability == null)?-1:' + item + '.getDurability()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
