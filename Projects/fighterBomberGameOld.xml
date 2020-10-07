@@ -35,17 +35,10 @@
                     <field name="VARNAME">blueDefenders</field>
                     <value name="EXPRESSION">
                       <block type="lists_create_with" id=")NVyxw:}2n__sW4jlzZV">
-                        <mutation items="2"></mutation>
+                        <mutation items="1"></mutation>
                         <value name="ADD0">
                           <block type="absolutelocation" id="QJ{]bid_aK|P_*hkg!hC">
                             <field name="X">512</field>
-                            <field name="Y">20</field>
-                            <field name="Z">746</field>
-                          </block>
-                        </value>
-                        <value name="ADD1">
-                          <block type="absolutelocation" id="8~B3MO=Ycen,c*2FZXVa">
-                            <field name="X">492</field>
                             <field name="Y">20</field>
                             <field name="Z">746</field>
                           </block>
@@ -67,17 +60,10 @@
                             <field name="VARNAME">redDefenders</field>
                             <value name="EXPRESSION">
                               <block type="lists_create_with" id="uIP2@*LWOrc!R}B3S5ST">
-                                <mutation items="2"></mutation>
+                                <mutation items="1"></mutation>
                                 <value name="ADD0">
                                   <block type="absolutelocation" id="r8,`0_g0nPimKR?.-*l+">
                                     <field name="X">489</field>
-                                    <field name="Y">20</field>
-                                    <field name="Z">292</field>
-                                  </block>
-                                </value>
-                                <value name="ADD1">
-                                  <block type="absolutelocation" id="V,#9LXd)}FU9!S(2qBd!">
-                                    <field name="X">519</field>
                                     <field name="Y">20</field>
                                     <field name="Z">292</field>
                                   </block>
@@ -116,173 +102,183 @@
                                             <field name="COMMAND">gamemode survival @a</field>
                                             <next>
                                               <block type="servercommand" id="4?/P[O~JD7t,H1RH!5kC">
-                                                <field name="COMMAND">gamerule keepInventory true</field>
+                                                <field name="COMMAND">gamerule keepinventory true</field>
                                                 <next>
                                                   <block type="servercommand" id="{NE}4tN^]+[W:$hT%}`R">
-                                                    <field name="COMMAND">gamerule doWeatherCycle false</field>
+                                                    <field name="COMMAND">gamerule doweathercycle false</field>
                                                     <next>
                                                       <block type="servercommand" id="GO=t(.1Up@?|,6yF%!6M">
-                                                        <field name="COMMAND">gamerule doDaylightCycle false</field>
+                                                        <field name="COMMAND">gamerule dodaylightcycle false</field>
                                                         <next>
                                                           <block type="servercommand" id="yUt:^@E!d+Ndt165`M,U">
-                                                            <field name="COMMAND">gamerule commandBlockOutput false</field>
+                                                            <field name="COMMAND">gamerule commandblockoutput false</field>
                                                             <next>
                                                               <block type="servercommand" id="=je9S/XHQIz;Uc1M%^Y[">
                                                                 <field name="COMMAND">gamerule sendCommandFeedback false</field>
                                                                 <next>
-                                                                  <block type="servercommand" id="*P3Q)Af+bKKa$}u9/V)=">
-                                                                    <field name="COMMAND">setworldspawn 500 59 494</field>
+                                                                  <block type="servercommand" id="iFBdk3..(c[A/PEE?ZrT">
+                                                                    <field name="COMMAND">gamerule dodaylightcycle false</field>
                                                                     <next>
-                                                                      <block type="servercommand" id="Q[d^)(Ok7QpqSlkOQwc{" disabled="true">
-                                                                        <field name="COMMAND">deop @a</field>
+                                                                      <block type="servercommand" id="*P3Q)Af+bKKa$}u9/V)=">
+                                                                        <field name="COMMAND">setworldspawn 500 59 494</field>
                                                                         <next>
-                                                                          <block type="servercommand" id=";S^g?!@262!G=1NWd.s6">
-                                                                            <field name="COMMAND">weather clear</field>
+                                                                          <block type="servercommand" id="e:ya:k4kaG|=?Y$$.EoL">
+                                                                            <field name="COMMAND">setworldspawn 500 59 494</field>
                                                                             <next>
-                                                                              <block type="servercommand" id="d%P`%(Qla344:UfvI7Eb">
-                                                                                <field name="COMMAND">time set day</field>
+                                                                              <block type="servercommand" id="Q[d^)(Ok7QpqSlkOQwc{" disabled="true">
+                                                                                <field name="COMMAND">deop @a</field>
                                                                                 <next>
-                                                                                  <block type="fill" id="hGX45AT^?@UPpAuCy;5{">
-                                                                                    <value name="MATERIAL">
-                                                                                      <block type="blocktype" id="[K!Y%^1id.[#Ee~:o!`f">
-                                                                                        <field name="BLOCKTYPE">RED_CONCRETE</field>
-                                                                                      </block>
-                                                                                    </value>
-                                                                                    <value name="LOCATION">
-                                                                                      <block type="locationadd" id="Fc.@JubN4XsyM@Uh37v.">
-                                                                                        <field name="X">-5</field>
-                                                                                        <field name="Y">-1</field>
-                                                                                        <field name="Z">-5</field>
-                                                                                        <value name="LOCATION">
-                                                                                          <block type="varname" id="9-B{*gWUz`D4uMih^Vkk">
-                                                                                            <field name="VARNAME">exports.redBed</field>
-                                                                                          </block>
-                                                                                        </value>
-                                                                                      </block>
-                                                                                    </value>
-                                                                                    <value name="X">
-                                                                                      <block type="math_number" id="}9K|l=pRXdcY`]Vq`tNI">
-                                                                                        <field name="NUM">10</field>
-                                                                                      </block>
-                                                                                    </value>
-                                                                                    <value name="Y">
-                                                                                      <block type="math_number" id="+%=-oM+AICUt/C|1Qqz*">
-                                                                                        <field name="NUM">1</field>
-                                                                                      </block>
-                                                                                    </value>
-                                                                                    <value name="Z">
-                                                                                      <block type="math_number" id="$jtv{ht1Skx13w{JFdLt">
-                                                                                        <field name="NUM">10</field>
-                                                                                      </block>
-                                                                                    </value>
+                                                                                  <block type="servercommand" id=";S^g?!@262!G=1NWd.s6">
+                                                                                    <field name="COMMAND">weather clear</field>
                                                                                     <next>
-                                                                                      <block type="spawnblock" id="?.6QqllM(XMAv%AXeEUA">
-                                                                                        <value name="TYPE">
-                                                                                          <block type="blocktype" id="p?LMXaSH(YR4JDY|+GK8">
-                                                                                            <field name="BLOCKTYPE">LEGACY_BED_BLOCK</field>
-                                                                                          </block>
-                                                                                        </value>
-                                                                                        <value name="LOCATION">
-                                                                                          <block type="globalvariable" id="qOkLdqAmT0w~$e4lXdmq">
-                                                                                            <field name="VARNAME">redBed</field>
-                                                                                          </block>
-                                                                                        </value>
+                                                                                      <block type="servercommand" id="d%P`%(Qla344:UfvI7Eb">
+                                                                                        <field name="COMMAND">time set day</field>
                                                                                         <next>
-                                                                                          <block type="fill" id="22q1;}:0teL(e9Ur$gLW">
+                                                                                          <block type="fill" id="hGX45AT^?@UPpAuCy;5{">
                                                                                             <value name="MATERIAL">
-                                                                                              <block type="blocktype" id="E:@%VjG!Dr)L-JfJ|EcF">
-                                                                                                <field name="BLOCKTYPE">BLUE_CONCRETE</field>
+                                                                                              <block type="blocktype" id="[K!Y%^1id.[#Ee~:o!`f">
+                                                                                                <field name="BLOCKTYPE">RED_CONCRETE</field>
                                                                                               </block>
                                                                                             </value>
                                                                                             <value name="LOCATION">
-                                                                                              <block type="locationadd" id="v,1~?NQi0?3TQsoO@|O}">
+                                                                                              <block type="locationadd" id="Fc.@JubN4XsyM@Uh37v.">
                                                                                                 <field name="X">-5</field>
                                                                                                 <field name="Y">-1</field>
                                                                                                 <field name="Z">-5</field>
                                                                                                 <value name="LOCATION">
-                                                                                                  <block type="varname" id="7F.0P,v,)3RaeIp92AJM">
-                                                                                                    <field name="VARNAME">exports.blueBed</field>
+                                                                                                  <block type="varname" id="9-B{*gWUz`D4uMih^Vkk">
+                                                                                                    <field name="VARNAME">exports.redBed</field>
                                                                                                   </block>
                                                                                                 </value>
                                                                                               </block>
                                                                                             </value>
                                                                                             <value name="X">
-                                                                                              <block type="math_number" id="7Q4^~D}ck6l:8L653zMO">
+                                                                                              <block type="math_number" id="}9K|l=pRXdcY`]Vq`tNI">
                                                                                                 <field name="NUM">10</field>
                                                                                               </block>
                                                                                             </value>
                                                                                             <value name="Y">
-                                                                                              <block type="math_number" id="VGc@]5n28sW;Kl-Q9E~b">
+                                                                                              <block type="math_number" id="+%=-oM+AICUt/C|1Qqz*">
                                                                                                 <field name="NUM">1</field>
                                                                                               </block>
                                                                                             </value>
                                                                                             <value name="Z">
-                                                                                              <block type="math_number" id="7Y3h-!ta8|t;bp}7j!8B">
+                                                                                              <block type="math_number" id="$jtv{ht1Skx13w{JFdLt">
                                                                                                 <field name="NUM">10</field>
                                                                                               </block>
                                                                                             </value>
                                                                                             <next>
-                                                                                              <block type="spawnblock" id="YBh^.K}i-R(WfPUdIs1i">
+                                                                                              <block type="spawnblock" id="?.6QqllM(XMAv%AXeEUA">
                                                                                                 <value name="TYPE">
-                                                                                                  <block type="blocktype" id="hrwI(%D5(R%YN6wVJj4I">
+                                                                                                  <block type="blocktype" id="p?LMXaSH(YR4JDY|+GK8">
                                                                                                     <field name="BLOCKTYPE">LEGACY_BED_BLOCK</field>
                                                                                                   </block>
                                                                                                 </value>
                                                                                                 <value name="LOCATION">
-                                                                                                  <block type="globalvariable" id="GDsDpcjyGNO]X|n:i|sd">
-                                                                                                    <field name="VARNAME">blueBed</field>
+                                                                                                  <block type="globalvariable" id="qOkLdqAmT0w~$e4lXdmq">
+                                                                                                    <field name="VARNAME">redBed</field>
                                                                                                   </block>
                                                                                                 </value>
                                                                                                 <next>
-                                                                                                  <block type="foreachloop" id="^DcG(o{Rxn@0|471jy4K">
-                                                                                                    <field name="ELEMENT">defender</field>
-                                                                                                    <value name="LIST">
-                                                                                                      <block type="globalvariable" id="2EnJ9,`t}x`EOVIt~iUT">
-                                                                                                        <field name="VARNAME">blueDefenders</field>
+                                                                                                  <block type="fill" id="22q1;}:0teL(e9Ur$gLW">
+                                                                                                    <value name="MATERIAL">
+                                                                                                      <block type="blocktype" id="E:@%VjG!Dr)L-JfJ|EcF">
+                                                                                                        <field name="BLOCKTYPE">BLUE_CONCRETE</field>
                                                                                                       </block>
                                                                                                     </value>
-                                                                                                    <statement name="FORCODE">
-                                                                                                      <block type="functionCall" id="J.@Z+@.aV;bRp|4[-^V0">
-                                                                                                        <field name="FUNCTIONNAME">createBeacon ("blue", defender)</field>
-                                                                                                      </block>
-                                                                                                    </statement>
-                                                                                                    <next>
-                                                                                                      <block type="foreachloop" id="L_S7V^pL1Dl5Ag5*LX`B">
-                                                                                                        <field name="ELEMENT">defender</field>
-                                                                                                        <value name="LIST">
-                                                                                                          <block type="globalvariable" id="ETgxX?UCII8CLXb;u{Y3">
-                                                                                                            <field name="VARNAME">redDefenders</field>
+                                                                                                    <value name="LOCATION">
+                                                                                                      <block type="locationadd" id="v,1~?NQi0?3TQsoO@|O}">
+                                                                                                        <field name="X">-5</field>
+                                                                                                        <field name="Y">-1</field>
+                                                                                                        <field name="Z">-5</field>
+                                                                                                        <value name="LOCATION">
+                                                                                                          <block type="varname" id="7F.0P,v,)3RaeIp92AJM">
+                                                                                                            <field name="VARNAME">exports.blueBed</field>
                                                                                                           </block>
                                                                                                         </value>
-                                                                                                        <statement name="FORCODE">
-                                                                                                          <block type="functionCall" id="cFwDX9`sgPmVD-)zf~D1">
-                                                                                                            <field name="FUNCTIONNAME">createBeacon ("red", defender)</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <value name="X">
+                                                                                                      <block type="math_number" id="7Q4^~D}ck6l:8L653zMO">
+                                                                                                        <field name="NUM">10</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <value name="Y">
+                                                                                                      <block type="math_number" id="VGc@]5n28sW;Kl-Q9E~b">
+                                                                                                        <field name="NUM">1</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <value name="Z">
+                                                                                                      <block type="math_number" id="7Y3h-!ta8|t;bp}7j!8B">
+                                                                                                        <field name="NUM">10</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <next>
+                                                                                                      <block type="spawnblock" id="YBh^.K}i-R(WfPUdIs1i">
+                                                                                                        <value name="TYPE">
+                                                                                                          <block type="blocktype" id="hrwI(%D5(R%YN6wVJj4I">
+                                                                                                            <field name="BLOCKTYPE">LEGACY_BED_BLOCK</field>
                                                                                                           </block>
-                                                                                                        </statement>
+                                                                                                        </value>
+                                                                                                        <value name="LOCATION">
+                                                                                                          <block type="globalvariable" id="GDsDpcjyGNO]X|n:i|sd">
+                                                                                                            <field name="VARNAME">blueBed</field>
+                                                                                                          </block>
+                                                                                                        </value>
                                                                                                         <next>
-                                                                                                          <block type="foreachloop" id="Ywx^}]-d%/TG?oWqpJEE">
-                                                                                                            <field name="ELEMENT">player</field>
+                                                                                                          <block type="foreachloop" id="^DcG(o{Rxn@0|471jy4K">
+                                                                                                            <field name="ELEMENT">defender</field>
                                                                                                             <value name="LIST">
-                                                                                                              <block type="allplayers" id="yU^/{Gbu_Na9XP-=q[@{"></block>
+                                                                                                              <block type="globalvariable" id="2EnJ9,`t}x`EOVIt~iUT">
+                                                                                                                <field name="VARNAME">blueDefenders</field>
+                                                                                                              </block>
                                                                                                             </value>
                                                                                                             <statement name="FORCODE">
-                                                                                                              <block type="setplayerdata" id="ZYY)e-:7nC;.1Wc:zXQF">
-                                                                                                                <field name="KEY">gameId</field>
-                                                                                                                <value name="VALUE">
-                                                                                                                  <block type="varname" id="}$*6U$U(7Q00Q-%x7QD%">
-                                                                                                                    <field name="VARNAME">-1</field>
-                                                                                                                  </block>
-                                                                                                                </value>
-                                                                                                                <value name="PLAYER">
-                                                                                                                  <block type="varname" id="H=J187D**kmC6uLT:LyM">
-                                                                                                                    <field name="VARNAME">player</field>
-                                                                                                                  </block>
-                                                                                                                </value>
+                                                                                                              <block type="functionCall" id="J.@Z+@.aV;bRp|4[-^V0">
+                                                                                                                <field name="FUNCTIONNAME">createBeacon ("blue", defender)</field>
                                                                                                               </block>
                                                                                                             </statement>
                                                                                                             <next>
-                                                                                                              <block type="functionCall" id="FP[eLFr}6!iWa$iXH;$f">
-                                                                                                                <field name="FUNCTIONNAME">listeners</field>
+                                                                                                              <block type="foreachloop" id="L_S7V^pL1Dl5Ag5*LX`B">
+                                                                                                                <field name="ELEMENT">defender</field>
+                                                                                                                <value name="LIST">
+                                                                                                                  <block type="globalvariable" id="ETgxX?UCII8CLXb;u{Y3">
+                                                                                                                    <field name="VARNAME">redDefenders</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <statement name="FORCODE">
+                                                                                                                  <block type="functionCall" id="cFwDX9`sgPmVD-)zf~D1">
+                                                                                                                    <field name="FUNCTIONNAME">createBeacon ("red", defender)</field>
+                                                                                                                  </block>
+                                                                                                                </statement>
+                                                                                                                <next>
+                                                                                                                  <block type="foreachloop" id="Ywx^}]-d%/TG?oWqpJEE">
+                                                                                                                    <field name="ELEMENT">player</field>
+                                                                                                                    <value name="LIST">
+                                                                                                                      <block type="allplayers" id="yU^/{Gbu_Na9XP-=q[@{"></block>
+                                                                                                                    </value>
+                                                                                                                    <statement name="FORCODE">
+                                                                                                                      <block type="setplayerdata" id="ZYY)e-:7nC;.1Wc:zXQF">
+                                                                                                                        <field name="KEY">gameId</field>
+                                                                                                                        <value name="VALUE">
+                                                                                                                          <block type="varname" id="}$*6U$U(7Q00Q-%x7QD%">
+                                                                                                                            <field name="VARNAME">-1</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <value name="PLAYER">
+                                                                                                                          <block type="varname" id="H=J187D**kmC6uLT:LyM">
+                                                                                                                            <field name="VARNAME">player</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                      </block>
+                                                                                                                    </statement>
+                                                                                                                    <next>
+                                                                                                                      <block type="functionCall" id="FP[eLFr}6!iWa$iXH;$f">
+                                                                                                                        <field name="FUNCTIONNAME">listeners</field>
+                                                                                                                      </block>
+                                                                                                                    </next>
+                                                                                                                  </block>
+                                                                                                                </next>
                                                                                                               </block>
                                                                                                             </next>
                                                                                                           </block>
@@ -447,15 +443,6 @@
                         </value>
                       </block>
                     </statement>
-                    <next>
-                      <block type="consolelog" id="n?:E_z8q?eM_P_W1xdb[">
-                        <value name="NAME">
-                          <block type="varname" id="`;e.]Uk^9rm1oyn;~NM%">
-                            <field name="VARNAME">"create beacon at: " + location</field>
-                          </block>
-                        </value>
-                      </block>
-                    </next>
                   </block>
                 </next>
               </block>

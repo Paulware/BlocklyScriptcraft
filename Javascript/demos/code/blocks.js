@@ -4563,3 +4563,14 @@ Blockly.Blocks['getdurability'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['stackinoffhand'] = {
+  init: function() {
+    this.appendValueInput("PLAYER")        
+        .appendField("Stack in offhand of Player");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

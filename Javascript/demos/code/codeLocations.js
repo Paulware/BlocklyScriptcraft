@@ -216,7 +216,8 @@
       "Player on ground => Entities, Player",   
       "Get durability => Items",     
       "Equipment Slot => Items, Gear",  
-      "Spawn Arrow at Location => Entities",       
+      "Spawn Arrow at Location => Entities",    
+      "Stack in offhand of player => Entities, Player",       
    ];
    
    function autocomplete(inp, arr) {

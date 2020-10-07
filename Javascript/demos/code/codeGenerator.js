@@ -3873,3 +3873,10 @@ Blockly.Python['getdurability'] = function(block) {
   var code = '(' + item + '==null)?-1:(' + item + '.getDurability == null)?-1:' + item + '.getDurability()';
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['stackinoffhand'] = function(block) {
+  var player = Blockly.Python.valueToCode(block, 'PLAYER', Blockly.Python.ORDER_ATOMIC);
+  player = insideParen(player)
+  var code = '(' + player + '== null) ? null : ( ' + player + '.getInventory().getItemInOffHand == null) ? null : ' + player + '.getInventory().getItemInOffHand()';  
+  return [code, Blockly.Python.ORDER_NONE];
+};
