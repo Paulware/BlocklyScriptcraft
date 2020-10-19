@@ -3880,3 +3880,19 @@ Blockly.Python['stackinoffhand'] = function(block) {
   var code = '(' + player + '== null) ? null : ( ' + player + '.getInventory().getItemInOffHand == null) ? null : ' + player + '.getInventory().getItemInOffHand()';  
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['stacklength'] = function(block) {
+  var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);
+  stack = insideParen(stack)
+  var code = stack + '.getAmount()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['decrementstack'] = function(block) {
+  var stack = Blockly.Python.valueToCode(block, 'STACK', Blockly.Python.ORDER_ATOMIC);
+  stack = insideParen(stack);
+  var code = 'if (' + stack + '.getAmount() > 0) {\n' + 
+             '  ' + stack + '.setAmount(' + stack + '.getAmount ()-1); \n' + 
+             '}\n';
+  return code;
+};

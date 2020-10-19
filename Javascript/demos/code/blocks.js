@@ -4574,3 +4574,26 @@ Blockly.Blocks['stackinoffhand'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['stacklength'] = {
+  init: function() {
+    this.appendValueInput("STACK")        
+        .appendField("Length of stack");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['decrementstack'] = {
+  init: function() {
+    this.appendValueInput("STACK")
+        .appendField("Decrement stack: ");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
