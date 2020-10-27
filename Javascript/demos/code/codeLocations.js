@@ -220,7 +220,8 @@
       "Stack in offhand of player => Items, Stack",    
       "To lowercase => Text",  
       "Length of Stack => Items, Stack,",
-      "Decrement stack => Items, Stack",       
+      "Decrement stack => Items, Stack", 
+      "Customize Firework => Entities, Projectiles",       
    ];
    
    function autocomplete(inp, arr) {
