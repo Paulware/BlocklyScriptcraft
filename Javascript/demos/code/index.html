@@ -212,7 +212,7 @@ function bodyLoad() {
         <!--Make sure the form has the autocomplete function switched off:-->
         <form autocomplete="off" action="/action_page.php">
           <div class="autocomplete" style="width:500px;">
-            <input id="myInput" type="text" name="myCountry" placeholder="Search For Block">
+            V1.01<input id="myInput" type="text" name="myCountry" placeholder="Search For Block">
           </div>
         </form>
       </td>
@@ -314,6 +314,8 @@ function bodyLoad() {
            <block type="changeBlock"></block>
            <block type="blockfacingdirection"></block>
            <block type="blockfacing"></block>
+           <block type="setblockface"></block>
+           <block type="blockface"></block>
            <block type="reverseface"></block>
            <block type="blocksradius"></block>
            <block type="isopen"></block>
@@ -486,6 +488,7 @@ function bodyLoad() {
           <block type="existsblockdata"></block>  
        </category> 
        <category name="Entity">       
+          <block type="setallplayersdata"></block>
           <block type="existsplayerdata"></block>		 
           <block type="setplayerdata"></block>
           <block type="getplayerdata2"></block>

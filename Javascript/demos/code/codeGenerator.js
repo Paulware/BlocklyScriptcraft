@@ -782,6 +782,27 @@ Blockly.Python['setplayerdata'] = function(block) {
   return code;
 };
 
+Blockly.Python['setallplayersdata'] = function(block) {
+  var key = block.getFieldValue ('KEY');
+  key = key.toLowerCase();
+  key = '_' + key + '_';
+  var value = Blockly.Python.valueToCode (block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
+  value = insideParen (value);
+  var code = "fd = new org.bukkit.metadata.FixedMetadataValue (__plugin," + value + ");\n" + 
+             "var players = server.getOnlinePlayers();\n" +
+             "var _player;\n" +              
+             "for (var playersIndex=0; playersIndex<players.length; playersIndex++) {\n" +   
+             "  _player = players[playersIndex];\n" + 
+             "  if ( _player != null) { \n" + 
+             "    if (_player.setMetadata != null ) { \n" +              
+             "      _player.setMetadata (\"" + key + "\", fd );\n" + 
+             "    }\n" + 
+             "  }\n" + 
+             "}\n";
+  return code;
+};
+
+
 Blockly.Python['removeplayerdata'] = function(block) {
   var key = block.getFieldValue ('KEY');
   key = key.toLowerCase();
@@ -1977,6 +1998,21 @@ Blockly.Python['blockfacing'] = function(block) {
   return code;
 };
 
+Blockly.Python['setblockface'] = function(block) {
+  var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+  location = insideParen(location); 
+  var face = Blockly.Python.valueToCode(block, 'FACE', Blockly.Python.ORDER_ATOMIC);  
+  face = insideParen (face);
+  instantiateVariable ("_data");
+  instantiateVariable ("_block");
+
+  var code = "_block = server.worlds[0].getBlockAt (" + location + ")\n" + 
+             "_data = _block.getBlockData();\n" + 
+             "_data.setFace(" + face + ")\n" + 
+             "_block.setBlockData(_data)\n"; 
+  return code;
+};
+
 
 Blockly.Python['signfacing'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
@@ -2001,13 +2037,34 @@ Blockly.Python['getcolor'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 }
 
+function escapeIt(value) {
+   var ch;
+   var message = ''; 
+   
+   for (i =0; i<value.length; i++) {
+      ch = value.substring (i,i+1);
+      if (ch == "\"") {
+         message = message + "\\\"";
+      } else if (ch == "\\" ) {
+         message = message + "\\\\"
+      } else {
+         message = message + ch;
+      }
+   }
+   return message;
+}
+
 Blockly.Python['setblockcommand'] = function(block) {
   var location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
   location = insideParen(location);
   var command = block.getFieldValue("COMMAND");
-  if ((command.indexOf ( "\"") == -1) && (command.indexOf ( "'") == -1)) {
+
+  // Add leading and trailing double-quote if command is not a variable.  
+  if ((command.indexOf ( "\"") > -1) || (command.indexOf ( "'") > -1)) {
+     command = escapeIt (command);   
      command = "\"" + command + "\""
   }
+
   instantiateVariable ("state");
   instantiateVariable ("block");
   var code = "block = server.worlds[0].getBlockAt (" + location + ");\n" + 
@@ -2212,6 +2269,12 @@ Blockly.Python['distancebetweenlocations'] = function(block) {
 Blockly.Python['direction'] = function(block) {
   var direction =  block.getFieldValue ('DIRECTION');   
   code = "org.bukkit.block.BlockFace." + direction;
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['blockface'] = function(block) {
+  var face =  block.getFieldValue ('FACE');   
+  code = "org.bukkit.block.data.type.Switch.Face." + face;
   return [code, Blockly.Python.ORDER_NONE];
 };
 

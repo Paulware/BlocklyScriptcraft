@@ -221,7 +221,11 @@
       "To lowercase => Text",  
       "Length of Stack => Items, Stack,",
       "Decrement stack => Items, Stack", 
-      "Customize Firework => Entities, Projectiles",       
+      "Customize Firework => Entities, Projectiles", 
+      "Block Face => World, Blocks",       
+      "Set Block Facing => World, Blocks",       
+      "Set Block Face => World, Blocks", 
+      "Set All Players Data => Data, Entity",      
    ];
    
    function autocomplete(inp, arr) {

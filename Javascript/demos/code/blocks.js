@@ -1513,6 +1513,26 @@ Blockly.Blocks['setplayerdata'] = {
   }
 };
 
+Blockly.Blocks['setallplayersdata'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .appendField("Set Data")  
+        .appendField (new Blockly.FieldTextInput ("Key"), "KEY")
+        .appendField(" = ");
+          
+    this.appendDummyInput()
+        .appendField("for all players");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
 Blockly.Blocks['removeplayerdata'] = {
   init: function() {
     this.appendDummyInput()
@@ -2075,6 +2095,21 @@ Blockly.Blocks['blockfacing'] = {
   }
 };
 
+Blockly.Blocks['setblockface'] = {
+  init: function() {
+    this.appendValueInput("FACE")
+        .appendField("Set Block Face");
+    this.appendValueInput("LOCATION")
+        .appendField("At Location ");                                                       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
 Blockly.Blocks['blockfacingdirection'] = {
   init: function() {
     this.appendDummyInput()
@@ -2186,7 +2221,7 @@ Blockly.Blocks['setblockcommand'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Set command block command")         
-        .appendField (new Blockly.FieldTextInput ("\"say \\\"Hello\\\"\""), "COMMAND");     
+        .appendField (new Blockly.FieldTextInput ("say \"Hello\""), "COMMAND");     
     this.appendValueInput("LOCATION")
         .appendField("At Location ");                                                       
     this.setPreviousStatement(true, null);
@@ -2501,6 +2536,23 @@ Blockly.Blocks['direction'] = {
                                                       
     this.setOutput(true, null);
     this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['blockface'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Block Face")
+        .appendField(new Blockly.FieldDropdown([
+                                                 ["Ceiling", "CEILING"],
+                                                 ["Floor", "FLOOR"],                                                 
+                                                 ["Wall","WALL"]        
+                                               ]), "FACE"); 
+                                                      
+    this.setOutput(true, null);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
