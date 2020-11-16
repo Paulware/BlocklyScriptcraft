@@ -961,6 +961,7 @@ Blockly.Blocks['materialtype'] = {
                                                   ["Baked Potato","BAKED_POTATO"],
                                                   ["Blaze Rod", "BLAZE_ROD"],
                                                   ["Bone Meal", "BONE_MEAL"],
+                                                  ["Cake", "CAKE"],
                                                   ["Chainmail Boots", "CHAINMAIL_BOOTS"],
                                                   ["Chainmail ChestPlate", "CHAINMAIL_CHESTPLATE"],
                                                   ["Chainmail Helmet", "CHAINMAIL_HELMET"],
@@ -1097,7 +1098,8 @@ Blockly.Blocks['blocktype'] = {
                                                 ["Bed", "LEGACY_BED_BLOCK"],      
                                                 ["Blue Concrete", "BLUE_CONCRETE"],                                                
                                                 ["Blue Stained Glass", "BLUE_STAINED_GLASS"], 
-                                                ["Button (Oak)", "OAK_BUTTON"],                                                
+                                                ["Button (Oak)", "OAK_BUTTON"], 
+                                                ["Cake", "CAKE"],                                                
                                                 ["Chest", "CHEST"],
                                                 ["Cobblestone", "COBBLESTONE"],
                                                 ["Cobweb", "COBWEB"],
@@ -4654,6 +4656,17 @@ Blockly.Blocks['randomlistitem'] = {
   init: function() {
     this.appendValueInput("LIST")        
         .appendField("Get a random item from list: ");
+    this.setOutput(true, null);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['cakeslicesremaining'] = {
+  init: function() {
+    this.appendValueInput("BLOCK")        
+        .appendField("Number of cake slices remaining for cake block:");
     this.setOutput(true, null);
     this.setColour(260);
     this.setTooltip('');

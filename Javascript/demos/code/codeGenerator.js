@@ -3971,3 +3971,26 @@ Blockly.Python['randomlistitem'] = function(block) {
   
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+
+Blockly.Python['cakeslicesremaining'] = function(block) {
+  var block = Blockly.Python.valueToCode(block, 'BLOCK', Blockly.Python.ORDER_ATOMIC);
+  block = insideParen(block)
+  var code =   
+      "function () {\n" + 
+      "   var remaining=-1;\n" + 
+      "   var data;\n" + 
+      "   var ind;\n" + 
+      "   if (" + block + "!= null) {\n" + 
+      "      if (" + block + ".getState != null) {\n" + 
+      "         if (" + block + ".getState().getData != null) {\n" + 
+      "            data = " + block + ".getState().getData().toString();\n" + 
+      "            ind = data.indexOf ( \"(\") + 1;\n" + 
+      "            remaining = 6 - parseInt (data.toString ().substring (ind));\n" +             
+      "         }\n" +        
+      "      }\n" + 
+      "   }\n" + 
+      "   return remaining;\n" +    
+      "}()";    
+  return [code, Blockly.Python.ORDER_NONE];
+};

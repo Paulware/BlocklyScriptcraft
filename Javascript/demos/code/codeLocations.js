@@ -226,7 +226,8 @@
       "Set Block Facing => World, Blocks",       
       "Set Block Face => World, Blocks", 
       "Set All Players Data => Data, Entity",   
-      "Get a random item from list => Lists",      
+      "Get a random item from list => Lists",  
+      "Number of cake slices remaining => World, Blocks, Cake",       
    ];
    
    function autocomplete(inp, arr) {
