@@ -3959,3 +3959,15 @@ Blockly.Python['decrementstack'] = function(block) {
              '}\n';
   return code;
 };
+
+Blockly.Python['randomlistitem'] = function(block) {
+  var list = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_ATOMIC);
+  list = insideParen(list)
+  var code =   
+      "function () {\n" + 
+      "  var index=parseInt(Math.random()*" + list + ".length);\n" + 
+      "  return " + list + "[index];\n" +
+      "}()";  
+  
+  return [code, Blockly.Python.ORDER_NONE];
+};

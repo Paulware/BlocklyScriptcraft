@@ -4650,3 +4650,13 @@ Blockly.Blocks['decrementstack'] = {
   }
 };
 
+Blockly.Blocks['randomlistitem'] = {
+  init: function() {
+    this.appendValueInput("LIST")        
+        .appendField("Get a random item from list: ");
+    this.setOutput(true, null);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
