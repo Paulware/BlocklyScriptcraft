@@ -49,9 +49,8 @@ Blockly.Dart.lists_getIndex=function(a){
      if("GET"==c)return[e+"["+e+".length - "+d+"]",Blockly.Dart.ORDER_UNARY_POSTFIX];
      if("GET_REMOVE"==c||"REMOVE"==c)
         a=e+".removeAt("+e+".length - "+d+")";
-        if("GET_REMOVE"==c)return[a,Blockly.Dart.ORDER_UNARY_POSTFIX];
-        if("REMOVE"==c)return a+";\n"
-     }
+     if("GET_REMOVE"==c)return[a,Blockly.Dart.ORDER_UNARY_POSTFIX];
+     if("REMOVE"==c)return a+";\n"     
      break;
    case "RANDOM":
      Blockly.Dart.definitions_.import_dart_math="import 'dart:math' as Math;";

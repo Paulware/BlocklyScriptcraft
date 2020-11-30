@@ -4673,3 +4673,37 @@ Blockly.Blocks['cakeslicesremaining'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['getnamestructure']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   this.appendDummyInput()
+      .appendField("Data Name")
+      .appendField (new Blockly.FieldTextInput ("name"), "ELEMENT")   
+   this.appendValueInput("STRUCTURE")        
+      .appendField("in structure");      
+   this.setInputsInline(true); 
+   this.setTooltip('');
+   this.setOutput(true, null);
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['namevaluevariable']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   this.appendDummyInput()
+      .appendField("Data Name")
+      .appendField (new Blockly.FieldTextInput ("name"), "VARNAME");     
+   this.appendValueInput("VALUE")        
+      .appendField("Value");  
+   // var a=this;
+   this.setTooltip('');
+   this.setInputsInline(true);    
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setHelpUrl('http://www.example.com/');
+  }
+};

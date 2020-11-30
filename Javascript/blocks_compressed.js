@@ -25,6 +25,7 @@ Blockly.Blocks.lists_isEmpty={init:function(){this.jsonInit({message0:Blockly.Ms
 Blockly.Blocks.lists_indexOf={init:function(){var a=[[Blockly.Msg.LISTS_INDEX_OF_FIRST,"FIRST"],[Blockly.Msg.LISTS_INDEX_OF_LAST,"LAST"]];this.setHelpUrl(Blockly.Msg.LISTS_INDEX_OF_HELPURL);this.setColour(Blockly.Blocks.lists.HUE);this.setOutput(!0,"Number");this.appendValueInput("VALUE").setCheck("Array").appendField(Blockly.Msg.LISTS_INDEX_OF_INPUT_IN_LIST);this.appendValueInput("FIND").appendField(new Blockly.FieldDropdown(a),"END");this.setInputsInline(!0);this.setTooltip(function(){return Blockly.Msg.LISTS_INDEX_OF_TOOLTIP.replace("%1",
 this.workspace.options.oneBasedIndex?"0":"-1")})}};
 Blockly.Blocks.lists_getIndex={init:function(){
+   alert ( 'lists_getIndex yo' );
    var a=[
            [Blockly.Msg.LISTS_GET_INDEX_GET,"GET"],
            [Blockly.Msg.LISTS_GET_INDEX_GET_REMOVE,"GET_REMOVE"],

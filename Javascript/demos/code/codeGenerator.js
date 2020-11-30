@@ -3907,7 +3907,6 @@ Blockly.Python['locationtovector'] = function(block) {
 Blockly.Python['spawnarrow'] = function(block) {
   var location = insideParen(Blockly.Python.valueToCode(block, "LOCATION", Blockly.Python.ORDER_ATOMIC)); 
   var vector = insideParen(Blockly.Python.valueToCode(block, "VECTOR", Blockly.Python.ORDER_ATOMIC)); 
-  //var speed = block.getFieldValue ("SPEED");
   var spread = block.getFieldValue ("SPREAD");
   var code = "server.worlds[0].spawnArrow(" + location + "," + vector + "," + vector + ".length()," + spread + ");\n";  
   return [code, Blockly.Python.ORDER_NONE];
@@ -3994,3 +3993,22 @@ Blockly.Python['cakeslicesremaining'] = function(block) {
       "}()";    
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+
+Blockly.Python['getnamestructure'] = function(block) {
+  var structure = Blockly.Python.valueToCode(block, 'STRUCTURE', Blockly.Python.ORDER_ATOMIC);
+  structure = insideParen(structure)
+  var element = block.getFieldValue ("ELEMENT");  
+  var code = structure + "." + element;  
+  
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['namevaluevariable'] = function(block) {
+  var varname = block.getFieldValue ('VARNAME'); 
+  var value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
+  value = insideParen(value)
+  var code = varname + ':' + value + ',';
+  return code;
+};
+
