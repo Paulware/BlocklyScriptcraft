@@ -2262,7 +2262,21 @@ Blockly.Python['distancebetweenlocations'] = function(block) {
   var location2 =  Blockly.Python.valueToCode(block, 'LOCATION2', Blockly.Python.ORDER_ATOMIC);   
   location1 = insideParen (location1)
   location2 = insideParen (location2)
-  code = location1 + ".distance(" + location2 + ")"
+  
+  var code = '(function() { ' +
+             '  var _value = 0.0;\n' +   
+             '  if (' + location1 + ' instanceof org.bukkit.Location ){ \n' + 
+             '     if (' + location2 + ' instanceof org.bukkit.Location ) { \n' + 
+             '        _value = ' + location1 + ".distance(" + location2 + ")" + ';\n' + 
+             '     } else { \n' + 
+             '        console.log ( \'\\n***ERR! Cannot determine distance...' + location2 + ' is not a location!\');\n' +   
+             '     } \n' + 
+             '  } else { \n' + 
+             '     console.log ( \'\\n***ERR! Cannot determine distance...' + location1 + ' is not a location!\');\n' + 
+             '  }\n' + 
+             '  console.log ( \'Custom name: [\' + _value + \']\');\n' + 
+             '  return _value;' + 
+             ' })()'     
   return [code, Blockly.Python.ORDER_NONE];
 };
 
