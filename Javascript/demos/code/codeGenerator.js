@@ -1222,7 +1222,12 @@ Blockly.Python['spawnblock'] = function(block) {
             "sign.setData (data);\n" + 
             "sign.update();\n" 
   } else {   
-     code = "server.worlds[0].getBlockAt (" + location + ").setType (" + blockType + ");\n";            
+  
+     code = '  if (' + location + ' instanceof org.bukkit.Location ){ \n' + 
+            '     server.worlds[0].getBlockAt (' + location + ').setType (' + blockType + ');\n' +             
+            '  } else { \n' + 
+            '    console.log ( \'\\n***ERR! Cannot spawn block.  Invalid location specified!\');\n' +   
+            '  }\n'; 
   }
   return code;
 };
@@ -2269,12 +2274,11 @@ Blockly.Python['distancebetweenlocations'] = function(block) {
              '     if (' + location2 + ' instanceof org.bukkit.Location ) { \n' + 
              '        _value = ' + location1 + ".distance(" + location2 + ")" + ';\n' + 
              '     } else { \n' + 
-             '        console.log ( \'\\n***ERR! Cannot determine distance...' + location2 + ' is not a location!\');\n' +   
+             '        console.log ( \'\\n***ERR! Distance between locations cannot determine distance...location2 is not a location!\');\n' +   
              '     } \n' + 
              '  } else { \n' + 
-             '     console.log ( \'\\n***ERR! Cannot determine distance...' + location1 + ' is not a location!\');\n' + 
+             '     console.log ( \'\\n***ERR! Distance between locations cannot determine distance...location1 is not a location!\');\n' + 
              '  }\n' + 
-             '  console.log ( \'Custom name: [\' + _value + \']\');\n' + 
              '  return _value;' + 
              ' })()'     
   return [code, Blockly.Python.ORDER_NONE];
