@@ -1381,8 +1381,6 @@ Blockly.Blocks['createVariable'] = {
 
 Blockly.Blocks['functionCall'] = {
   init: function() {   
-    //this.appendValueInput("FUNCTIONNAME")
-    //    .appendField("Call Function");
     this.appendDummyInput()
         .appendField("Call Function")
         .appendField (new Blockly.FieldTextInput ("test"), "FUNCTIONNAME");
@@ -3329,8 +3327,14 @@ Blockly.Blocks['setscore'] = {
 
 Blockly.Blocks['increment'] = { 
   init: function() {
+       this.appendDummyInput()
+          .appendField("")        
+          .appendField(new Blockly.FieldDropdown([
+                                                  [ "increment", "INCREMENT"],
+                                                  [ "decrement", "DECREMENT"]
+                                                 ]), "INCREMENTDECREMENT");   
     this.appendValueInput("VARIABLE")       
-        .appendField("Increment variable:");
+        .appendField(" variable:");
     this.setInputsInline(true);        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -4699,7 +4703,6 @@ Blockly.Blocks['namevaluevariable']={
       .appendField (new Blockly.FieldTextInput ("name"), "VARNAME");     
    this.appendValueInput("VALUE")        
       .appendField("Value");  
-   // var a=this;
    this.setTooltip('');
    this.setInputsInline(true);    
    this.setPreviousStatement(true, null);
@@ -4707,3 +4710,37 @@ Blockly.Blocks['namevaluevariable']={
    this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['namevaluestructure']={
+  init:function(){
+   this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
+   this.setColour(330);
+   this.appendDummyInput()
+      .appendField("Data Name")
+      .appendField (new Blockly.FieldTextInput ("name"), "NAME");     
+   this.appendValueInput("VALUE")        
+      .appendField("Value");  
+   this.appendValueInput("STRUCTURE")        
+      .appendField("in Structure:");  
+   this.setTooltip('');
+   this.setInputsInline(true);    
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['functioncallreturn'] = {
+  init: function() {   
+    this.appendDummyInput()
+        .appendField("Call Function")
+        .appendField (new Blockly.FieldTextInput ("test"), "FUNCTIONNAME");
+
+    this.setOutput(true, null);    
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+

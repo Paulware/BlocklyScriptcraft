@@ -2802,12 +2802,15 @@ Blockly.Python['scoreboardtitle'] = function(block) {
 
 Blockly.Python['increment'] = function(block) {
   var variable = insideParen(Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC)); 
-  
-  instantiateVariable ( 'value' );
+  var incrementDecrement = block.getFieldValue ( 'INCREMENTDECREMENT' );   
   var code = '(function () {\n'  + 
-             '  var value = ( ' + variable + '==null)?0:' + variable + ';\n' + 
-             '  ' + variable + '= value+1;\n' +
-             '})();\n'
+             '  var value = ( ' + variable + '==null)?0:' + variable + ';\n';
+  if (incrementDecrement == 'INCREMENT') { 
+      code = code + '    ' + variable + '= value+1;\n';
+  } else {
+      code = code + '    ' + variable + '= value-1;\n';
+  }            
+  code = code + '})();\n'
   return code;
 };
 
@@ -4030,3 +4033,23 @@ Blockly.Python['namevaluevariable'] = function(block) {
   return code;
 };
 
+Blockly.Python['namevaluestructure'] = function(block) {
+  var name = block.getFieldValue ('NAME'); 
+  var value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);  
+  value = insideParen(value)
+  var structure = Blockly.Python.valueToCode (block, 'STRUCTURE', Blockly.Python.ORDER_ATOMIC);
+  structure = insideParen(structure);
+  var code = structure + '.' + name + '=' + value + ';\n';
+  return code;
+};
+
+Blockly.Python['functioncallreturn'] = function(block) {
+  var name = block.getFieldValue ('FUNCTIONNAME'); 
+
+  if (name.indexOf ( '(') == -1) {
+     name = name + "()";
+  } else if (name.indexOf ( ')' ) == -1) { // Right parenthesis is missing from name 
+     name = name + ")";
+  } 
+  return [name, Blockly.Python.ORDER_NONE];
+};
