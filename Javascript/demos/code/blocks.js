@@ -3336,8 +3336,7 @@ Blockly.Blocks['increment'] = {
     this.appendValueInput("VARIABLE")       
         .appendField(" variable:");
     this.setInputsInline(true);        
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+    this.setOutput(true, null);
     this.setColour(230);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');

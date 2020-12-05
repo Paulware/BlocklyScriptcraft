@@ -2805,15 +2805,15 @@ Blockly.Python['increment'] = function(block) {
   var variable = insideParen(Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC)); 
   var incrementDecrement = block.getFieldValue ( 'INCREMENTDECREMENT' );   
   var code = '(function () {\n'  + 
-             '  var value = ( ' + variable + '==null)?0:' + variable + ';\n';
+             '  var _val_ = ( ' + variable + '==null)?0:' + variable + ';\n';
   if (incrementDecrement == 'INCREMENT') { 
-      code = code + '    ' + variable + '= value+1;\n';
+      code = code + '  ' + '_val_ = _val_+1;\n';
   } else {
-      code = code + '    ' + variable + '= value-1;\n';
+      code = code + '  ' + '_val_ = _val_-1;\n';
   } 
-  code = code + '  return value;\n'; 
-  code = code + '})();\n';
-  return code;
+  code = code + '  return _val_;\n'
+  code = code + '})()';
+  return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['allplayerssetscore'] = function(block) {
