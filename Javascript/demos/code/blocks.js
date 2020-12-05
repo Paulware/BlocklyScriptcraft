@@ -4730,7 +4730,7 @@ Blockly.Blocks['namevaluestructure']={
       .appendField("Set Data Name")
       .appendField (new Blockly.FieldTextInput ("name"), "NAME");     
    this.appendValueInput("VALUE")        
-      .appendField("Value");  
+      .appendField("=");  
    this.appendValueInput("STRUCTURE")        
       .appendField("in Structure:");  
    this.setTooltip('');
