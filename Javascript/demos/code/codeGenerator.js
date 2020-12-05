@@ -2811,8 +2811,8 @@ Blockly.Python['increment'] = function(block) {
   } else {
       code = code + '    ' + variable + '= value-1;\n';
   } 
-  code = code + '  return value;\n' +   
-  code = code + '})();\n'
+  code = code + '  return value;\n'; 
+  code = code + '})();\n';
   return code;
 };
 
