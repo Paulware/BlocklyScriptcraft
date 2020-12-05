@@ -1223,11 +1223,12 @@ Blockly.Python['spawnblock'] = function(block) {
             "sign.update();\n" 
   } else {   
   
-     code = '  if (' + location + ' instanceof org.bukkit.Location ){ \n' + 
-            '     server.worlds[0].getBlockAt (' + location + ').setType (' + blockType + ');\n' +             
-            '  } else { \n' + 
-            '    console.log ( \'\\n***ERR! Cannot spawn block.  Invalid location specified!\');\n' +   
-            '  }\n'; 
+     code = '// Spawn ' + blockType + ' at: ' + location + '\n' + 
+            'if (' + location + ' instanceof org.bukkit.Location ){ \n' + 
+            '  server.worlds[0].getBlockAt (' + location + ').setType (' + blockType + ');\n' +             
+            '} else { \n' + 
+            '  console.log ( \'\\n***ERR! Cannot spawn block.  Invalid location specified!\');\n' +   
+            '}\n'; 
   }
   return code;
 };
@@ -2809,7 +2810,8 @@ Blockly.Python['increment'] = function(block) {
       code = code + '    ' + variable + '= value+1;\n';
   } else {
       code = code + '    ' + variable + '= value-1;\n';
-  }            
+  } 
+  code = code + '  return value;\n' +   
   code = code + '})();\n'
   return code;
 };
