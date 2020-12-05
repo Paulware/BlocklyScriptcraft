@@ -4727,7 +4727,7 @@ Blockly.Blocks['namevaluestructure']={
    this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
    this.setColour(330);
    this.appendDummyInput()
-      .appendField("Data Name")
+      .appendField("Set Data Name")
       .appendField (new Blockly.FieldTextInput ("name"), "NAME");     
    this.appendValueInput("VALUE")        
       .appendField("Value");  
