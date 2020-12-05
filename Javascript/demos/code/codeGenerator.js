@@ -2802,6 +2802,18 @@ Blockly.Python['scoreboardtitle'] = function(block) {
 
 
 Blockly.Python['increment'] = function(block) {
+  var variable = insideParen(Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC));   
+  var code = '(function () {\n'  + 
+             '  var value = ( ' + variable + '==null)?0:' + variable + ';\n';
+
+   code = code + '  ' + variable + '= value+1;\n';
+
+  
+  code = code + '})();\n';
+  return code;
+};
+
+Blockly.Python['incrementdecrement'] = function(block) {
   var variable = insideParen(Blockly.Python.valueToCode(block, 'VARIABLE', Blockly.Python.ORDER_ATOMIC)); 
   var incrementDecrement = block.getFieldValue ( 'INCREMENTDECREMENT' );   
   var code = '(function () {\n'  + 

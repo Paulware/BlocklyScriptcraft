@@ -3327,6 +3327,19 @@ Blockly.Blocks['setscore'] = {
 
 Blockly.Blocks['increment'] = { 
   init: function() {
+    this.appendValueInput("VARIABLE")       
+        .appendField("Increment variable:");
+    this.setInputsInline(true);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }   
+};
+
+Blockly.Blocks['incrementdecrement'] = { 
+  init: function() {
        this.appendDummyInput()
           .appendField("")        
           .appendField(new Blockly.FieldDropdown([
@@ -3342,7 +3355,6 @@ Blockly.Blocks['increment'] = {
     this.setHelpUrl('http://www.example.com/');
   }   
 };
-
 Blockly.Blocks['allplayerssetscore'] = {
   init: function() {
     this.appendValueInput("SCORE")
