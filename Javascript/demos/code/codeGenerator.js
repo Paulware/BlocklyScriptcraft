@@ -4067,3 +4067,23 @@ Blockly.Python['functioncallreturn'] = function(block) {
   } 
   return [name, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['setdurability'] = function(block) {
+  var item = insideParen(Blockly.Python.valueToCode(block, "ITEM", Blockly.Python.ORDER_ATOMIC)); 
+  var value = insideParen(Blockly.Python.valueToCode(block, "VALUE", Blockly.Python.ORDER_ATOMIC));   
+  // var code = '(' + item + '==null)?-1:(' + item + '.getDurability == null)?-1:' + item + '.setDurability(' + value + ')\n';
+  
+  /*
+  var code = 'var newItems = new org.bukkit.inventory.ItemStack (org.bukkit.Material.' + potion + ',' + count + ');\n' +
+             'var meta = newItems.getItemMeta();\n' +
+             'meta.setDisplayName(\'' + name + '\');\n' +
+             'newItems.setItemMeta(meta);\n' +              
+             'inventory.addItem(newItems);\n';  
+  */
+  var code = 'var meta = ' + item + '.getItemMeta();\n' + 
+             'meta.setDamage (' + value + ');\n' + 
+             item + '.setItemMeta (meta);\n'; 
+             
+  return code;
+};
+

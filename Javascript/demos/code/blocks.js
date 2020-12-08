@@ -4627,7 +4627,7 @@ Blockly.Blocks['getdurability'] = {
     this.appendValueInput("ITEM")
         .appendField ("Get durability of item" );   
     this.setOutput(true, null);
-    this.setColour(0);
+    this.setColour(320);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -4755,3 +4755,17 @@ Blockly.Blocks['functioncallreturn'] = {
 };
 
 
+Blockly.Blocks['setdurability'] = {
+  init: function() {
+    this.appendValueInput("ITEM")
+        .appendField ("Set durability of item" );   
+    this.appendValueInput("VALUE")
+        .appendField ("to " );   
+    this.setInputsInline(true);    
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(320);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
