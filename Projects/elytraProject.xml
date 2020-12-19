@@ -1,6 +1,6 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="scriptcraftfunction" id="U?SA[{|oe`ZMCD5STj9." x="-1787" y="-3862">
-    <field name="nameOfFunction">spawnCapturePoint(location)</field>
+  <block type="scriptcraftfunction" id="U?SA[{|oe`ZMCD5STj9." x="-1687" y="-3887">
+    <field name="nameOfFunction">spawnCapturePoint(location,destroy)</field>
     <statement name="FUNCTIONCODE">
       <block type="setvariablevalue" id="zM-(6a!6)Fh@#t=Fs.UT">
         <field name="VARNAME">newLocation</field>
@@ -25,75 +25,117 @@
               </block>
             </value>
             <next>
-              <block type="controls_repeat_ext" id="t0H]?|t^hWxDOjdF[7-W">
-                <field name="VAR">i</field>
-                <value name="TIMES">
-                  <shadow type="math_number" id="hO7V!FeWNwpcct^B9~?b">
-                    <field name="NUM">7</field>
-                  </shadow>
+              <block type="controls_if" id="$y+z9Bn,SQ|yufkvCK9x">
+                <value name="IF0">
+                  <block type="varname" id="?abFm6T,!w(-wTx(Yf!D">
+                    <field name="VARNAME">destroy</field>
+                  </block>
                 </value>
-                <statement name="DO">
-                  <block type="spawnblock" id="0n8Y149PHC-pl2M46k.a">
-                    <value name="TYPE">
-                      <block type="blocktype" id="m1*5}dXw)_;rj~8q)Q|:">
-                        <field name="BLOCKTYPE">RED_CONCRETE</field>
+                <statement name="DO0">
+                  <block type="consolelog" id="41]y%QKK@SI;yx@exSlk">
+                    <value name="NAME">
+                      <block type="varname" id="X=##d}6E,a64+h:DwW).">
+                        <field name="VARNAME">"Remove capture point located at: "  + location</field>
                       </block>
                     </value>
-                    <value name="LOCATION">
-                      <block type="varname" id="LA%]MdK6@`]!1EH{2eg*">
-                        <field name="VARNAME">newLocation</field>
-                      </block>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_repeat_ext" id="t0H]?|t^hWxDOjdF[7-W">
+                    <field name="VAR">i</field>
+                    <value name="TIMES">
+                      <shadow type="math_number" id="hO7V!FeWNwpcct^B9~?b">
+                        <field name="NUM">7</field>
+                      </shadow>
                     </value>
-                    <next>
-                      <block type="setvariablevalue" id="r!izR8JJCb?{CU:V[-!`">
-                        <field name="VARNAME">airLocation</field>
-                        <value name="EXPRESSION">
-                          <block type="locationadd" id="h{e3ju=]4s}tOo.!E/3]">
-                            <field name="X">1</field>
-                            <field name="Y">0</field>
-                            <field name="Z">0</field>
-                            <value name="LOCATION">
-                              <block type="varname" id="e9P-OOarpoU/#tdS{?~N">
-                                <field name="VARNAME">newLocation</field>
-                              </block>
-                            </value>
+                    <statement name="DO">
+                      <block type="controls_if" id="X=G=l7OGgmDa;9[~.~JN">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="varname" id="0xY8P(m!stX::,@%m1*m">
+                            <field name="VARNAME">destroy</field>
                           </block>
                         </value>
-                        <next>
-                          <block type="spawnblock" id="l?M/{)w60MG*$rgBw$2G">
+                        <statement name="DO0">
+                          <block type="spawnblock" id="0n8Y149PHC-pl2M46k.a">
                             <value name="TYPE">
-                              <block type="blocktype" id="Y]_cFYtC!bX]E:RSZ??v">
+                              <block type="blocktype" id="m1*5}dXw)_;rj~8q)Q|:">
                                 <field name="BLOCKTYPE">AIR</field>
                               </block>
                             </value>
                             <value name="LOCATION">
-                              <block type="varname" id=":M_04j:u?G-o)G^2_f^t">
-                                <field name="VARNAME">airLocation</field>
+                              <block type="varname" id="LA%]MdK6@`]!1EH{2eg*">
+                                <field name="VARNAME">newLocation</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="spawnblock" id="#umjOdJ2V~cXBwq}{GQ3">
+                            <value name="TYPE">
+                              <block type="blocktype" id="6-c@u4e7V+e2Ln0l3)o4">
+                                <field name="BLOCKTYPE">RED_CONCRETE</field>
+                              </block>
+                            </value>
+                            <value name="LOCATION">
+                              <block type="varname" id="$}s;t/}[|L`]1}4#}wI5">
+                                <field name="VARNAME">newLocation</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="setvariablevalue" id="r!izR8JJCb?{CU:V[-!`">
+                            <field name="VARNAME">airLocation</field>
+                            <value name="EXPRESSION">
+                              <block type="locationadd" id="h{e3ju=]4s}tOo.!E/3]">
+                                <field name="X">1</field>
+                                <field name="Y">0</field>
+                                <field name="Z">0</field>
+                                <value name="LOCATION">
+                                  <block type="varname" id="e9P-OOarpoU/#tdS{?~N">
+                                    <field name="VARNAME">newLocation</field>
+                                  </block>
+                                </value>
                               </block>
                             </value>
                             <next>
-                              <block type="setvariablevalue" id="(w9fd+#l..!^KIv/2}a9">
-                                <field name="VARNAME">newLocation</field>
-                                <value name="EXPRESSION">
-                                  <block type="locationadd" id="jgy6wC)gI7gL_m_{THe*">
-                                    <field name="X">0</field>
-                                    <field name="Y">1</field>
-                                    <field name="Z">0</field>
-                                    <value name="LOCATION">
-                                      <block type="varname" id="2_d_+[H7F8kBc;Y8)j2`">
-                                        <field name="VARNAME">newLocation</field>
+                              <block type="spawnblock" id="l?M/{)w60MG*$rgBw$2G">
+                                <value name="TYPE">
+                                  <block type="blocktype" id="Y]_cFYtC!bX]E:RSZ??v">
+                                    <field name="BLOCKTYPE">AIR</field>
+                                  </block>
+                                </value>
+                                <value name="LOCATION">
+                                  <block type="varname" id=":M_04j:u?G-o)G^2_f^t">
+                                    <field name="VARNAME">airLocation</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="setvariablevalue" id="(w9fd+#l..!^KIv/2}a9">
+                                    <field name="VARNAME">newLocation</field>
+                                    <value name="EXPRESSION">
+                                      <block type="locationadd" id="jgy6wC)gI7gL_m_{THe*">
+                                        <field name="X">0</field>
+                                        <field name="Y">1</field>
+                                        <field name="Z">0</field>
+                                        <value name="LOCATION">
+                                          <block type="varname" id="2_d_+[H7F8kBc;Y8)j2`">
+                                            <field name="VARNAME">newLocation</field>
+                                          </block>
+                                        </value>
                                       </block>
                                     </value>
                                   </block>
-                                </value>
+                                </next>
                               </block>
                             </next>
                           </block>
                         </next>
                       </block>
-                    </next>
+                    </statement>
                   </block>
-                </statement>
+                </next>
               </block>
             </next>
           </block>
@@ -103,139 +145,139 @@
   </block>
   <block type="scriptcraftexpression" id="MjoZxLLU+rmb@I*w$%Gv" x="-3287" y="-3562">
     <statement name="EXPRESSIONCODE">
-      <block type="delayedexecution" id="tlspEYjQ!}y]#4+,CB-q">
-        <field name="TIMEOUT">500</field>
-        <statement name="DELAYEDCODE">
-          <block type="consolelog" id="#Fw2_7I8I.H%Tq_3ulP!">
-            <value name="NAME">
-              <block type="text" id="/D=~`d;PqD!K89V@%dZ,">
-                <field name="TEXT">do daylightcycle</field>
-              </block>
-            </value>
-            <next>
-              <block type="servercommand" id="A;/S]H%CH;VrP/Ti5+M.">
-                <field name="COMMAND">gamerule doDaylightCycle false</field>
-                <next>
-                  <block type="consolelog" id="pGJu4ZPy,R^gx~u:q=3E">
-                    <value name="NAME">
-                      <block type="text" id="HQB4s@?/*@ZSb3~AAKb(">
-                        <field name="TEXT">done with daylight cycle</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </next>
+      <block type="setglobal" id="4eH+T|@dv_(]ImA,mX$i">
+        <field name="VARNAME">lobbyLocation</field>
+        <value name="EXPRESSION">
+          <block type="absolutelocation" id="BuRZ)29PAqf,Vp5cJv$r">
+            <field name="X">410</field>
+            <field name="Y">20</field>
+            <field name="Z">649</field>
           </block>
-        </statement>
+        </value>
         <next>
-          <block type="setglobal" id="4eH+T|@dv_(]ImA,mX$i">
-            <field name="VARNAME">lobbyLocation</field>
+          <block type="setglobal" id="L$2C9x_6e*GXYO-|#,1g">
+            <field name="VARNAME">careerLocation</field>
             <value name="EXPRESSION">
-              <block type="absolutelocation" id="BuRZ)29PAqf,Vp5cJv$r">
-                <field name="X">410</field>
+              <block type="absolutelocation" id="-)P6`ba8:(@nrpA:G^v+">
+                <field name="X">425</field>
                 <field name="Y">20</field>
-                <field name="Z">649</field>
+                <field name="Z">650</field>
               </block>
             </value>
             <next>
-              <block type="setglobal" id="L$2C9x_6e*GXYO-|#,1g">
-                <field name="VARNAME">careerLocation</field>
+              <block type="setglobal" id="Yf9Tm[L]-x(O(2kt8dr^">
+                <field name="VARNAME">blueBed</field>
                 <value name="EXPRESSION">
-                  <block type="absolutelocation" id="-)P6`ba8:(@nrpA:G^v+">
-                    <field name="X">425</field>
+                  <block type="absolutelocation" id="R+-)wZxuZvDL}XHIAK~D">
+                    <field name="X">509</field>
                     <field name="Y">20</field>
-                    <field name="Z">650</field>
+                    <field name="Z">766</field>
                   </block>
                 </value>
                 <next>
-                  <block type="setglobal" id="Yf9Tm[L]-x(O(2kt8dr^">
-                    <field name="VARNAME">blueBed</field>
+                  <block type="setglobal" id="4@dZ=xe2Xl*?4A_o{{#D">
+                    <field name="VARNAME">blueDefenders</field>
                     <value name="EXPRESSION">
-                      <block type="absolutelocation" id="R+-)wZxuZvDL}XHIAK~D">
-                        <field name="X">509</field>
-                        <field name="Y">20</field>
-                        <field name="Z">766</field>
+                      <block type="lists_create_with" id=")NVyxw:}2n__sW4jlzZV">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="absolutelocation" id="QJ{]bid_aK|P_*hkg!hC">
+                            <field name="X">512</field>
+                            <field name="Y">20</field>
+                            <field name="Z">746</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="absolutelocation" id="L5.T^6K/S1N!w$/rZh6f">
+                            <field name="X">482</field>
+                            <field name="Y">20</field>
+                            <field name="Z">746</field>
+                          </block>
+                        </value>
                       </block>
                     </value>
                     <next>
-                      <block type="setglobal" id="4@dZ=xe2Xl*?4A_o{{#D">
-                        <field name="VARNAME">blueDefenders</field>
+                      <block type="setglobal" id="SODGH6GofyUorAZZn0rG">
+                        <field name="VARNAME">redBed</field>
                         <value name="EXPRESSION">
-                          <block type="lists_create_with" id=")NVyxw:}2n__sW4jlzZV">
-                            <mutation items="2"></mutation>
-                            <value name="ADD0">
-                              <block type="absolutelocation" id="QJ{]bid_aK|P_*hkg!hC">
-                                <field name="X">512</field>
-                                <field name="Y">20</field>
-                                <field name="Z">746</field>
-                              </block>
-                            </value>
-                            <value name="ADD1">
-                              <block type="absolutelocation" id="L5.T^6K/S1N!w$/rZh6f">
-                                <field name="X">482</field>
-                                <field name="Y">20</field>
-                                <field name="Z">746</field>
-                              </block>
-                            </value>
+                          <block type="absolutelocation" id="L0GO;x17[X^@[xs/Aqx0">
+                            <field name="X">489</field>
+                            <field name="Y">20</field>
+                            <field name="Z">271</field>
                           </block>
                         </value>
                         <next>
-                          <block type="setglobal" id="SODGH6GofyUorAZZn0rG">
-                            <field name="VARNAME">redBed</field>
+                          <block type="setglobal" id="s|8aUb4oQ?^guN%bsmH%">
+                            <field name="VARNAME">redDefenders</field>
                             <value name="EXPRESSION">
-                              <block type="absolutelocation" id="L0GO;x17[X^@[xs/Aqx0">
-                                <field name="X">489</field>
-                                <field name="Y">20</field>
-                                <field name="Z">271</field>
+                              <block type="lists_create_with" id="uIP2@*LWOrc!R}B3S5ST">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="absolutelocation" id="r8,`0_g0nPimKR?.-*l+">
+                                    <field name="X">489</field>
+                                    <field name="Y">20</field>
+                                    <field name="Z">292</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="absolutelocation" id="ry@fDEZgo0tn)zu!:JyN">
+                                    <field name="X">519</field>
+                                    <field name="Y">20</field>
+                                    <field name="Z">292</field>
+                                  </block>
+                                </value>
                               </block>
                             </value>
                             <next>
-                              <block type="setglobal" id="s|8aUb4oQ?^guN%bsmH%">
-                                <field name="VARNAME">redDefenders</field>
+                              <block type="setglobal" id="(1y|Y(MQv`9V#zsI*V-;">
+                                <field name="VARNAME">spawnPoints</field>
                                 <value name="EXPRESSION">
-                                  <block type="lists_create_with" id="uIP2@*LWOrc!R}B3S5ST">
+                                  <block type="lists_create_with" id="P?dev[.pK;epG$B2|,Z{">
                                     <mutation items="2"></mutation>
                                     <value name="ADD0">
-                                      <block type="absolutelocation" id="r8,`0_g0nPimKR?.-*l+">
-                                        <field name="X">489</field>
-                                        <field name="Y">20</field>
-                                        <field name="Z">292</field>
+                                      <block type="globalvariable" id=")::Z`#bm{}UaQHBh_H^|">
+                                        <field name="VARNAME">careerLocation</field>
                                       </block>
                                     </value>
                                     <value name="ADD1">
-                                      <block type="absolutelocation" id="ry@fDEZgo0tn)zu!:JyN">
-                                        <field name="X">519</field>
-                                        <field name="Y">20</field>
-                                        <field name="Z">292</field>
+                                      <block type="globalvariable" id="X?8(!5P~)7YBSPG:zhX0">
+                                        <field name="VARNAME">lobbyLocation</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="setglobal" id="(1y|Y(MQv`9V#zsI*V-;">
-                                    <field name="VARNAME">spawnPoints</field>
+                                  <block type="setglobal" id="lzTmIC_Q*K7Zd;^~TD$3">
+                                    <field name="VARNAME">gameId</field>
                                     <value name="EXPRESSION">
-                                      <block type="lists_create_with" id="P?dev[.pK;epG$B2|,Z{">
-                                        <mutation items="2"></mutation>
-                                        <value name="ADD0">
-                                          <block type="globalvariable" id=")::Z`#bm{}UaQHBh_H^|">
-                                            <field name="VARNAME">careerLocation</field>
-                                          </block>
-                                        </value>
-                                        <value name="ADD1">
-                                          <block type="globalvariable" id="X?8(!5P~)7YBSPG:zhX0">
-                                            <field name="VARNAME">lobbyLocation</field>
-                                          </block>
-                                        </value>
-                                      </block>
+                                      <block type="millis" id="XvHV]~F`:^YD3-q;xj*)"></block>
                                     </value>
                                     <next>
-                                      <block type="setglobal" id="lzTmIC_Q*K7Zd;^~TD$3">
-                                        <field name="VARNAME">gameId</field>
-                                        <value name="EXPRESSION">
-                                          <block type="millis" id="XvHV]~F`:^YD3-q;xj*)"></block>
-                                        </value>
+                                      <block type="delayedexecution" id="tlspEYjQ!}y]#4+,CB-q">
+                                        <field name="TIMEOUT">500</field>
+                                        <statement name="DELAYEDCODE">
+                                          <block type="consolelog" id="#Fw2_7I8I.H%Tq_3ulP!">
+                                            <value name="NAME">
+                                              <block type="text" id="/D=~`d;PqD!K89V@%dZ,">
+                                                <field name="TEXT">do daylightcycle</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="servercommand" id="A;/S]H%CH;VrP/Ti5+M.">
+                                                <field name="COMMAND">gamerule doDaylightCycle false</field>
+                                                <next>
+                                                  <block type="consolelog" id="pGJu4ZPy,R^gx~u:q=3E">
+                                                    <value name="NAME">
+                                                      <block type="text" id="HQB4s@?/*@ZSb3~AAKb(">
+                                                        <field name="TEXT">done with daylight cycle</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
                                         <next>
                                           <block type="functionCall" id="5k2mNp}#f%hGV*;}Zko-">
                                             <field name="FUNCTIONNAME">resetCapturePoints</field>
@@ -243,16 +285,16 @@
                                               <block type="functionCall" id="tk0Q4=4_vB^V($:pvD)J">
                                                 <field name="FUNCTIONNAME">spawnStructures</field>
                                                 <next>
-                                                  <block type="functionCall" id="NJy%.G2fkR7dDX)[n%~b">
-                                                    <field name="FUNCTIONNAME">listeners</field>
+                                                  <block type="setallplayersdata" id="+2cguabbg:yH::U()#Hf">
+                                                    <field name="KEY">gameId</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="$}jt6zHX2]I=RTKlVT=r">
+                                                        <field name="NUM">0</field>
+                                                      </block>
+                                                    </value>
                                                     <next>
-                                                      <block type="setallplayersdata" id="+2cguabbg:yH::U()#Hf">
-                                                        <field name="KEY">gameId</field>
-                                                        <value name="VALUE">
-                                                          <block type="math_number" id="$}jt6zHX2]I=RTKlVT=r">
-                                                            <field name="NUM">0</field>
-                                                          </block>
-                                                        </value>
+                                                      <block type="functionCall" id="NJy%.G2fkR7dDX)[n%~b">
+                                                        <field name="FUNCTIONNAME">listeners</field>
                                                       </block>
                                                     </next>
                                                   </block>
@@ -271,6 +313,64 @@
                         </next>
                       </block>
                     </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="scriptcraftfunction" id="BuMK/60t-7j#2j=o_*Tm" x="-862" y="-3637">
+    <field name="nameOfFunction">getRandomLocation</field>
+    <statement name="FUNCTIONCODE">
+      <block type="setvariablevalue" id="E*|a=`3DOMX^L}S;-Kfe">
+        <field name="VARNAME">x</field>
+        <value name="EXPRESSION">
+          <block type="randomnumber" id="x;Blc-6U3XEGlG*P]zZG">
+            <value name="LOW">
+              <block type="math_number" id="c[ZrTLL@WO~-WR)nz0mz">
+                <field name="NUM">400</field>
+              </block>
+            </value>
+            <value name="HIGH">
+              <block type="math_number" id="Y`$u*k(v}TrmiK%jFqai">
+                <field name="NUM">600</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="setvariablevalue" id="#|i#Gs-zq4?1N5#SilUE">
+            <field name="VARNAME">z</field>
+            <value name="EXPRESSION">
+              <block type="randomnumber" id="Y%~W{WaJQx:~vUN3/3yv">
+                <value name="LOW">
+                  <block type="math_number" id="3*;f:r!n=0VplE}XCj%o">
+                    <field name="NUM">200</field>
+                  </block>
+                </value>
+                <value name="HIGH">
+                  <block type="math_number" id="+(e9:*9TX+w.,^bt]r=.">
+                    <field name="NUM">800</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="!DO@sh9wwcVfnO/v8WfX">
+                <field name="VARNAME">location</field>
+                <value name="EXPRESSION">
+                  <block type="absolutelocation" id="Opob8jiGHe8(5]zte`]5">
+                    <field name="X">x</field>
+                    <field name="Y">20</field>
+                    <field name="Z">z</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="returnVariable" id="dc1PmG6}.*AggZadrw}f">
+                    <field name="RETURNVARIABLE">location</field>
                   </block>
                 </next>
               </block>
@@ -363,85 +463,37 @@
                                       </block>
                                     </value>
                                     <statement name="DO0">
-                                      <block type="setvariablevalue" id="*)3tko8OYH#+iUXZ[xM;">
-                                        <field name="VARNAME">x</field>
+                                      <block type="setvariablevalue" id=":*YAS5@b!A3dvl:tGVL/">
+                                        <field name="VARNAME">location</field>
                                         <value name="EXPRESSION">
-                                          <block type="randomnumber" id="M]{wmsiwj)g(;Jt?B9ys">
-                                            <value name="LOW">
-                                              <block type="math_number" id="ykud#XDRs,ve5ntS*4Z#">
-                                                <field name="NUM">400</field>
-                                              </block>
-                                            </value>
-                                            <value name="HIGH">
-                                              <block type="math_number" id="}]p-F_d_+c[Fq}.z,]wy">
-                                                <field name="NUM">600</field>
-                                              </block>
-                                            </value>
+                                          <block type="functioncallreturn" id="AZCo:r|a]g,7Ds-FWAei">
+                                            <field name="FUNCTIONNAME">getRandomLocation</field>
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="setvariablevalue" id="U,gVzfoJ/?lz}=ajXLZD">
-                                            <field name="VARNAME">z</field>
-                                            <value name="EXPRESSION">
-                                              <block type="randomnumber" id="|^_AD%_tHLMY)fH|*z_2">
-                                                <value name="LOW">
-                                                  <block type="math_number" id="YNG94Tns5Lc1]+#_?MB.">
-                                                    <field name="NUM">200</field>
-                                                  </block>
-                                                </value>
-                                                <value name="HIGH">
-                                                  <block type="math_number" id="$F+;^())V.N#alP8mdfJ">
-                                                    <field name="NUM">800</field>
-                                                  </block>
-                                                </value>
+                                          <block type="namevaluestructure" id="X8TEZ52H_CXxRN(tWXOC">
+                                            <field name="NAME">location</field>
+                                            <value name="VALUE">
+                                              <block type="varname" id="2#b7pjhr3.d!RX3F!nTO">
+                                                <field name="VARNAME">location</field>
+                                              </block>
+                                            </value>
+                                            <value name="STRUCTURE">
+                                              <block type="varname" id="qg4onKD#-o/b73A7kbwM">
+                                                <field name="VARNAME">capturePoint</field>
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="setvariablevalue" id=":*YAS5@b!A3dvl:tGVL/">
-                                                <field name="VARNAME">location</field>
-                                                <value name="EXPRESSION">
-                                                  <block type="absolutelocation" id="g.]#8q|Hy3Omq/5mSPK,">
-                                                    <field name="X">x</field>
-                                                    <field name="Y">20</field>
-                                                    <field name="Z">z</field>
-                                                  </block>
-                                                </value>
+                                              <block type="functionCall" id="=zztf_:sdRg|9sl,=]6V">
+                                                <field name="FUNCTIONNAME">spawnCapturePoint(location, false)</field>
                                                 <next>
-                                                  <block type="namevaluestructure" id="X8TEZ52H_CXxRN(tWXOC">
-                                                    <field name="NAME">location</field>
-                                                    <value name="VALUE">
-                                                      <block type="varname" id="2#b7pjhr3.d!RX3F!nTO">
-                                                        <field name="VARNAME">location</field>
+                                                  <block type="allplayersmessage" id="t=.Y%^@n=?YE5U0;E)a6">
+                                                    <field name="DELAY">TRUE</field>
+                                                    <value name="MESSAGE">
+                                                      <block type="varname" id="o9NoQhU)H4[3=4_n9bYr">
+                                                        <field name="VARNAME">"The random capture point is located at: " + location</field>
                                                       </block>
                                                     </value>
-                                                    <value name="STRUCTURE">
-                                                      <block type="varname" id="qg4onKD#-o/b73A7kbwM">
-                                                        <field name="VARNAME">capturePoint</field>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="functionCall" id="=zztf_:sdRg|9sl,=]6V">
-                                                        <field name="FUNCTIONNAME">spawnCapturePoint(location)</field>
-                                                        <next>
-                                                          <block type="consolelog" id="V|Y3t0FpjaY#@c[2P/(b" disabled="true">
-                                                            <value name="NAME">
-                                                              <block type="varname" id="NI_[De^00@8;{:J;93dB">
-                                                                <field name="VARNAME">"The random capture point is at: " + location</field>
-                                                              </block>
-                                                            </value>
-                                                            <next>
-                                                              <block type="allplayersmessage" id="t=.Y%^@n=?YE5U0;E)a6" disabled="true">
-                                                                <value name="MESSAGE">
-                                                                  <block type="varname" id="o9NoQhU)H4[3=4_n9bYr">
-                                                                    <field name="VARNAME">"The random capture point is located at: " + location</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </next>
-                                                          </block>
-                                                        </next>
-                                                      </block>
-                                                    </next>
                                                   </block>
                                                 </next>
                                               </block>
@@ -465,7 +517,7 @@
                                         </value>
                                         <next>
                                           <block type="functionCall" id="7!O]Vc%rG7Jw6zOuc5kn">
-                                            <field name="FUNCTIONNAME">spawnCapturePoint(location)</field>
+                                            <field name="FUNCTIONNAME">spawnCapturePoint(location, false)</field>
                                           </block>
                                         </next>
                                       </block>
@@ -840,249 +892,259 @@
   <block type="scriptcraftfunction" id="mR,{EJy-D{Fj2ZhTqLH3" x="-4487" y="-3388">
     <field name="nameOfFunction">resetCapturePoints</field>
     <statement name="FUNCTIONCODE">
-      <block type="setglobal" id="}GdB{mc$g]#_C/Ihf?~O">
-        <field name="VARNAME">capturePoints</field>
+      <block type="setvariablevalue" id="f]=6JEx]]7K-*!*V(1~;">
+        <field name="VARNAME">location</field>
         <value name="EXPRESSION">
-          <block type="lists_create_with" id="FuKrp{1M@6p*@fc(W`4f">
-            <mutation items="6"></mutation>
-            <value name="ADD0">
-              <block type="dataexpression" id="t3[exTc9gaO]^XI)$X.M">
-                <statement name="EXPRESSION">
-                  <block type="namevaluevariable" id="w+;tl+eNvt0B{N(o:5!.">
-                    <field name="VARNAME">location</field>
-                    <value name="VALUE">
-                      <block type="locationadd" id="}Au^tkqy@qYov`+uzW2z">
-                        <field name="X">40</field>
-                        <field name="Y">-1</field>
-                        <field name="Z">40</field>
-                        <value name="LOCATION">
-                          <block type="globalvariable" id="M@WXiq+s+5Sm`)GA?l*Q">
-                            <field name="VARNAME">redBed</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="namevaluevariable" id="i%N)3XAXR8.8MRRza;!~">
-                        <field name="VARNAME">owner</field>
+          <block type="functioncallreturn" id="0BO:!Rnq,UVazqX}MUh*">
+            <field name="FUNCTIONNAME">getRandomLocation</field>
+          </block>
+        </value>
+        <next>
+          <block type="setglobal" id="}GdB{mc$g]#_C/Ihf?~O">
+            <field name="VARNAME">capturePoints</field>
+            <value name="EXPRESSION">
+              <block type="lists_create_with" id="FuKrp{1M@6p*@fc(W`4f">
+                <mutation items="6"></mutation>
+                <value name="ADD0">
+                  <block type="dataexpression" id="t3[exTc9gaO]^XI)$X.M">
+                    <statement name="EXPRESSION">
+                      <block type="namevaluevariable" id="w+;tl+eNvt0B{N(o:5!.">
+                        <field name="VARNAME">location</field>
                         <value name="VALUE">
-                          <block type="text" id=":w`!U2SaGgVyMC6ZB0Y/">
-                            <field name="TEXT"></field>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="namevaluevariable" id="8kZnBNObH.{#*81KLSIt">
-                            <field name="VARNAME">flagHeight</field>
-                            <value name="VALUE">
-                              <block type="math_number" id="mII2?09Wb5=.w|9liA0/">
-                                <field name="NUM">0</field>
+                          <block type="locationadd" id="}Au^tkqy@qYov`+uzW2z">
+                            <field name="X">40</field>
+                            <field name="Y">-1</field>
+                            <field name="Z">40</field>
+                            <value name="LOCATION">
+                              <block type="globalvariable" id="M@WXiq+s+5Sm`)GA?l*Q">
+                                <field name="VARNAME">redBed</field>
                               </block>
                             </value>
                           </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </statement>
-              </block>
-            </value>
-            <value name="ADD1">
-              <block type="dataexpression" id="#7+ElGe%/+QrF[FOnXD!">
-                <statement name="EXPRESSION">
-                  <block type="namevaluevariable" id="WJk,[@wwo%3nYy=`[sag">
-                    <field name="VARNAME">location</field>
-                    <value name="VALUE">
-                      <block type="locationadd" id="4u;iEXcp2n0BUnb/WL4)">
-                        <field name="X">20</field>
-                        <field name="Y">-1</field>
-                        <field name="Z">20</field>
-                        <value name="LOCATION">
-                          <block type="globalvariable" id="d~MbK7EefC(j,jqTG6/G">
-                            <field name="VARNAME">redBed</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="namevaluevariable" id="Hu5~dC2{%SE/)gz+:Uf?">
-                        <field name="VARNAME">owner</field>
-                        <value name="VALUE">
-                          <block type="text" id="z]*3}JWg[lX|mgJ,2#ZO">
-                            <field name="TEXT"></field>
-                          </block>
                         </value>
                         <next>
-                          <block type="namevaluevariable" id="~JG*`[W:CFuk%q8E)r0G">
-                            <field name="VARNAME">flagHeight</field>
+                          <block type="namevaluevariable" id="i%N)3XAXR8.8MRRza;!~">
+                            <field name="VARNAME">owner</field>
                             <value name="VALUE">
-                              <block type="math_number" id="zdb!3jJD`g-6P9=aALR)">
-                                <field name="NUM">0</field>
+                              <block type="text" id=":w`!U2SaGgVyMC6ZB0Y/">
+                                <field name="TEXT"></field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="namevaluevariable" id="8kZnBNObH.{#*81KLSIt">
+                                <field name="VARNAME">flagHeight</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="mII2?09Wb5=.w|9liA0/">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="dataexpression" id="#7+ElGe%/+QrF[FOnXD!">
+                    <statement name="EXPRESSION">
+                      <block type="namevaluevariable" id="WJk,[@wwo%3nYy=`[sag">
+                        <field name="VARNAME">location</field>
+                        <value name="VALUE">
+                          <block type="locationadd" id="4u;iEXcp2n0BUnb/WL4)">
+                            <field name="X">20</field>
+                            <field name="Y">-1</field>
+                            <field name="Z">20</field>
+                            <value name="LOCATION">
+                              <block type="globalvariable" id="d~MbK7EefC(j,jqTG6/G">
+                                <field name="VARNAME">redBed</field>
                               </block>
                             </value>
                           </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </statement>
-              </block>
-            </value>
-            <value name="ADD2">
-              <block type="dataexpression" id="7A(j/-{oSRdaG=id9Wzu">
-                <statement name="EXPRESSION">
-                  <block type="namevaluevariable" id="_2Oiziqi@K]{.DIlO:S[">
-                    <field name="VARNAME">location</field>
-                    <value name="VALUE">
-                      <block type="locationadd" id="-6ocKub!zziwaR0MYkV[">
-                        <field name="X">40</field>
-                        <field name="Y">-1</field>
-                        <field name="Z">40</field>
-                        <value name="LOCATION">
-                          <block type="globalvariable" id="*%!`kb=FN.a4X+h{V92;">
-                            <field name="VARNAME">blueBed</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="namevaluevariable" id="]k.0!qYrRSQ~^k2G#yCN">
-                        <field name="VARNAME">owner</field>
-                        <value name="VALUE">
-                          <block type="text" id="e16y-5]mi{p5KmmGbUn^">
-                            <field name="TEXT"></field>
-                          </block>
                         </value>
                         <next>
-                          <block type="namevaluevariable" id="N?OcBmK;N++*/gBW;8?-">
-                            <field name="VARNAME">flagHeight</field>
+                          <block type="namevaluevariable" id="Hu5~dC2{%SE/)gz+:Uf?">
+                            <field name="VARNAME">owner</field>
                             <value name="VALUE">
-                              <block type="math_number" id="0A~vA??l9RscDpiqgX/]">
-                                <field name="NUM">0</field>
+                              <block type="text" id="z]*3}JWg[lX|mgJ,2#ZO">
+                                <field name="TEXT"></field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="namevaluevariable" id="~JG*`[W:CFuk%q8E)r0G">
+                                <field name="VARNAME">flagHeight</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="zdb!3jJD`g-6P9=aALR)">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </value>
+                <value name="ADD2">
+                  <block type="dataexpression" id="7A(j/-{oSRdaG=id9Wzu">
+                    <statement name="EXPRESSION">
+                      <block type="namevaluevariable" id="_2Oiziqi@K]{.DIlO:S[">
+                        <field name="VARNAME">location</field>
+                        <value name="VALUE">
+                          <block type="locationadd" id="-6ocKub!zziwaR0MYkV[">
+                            <field name="X">40</field>
+                            <field name="Y">-1</field>
+                            <field name="Z">40</field>
+                            <value name="LOCATION">
+                              <block type="globalvariable" id="*%!`kb=FN.a4X+h{V92;">
+                                <field name="VARNAME">blueBed</field>
                               </block>
                             </value>
                           </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </statement>
-              </block>
-            </value>
-            <value name="ADD3">
-              <block type="dataexpression" id="}.pZJ6t#)|^TydR%k14q">
-                <statement name="EXPRESSION">
-                  <block type="namevaluevariable" id="pzIaN*bwj6Js`1`,U1JM">
-                    <field name="VARNAME">location</field>
-                    <value name="VALUE">
-                      <block type="locationadd" id="nvW[fWQ~4Y*RP?zxdDk#">
-                        <field name="X">20</field>
-                        <field name="Y">-1</field>
-                        <field name="Z">20</field>
-                        <value name="LOCATION">
-                          <block type="globalvariable" id="}qL+B-[?3Ua6Tnv.PW?x">
-                            <field name="VARNAME">blueBed</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="namevaluevariable" id="h^Mk#2eI7FK*k5/_~g1y">
-                        <field name="VARNAME">owner</field>
-                        <value name="VALUE">
-                          <block type="text" id="SA,ah2NB{n%[x;2$RW|^">
-                            <field name="TEXT"></field>
-                          </block>
                         </value>
                         <next>
-                          <block type="namevaluevariable" id="Se$Z-[tU*2c1OAAi]+`_">
-                            <field name="VARNAME">flagHeight</field>
+                          <block type="namevaluevariable" id="]k.0!qYrRSQ~^k2G#yCN">
+                            <field name="VARNAME">owner</field>
                             <value name="VALUE">
-                              <block type="math_number" id="PIY6I}M]ntOjY6n:En#|">
-                                <field name="NUM">0</field>
+                              <block type="text" id="e16y-5]mi{p5KmmGbUn^">
+                                <field name="TEXT"></field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="namevaluevariable" id="N?OcBmK;N++*/gBW;8?-">
+                                <field name="VARNAME">flagHeight</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="0A~vA??l9RscDpiqgX/]">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </value>
+                <value name="ADD3">
+                  <block type="dataexpression" id="}.pZJ6t#)|^TydR%k14q">
+                    <statement name="EXPRESSION">
+                      <block type="namevaluevariable" id="pzIaN*bwj6Js`1`,U1JM">
+                        <field name="VARNAME">location</field>
+                        <value name="VALUE">
+                          <block type="locationadd" id="nvW[fWQ~4Y*RP?zxdDk#">
+                            <field name="X">20</field>
+                            <field name="Y">-1</field>
+                            <field name="Z">20</field>
+                            <value name="LOCATION">
+                              <block type="globalvariable" id="}qL+B-[?3Ua6Tnv.PW?x">
+                                <field name="VARNAME">blueBed</field>
                               </block>
                             </value>
                           </block>
+                        </value>
+                        <next>
+                          <block type="namevaluevariable" id="h^Mk#2eI7FK*k5/_~g1y">
+                            <field name="VARNAME">owner</field>
+                            <value name="VALUE">
+                              <block type="text" id="SA,ah2NB{n%[x;2$RW|^">
+                                <field name="TEXT"></field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="namevaluevariable" id="Se$Z-[tU*2c1OAAi]+`_">
+                                <field name="VARNAME">flagHeight</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="PIY6I}M]ntOjY6n:En#|">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
                         </next>
                       </block>
-                    </next>
+                    </statement>
                   </block>
-                </statement>
-              </block>
-            </value>
-            <value name="ADD4">
-              <block type="dataexpression" id="WEUJOIVBK~):6qnp@,@D">
-                <statement name="EXPRESSION">
-                  <block type="namevaluevariable" id="~^Tp^T,1Az]6V/IK3Miv">
-                    <field name="VARNAME">location</field>
-                    <value name="VALUE">
-                      <block type="absolutelocation" id="y|sY8^8{pR+@D%5ab_O0">
-                        <field name="X">501</field>
-                        <field name="Y">59</field>
-                        <field name="Z">497</field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="namevaluevariable" id="HH;;G*5ynyM4WinT08_F">
-                        <field name="VARNAME">owner</field>
+                </value>
+                <value name="ADD4">
+                  <block type="dataexpression" id="WEUJOIVBK~):6qnp@,@D">
+                    <statement name="EXPRESSION">
+                      <block type="namevaluevariable" id="~^Tp^T,1Az]6V/IK3Miv">
+                        <field name="VARNAME">location</field>
                         <value name="VALUE">
-                          <block type="text" id="!XZeI$6%vn94R@1K3{A5">
-                            <field name="TEXT"></field>
+                          <block type="absolutelocation" id="y|sY8^8{pR+@D%5ab_O0">
+                            <field name="X">501</field>
+                            <field name="Y">59</field>
+                            <field name="Z">497</field>
                           </block>
                         </value>
                         <next>
-                          <block type="namevaluevariable" id="x%wcExWtdlmX.J{t#H5|">
-                            <field name="VARNAME">flagHeight</field>
+                          <block type="namevaluevariable" id="HH;;G*5ynyM4WinT08_F">
+                            <field name="VARNAME">owner</field>
                             <value name="VALUE">
-                              <block type="math_number" id="7g8w,]e{}s.b(Q^ETE_=">
-                                <field name="NUM">0</field>
+                              <block type="text" id="!XZeI$6%vn94R@1K3{A5">
+                                <field name="TEXT"></field>
                               </block>
                             </value>
+                            <next>
+                              <block type="namevaluevariable" id="x%wcExWtdlmX.J{t#H5|">
+                                <field name="VARNAME">flagHeight</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="7g8w,]e{}s.b(Q^ETE_=">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
                           </block>
                         </next>
                       </block>
-                    </next>
+                    </statement>
                   </block>
-                </statement>
-              </block>
-            </value>
-            <value name="ADD5">
-              <block type="dataexpression" id="qqcm.p+MZp;c4oj1u8t@">
-                <statement name="EXPRESSION">
-                  <block type="namevaluevariable" id="3SM!J2uVRn;|rC6/T4_4">
-                    <field name="VARNAME">location</field>
-                    <value name="VALUE">
-                      <block type="absolutelocation" id="v.?-5jb7t87r:K?t4__n">
-                        <field name="X">0</field>
-                        <field name="Y">0</field>
-                        <field name="Z">0</field>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="namevaluevariable" id=".d;M$~S?9Jw-gkoxw+}z">
-                        <field name="VARNAME">owner</field>
+                </value>
+                <value name="ADD5">
+                  <block type="dataexpression" id="qqcm.p+MZp;c4oj1u8t@">
+                    <statement name="EXPRESSION">
+                      <block type="namevaluevariable" id="3SM!J2uVRn;|rC6/T4_4">
+                        <field name="VARNAME">location</field>
                         <value name="VALUE">
-                          <block type="text" id=".A:/ECUYKy8:uY.1%]1(">
-                            <field name="TEXT"></field>
+                          <block type="absolutelocation" id="v.?-5jb7t87r:K?t4__n">
+                            <field name="X">location.x</field>
+                            <field name="Y">location.y</field>
+                            <field name="Z">location.z</field>
                           </block>
                         </value>
                         <next>
-                          <block type="namevaluevariable" id=";H?^FRt?otC?]5hNRnx;">
-                            <field name="VARNAME">flagHeight</field>
+                          <block type="namevaluevariable" id=".d;M$~S?9Jw-gkoxw+}z">
+                            <field name="VARNAME">owner</field>
                             <value name="VALUE">
-                              <block type="math_number" id="2#_t++L,Ycp%lz|7Tq`]">
-                                <field name="NUM">0</field>
+                              <block type="text" id=".A:/ECUYKy8:uY.1%]1(">
+                                <field name="TEXT"></field>
                               </block>
                             </value>
+                            <next>
+                              <block type="namevaluevariable" id=";H?^FRt?otC?]5hNRnx;">
+                                <field name="VARNAME">flagHeight</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="2#_t++L,Ycp%lz|7Tq`]">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
                           </block>
                         </next>
                       </block>
-                    </next>
+                    </statement>
                   </block>
-                </statement>
+                </value>
               </block>
             </value>
           </block>
-        </value>
+        </next>
       </block>
     </statement>
   </block>
@@ -1324,7 +1386,7 @@
                             </value>
                             <next>
                               <block type="controls_if" id="eZZ|XrXt1gXt{Ez[4St=">
-                                <mutation elseif="2" else="1"></mutation>
+                                <mutation elseif="3" else="1"></mutation>
                                 <comment pinned="false" h="80" w="160">Give the player a damaged Elytra</comment>
                                 <value name="IF0">
                                   <block type="logic_compare" id=")V:asQPq}I5tcGbRT%EQ">
@@ -1500,6 +1562,87 @@
                                     </next>
                                   </block>
                                 </statement>
+                                <value name="IF3">
+                                  <block type="logic_compare" id="sf^1P1bo9)G5Yq{l7(Hb">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="varname" id="wT/g;m$V%u{+@SbSpOVL">
+                                        <field name="VARNAME">cmd</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="text" id="u*ZR=zt%%W-C:;`q^W~2">
+                                        <field name="TEXT">/r</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO3">
+                                  <block type="setvariablevalue" id="_!5:(~I*PSo[tG|vV:8)">
+                                    <field name="VARNAME">index</field>
+                                    <value name="EXPRESSION">
+                                      <block type="incrementdecrement" id="D3$6%}=Fg90)xQ#nhKNG">
+                                        <field name="INCREMENTDECREMENT">DECREMENT</field>
+                                        <value name="VARIABLE">
+                                          <block type="lists_length" id=".Wn~Og_Boz^fKh+m7(@7">
+                                            <value name="VALUE">
+                                              <block type="globalvariable" id="Il6fThT1Y})|C{/VdPL|">
+                                                <field name="VARNAME">capturePoints</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="consolelog" id=")6C[2I(=;oSns*RQDX1B">
+                                        <value name="NAME">
+                                          <block type="varname" id="Bbp@K(/CeSI|VG/vm7Kr">
+                                            <field name="VARNAME">"index: " + index</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="setvariable" id="L)9=cMdH`KL{LTjl[g0@">
+                                            <field name="VARNAME">location</field>
+                                            <field name="EXPRESSION">exports.capturePoints[index].location</field>
+                                            <next>
+                                              <block type="consolelog" id="c+#Zn|9HohJ@ZFZ,#`y?">
+                                                <value name="NAME">
+                                                  <block type="varname" id="0$PMLF}A6$P|?,-/(1Dv">
+                                                    <field name="VARNAME">"capturePoints: " + exports.capturePoints</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="setvariablevalue" id="FWKWW*OW``bg-YkR|S_j">
+                                                    <field name="VARNAME">textLocation</field>
+                                                    <value name="EXPRESSION">
+                                                      <block type="varname" id="U0qAT0J+aI}s(avk9=g;">
+                                                        <field name="VARNAME">"[" + location.x + "," + location.y + "," + location.z + "]"</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="sendmessage" id="}iRw9_]*aVF5f/0-:VXB">
+                                                        <field name="MESSAGE">"Random capture point is located at: " + textLocation</field>
+                                                        <value name="PLAYER">
+                                                          <block type="varname" id="B_|=/|jb#oN-idyUVL{W">
+                                                            <field name="VARNAME">player</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="eventcancel" id="W4(uwZ15Obom]%H?:Y^9"></block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
                                 <statement name="ELSE">
                                   <block type="consolelog" id="wUeHzRnSQnjgL{yW+P^4">
                                     <value name="NAME">
@@ -1524,7 +1667,158 @@
       </block>
     </statement>
   </block>
-  <block type="scriptcraftfunction" id="hPHba8=H#s1V~#kn)(J0" x="-1787" y="-2463">
+  <block type="scriptcraftfunction" id="=t`h3cQ[W!zh7riv]*3A" x="-2612" y="-2287">
+    <field name="nameOfFunction">listeners</field>
+    <statement name="FUNCTIONCODE">
+      <block type="consolelog" id="~a]9(MicbYk:X6LG^B_.">
+        <value name="NAME">
+          <block type="varname" id="XK41zk{XWuox`)G)Wk-s">
+            <field name="VARNAME">"listeners"</field>
+          </block>
+        </value>
+        <next>
+          <block type="eventlistener" id=",B9)s|:Qrzh1+P=tJJk^">
+            <field name="LISTENERTYPE">playerMove</field>
+            <statement name="LISTENERCODE">
+              <block type="functionCall" id="M-rddq;B(rdbz[b,pHpi">
+                <field name="FUNCTIONNAME">PlayerMoved(event)</field>
+              </block>
+            </statement>
+            <next>
+              <block type="eventlistener" id="hl^(b|WoGE_6z7V%/L0j">
+                <field name="LISTENERTYPE">playerRespawn</field>
+                <comment pinned="false" h="80" w="160">You'll turn into a spectator once your bed has been destroyed and you die.</comment>
+                <statement name="LISTENERCODE">
+                  <block type="functionCall" id="//%:`JA*Q9}7P.XqX!U6">
+                    <field name="FUNCTIONNAME">PlayerRespawn(event)</field>
+                  </block>
+                </statement>
+                <next>
+                  <block type="eventlistener" id="/neA~n=lJ-)MGT0AJJKQ">
+                    <field name="LISTENERTYPE">playerInteract</field>
+                    <comment pinned="false" h="80" w="160">Every time the user clicks</comment>
+                    <statement name="LISTENERCODE">
+                      <block type="functionCall" id="8+.A4ABO4eQuC3t*!dwt">
+                        <field name="FUNCTIONNAME">PlayerClick(event)</field>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="eventlistener" id="Lfy]:I2#;:|WSO`,66%-">
+                        <field name="LISTENERTYPE">projectileHit</field>
+                        <statement name="LISTENERCODE">
+                          <block type="functionCall" id="rKjF!1cRE$mCS`bus$fJ">
+                            <field name="FUNCTIONNAME">projectileHit(event)</field>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="eventlistener" id="b45`[PtS9K3bddG5,5*F">
+                            <field name="LISTENERTYPE">playerJoin</field>
+                            <comment pinned="false" h="80" w="160">Set gameId so we know that null is not associated with any player</comment>
+                            <statement name="LISTENERCODE">
+                              <block type="setplayerdata" id="%$f_S3,5(ax]iN}vASOT">
+                                <field name="KEY">gameId</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="4DMw,W=OkWui#2?O)!z9">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <value name="PLAYER">
+                                  <block type="eventinfo" id="q$!gXO[,|7Dmtz!U`d7F">
+                                    <field name="INFORMATION">getPlayer</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="eventlistener" id="vmwJW`2{r4*E6Gcl,ItJ">
+                                <field name="LISTENERTYPE">blockBreak</field>
+                                <statement name="LISTENERCODE">
+                                  <block type="eventcancel" id="ZgPv[~|M-L:KDIN(Mp(]"></block>
+                                </statement>
+                                <next>
+                                  <block type="eventlistener" id="`s@5{8EYXewu;Z-A4W3_">
+                                    <field name="LISTENERTYPE">playerItemConsume</field>
+                                    <statement name="LISTENERCODE">
+                                      <block type="setvariablevalue" id="?Pq(k*DGZAS3i.hELI{u">
+                                        <field name="VARNAME">player</field>
+                                        <value name="EXPRESSION">
+                                          <block type="eventinfo" id="P5~Ax5%nhF%=1.R@9gt6">
+                                            <field name="INFORMATION">getPlayer</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="setvariablevalue" id="jx+5NzDqQNr:y-y,Qz^%">
+                                            <field name="VARNAME">item</field>
+                                            <value name="EXPRESSION">
+                                              <block type="eventinfo" id="dD#aIV)iv/NAXf)e}:=u">
+                                                <field name="INFORMATION">getItem</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="controls_if" id="},dTqIn!E;fwzHV@d|G~">
+                                                <value name="IF0">
+                                                  <block type="logic_compare" id="4Q-[knx`n`lQspr*$Lbq">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A">
+                                                      <block type="materialdata" id="XtGH@`oQ$6:hbd((1qOw">
+                                                        <value name="STACK">
+                                                          <block type="varname" id="XV}e@N,#MbAR#lm6Hv=G">
+                                                            <field name="VARNAME">item</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="materialtype" id="js#vX+Z[xqw!{u*#vOU{">
+                                                        <field name="MATERIAL">COOKIE</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="sendmessage" id="5jvU#}0@FNDwcMTk`xsb">
+                                                    <field name="MESSAGE">"You consumed an cookie"</field>
+                                                    <value name="PLAYER">
+                                                      <block type="varname" id="}C(A)k|f:IM;.b/+*Vvu">
+                                                        <field name="VARNAME">player</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="eventlistener" id="Uq)h*G]YC5D`s16o{_-W">
+                                        <field name="LISTENERTYPE">playerCommandPreprocess</field>
+                                        <statement name="LISTENERCODE">
+                                          <block type="functionCall" id="SlICnw=@Ya3LO]4RuUmj">
+                                            <field name="FUNCTIONNAME">playerCommand(event)</field>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="scriptcraftfunction" id="hPHba8=H#s1V~#kn)(J0" x="-1588" y="-2187">
     <field name="nameOfFunction">PlayerMoved(event)</field>
     <statement name="FUNCTIONCODE">
       <block type="setvariablevalue" id="qdx1p_!)KnK4!kk7dzGn">
@@ -1563,7 +1857,7 @@
                 <next>
                   <block type="controls_if" id="Y(@~(pZ2=ZyIzfTc:vV7">
                     <mutation else="1"></mutation>
-                    <comment pinned="false" h="80" w="160">Join server sets gameId to 0 so this should never occur.  Code is here for debugging only.</comment>
+                    <comment pinned="false" h="80" w="160">Join server sets gameId to 0 so this should never occur, since player's gameId is set to zero when they join the server.</comment>
                     <value name="IF0">
                       <block type="logic_compare" id="pM3i~S!p3Tde80VUr,oJ">
                         <field name="OP">EQ</field>
@@ -1583,17 +1877,32 @@
                       <block type="consolelog" id="jVNQAHCds`^V:}K_^rzq">
                         <value name="NAME">
                           <block type="varname" id="!W$e7S526mv=4p7wr}go">
-                            <field name="VARNAME">"This should not happen for a player: " + player.name</field>
+                            <field name="VARNAME">"This is an unknown glitch...."</field>
                           </block>
                         </value>
                         <next>
-                          <block type="sendmessage" id="I*sTp@FWs^BpGX_o$]vu">
-                            <field name="MESSAGE">"Server is having trouble...please disconnect and reconnect...Thanks!"</field>
+                          <block type="setplayerdata" id="T.;B#`bOb*;X6_XX|[*.">
+                            <field name="KEY">gameId</field>
+                            <value name="VALUE">
+                              <block type="globalvariable" id="8-am9JXS3yF`3R5$.#ol">
+                                <field name="VARNAME">gameId</field>
+                              </block>
+                            </value>
                             <value name="PLAYER">
-                              <block type="varname" id="5ko]|KzHNW0}KtY/1@yh">
+                              <block type="varname" id="IMgkgXDcZ,D~50/(X.)U">
                                 <field name="VARNAME">player</field>
                               </block>
                             </value>
+                            <next>
+                              <block type="sendmessage" id="#V4ev|zUFYp9(/FHPxJ|">
+                                <field name="MESSAGE">"Random glitch noticed (Tell Paul)"</field>
+                                <value name="PLAYER">
+                                  <block type="varname" id="@1?v.P84nI;c4.f|BfT*">
+                                    <field name="VARNAME">player</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
                           </block>
                         </next>
                       </block>
@@ -1836,158 +2145,7 @@
       </block>
     </statement>
   </block>
-  <block type="scriptcraftfunction" id="=t`h3cQ[W!zh7riv]*3A" x="-2612" y="-2287">
-    <field name="nameOfFunction">listeners</field>
-    <statement name="FUNCTIONCODE">
-      <block type="consolelog" id="~a]9(MicbYk:X6LG^B_.">
-        <value name="NAME">
-          <block type="varname" id="XK41zk{XWuox`)G)Wk-s">
-            <field name="VARNAME">"listeners"</field>
-          </block>
-        </value>
-        <next>
-          <block type="eventlistener" id=",B9)s|:Qrzh1+P=tJJk^">
-            <field name="LISTENERTYPE">playerMove</field>
-            <statement name="LISTENERCODE">
-              <block type="functionCall" id="M-rddq;B(rdbz[b,pHpi">
-                <field name="FUNCTIONNAME">PlayerMoved(event)</field>
-              </block>
-            </statement>
-            <next>
-              <block type="eventlistener" id="hl^(b|WoGE_6z7V%/L0j">
-                <field name="LISTENERTYPE">playerRespawn</field>
-                <comment pinned="false" h="80" w="160">You'll turn into a spectator once your bed has been destroyed or when you die.</comment>
-                <statement name="LISTENERCODE">
-                  <block type="functionCall" id="//%:`JA*Q9}7P.XqX!U6">
-                    <field name="FUNCTIONNAME">PlayerRespawn(event)</field>
-                  </block>
-                </statement>
-                <next>
-                  <block type="eventlistener" id="/neA~n=lJ-)MGT0AJJKQ">
-                    <field name="LISTENERTYPE">playerInteract</field>
-                    <comment pinned="false" h="80" w="160">Every time the user clicks, something happens... or something</comment>
-                    <statement name="LISTENERCODE">
-                      <block type="functionCall" id="8+.A4ABO4eQuC3t*!dwt">
-                        <field name="FUNCTIONNAME">PlayerClick(event)</field>
-                      </block>
-                    </statement>
-                    <next>
-                      <block type="eventlistener" id="Lfy]:I2#;:|WSO`,66%-">
-                        <field name="LISTENERTYPE">projectileHit</field>
-                        <statement name="LISTENERCODE">
-                          <block type="functionCall" id="rKjF!1cRE$mCS`bus$fJ">
-                            <field name="FUNCTIONNAME">projectileHit(event)</field>
-                          </block>
-                        </statement>
-                        <next>
-                          <block type="eventlistener" id="b45`[PtS9K3bddG5,5*F">
-                            <field name="LISTENERTYPE">playerJoin</field>
-                            <comment pinned="false" h="80" w="160">Set gameId so we know that null is not associated with any player</comment>
-                            <statement name="LISTENERCODE">
-                              <block type="setplayerdata" id="%$f_S3,5(ax]iN}vASOT">
-                                <field name="KEY">gameId</field>
-                                <value name="VALUE">
-                                  <block type="math_number" id="4DMw,W=OkWui#2?O)!z9">
-                                    <field name="NUM">0</field>
-                                  </block>
-                                </value>
-                                <value name="PLAYER">
-                                  <block type="eventinfo" id="q$!gXO[,|7Dmtz!U`d7F">
-                                    <field name="INFORMATION">getPlayer</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </statement>
-                            <next>
-                              <block type="eventlistener" id="vmwJW`2{r4*E6Gcl,ItJ">
-                                <field name="LISTENERTYPE">blockBreak</field>
-                                <statement name="LISTENERCODE">
-                                  <block type="eventcancel" id="ZgPv[~|M-L:KDIN(Mp(]"></block>
-                                </statement>
-                                <next>
-                                  <block type="eventlistener" id="`s@5{8EYXewu;Z-A4W3_">
-                                    <field name="LISTENERTYPE">playerItemConsume</field>
-                                    <statement name="LISTENERCODE">
-                                      <block type="setvariablevalue" id="?Pq(k*DGZAS3i.hELI{u">
-                                        <field name="VARNAME">player</field>
-                                        <value name="EXPRESSION">
-                                          <block type="eventinfo" id="P5~Ax5%nhF%=1.R@9gt6">
-                                            <field name="INFORMATION">getPlayer</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="setvariablevalue" id="jx+5NzDqQNr:y-y,Qz^%">
-                                            <field name="VARNAME">item</field>
-                                            <value name="EXPRESSION">
-                                              <block type="eventinfo" id="dD#aIV)iv/NAXf)e}:=u">
-                                                <field name="INFORMATION">getItem</field>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="controls_if" id="},dTqIn!E;fwzHV@d|G~">
-                                                <value name="IF0">
-                                                  <block type="logic_compare" id="4Q-[knx`n`lQspr*$Lbq">
-                                                    <field name="OP">EQ</field>
-                                                    <value name="A">
-                                                      <block type="materialdata" id="XtGH@`oQ$6:hbd((1qOw">
-                                                        <value name="STACK">
-                                                          <block type="varname" id="XV}e@N,#MbAR#lm6Hv=G">
-                                                            <field name="VARNAME">item</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <value name="B">
-                                                      <block type="materialtype" id="js#vX+Z[xqw!{u*#vOU{">
-                                                        <field name="MATERIAL">COOKIE</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <statement name="DO0">
-                                                  <block type="sendmessage" id="5jvU#}0@FNDwcMTk`xsb">
-                                                    <field name="MESSAGE">"You consumed an cookie"</field>
-                                                    <value name="PLAYER">
-                                                      <block type="varname" id="}C(A)k|f:IM;.b/+*Vvu">
-                                                        <field name="VARNAME">player</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </statement>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
-                                    <next>
-                                      <block type="eventlistener" id="Uq)h*G]YC5D`s16o{_-W">
-                                        <field name="LISTENERTYPE">playerCommandPreprocess</field>
-                                        <statement name="LISTENERCODE">
-                                          <block type="functionCall" id="SlICnw=@Ya3LO]4RuUmj">
-                                            <field name="FUNCTIONNAME">playerCommand(event)</field>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="scriptcraftfunction" id="C(//S??;x+cUbh/wTBP3" x="-962" y="-2187">
+  <block type="scriptcraftfunction" id="C(//S??;x+cUbh/wTBP3" x="-712" y="-2137">
     <field name="nameOfFunction">autoDefenderMove(team,player)</field>
     <statement name="FUNCTIONCODE">
       <block type="controls_if" id="~Az11vuBipD.3VVLb~dK">
@@ -2279,476 +2437,6 @@
       </block>
     </statement>
   </block>
-  <block type="scriptcraftfunction" id="*y7{i*~yz50zQa@CZPMH" x="-1938" y="-1588">
-    <field name="nameOfFunction">capturePointMove(player,team)</field>
-    <statement name="FUNCTIONCODE">
-      <block type="foreachloop" id="?#hMZ,~-9r94k(W3:DX{">
-        <field name="ELEMENT">capturePoint</field>
-        <value name="LIST">
-          <block type="globalvariable" id="fQfr9e#t}BOA~nzr}(~O">
-            <field name="VARNAME">capturePoints</field>
-          </block>
-        </value>
-        <statement name="FORCODE">
-          <block type="setvariablevalue" id="y{hyG-RBao__eKE.Pwvt">
-            <field name="VARNAME">location</field>
-            <value name="EXPRESSION">
-              <block type="getnamestructure" id="Xig;h%WtF8/o~JNCwYK,">
-                <field name="ELEMENT">location</field>
-                <value name="STRUCTURE">
-                  <block type="varname" id="~aEH0a42BHl~42=-J,=O">
-                    <field name="VARNAME">capturePoint</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <next>
-              <block type="setvariablevalue" id="_L;iya!zDf`neBoY`PZ{">
-                <field name="VARNAME">distance</field>
-                <value name="EXPRESSION">
-                  <block type="distancebetweenlocations" id="pfFb18|Khi8S]3h~{(r)">
-                    <value name="LOCATION1">
-                      <block type="locationof" id="i+zPDlGYD4y@rf=3V2I7">
-                        <value name="OBJECT">
-                          <block type="varname" id="f,bzg=PB@25P=X{r3|kT">
-                            <field name="VARNAME">player</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <value name="LOCATION2">
-                      <block type="varname" id="YLforj0k?%XC%cKv+S;v">
-                        <field name="VARNAME">location</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <next>
-                  <block type="controls_if" id="wYSK%?^mB#HsjZvpJ=3i">
-                    <value name="IF0">
-                      <block type="logic_compare" id="M0FUG|.rpl+h{]N+jyX(">
-                        <field name="OP">LT</field>
-                        <value name="A">
-                          <block type="varname" id="K`lZ0Pk2[L)yvw3aNw_x">
-                            <field name="VARNAME">distance</field>
-                          </block>
-                        </value>
-                        <value name="B">
-                          <block type="math_number" id="KdFr!]iZgcBh%{;/T$X*">
-                            <field name="NUM">20</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <statement name="DO0">
-                      <block type="setvariablevalue" id="?/g:PeZHi+_KtpRkU.=}">
-                        <field name="VARNAME">flagHeight</field>
-                        <value name="EXPRESSION">
-                          <block type="getnamestructure" id="h[e`jL~3$agF:b(y?0xQ">
-                            <field name="ELEMENT">flagHeight</field>
-                            <value name="STRUCTURE">
-                              <block type="varname" id="K[cVy+^4#sxgeF+T}%X.">
-                                <field name="VARNAME">capturePoint</field>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="controls_if" id="-P]@*UYyIG~NeWY)ow%r">
-                            <value name="IF0">
-                              <block type="logic_compare" id="mY]FgenUqR{#@]6Oa;o^">
-                                <field name="OP">EQ</field>
-                                <value name="A">
-                                  <block type="varname" id="S*tYLZqZ-%Ud3MjDHmd2">
-                                    <field name="VARNAME">flagHeight</field>
-                                  </block>
-                                </value>
-                                <value name="B">
-                                  <block type="math_number" id=",sEQ2+,w.6M/wX0GfA}5">
-                                    <field name="NUM">0</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <statement name="DO0">
-                              <block type="namevaluestructure" id="6{=3DF;@cNg)U:E+I41P">
-                                <field name="NAME">owner</field>
-                                <value name="VALUE">
-                                  <block type="varname" id="tJ[/g%0-P):,SRpRQY+9">
-                                    <field name="VARNAME">team</field>
-                                  </block>
-                                </value>
-                                <value name="STRUCTURE">
-                                  <block type="varname" id="/35=1;Y{kBusjWct7-Le">
-                                    <field name="VARNAME">capturePoint</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </statement>
-                            <next>
-                              <block type="setvariablevalue" id="Se,Rba9G4e!4yw5fmnN}">
-                                <field name="VARNAME">owner</field>
-                                <value name="EXPRESSION">
-                                  <block type="getnamestructure" id="$/u3^Jq]bb-Hwg!TNeV8">
-                                    <field name="ELEMENT">owner</field>
-                                    <value name="STRUCTURE">
-                                      <block type="varname" id=";SI.mO7[j6/jN,5%MfSJ">
-                                        <field name="VARNAME">capturePoint</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                                <next>
-                                  <block type="controls_if" id="SNva3u!z{6@4qg;T]I5c">
-                                    <mutation else="1"></mutation>
-                                    <value name="IF0">
-                                      <block type="logic_compare" id="^aH_N]^%].iUStj5l0{i">
-                                        <field name="OP">EQ</field>
-                                        <value name="A">
-                                          <block type="varname" id="lZu:A`Gc}g^)0{}XobrP">
-                                            <field name="VARNAME">owner</field>
-                                          </block>
-                                        </value>
-                                        <value name="B">
-                                          <block type="varname" id="PHy0[s+.I0-*0VLktH5K">
-                                            <field name="VARNAME">team</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <statement name="DO0">
-                                      <block type="controls_if" id="L(~ni/z1GoY(w8`ru2iT">
-                                        <value name="IF0">
-                                          <block type="logic_compare" id="@?Egfx$2v#iecw*$h6VD">
-                                            <field name="OP">LT</field>
-                                            <value name="A">
-                                              <block type="varname" id="sFM=OyCoP020f@4(*n~g">
-                                                <field name="VARNAME">flagHeight</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="math_number" id="K?Wu;90=RlejuQ1v|?sg">
-                                                <field name="NUM">7</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="DO0">
-                                          <block type="setvariablevalue" id="--0i5ap8/Dwx9+TTH#?P">
-                                            <field name="VARNAME">flagHeight</field>
-                                            <value name="EXPRESSION">
-                                              <block type="incrementdecrement" id="du8ice#%j{lxQ1@npLcR">
-                                                <field name="INCREMENTDECREMENT">INCREMENT</field>
-                                                <value name="VARIABLE">
-                                                  <block type="varname" id="AZ9$aQ,*8R8jFf:9k~+Q">
-                                                    <field name="VARNAME">flagHeight</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="namevaluestructure" id=",R{A]tDc[t}$M|2+1}|l">
-                                                <field name="NAME">flagHeight</field>
-                                                <value name="VALUE">
-                                                  <block type="varname" id="I[0d`T))Nn-pEc:C)7#q">
-                                                    <field name="VARNAME">flagHeight</field>
-                                                  </block>
-                                                </value>
-                                                <value name="STRUCTURE">
-                                                  <block type="varname" id="@tm,XjCI6!bUyrvz@]n7">
-                                                    <field name="VARNAME">capturePoint</field>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="controls_if" id="a/R(:ISVRjOX7vmZ).Kf">
-                                                    <value name="IF0">
-                                                      <block type="logic_compare" id="MPY/-!*!23}Aipx_jsz$">
-                                                        <field name="OP">EQ</field>
-                                                        <value name="A">
-                                                          <block type="varname" id="W,%NW/egBiocInIf$3WK">
-                                                            <field name="VARNAME">flagHeight</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="B">
-                                                          <block type="math_number" id="zNnNAgN)a%qdpFsLbgA7">
-                                                            <field name="NUM">7</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <statement name="DO0">
-                                                      <block type="sendmessage" id="5CjXU4k_A/FdcN,VJA{L">
-                                                        <field name="MESSAGE">"You have claimed the flag"</field>
-                                                        <value name="PLAYER">
-                                                          <block type="varname" id="zz}Yw*%2^|]Nb#R$]XzH">
-                                                            <field name="VARNAME">player</field>
-                                                          </block>
-                                                        </value>
-                                                        <next>
-                                                          <block type="allplayersmessage" id="eTC,F;]:Gq5sFE!n2zY.">
-                                                            <value name="MESSAGE">
-                                                              <block type="varname" id="]xTRW2TCt|9aUqq/(lrR">
-                                                                <field name="VARNAME">"Capture point has been captured by " + team + " team"</field>
-                                                              </block>
-                                                            </value>
-                                                            <next>
-                                                              <block type="controls_if" id="uq|L+zTU7:lZ:]}bJNnF">
-                                                                <value name="IF0">
-                                                                  <block type="functioncallreturn" id="wq}]01Yl:AOjig)xluUT">
-                                                                    <field name="FUNCTIONNAME">gameOver</field>
-                                                                  </block>
-                                                                </value>
-                                                                <statement name="DO0">
-                                                                  <block type="allplayersmessage" id="C21pF09gm7uv,m*gD^i{">
-                                                                    <value name="MESSAGE">
-                                                                      <block type="varname" id="]J$4uhy+(Z%j~XR%CFwr">
-                                                                        <field name="VARNAME">"The game is over " + team + " has won" </field>
-                                                                      </block>
-                                                                    </value>
-                                                                    <next>
-                                                                      <block type="setglobal" id="6%ESAQ/`U{UfTfFAK6=)">
-                                                                        <field name="VARNAME">gameId</field>
-                                                                        <value name="EXPRESSION">
-                                                                          <block type="millis" id="E_C#N46luDn^WCcD==?u"></block>
-                                                                        </value>
-                                                                        <next>
-                                                                          <block type="functionCall" id="1(O+iE#Q_.#4{7D[R.d*">
-                                                                            <field name="FUNCTIONNAME">spawnStructures</field>
-                                                                            <next>
-                                                                              <block type="functionCall" id=":8;;Z%_velx|mpT?ugR$">
-                                                                                <field name="FUNCTIONNAME">resetCapturePoints</field>
-                                                                              </block>
-                                                                            </next>
-                                                                          </block>
-                                                                        </next>
-                                                                      </block>
-                                                                    </next>
-                                                                  </block>
-                                                                </statement>
-                                                              </block>
-                                                            </next>
-                                                          </block>
-                                                        </next>
-                                                      </block>
-                                                    </statement>
-                                                    <next>
-                                                      <block type="controls_if" id="*CyxQ:NZV2h9?r-}X(`t">
-                                                        <mutation else="1"></mutation>
-                                                        <value name="IF0">
-                                                          <block type="logic_compare" id="}IF_.,~HLsDklogg+ifS">
-                                                            <field name="OP">EQ</field>
-                                                            <value name="A">
-                                                              <block type="varname" id="@S9d8B$Q@zA6Yym5,.~5">
-                                                                <field name="VARNAME">team</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="B">
-                                                              <block type="varname" id="9(:)QTF7B_$Z4vMqOWb8">
-                                                                <field name="VARNAME">"red"</field>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <statement name="DO0">
-                                                          <block type="spawnblock" id="k6(~rGX;dQA;.doyVZ@s">
-                                                            <value name="TYPE">
-                                                              <block type="blocktype" id="BT@]G^PW(mqBkdV]`h1J">
-                                                                <field name="BLOCKTYPE">RED_STAINED_GLASS</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="LOCATION">
-                                                              <block type="locationadd" id="vb~^L_7!{$?fyaHr`{f0">
-                                                                <field name="X">1</field>
-                                                                <field name="Y">flagHeight</field>
-                                                                <field name="Z">0</field>
-                                                                <value name="LOCATION">
-                                                                  <block type="varname" id="rh`iU!U$7G,hB3-,!Guv">
-                                                                    <field name="VARNAME">location</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </statement>
-                                                        <statement name="ELSE">
-                                                          <block type="spawnblock" id="RBBv!,~J|ZxBS{*SE$Q_">
-                                                            <value name="TYPE">
-                                                              <block type="blocktype" id="x!GaU)/fp^@r,6%vMAGt">
-                                                                <field name="BLOCKTYPE">BLUE_STAINED_GLASS</field>
-                                                              </block>
-                                                            </value>
-                                                            <value name="LOCATION">
-                                                              <block type="locationadd" id="jOt%0QA*n`ialc%d.R:U">
-                                                                <field name="X">1</field>
-                                                                <field name="Y">flagHeight</field>
-                                                                <field name="Z">0</field>
-                                                                <value name="LOCATION">
-                                                                  <block type="varname" id="dlrNvnmY/Vb2vC:GqkFU">
-                                                                    <field name="VARNAME">location</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </statement>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </statement>
-                                    <statement name="ELSE">
-                                      <block type="spawnblock" id="-zP!A=nG4APfj4sIh,/J">
-                                        <value name="TYPE">
-                                          <block type="blocktype" id="^-m(osHZ#Z_;jt-d74hr">
-                                            <field name="BLOCKTYPE">AIR</field>
-                                          </block>
-                                        </value>
-                                        <value name="LOCATION">
-                                          <block type="locationadd" id="eu/YMOcZe-6]~3o?=:Kf">
-                                            <field name="X">1</field>
-                                            <field name="Y">flagHeight</field>
-                                            <field name="Z">0</field>
-                                            <value name="LOCATION">
-                                              <block type="varname" id="Mb(MT@1w}$|,.npoKl7I">
-                                                <field name="VARNAME">location</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="setvariablevalue" id="0Z(eT}q@KZb?nNR,O{L;">
-                                            <field name="VARNAME">flagHeight</field>
-                                            <value name="EXPRESSION">
-                                              <block type="incrementdecrement" id="qT/0F2s[f2nx8U+:z{jm">
-                                                <field name="INCREMENTDECREMENT">DECREMENT</field>
-                                                <value name="VARIABLE">
-                                                  <block type="varname" id="_FKEu~BfE4g-I|yWIiH{">
-                                                    <field name="VARNAME">flagHeight</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
-                                            <next>
-                                              <block type="namevaluestructure" id="CZ1jW0P/YKYf-U_bpa|}">
-                                                <field name="NAME">flagHeight</field>
-                                                <value name="VALUE">
-                                                  <block type="varname" id="t|5E._#cnjm0|#*k(n;s">
-                                                    <field name="VARNAME">flagHeight</field>
-                                                  </block>
-                                                </value>
-                                                <value name="STRUCTURE">
-                                                  <block type="varname" id="@=beN*5XDdqh!h-fmf:6">
-                                                    <field name="VARNAME">capturePoint</field>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="controls_if" id="@uSkL+zuk7yF?_=7XzYC">
-                                                    <mutation else="1"></mutation>
-                                                    <value name="IF0">
-                                                      <block type="logic_compare" id="B4Ga/?,?%;MlUtG3XBFU">
-                                                        <field name="OP">EQ</field>
-                                                        <value name="A">
-                                                          <block type="varname" id="Cav|sg?eqnOUnU;g3A0~">
-                                                            <field name="VARNAME">owner</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="B">
-                                                          <block type="varname" id="S}KT0L^BG?fw8d.^x()g">
-                                                            <field name="VARNAME">"red"</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <statement name="DO0">
-                                                      <block type="spawnblock" id="lyQU/ur[mmH$SR#zB/FK">
-                                                        <value name="TYPE">
-                                                          <block type="blocktype" id="ws~(DD0oxBftF)q)I],j">
-                                                            <field name="BLOCKTYPE">RED_STAINED_GLASS</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="LOCATION">
-                                                          <block type="locationadd" id="K0PD?)i*iRet$`;E=+CX">
-                                                            <field name="X">1</field>
-                                                            <field name="Y">flagHeight</field>
-                                                            <field name="Z">0</field>
-                                                            <value name="LOCATION">
-                                                              <block type="varname" id=".qpRO[i[#%iHKQ@yxuk0">
-                                                                <field name="VARNAME">location</field>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </statement>
-                                                    <statement name="ELSE">
-                                                      <block type="spawnblock" id="S1Dc)N@2Ml)!k1HmkIzL">
-                                                        <value name="TYPE">
-                                                          <block type="blocktype" id="^AzMstk=qMyCMGEvZO4b">
-                                                            <field name="BLOCKTYPE">BLUE_STAINED_GLASS</field>
-                                                          </block>
-                                                        </value>
-                                                        <value name="LOCATION">
-                                                          <block type="locationadd" id="d!xNWY%{=}](9)x=h.W}">
-                                                            <field name="X">1</field>
-                                                            <field name="Y">flagHeight</field>
-                                                            <field name="Z">0</field>
-                                                            <value name="LOCATION">
-                                                              <block type="varname" id="OyTCW}(O=+:0Qdtp0TM#">
-                                                                <field name="VARNAME">location</field>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </statement>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </statement>
-                                  </block>
-                                </next>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </statement>
-                    <next>
-                      <block type="consolelog" id="KExt`CcNoj/a:a!3/JhN" disabled="true">
-                        <value name="NAME">
-                          <block type="varname" id="q;;BG#W;drH8:2%fTTvZ">
-                            <field name="VARNAME">distance</field>
-                          </block>
-                        </value>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </statement>
-        <next>
-          <block type="consolelog" id="dJvCol##HbsV:O+ls.+H" disabled="true">
-            <value name="NAME">
-              <block type="varname" id="Ig$aG!zo0a*j?BTB]i9!">
-                <field name="VARNAME">""</field>
-              </block>
-            </value>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
   <block type="scriptcraftfunction" id="6A9b:-Ee;K-%S^,pu7=3" x="-3212" y="-1512">
     <field name="nameOfFunction">PlayerRespawn(event)</field>
     <statement name="FUNCTIONCODE">
@@ -2925,7 +2613,7 @@
       </block>
     </statement>
   </block>
-  <block type="scriptcraftfunction" id="L+@Ts~{uTnY:.+IG}@SK" x="-1062" y="-1587">
+  <block type="scriptcraftfunction" id="L+@Ts~{uTnY:.+IG}@SK" x="-763" y="-1487">
     <field name="nameOfFunction">gameOver</field>
     <statement name="FUNCTIONCODE">
       <block type="setvariablevalue" id="=qIP)]W]$^N!O%terh=k">
@@ -3103,6 +2791,531 @@
             </next>
           </block>
         </next>
+      </block>
+    </statement>
+  </block>
+  <block type="scriptcraftfunction" id="*y7{i*~yz50zQa@CZPMH" x="-1963" y="-1287">
+    <field name="nameOfFunction">capturePointMove(player,team)</field>
+    <statement name="FUNCTIONCODE">
+      <block type="foreachloop" id="?#hMZ,~-9r94k(W3:DX{">
+        <field name="ELEMENT">capturePoint</field>
+        <value name="LIST">
+          <block type="globalvariable" id="fQfr9e#t}BOA~nzr}(~O">
+            <field name="VARNAME">capturePoints</field>
+          </block>
+        </value>
+        <statement name="FORCODE">
+          <block type="setvariablevalue" id="y{hyG-RBao__eKE.Pwvt">
+            <field name="VARNAME">location</field>
+            <value name="EXPRESSION">
+              <block type="getnamestructure" id="Xig;h%WtF8/o~JNCwYK,">
+                <field name="ELEMENT">location</field>
+                <value name="STRUCTURE">
+                  <block type="varname" id="~aEH0a42BHl~42=-J,=O">
+                    <field name="VARNAME">capturePoint</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="setvariablevalue" id="_L;iya!zDf`neBoY`PZ{">
+                <field name="VARNAME">distance</field>
+                <value name="EXPRESSION">
+                  <block type="distancebetweenlocations" id="pfFb18|Khi8S]3h~{(r)">
+                    <value name="LOCATION1">
+                      <block type="locationof" id="i+zPDlGYD4y@rf=3V2I7">
+                        <value name="OBJECT">
+                          <block type="varname" id="f,bzg=PB@25P=X{r3|kT">
+                            <field name="VARNAME">player</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="LOCATION2">
+                      <block type="varname" id="YLforj0k?%XC%cKv+S;v">
+                        <field name="VARNAME">location</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="wYSK%?^mB#HsjZvpJ=3i">
+                    <value name="IF0">
+                      <block type="logic_compare" id="M0FUG|.rpl+h{]N+jyX(">
+                        <field name="OP">LT</field>
+                        <value name="A">
+                          <block type="varname" id="K`lZ0Pk2[L)yvw3aNw_x">
+                            <field name="VARNAME">distance</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="KdFr!]iZgcBh%{;/T$X*">
+                            <field name="NUM">20</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_if" id="sM[hY).2!h$f*[0}M9ls">
+                        <value name="IF0">
+                          <block type="playeronground" id="PdymLPHC0q/TImvB6T3Q">
+                            <value name="PLAYER">
+                              <block type="varname" id="esg_dd!.tUtwsmy#_4wV">
+                                <field name="VARNAME">player</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="controls_if" id=";dZ=q[;8r7$VXxeTW(I2">
+                            <value name="IF0">
+                              <block type="logic_compare" id="obnL|?5,fEq8t:G2Tn=@">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="elapsedtime" id="ar2:L%FPJJ3;FIVD}~,d">
+                                    <field name="TIMERNAME">"captureTime"</field>
+                                    <value name="PLAYER">
+                                      <block type="varname" id="r?l=EgwIsS/P5BIkono1">
+                                        <field name="VARNAME">player</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="q1$fgY_zN#:aipv0q;I8">
+                                    <field name="NUM">1000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="starttimer" id="FpLWu%$FXs1xH5F,o[92">
+                                <field name="TIMERNAME">"captureTime"</field>
+                                <value name="PLAYER">
+                                  <block type="varname" id=")-d?r{:X]-H@[j]p^w1P">
+                                    <field name="VARNAME">player</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="setvariablevalue" id="?/g:PeZHi+_KtpRkU.=}">
+                                    <field name="VARNAME">flagHeight</field>
+                                    <value name="EXPRESSION">
+                                      <block type="getnamestructure" id="h[e`jL~3$agF:b(y?0xQ">
+                                        <field name="ELEMENT">flagHeight</field>
+                                        <value name="STRUCTURE">
+                                          <block type="varname" id="K[cVy+^4#sxgeF+T}%X.">
+                                            <field name="VARNAME">capturePoint</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="controls_if" id="-P]@*UYyIG~NeWY)ow%r">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="mY]FgenUqR{#@]6Oa;o^">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="varname" id="S*tYLZqZ-%Ud3MjDHmd2">
+                                                <field name="VARNAME">flagHeight</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id=",sEQ2+,w.6M/wX0GfA}5">
+                                                <field name="NUM">0</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="namevaluestructure" id="6{=3DF;@cNg)U:E+I41P">
+                                            <field name="NAME">owner</field>
+                                            <value name="VALUE">
+                                              <block type="varname" id="tJ[/g%0-P):,SRpRQY+9">
+                                                <field name="VARNAME">team</field>
+                                              </block>
+                                            </value>
+                                            <value name="STRUCTURE">
+                                              <block type="varname" id="/35=1;Y{kBusjWct7-Le">
+                                                <field name="VARNAME">capturePoint</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="setvariablevalue" id="Se,Rba9G4e!4yw5fmnN}">
+                                            <field name="VARNAME">owner</field>
+                                            <value name="EXPRESSION">
+                                              <block type="getnamestructure" id="$/u3^Jq]bb-Hwg!TNeV8">
+                                                <field name="ELEMENT">owner</field>
+                                                <value name="STRUCTURE">
+                                                  <block type="varname" id=";SI.mO7[j6/jN,5%MfSJ">
+                                                    <field name="VARNAME">capturePoint</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="controls_if" id="SNva3u!z{6@4qg;T]I5c">
+                                                <mutation else="1"></mutation>
+                                                <value name="IF0">
+                                                  <block type="logic_compare" id="^aH_N]^%].iUStj5l0{i">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A">
+                                                      <block type="varname" id="lZu:A`Gc}g^)0{}XobrP">
+                                                        <field name="VARNAME">owner</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="varname" id="PHy0[s+.I0-*0VLktH5K">
+                                                        <field name="VARNAME">team</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="controls_if" id="L(~ni/z1GoY(w8`ru2iT">
+                                                    <value name="IF0">
+                                                      <block type="logic_compare" id="@?Egfx$2v#iecw*$h6VD">
+                                                        <field name="OP">LT</field>
+                                                        <value name="A">
+                                                          <block type="varname" id="sFM=OyCoP020f@4(*n~g">
+                                                            <field name="VARNAME">flagHeight</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="math_number" id="K?Wu;90=RlejuQ1v|?sg">
+                                                            <field name="NUM">7</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="setvariablevalue" id="--0i5ap8/Dwx9+TTH#?P">
+                                                        <field name="VARNAME">flagHeight</field>
+                                                        <value name="EXPRESSION">
+                                                          <block type="incrementdecrement" id="du8ice#%j{lxQ1@npLcR">
+                                                            <field name="INCREMENTDECREMENT">INCREMENT</field>
+                                                            <value name="VARIABLE">
+                                                              <block type="varname" id="AZ9$aQ,*8R8jFf:9k~+Q">
+                                                                <field name="VARNAME">flagHeight</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="namevaluestructure" id=",R{A]tDc[t}$M|2+1}|l">
+                                                            <field name="NAME">flagHeight</field>
+                                                            <value name="VALUE">
+                                                              <block type="varname" id="I[0d`T))Nn-pEc:C)7#q">
+                                                                <field name="VARNAME">flagHeight</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="STRUCTURE">
+                                                              <block type="varname" id="@tm,XjCI6!bUyrvz@]n7">
+                                                                <field name="VARNAME">capturePoint</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="controls_if" id="a/R(:ISVRjOX7vmZ).Kf">
+                                                                <value name="IF0">
+                                                                  <block type="logic_compare" id="MPY/-!*!23}Aipx_jsz$">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="varname" id="W,%NW/egBiocInIf$3WK">
+                                                                        <field name="VARNAME">flagHeight</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="math_number" id="zNnNAgN)a%qdpFsLbgA7">
+                                                                        <field name="NUM">7</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="DO0">
+                                                                  <block type="sendmessage" id="5CjXU4k_A/FdcN,VJA{L">
+                                                                    <field name="MESSAGE">"You have claimed the flag"</field>
+                                                                    <value name="PLAYER">
+                                                                      <block type="varname" id="zz}Yw*%2^|]Nb#R$]XzH">
+                                                                        <field name="VARNAME">player</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="allplayersmessage" id="eTC,F;]:Gq5sFE!n2zY.">
+                                                                        <field name="DELAY">FALSE</field>
+                                                                        <value name="MESSAGE">
+                                                                          <block type="varname" id="]xTRW2TCt|9aUqq/(lrR">
+                                                                            <field name="VARNAME">"Capture point has been captured by " + team + " team"</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="controls_if" id="uq|L+zTU7:lZ:]}bJNnF">
+                                                                            <value name="IF0">
+                                                                              <block type="functioncallreturn" id="wq}]01Yl:AOjig)xluUT">
+                                                                                <field name="FUNCTIONNAME">gameOver</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <statement name="DO0">
+                                                                              <block type="allplayersmessage" id="C21pF09gm7uv,m*gD^i{">
+                                                                                <field name="DELAY">TRUE</field>
+                                                                                <value name="MESSAGE">
+                                                                                  <block type="varname" id="]J$4uhy+(Z%j~XR%CFwr">
+                                                                                    <field name="VARNAME">"The game is over " + team + " has won" </field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="setvariablevalue" id="Ft_)y/K0lU)[e+b^B85_">
+                                                                                    <field name="VARNAME">index</field>
+                                                                                    <value name="EXPRESSION">
+                                                                                      <block type="incrementdecrement" id="oyim}{9taOxKe]b!+f(R">
+                                                                                        <field name="INCREMENTDECREMENT">DECREMENT</field>
+                                                                                        <value name="VARIABLE">
+                                                                                          <block type="lists_length" id="539Z!Q:i9Uo+2oXlSN[y">
+                                                                                            <value name="VALUE">
+                                                                                              <block type="globalvariable" id="4@%4c^oAYI[1iZ|B*C+`">
+                                                                                                <field name="VARNAME">capturePoints</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="functionCall" id="2f8s.Xf7JvFrOKriDrtm">
+                                                                                        <field name="FUNCTIONNAME">spawnCapturePoint (exports.capturePoints[index].location, true)</field>
+                                                                                        <next>
+                                                                                          <block type="setglobal" id="6%ESAQ/`U{UfTfFAK6=)">
+                                                                                            <field name="VARNAME">gameId</field>
+                                                                                            <value name="EXPRESSION">
+                                                                                              <block type="millis" id="E_C#N46luDn^WCcD==?u"></block>
+                                                                                            </value>
+                                                                                            <next>
+                                                                                              <block type="functionCall" id="1(O+iE#Q_.#4{7D[R.d*">
+                                                                                                <field name="FUNCTIONNAME">spawnStructures</field>
+                                                                                                <next>
+                                                                                                  <block type="functionCall" id=":8;;Z%_velx|mpT?ugR$">
+                                                                                                    <field name="FUNCTIONNAME">resetCapturePoints</field>
+                                                                                                  </block>
+                                                                                                </next>
+                                                                                              </block>
+                                                                                            </next>
+                                                                                          </block>
+                                                                                        </next>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </statement>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </statement>
+                                                                <next>
+                                                                  <block type="controls_if" id="*CyxQ:NZV2h9?r-}X(`t">
+                                                                    <mutation else="1"></mutation>
+                                                                    <value name="IF0">
+                                                                      <block type="logic_compare" id="}IF_.,~HLsDklogg+ifS">
+                                                                        <field name="OP">EQ</field>
+                                                                        <value name="A">
+                                                                          <block type="varname" id="@S9d8B$Q@zA6Yym5,.~5">
+                                                                            <field name="VARNAME">team</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <block type="varname" id="9(:)QTF7B_$Z4vMqOWb8">
+                                                                            <field name="VARNAME">"red"</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <statement name="DO0">
+                                                                      <block type="spawnblock" id="k6(~rGX;dQA;.doyVZ@s">
+                                                                        <value name="TYPE">
+                                                                          <block type="blocktype" id="BT@]G^PW(mqBkdV]`h1J">
+                                                                            <field name="BLOCKTYPE">RED_STAINED_GLASS</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="LOCATION">
+                                                                          <block type="locationadd" id="vb~^L_7!{$?fyaHr`{f0">
+                                                                            <field name="X">1</field>
+                                                                            <field name="Y">flagHeight</field>
+                                                                            <field name="Z">0</field>
+                                                                            <value name="LOCATION">
+                                                                              <block type="varname" id="rh`iU!U$7G,hB3-,!Guv">
+                                                                                <field name="VARNAME">location</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </statement>
+                                                                    <statement name="ELSE">
+                                                                      <block type="spawnblock" id="RBBv!,~J|ZxBS{*SE$Q_">
+                                                                        <value name="TYPE">
+                                                                          <block type="blocktype" id="x!GaU)/fp^@r,6%vMAGt">
+                                                                            <field name="BLOCKTYPE">BLUE_STAINED_GLASS</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="LOCATION">
+                                                                          <block type="locationadd" id="jOt%0QA*n`ialc%d.R:U">
+                                                                            <field name="X">1</field>
+                                                                            <field name="Y">flagHeight</field>
+                                                                            <field name="Z">0</field>
+                                                                            <value name="LOCATION">
+                                                                              <block type="varname" id="dlrNvnmY/Vb2vC:GqkFU">
+                                                                                <field name="VARNAME">location</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </statement>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                  </block>
+                                                </statement>
+                                                <statement name="ELSE">
+                                                  <block type="spawnblock" id="-zP!A=nG4APfj4sIh,/J">
+                                                    <value name="TYPE">
+                                                      <block type="blocktype" id="^-m(osHZ#Z_;jt-d74hr">
+                                                        <field name="BLOCKTYPE">AIR</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="LOCATION">
+                                                      <block type="locationadd" id="eu/YMOcZe-6]~3o?=:Kf">
+                                                        <field name="X">1</field>
+                                                        <field name="Y">flagHeight</field>
+                                                        <field name="Z">0</field>
+                                                        <value name="LOCATION">
+                                                          <block type="varname" id="Mb(MT@1w}$|,.npoKl7I">
+                                                            <field name="VARNAME">location</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="setvariablevalue" id="0Z(eT}q@KZb?nNR,O{L;">
+                                                        <field name="VARNAME">flagHeight</field>
+                                                        <value name="EXPRESSION">
+                                                          <block type="incrementdecrement" id="qT/0F2s[f2nx8U+:z{jm">
+                                                            <field name="INCREMENTDECREMENT">DECREMENT</field>
+                                                            <value name="VARIABLE">
+                                                              <block type="varname" id="_FKEu~BfE4g-I|yWIiH{">
+                                                                <field name="VARNAME">flagHeight</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="namevaluestructure" id="CZ1jW0P/YKYf-U_bpa|}">
+                                                            <field name="NAME">flagHeight</field>
+                                                            <value name="VALUE">
+                                                              <block type="varname" id="t|5E._#cnjm0|#*k(n;s">
+                                                                <field name="VARNAME">flagHeight</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="STRUCTURE">
+                                                              <block type="varname" id="@=beN*5XDdqh!h-fmf:6">
+                                                                <field name="VARNAME">capturePoint</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="controls_if" id="@uSkL+zuk7yF?_=7XzYC">
+                                                                <mutation else="1"></mutation>
+                                                                <value name="IF0">
+                                                                  <block type="logic_compare" id="B4Ga/?,?%;MlUtG3XBFU">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="varname" id="Cav|sg?eqnOUnU;g3A0~">
+                                                                        <field name="VARNAME">owner</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="varname" id="S}KT0L^BG?fw8d.^x()g">
+                                                                        <field name="VARNAME">"red"</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="DO0">
+                                                                  <block type="spawnblock" id="lyQU/ur[mmH$SR#zB/FK">
+                                                                    <value name="TYPE">
+                                                                      <block type="blocktype" id="ws~(DD0oxBftF)q)I],j">
+                                                                        <field name="BLOCKTYPE">RED_STAINED_GLASS</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="LOCATION">
+                                                                      <block type="locationadd" id="K0PD?)i*iRet$`;E=+CX">
+                                                                        <field name="X">1</field>
+                                                                        <field name="Y">flagHeight</field>
+                                                                        <field name="Z">0</field>
+                                                                        <value name="LOCATION">
+                                                                          <block type="varname" id=".qpRO[i[#%iHKQ@yxuk0">
+                                                                            <field name="VARNAME">location</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <statement name="ELSE">
+                                                                  <block type="spawnblock" id="S1Dc)N@2Ml)!k1HmkIzL">
+                                                                    <value name="TYPE">
+                                                                      <block type="blocktype" id="^AzMstk=qMyCMGEvZO4b">
+                                                                        <field name="BLOCKTYPE">BLUE_STAINED_GLASS</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="LOCATION">
+                                                                      <block type="locationadd" id="d!xNWY%{=}](9)x=h.W}">
+                                                                        <field name="X">1</field>
+                                                                        <field name="Y">flagHeight</field>
+                                                                        <field name="Z">0</field>
+                                                                        <value name="LOCATION">
+                                                                          <block type="varname" id="OyTCW}(O=+:0Qdtp0TM#">
+                                                                            <field name="VARNAME">location</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
       </block>
     </statement>
   </block>
@@ -3878,7 +4091,7 @@
       </block>
     </statement>
   </block>
-  <block type="scriptcraftfunction" id="lIL;h{zv8[:?0cf|*h^g" x="-1287" y="-162">
+  <block type="scriptcraftfunction" id="lIL;h{zv8[:?0cf|*h^g" x="-1112" y="-262">
     <field name="nameOfFunction">selectCareer(block,player)</field>
     <statement name="FUNCTIONCODE">
       <block type="controls_if" id="dzQ:.6=557=Gkw{d@f|%">
