@@ -1021,7 +1021,7 @@ Blockly.Blocks['materialtype'] = {
 	  ["Wolf Egg", "WOLF_SPAWN_EGG"],
 	  ["Wheat Seeds", "WHEAT_SEEDS"]
 	]
-	materialtypes.sort(function(a,b){return a[1].localeCompare(b[1]);});
+	materialtypes.sort(function(a,b){return a[0].localeCompare(b[0]);});
     this.appendDummyInput()
         .appendField("Material")        
         .appendField(new Blockly.FieldDropdown(materialtypes), "MATERIAL");                   
