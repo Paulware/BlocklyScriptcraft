@@ -2842,9 +2842,22 @@ Blockly.Python['allplayerssetscore'] = function(block) {
 };
 
 Blockly.Python['allplayersmessage'] = function(block) {
-  var message = insideParen(Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC));   
-  var code = 'org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), ' + 
+  var message = insideParen(Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC)); 
+  var delay = block.getFieldValue ("DELAY");  
+  if (delay == "TRUE") {
+     delay = true;
+  } else {
+     delay = false;
+  }
+  var code = '';
+  if (delay) {
+     code = "setTimeout (function () {\n" + 
+             "  org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), \"say @a \" + " + message + ");\n" +
+             "},500);\n";       
+  } else {
+     code = 'org.bukkit.Bukkit.dispatchCommand(org.bukkit.Bukkit.getConsoleSender(), ' + 
              '\"say @a \" + ' + message + ');\n';
+  } 
   return code;
 };
 

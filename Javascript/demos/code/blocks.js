@@ -3371,6 +3371,10 @@ Blockly.Blocks['allplayersmessage'] = {
   init: function() {
     this.appendValueInput("MESSAGE")
         .appendField ( "To all players, send message:" );       
+    this.appendDummyInput()
+        .appendField('after 500ms delay')
+        .appendField(new Blockly.FieldCheckbox('FALSE'), 'DELAY'); 
+    this.setInputsInline(true);         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);

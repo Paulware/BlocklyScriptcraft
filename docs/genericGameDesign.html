@@ -6,12 +6,21 @@
 <h2>Player Move Event</h2>
 <img src="images/genericPlayerMove.jpg"><br>
 <h2>Player Mouse Click Event</h2>
-<img src="images/genericPlayerMouseclick.jpg"><br>
+<img src="images/genericPlayerMouseClick.jpg"><br>
 <h2>Player Respawn Event</h2>
 <img src="images/genericRespawn.jpg"><br>
-<h2>Player Death Event</h2>
-<img src="images/genericDeath.jpg"><br>
 <h2>Block Break Event</h2>
 <img src="images/genericBlockBreak.jpg"><br>
+<h2>Projectile Hit Event</h2>
+<pre>
+   Get pointer to projectile
+   Get the type of the projectile
+   Get distance from event location to lobby location
+   if the type of the projectile is a snowball then
+      if the distance from the event location to the lobby location is less than 50 blocks then 
+         Send a message to the server console: No explosions allowed near the lobby
+      else
+         Create an explosion with size = 1 to the projectile hit location
+</pre>
 <hr>
 <center><img src="images/ironGolemRose.jpg"></center>
